@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 0e1dev</title>
+    <link>https://blog.0e1dev.com/tags/</link>
+    <description>Recent content in Tags on 0e1dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 04 Aug 2016 10:50:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.0e1dev.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Admin</title>
+      <link>https://blog.0e1dev.com/tags/admin/</link>
+      <pubDate>Thu, 04 Aug 2016 10:50:59 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/admin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Angular</title>
+      <link>https://blog.0e1dev.com/tags/angular/</link>
+      <pubDate>Sat, 06 Aug 2016 10:17:46 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/angular/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Angularjs</title>
+      <link>https://blog.0e1dev.com/tags/angularjs/</link>
+      <pubDate>Fri, 05 Aug 2016 02:54:13 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/angularjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Api</title>
+      <link>https://blog.0e1dev.com/tags/api/</link>
+      <pubDate>Tue, 22 Nov 2016 09:53:27 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Autenticação</title>
+      <link>https://blog.0e1dev.com/tags/autentica%C3%A7%C3%A3o/</link>
+      <pubDate>Thu, 04 Aug 2016 10:50:59 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/autentica%C3%A7%C3%A3o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Auth</title>
+      <link>https://blog.0e1dev.com/tags/auth/</link>
+      <pubDate>Sun, 11 Dec 2016 12:30:40 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/auth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Components</title>
+      <link>https://blog.0e1dev.com/tags/components/</link>
+      <pubDate>Tue, 02 Aug 2016 11:28:49 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/components/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crud</title>
+      <link>https://blog.0e1dev.com/tags/crud/</link>
+      <pubDate>Sat, 07 Jan 2017 12:02:12 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/crud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deploy</title>
+      <link>https://blog.0e1dev.com/tags/deploy/</link>
+      <pubDate>Wed, 23 Nov 2016 03:01:10 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/deploy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Devops</title>
+      <link>https://blog.0e1dev.com/tags/devops/</link>
+      <pubDate>Wed, 23 Nov 2016 03:01:10 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Digitalocean</title>
+      <link>https://blog.0e1dev.com/tags/digitalocean/</link>
+      <pubDate>Thu, 14 Jul 2016 02:10:28 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/digitalocean/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flux</title>
+      <link>https://blog.0e1dev.com/tags/flux/</link>
+      <pubDate>Tue, 10 Jan 2017 22:46:07 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/flux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Front End</title>
+      <link>https://blog.0e1dev.com/tags/front-end/</link>
+      <pubDate>Sun, 11 Dec 2016 06:02:43 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/front-end/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Google</title>
+      <link>https://blog.0e1dev.com/tags/google/</link>
+      <pubDate>Tue, 02 Aug 2016 11:28:49 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/google/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hospedagem Compartilhada</title>
+      <link>https://blog.0e1dev.com/tags/hospedagem-compartilhada/</link>
+      <pubDate>Thu, 14 Jul 2016 02:10:28 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/hospedagem-compartilhada/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>I18n</title>
+      <link>https://blog.0e1dev.com/tags/i18n/</link>
+      <pubDate>Fri, 05 Aug 2016 02:54:13 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/i18n/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Internacionalização</title>
+      <link>https://blog.0e1dev.com/tags/internacionaliza%C3%A7%C3%A3o/</link>
+      <pubDate>Fri, 05 Aug 2016 02:54:13 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/internacionaliza%C3%A7%C3%A3o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jwt</title>
+      <link>https://blog.0e1dev.com/tags/jwt/</link>
+      <pubDate>Sun, 11 Dec 2016 12:30:40 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/jwt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Laravel</title>
+      <link>https://blog.0e1dev.com/tags/laravel/</link>
+      <pubDate>Thu, 04 Aug 2016 10:50:59 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/laravel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Multi Idiomas</title>
+      <link>https://blog.0e1dev.com/tags/multi-idiomas/</link>
+      <pubDate>Fri, 05 Aug 2016 02:54:13 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/multi-idiomas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Node.js</title>
+      <link>https://blog.0e1dev.com/tags/node.js/</link>
+      <pubDate>Thu, 14 Jul 2016 02:10:28 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nosql</title>
+      <link>https://blog.0e1dev.com/tags/nosql/</link>
+      <pubDate>Thu, 15 Dec 2016 21:41:08 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/nosql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Patterns</title>
+      <link>https://blog.0e1dev.com/tags/patterns/</link>
+      <pubDate>Tue, 02 Aug 2016 11:28:49 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/patterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Paypal</title>
+      <link>https://blog.0e1dev.com/tags/paypal/</link>
+      <pubDate>Mon, 21 Nov 2016 01:42:32 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/paypal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Php</title>
+      <link>https://blog.0e1dev.com/tags/php/</link>
+      <pubDate>Mon, 21 Nov 2016 01:42:32 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rails</title>
+      <link>https://blog.0e1dev.com/tags/rails/</link>
+      <pubDate>Wed, 23 Nov 2016 03:01:10 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/rails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Realtime</title>
+      <link>https://blog.0e1dev.com/tags/realtime/</link>
+      <pubDate>Sat, 06 Aug 2016 10:17:46 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/realtime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recurring Payments</title>
+      <link>https://blog.0e1dev.com/tags/recurring-payments/</link>
+      <pubDate>Mon, 21 Nov 2016 01:42:32 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/recurring-payments/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby</title>
+      <link>https://blog.0e1dev.com/tags/ruby/</link>
+      <pubDate>Tue, 22 Nov 2016 09:53:27 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/ruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Socket.io</title>
+      <link>https://blog.0e1dev.com/tags/socket.io/</link>
+      <pubDate>Sat, 06 Aug 2016 10:17:46 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/socket.io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spa</title>
+      <link>https://blog.0e1dev.com/tags/spa/</link>
+      <pubDate>Sun, 11 Dec 2016 12:30:40 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/spa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tempo Real</title>
+      <link>https://blog.0e1dev.com/tags/tempo-real/</link>
+      <pubDate>Sat, 06 Aug 2016 10:17:46 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/tempo-real/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vps</title>
+      <link>https://blog.0e1dev.com/tags/vps/</link>
+      <pubDate>Thu, 14 Jul 2016 02:10:28 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/vps/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue</title>
+      <link>https://blog.0e1dev.com/tags/vue/</link>
+      <pubDate>Tue, 10 Jan 2017 22:46:07 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/vue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vuex</title>
+      <link>https://blog.0e1dev.com/tags/vuex/</link>
+      <pubDate>Tue, 10 Jan 2017 22:46:07 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/tags/vuex/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

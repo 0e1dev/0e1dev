@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Montando CRUD com Vue 2</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o Vue 2.
+Caso você queira acompanhar os posts anteriores:
+ Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2  Pré-Requisitos  Vue Vue-resource Vue-router (opcional, mas útil caso você queira páginas separadas para cada ação)  Nosso projeto Atualmente, o projeto encontra-se assim:
+Vamos começar pelo Index (Listagem de Registros)." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Montando CRUD com Vue 2" />
+    <meta name="twitter:description" content="Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o Vue 2.
+Caso você queira acompanhar os posts anteriores:
+ Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2  Pré-Requisitos  Vue Vue-resource Vue-router (opcional, mas útil caso você queira páginas separadas para cada ação)  Nosso projeto Atualmente, o projeto encontra-se assim:
+Vamos começar pelo Index (Listagem de Registros)." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/montando-crud-com-vue-2.png" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/montando-crud-com-vue-2/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Montando CRUD com Vue 2</h1>
+      <p class="post-meta">@lhas · 07/01/2017 · 10 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o <a href="https://vuejs.org/">Vue 2</a>.</p>
+
+<p>Caso você queira acompanhar os posts anteriores:</p>
+
+<ul>
+<li><a href="http://blog.0e1dev.com/2016/12/11/Iniciando-um-projeto-com-Vue-2/">Iniciando um projeto com Vue 2</a></li>
+<li><a href="http://blog.0e1dev.com/2016/12/11/Autenticacao-com-JWT-e-Vue-2/">Autenticação com JWT e Vue 2</a></li>
+</ul>
+
+<h1 id="pré-requisitos">Pré-Requisitos</h1>
+
+<ul>
+<li><a href="https://vuejs.org/">Vue</a></li>
+<li><a href="https://github.com/pagekit/vue-resource">Vue-resource</a></li>
+<li><a href="https://router.vuejs.org/en/">Vue-router</a> (opcional, mas útil caso você queira páginas separadas para cada ação)</li>
+</ul>
+
+<h1 id="nosso-projeto">Nosso projeto</h1>
+
+<p>Atualmente, o projeto encontra-se assim:</p>
+
+<p><img src="1.png" alt="" /></p>
+
+<p>Vamos começar pelo <em>Index</em> (Listagem de Registros).</p>
+
+<pre><code class="language-js">&lt;template&gt;
+  &lt;div class=&quot;dashboard-inputs&quot;&gt;
+  &lt;/div&gt; &lt;!-- .dashboard-inputs --&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: 'DashboardInputsIndex'
+}
+&lt;/script&gt;
+</code></pre>
+
+<h1 id="index">Index</h1>
+
+<p>Primeiro, precisamos recuperar os nossos registros através de uma requisição XHR.</p>
+
+<p>Conseguimos fazer requisições facilmente com o <strong>vue-resource</strong>.</p>
+
+<p>Um exemplo para esta nossa requisição:</p>
+
+<pre><code class="language-js">this.$http.get('http://localhost:3000/lessons.json').then((response) =&gt; {
+  console.log('Dados aqui:')
+  console.log(response.data)
+})
+</code></pre>
+
+<p>Para quem está acostumado com o Angular 1, a sintaxe é bem semelhante.</p>
+
+<p>Este é um exemplo simples de requisição GET com o <em>vue-resource</em>.</p>
+
+<p>Porém, vamos trabalhar com outra funcionalidade deste componente, para agilizar nosso processo de desenvolver um CRUD.</p>
+
+<p>Para isto, vamos usar o método <code>this.$resource</code>.</p>
+
+<h1 id="usando-resource">Usando $resource</h1>
+
+<p>Um exemplo:</p>
+
+<pre><code class="language-js">let lessons = this.$resource('http://localhost:3000/lessons{/id}.json')
+
+lessons.get({}).then((response) =&gt; {
+  console.log(response)
+})
+</code></pre>
+
+<p><strong>Observação:</strong> <code>{/id}</code> significa que podemos passar um parâmetro ID, mas este parâmetro é opcional, por isto está entre chaves {}.</p>
+
+<h1 id="aplicando-resource-na-index">Aplicando $resource na Index</h1>
+
+<pre><code class="language-js">export default {
+  name: 'DashboardInputsIndex',
+  data () {
+    return {
+      resource: this.$resource('http://localhost:3000/lessons{/id}.json'),
+      lessons: []
+    }
+  },
+  methods: {
+    initialize () {
+      this.resource.get({}).then((response) =&gt; {
+        this.lessons = response.data
+      })
+    }
+  },
+  created () {
+    this.initialize()
+  }
+}
+</code></pre>
+
+<p>Vamos pontuar cada atributo do componente.</p>
+
+<h2 id="name">name</h2>
+
+<p>É o nome do nosso componente.</p>
+
+<h2 id="data">data</h2>
+
+<p>Este atributo é nossa camada de dados do componente. Caso você queira manipular dados dinâmicos, eles precisam ser inicializados aqui.</p>
+
+<p>No nosso caso, inicializamos 2 variáveis:</p>
+
+<p><strong>resource</strong>: Irá armazenar nosso objeto <code>$resource</code>
+<strong>lessons</strong>: Irá armazenar nossas futuras aulas.</p>
+
+<p>Todas as variáveis atribuídas ao data estarão disponíveis no resto do componente dentro do <code>this</code>.</p>
+
+<p>No nosso caso, podemos usar:</p>
+
+<pre><code class="language-js">this.resource; // para nosso $resource
+this.lessons; // para nossas aulas
+</code></pre>
+
+<h2 id="methods">methods</h2>
+
+<p>Esta é fácil. São os métodos que estarão disponíveis no nosso componente.</p>
+
+<p>Toda e qualquer função que você queira usar, deverá ser incluída aqui.</p>
+
+<p>No nosso caso, criamos uma chamada <code>initialize</code>, que será usada quando o nosso componente for construído/inicializado.</p>
+
+<p>Nosso método <code>initialize</code> usa o <code>$resource</code> para efetuar a requisição XHR e atualiza os nossos dados.</p>
+
+<h2 id="created">created</h2>
+
+<p>Este é um callback que o Vue disponibiliza. A função que for atribuída a este callback será rodada toda vez que nosso componente for chamado.</p>
+
+<p>No nosso caso, aproveitamos este callback para chamar o nosso método <code>this.initialize()</code>.</p>
+
+<p>Sendo assim, toda vez que nosso componente <em>Index</em> for carregado, ele fará a requisição XHR.</p>
+
+<p><strong>Lindo, não?!</strong></p>
+
+<p><img src="https://media.giphy.com/media/3o6ZtjrcQ4Cs3oYkik/giphy.gif" alt="" /></p>
+
+<h1 id="exibindo-dados-na-view">Exibindo dados na view</h1>
+
+<p>Explicado os atributos do componente, vamos exibir as informações retornadas pela requisição na nossa view.</p>
+
+<p>A view ficará assim:</p>
+
+<pre><code class="language-html">&lt;template&gt;
+  &lt;div class=&quot;dashboard-inputs&quot;&gt;
+
+    &lt;div class=&quot;container&quot;&gt;
+
+      &lt;div class=&quot;row&quot;&gt;
+
+        &lt;div class=&quot;col s12&quot; v-for=&quot;lesson in lessons&quot;&gt;
+          &lt;div class=&quot;card center&quot;&gt;
+            &lt;div class=&quot;card-content&quot;&gt;
+              &lt;span class=&quot;card-title&quot;&gt;{{lesson.class_date}}&lt;/span&gt;
+              &lt;p&gt;{{lesson.observation}}&lt;/p&gt;
+            &lt;/div&gt; &lt;!-- .card-content --&gt;
+          &lt;/div&gt; &lt;!-- .card --&gt;
+        &lt;/div&gt; &lt;!-- .col --&gt;
+
+      &lt;/div&gt; &lt;!-- .row --&gt;
+    &lt;/div&gt; &lt;!-- .container --&gt;
+
+  &lt;/div&gt; &lt;!-- .dashboard-inputs --&gt;
+&lt;/template&gt;
+</code></pre>
+
+<p><img src="2.png" alt="" /></p>
+
+<p>Nossa <em>Index</em> está finalizada por agora.</p>
+
+<p>Vamos para a próxima etapa&hellip;</p>
+
+<h1 id="create">Create</h1>
+
+<p>Precisamos permitir que nossos usuários criem novos registros, certo? Certo.</p>
+
+<p>Para isto, vamos usar outro componente. Vamos chamá-lo de <code>Create.vue</code>.</p>
+
+<p>Por enquanto, ele só vai ter um botão de adicionar que em breve acionará uma modal.</p>
+
+<pre><code class="language-html">&lt;template&gt;
+  &lt;div class=&quot;inputs-create&quot;&gt;
+    &lt;div class=&quot;fixed-action-btn&quot;&gt;
+      &lt;a class=&quot;btn-floating btn-large z-depth-4 green&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;add&lt;/i&gt;&lt;/a&gt;
+    &lt;/div&gt; &lt;!-- .fixed-action-btn --&gt;
+  &lt;/div&gt; &lt;!-- .inputs-create --&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: 'Inputs-Create'
+}
+&lt;/script&gt;
+</code></pre>
+
+<p><strong>Observação:</strong> Está é a minha árvore atual, caso você esteja curioso sobre.</p>
+
+<p><img src="3.png" alt="" /></p>
+
+<h2 id="importando-o-create-no-index">Importando o Create no Index</h2>
+
+<p>Graças ao Vue, podemos utilizar componentes dentro de outros componentes.</p>
+
+<p>Isto permite uma herança de pai x filho muito interessante.</p>
+
+<p>Através desta herança, os filhos podem herdar <strong>props</strong> (propriedades) e emitir <strong>eventos</strong> para os pais.</p>
+
+<p><img src="https://vuejs.org/images/props-events.png" alt="" /></p>
+
+<p>Como a documentação do Vue sugere: <code>Props down, events up</code>.</p>
+
+<p>Para os mais novatos, é aqui que o bicho pega conforme sua aplicação cresce. O nome que se dá para este &ldquo;compartilhamento de dados&rdquo; é gerenciamento de estados (ou <strong>State Management</strong>). Uma má implementação aqui e sua aplicação pode tornar-se lixo facilmente no futuro.</p>
+
+<p>Apenas imagine uma grande aplicação em que diversos componentes se comuniquem sem necessariamente conter uma herança.</p>
+
+<p>Para quem já ouviu falar, costumamos resolver este problema com uma pattern chamada <a href="https://github.com/facebook/flux/tree/master/examples/flux-concepts">Flux</a>.</p>
+
+<p>O vue contém sua própria implementação desta pattern chamada <a href="https://vuex.vuejs.org/en/intro.html">vuex</a>. No próximo post falo mais sobre este assunto.</p>
+
+<p>Voltando ao nosso título, vamos importar o create no index. No nosso <code>Index.vue</code>, precisaremos fazer esta importação:</p>
+
+<pre><code class="language-js">import InputsCreate from './Create'
+</code></pre>
+
+<p>Agora precisamos indicar ao nosso Index para consumir este componente:</p>
+
+<pre><code class="language-js">export default {
+  // ocultei o código para uma melhor leitura
+  ...,
+  components: {
+    'Inputs-Create': InputsCreate
+  }
+}
+</code></pre>
+
+<p>Agora podemos usar dentro do nosso Componente pai o nosso filho quantas vezes quisermos, da seguinte maneira:</p>
+
+<pre><code class="language-html">&lt;Inputs-Create&gt;&lt;/Input-Create&gt;
+</code></pre>
+
+<p>No meu caso eu usei assim:</p>
+
+<pre><code class="language-html">&lt;template&gt;
+  &lt;div class=&quot;dashboard-inputs&quot;&gt;
+
+    &lt;div class=&quot;container&quot;&gt;
+
+      &lt;div class=&quot;row&quot;&gt;
+
+        &lt;div class=&quot;col s12&quot; v-for=&quot;lesson in lessons&quot;&gt;
+          &lt;div class=&quot;card center z-depth-1&quot;&gt;
+            &lt;div class=&quot;card-content&quot;&gt;
+              &lt;span class=&quot;card-title&quot;&gt;{{lesson.class_date}}&lt;/span&gt;
+              &lt;p&gt;{{lesson.observation}}&lt;/p&gt;
+            &lt;/div&gt; &lt;!-- .card-content --&gt;
+          &lt;/div&gt; &lt;!-- .card --&gt;
+        &lt;/div&gt; &lt;!-- .col --&gt;
+
+      &lt;/div&gt; &lt;!-- .row --&gt;
+    &lt;/div&gt; &lt;!-- .container --&gt;
+
+    &lt;!-- Aqui a mágica acontece --&gt;
+    &lt;Inputs-Create&gt;&lt;/Inputs-Create&gt;
+
+  &lt;/div&gt; &lt;!-- .dashboard-inputs --&gt;
+&lt;/template&gt;
+</code></pre>
+
+<p>O que me proporcionou a seguinte renderização:</p>
+
+<p><img src="4.png" alt="" /></p>
+
+<p>Agora que temos o <strong>Create</strong> bem isolado do <strong>Index</strong>, vamos fazer a modal funcionar.</p>
+
+<p>Nesta situação, você pode resolver da maneira que lhe achar mais conveniente.</p>
+
+<p>Neste exemplo em específico, eu utilizarei o <a href="http://jquery.com/">jQuery</a> com o <a href="http://materializecss.com/">Materialize</a>, mas eu não recomendo a ninguém usar jQuery dentro do Vue. Tente usar plugins mais agnósticos de tecnologias possíveis.</p>
+
+<p>Eu só estou fazendo as coisas desta forma pois neste projeto quero usar o Materialize e nenhuma implementação do mesmo com o Vue me agradou, então tentei deixar as coisas mais <em>roots</em> possíveis.</p>
+
+<p>Meu template com o modal funcionando abaixo:</p>
+
+<pre><code class="language-html">&lt;template&gt;
+  &lt;div class=&quot;inputs-create&quot;&gt;
+    &lt;div class=&quot;fixed-action-btn&quot;&gt;
+      &lt;a href=&quot;#modal1&quot; class=&quot;btn-floating btn-large z-depth-4 green&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;add&lt;/i&gt;&lt;/a&gt;
+    &lt;/div&gt; &lt;!-- .fixed-action-btn --&gt;
+
+    &lt;div id=&quot;modal1&quot; class=&quot;modal&quot;&gt;
+      &lt;div class=&quot;modal-content&quot;&gt;
+        &lt;h4 class=&quot;center&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;edit&lt;/i&gt; Adicionar Aula&lt;/h4&gt;
+
+        &lt;div class=&quot;input-field&quot;&gt;
+          &lt;input type=&quot;text&quot; id=&quot;date&quot; v-model=&quot;lesson.class_date&quot;&gt;
+          &lt;label for=&quot;date&quot;&gt;Data&lt;/label&gt;
+        &lt;/div&gt; &lt;!-- .input-field --&gt;
+
+        &lt;div class=&quot;input-field&quot;&gt;
+          &lt;textarea id=&quot;observation&quot; class=&quot;materialize-textarea&quot; v-model=&quot;lesson.observation&quot;&gt;&lt;/textarea&gt;
+          &lt;label for=&quot;email&quot;&gt;Observações&lt;/label&gt;
+        &lt;/div&gt; &lt;!-- .input-field --&gt;
+      &lt;/div&gt; &lt;!-- .modal-content --&gt;
+
+      &lt;div class=&quot;modal-footer&quot;&gt;
+        &lt;a href=&quot;#!&quot; class=&quot;modal-action modal-close btn blue&quot;&gt;&lt;i class=&quot;material-icons right&quot;&gt;send&lt;/i&gt; Salvar Aula&lt;/a&gt;
+      &lt;/div&gt; &lt;!-- .modal-footer --&gt;
+    &lt;/div&gt; &lt;!-- .modal --&gt;
+
+  &lt;/div&gt; &lt;!-- .inputs-create --&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: 'Inputs-Create',
+  data () {
+    return {
+      lesson: {
+        class_date: null,
+        observation: null
+      }
+    }
+  },
+  created () {
+    window.jQuery(document).ready(() =&gt; {
+      window.jQuery('.modal').modal()
+    })
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+<p><img src="5.png" alt="" /></p>
+
+<p>Agora precisamos fazer este formulário funcionar.</p>
+
+<h2 id="fazendo-o-formulário-funcionar">Fazendo o formulário funcionar</h2>
+
+<p><img src="https://media.giphy.com/media/jTHt4MgxlbO5G/giphy.gif" alt="" /></p>
+
+<p>Primeiro, precisamos indicar ao nosso botão de <strong>Salvar</strong> que ele deve chamar um método através do evento de <strong>clique</strong>.</p>
+
+<p>Para isto, vamos mudar a sintaxe do botão:</p>
+
+<pre><code class="language-html">&lt;!-- Antes --&gt;
+&lt;a href=&quot;#!&quot; class=&quot;modal-action modal-close btn blue&quot;&gt;&lt;i class=&quot;material-icons right&quot;&gt;send&lt;/i&gt; Salvar Aula&lt;/a&gt;
+&lt;!-- Depois --&gt;
+&lt;a href=&quot;javascript:void(0);&quot; @click=&quot;handleSubmit(lesson)&quot; class=&quot;modal-action btn blue&quot;&gt;&lt;i class=&quot;material-icons right&quot;&gt;send&lt;/i&gt; Salvar Aula&lt;/a&gt;
+</code></pre>
+
+<p>Usamos a propriedade <code>@click</code> para isto, passando o método <code>handleSubmit(lesson)</code>.</p>
+
+<p>Vamos criar este método agora:</p>
+
+<pre><code class="language-js">export default {
+  name: 'Inputs-Create',
+  // resto do código ocultado
+  ...,
+  methods: {
+    handleSubmit (lesson) {
+      let message = ''
+
+      // usamos o resource do Index para salvar uma nova aula
+      // ela retornará uma Promise, que iremos tratar com o .then()
+      this.$parent.resource.save({}, lesson).then((result) =&gt; {
+        // em caso de sucesso, o primeiro parâmetro do .then() é usado
+
+        // como expliquei anteriormente,
+        // estou usando um plugin de jQuery para o modal.
+        // preciso fechá-lo então:
+        //
+        // fecha a modal
+        window.jQuery('.modal').modal('close')
+
+        // precisamos avisar o usuário que mudanças ocorreram
+        // notifica o usuário
+        message = 'Aula adicionada com sucesso!'
+        window.Materialize.toast(message)
+      }, () =&gt; {
+        // aqui é o fallback caso a requisição tenha algum problema
+
+        // notifica o usuário (em caso de erro)
+        message = 'Erro ao adicionar aula'
+        window.Materialize.toast(message)
+      })
+
+    }
+  }
+}
+</code></pre>
+
+<p><strong>Pronto!</strong> O nosso <em>Create</em> está concluído.</p>
+
+<p>Só que tem 1 problema: O <em>Index</em> não sabe que o seu filho, <em>Create</em>, fez algo.</p>
+
+<p>O filho, <em>Create</em>, precisa avisar seu pai, o <em>Index</em>, que ele fez alguma coisa.</p>
+
+<p>Faremos este aviso através dos <strong>Eventos</strong>.</p>
+
+<p><img src="http://berb.github.io/nodejs-talk-chaosseminar/assets/images/memes/ya_callback.jpg" alt="" />
+<em>Cuidado com o <a href="http://callbackhell.com/">Callback Hell</a>!</em></p>
+
+<p>Caso uma nova aula seja adicionada com sucesso, precisamos emitir um evento indicando mudanças, que chamarei de <strong>created</strong>.</p>
+
+<p>Para emitir este evento, o código necessário é:</p>
+
+<pre><code class="language-js">this.$emit('created')
+</code></pre>
+
+<p>Para nosso componente pai escutar este evento, podemos fazer de 2 maneiras:</p>
+
+<h3 id="a-maneira-ideal">A maneira ideal</h3>
+
+<p>No seu componente pai, onde chamamos o filho, adicionamos um novo atributo:</p>
+
+<pre><code class="language-html">&lt;Inputs-Create v-on:created=&quot;initialize&quot;&gt;&lt;/Inputs-Create&gt;
+</code></pre>
+
+<h3 id="a-maneira-feia">A maneira feia</h3>
+
+<p>Caso você queira detectar dentro da execução do componente:</p>
+
+<pre><code class="language-js">this.$on('created', () =&gt; {
+  this.initialize()
+})
+</code></pre>
+
+<p><strong>Pronto!</strong> <em>Created</em> de fato finalizado.</p>
+
+<p>Agora falta <strong>Delete</strong> e <strong>Update</strong>.</p>
+
+<h1 id="delete">Delete</h1>
+
+<p>Vamos começar pelo <em>Delete</em> pela simplicidade.</p>
+
+<p>Precisamos de um botão para remover os itens:</p>
+
+<pre><code class="language-html">&lt;div class=&quot;card-action&quot;&gt;
+  &lt;button @click=&quot;handleDelete(lesson)&quot; class=&quot;btn-flat red-text&quot;&gt;
+    &lt;i class=&quot;material-icons&quot;&gt;delete&lt;/i&gt;
+  &lt;/button&gt;
+&lt;/div&gt; &lt;!-- .card-action --&gt;
+</code></pre>
+
+<p>Este botão está chamando o método <code>handleDelete(lesson)</code>.</p>
+
+<pre><code class="language-js">handleDelete (lesson) {
+  this.resource.delete({id: lesson.id}).then((response) =&gt; {
+    this.$emit('deleted')
+  })
+}
+</code></pre>
+
+<p>Este método está emitindo um evento <code>deleted</code>. Vamos escutá-lo quando o componente é criado?</p>
+
+<pre><code class="language-js">created () {
+  this.initialize()
+
+  this.$on('deleted', () =&gt; {
+    this.eventDeleted()
+  })
+}
+</code></pre>
+
+<p>Dentro da nossa escuta, estamos acionando outro método <code>eventDeleted()</code>. Vamos criá-lo?</p>
+
+<pre><code class="language-js">eventDeleted () {
+  // reiniciamos o componente
+  this.initialize()
+
+  // notifica o usuário
+  let message = 'Aula removida!'
+  window.Materialize.toast(message)
+}
+</code></pre>
+
+<p><strong>Pronto!</strong> <em>Delete</em> concluído, faltando apenas o <em>Update</em>.</p>
+
+<p><img src="https://media.giphy.com/media/xT0GqtcVR0jOXzmmPK/giphy.gif" alt="" /></p>
+
+<h1 id="update">Update</h1>
+
+<p>O <em>Update</em> pode ser implementado em N maneiras. Faremos da maneira mais repetitiva possível, criando outro componente com um template próprio, mas talvez em uma situação da vida real seja interessante você isolar o formulário em um componente só e reaproveitá-lo dentro do <em>Create</em> e <em>Update</em>.</p>
+
+<p>Em termos de template, é idêntico, apenas removendo o botão fixo de adicionar novos:</p>
+
+<pre><code class="language-html">&lt;div class=&quot;inputs-update&quot;&gt;
+
+  &lt;div id=&quot;modal2&quot; class=&quot;modal&quot;&gt;
+    &lt;div class=&quot;modal-content&quot;&gt;
+      &lt;h4 class=&quot;center&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;edit&lt;/i&gt; Editar Aula&lt;/h4&gt;
+
+      &lt;div class=&quot;input-field&quot;&gt;
+        &lt;input type=&quot;text&quot; id=&quot;date&quot; v-model=&quot;lesson.class_date&quot;&gt;
+        &lt;label for=&quot;date&quot;&gt;Data&lt;/label&gt;
+      &lt;/div&gt; &lt;!-- .input-field --&gt;
+
+      &lt;div class=&quot;input-field&quot;&gt;
+        &lt;textarea id=&quot;observation&quot; class=&quot;materialize-textarea&quot; v-model=&quot;lesson.observation&quot;&gt;&lt;/textarea&gt;
+        &lt;label for=&quot;email&quot;&gt;Observações&lt;/label&gt;
+      &lt;/div&gt; &lt;!-- .input-field --&gt;
+
+    &lt;/div&gt; &lt;!-- .modal-content --&gt;
+    &lt;div class=&quot;modal-footer&quot;&gt;
+      &lt;a href=&quot;javascript:void(0);&quot; @click=&quot;handleSubmit(lesson)&quot; class=&quot;modal-action btn blue&quot;&gt;&lt;i class=&quot;material-icons right&quot;&gt;send&lt;/i&gt; Salvar Aula&lt;/a&gt;
+    &lt;/div&gt; &lt;!-- .modal-footer --&gt;
+  &lt;/div&gt; &lt;!-- .modal --&gt;
+
+&lt;/div&gt; &lt;!-- .inputs-update --&gt;
+</code></pre>
+
+<p>No JS, duas mudanças:</p>
+
+<ul>
+<li>Adicionado <em>props</em>;</li>
+<li>Alterado de <em>save</em> para <em>update</em>;</li>
+<li>Alterado evento para <em>updated</em>;</li>
+</ul>
+
+<h3 id="props">props</h3>
+
+<p>Estas são as propriedades que o seu filho receberá do pai. No caso, só temos um, o <strong>lesson</strong>.</p>
+
+<h3 id="alteração-de-save-para-update">Alteração de <em>save</em> para <em>update</em></h3>
+
+<p>Como estamos usando uma API RESTful como back-end, para editarmos uma entidade, precisamos executar requisições <strong>PUT</strong> ao invés de <em>POST</em>.</p>
+
+<p>Esta alteração simples faz esta adaptação, além de, é claro, passarmos o <em>ID</em> da nossa entidade a ser editada.</p>
+
+<h3 id="alteração-de-evento-para-updated">Alteração de evento para <em>updated</em></h3>
+
+<p>Toda vez que salvarmos as nossas mudanças, devemos notificar ao nosso pai que mudanças foram feitas.</p>
+
+<p>Esta notificação ocorrerá através do evento <em>updated</em>.</p>
+
+<p>Para isto, no nosso pai, abaixo do <code>&lt;Inputs-Create&gt;</code>, teremos o <code>&lt;Inputs-Update&gt;</code>:</p>
+
+<pre><code class="language-html">&lt;Inputs-Create v-on:created=&quot;initialize&quot;&gt;&lt;/Inputs-Create&gt;
+&lt;!-- Observe o evento &quot;updated&quot; sendo usado e o nosso prop &quot;lesson&quot; --&gt;
+&lt;Inputs-Update v-on:updated=&quot;initialize&quot; :lesson=&quot;lesson&quot;&gt;&lt;/Inputs-Update&gt;
+</code></pre>
+
+<p>Abaixo o código JS do componente <em>Update</em>:</p>
+
+<pre><code class="language-js">export default {
+  name: 'Inputs-Update',
+  props: ['lesson'],
+  created () {
+    window.jQuery(document).ready(() =&gt; {
+      window.jQuery('.modal').modal({
+        // isto é uma gambiarra para os labels do Materialize funcionarem
+        // com dados dinâmicos
+        ready: function () {
+          window.Materialize.updateTextFields()
+        }
+      })
+    })
+  },
+  methods: {
+    handleSubmit (lesson) {
+      let message = ''
+
+      this.$parent.resource.update({id: lesson.id}, lesson).then((result) =&gt; {
+        // fecha a modal
+        window.jQuery('.modal').modal('close')
+
+        // notifica o usuário
+        message = 'Aula editada com sucesso!'
+        window.Materialize.toast(message)
+
+        // emissão de evento
+        this.$emit('updated')
+      }, () =&gt; {
+        // notifica o usuário (em caso de erro)
+        message = 'Erro ao editar aula'
+        window.Materialize.toast(message)
+      })
+    }
+  }
+}
+</code></pre>
+
+<p>Para este componente funcionar, precisamos fazer 2 adaptações no <em>Index</em>:</p>
+
+<ul>
+<li>Importar o componente <em>Update</em>;</li>
+</ul>
+
+<pre><code class="language-js">import InputsUpdate from './Update'
+// ...
+components: {
+  'Inputs-Create': InputsCreate,
+  'Inputs-Update': InputsUpdate
+}
+</code></pre>
+
+<ul>
+<li>Adicionar o <em>prop</em> ao <strong>data</strong>;</li>
+</ul>
+
+<p>Como estamos passando uma propriedade dinâmica chamada <em>lesson</em>, precisamos inicializá-la no nosso <strong>data</strong>.</p>
+
+<p>Isso se faz necessário pois o <em>Vue</em> precisa que todos nossos &ldquo;models&rdquo; sejam inicializados antes de serem usados.</p>
+
+<p>No caso, nosso data ficará assim:</p>
+
+<pre><code class="language-js">data () {
+  return {
+    resource: this.$resource('http://localhost:3000/lessons{/id}.json'),
+    lessons: [],
+    // nova linha aqui
+    lesson: {}
+  }
+},
+</code></pre>
+
+<p><strong>Pronto</strong>! Nosso CRUD funcionando 100%.</p>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>No post de hoje trabalhamos com recursos muito interessantes como:</p>
+
+<ul>
+<li>O vue-resource;</li>
+<li>Emissão/Escuta de Eventos;</li>
+<li>Cruzamento de dados entre componentes pais e filhos.</li>
+</ul>
+
+<p>Deu para ter uma noção também do por que aplicar uma arquitetura Flux é interessante caso o seu projeto seja de médio a grande porte, para manter a sanidade de um Single Page Application. Este provavelmente será inclusive o assunto do próximo post.</p>
+
+<p>Antes disto, irei melhorar a minha comunicação com vocês reformulando o layout do blog e criando canais de divulgação no Facebook e Twitter.</p>
+
+<h3 id="obrigado-por-ter-lido-até-aqui">Obrigado por ter lido até aqui! :-)</h3>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/vue"><span class="tag">Vue</span></a></li>
+        
+          <li><a href="/tags/crud"><span class="tag">Crud</span></a></li>
+        
+          <li><a href="/tags/flux"><span class="tag">Flux</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>229</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Autenticação com JWT e Vue 2</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Agora que iniciamos nosso projeto, podemos fazer a próxima etapa que é inserir uma camada de Autenticação na nossa aplicação.
+Para isto, será necessário:
+ Ter uma rota de login Um formulário com e-mail e senha Uma API que tenha autenticação via JWT  Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Autenticação com JWT e Vue 2" />
+    <meta name="twitter:description" content="Agora que iniciamos nosso projeto, podemos fazer a próxima etapa que é inserir uma camada de Autenticação na nossa aplicação.
+Para isto, será necessário:
+ Ter uma rota de login Um formulário com e-mail e senha Uma API que tenha autenticação via JWT  Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/autenticacao-com-jwt-e-vue-2.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/autenticacao-com-jwt-e-vue-2/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Autenticação com JWT e Vue 2</h1>
+      <p class="post-meta">@lhas · 11/12/2016 · 6 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p><a href="http://blog.0e1dev.com/2016/12/11/Iniciando-um-projeto-com-Vue-2/">Agora que iniciamos nosso projeto</a>, podemos fazer a próxima etapa que é inserir uma camada de <strong>Autenticação</strong> na nossa aplicação.</p>
+
+<p>Para isto, será necessário:</p>
+
+<ul>
+<li>Ter uma rota de login</li>
+<li>Um formulário com e-mail e senha</li>
+<li>Uma API que tenha autenticação via JWT</li>
+</ul>
+
+<p>Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem.</p>
+
+<p>Caso você não tenha nenhuma e queira prosseguir com o tutorial, você pode usar um serviço externo como <a href="https://auth0.com/">Auth0</a>.</p>
+
+<h1 id="tela-de-login">Tela de login</h1>
+
+<p>Esta foi a tela que eu montei para seguir este tutorial:</p>
+
+<p><img src="1.png" alt="" /></p>
+
+<p>Ela foi implementada com o <code>Vue-Material</code>, caso você queira reaproveitá-la, segue o código-fonte:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>  &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;login&quot;</span>&gt;
+    &lt;<span style="color: #2c5dcd; font-weight: bold">md-toolbar</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;center-xs&quot;</span>&gt;
+      &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;md-title&quot;</span>&gt;Plataforma de Ensino Personalizado&lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
+    &lt;/<span style="color: #2c5dcd; font-weight: bold">md-toolbar</span>&gt;
+
+    &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;container&quot;</span>&gt;
+      &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;row&quot;</span>&gt;
+        &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 center-xs&quot;</span>&gt;
+
+          &lt;<span style="color: #2c5dcd; font-weight: bold">md-subheader</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;center-xs&quot;</span>&gt;Faça seu login agora&lt;/<span style="color: #2c5dcd; font-weight: bold">md-subheader</span>&gt;
+
+          &lt;<span style="color: #2c5dcd; font-weight: bold">form</span> <span style="color: #2c5dcd; font-style: italic">v-on:submit</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;handleSubmit($event)&quot;</span>&gt;
+
+            &lt;<span style="color: #2c5dcd; font-weight: bold">md-input-container</span>&gt;
+              &lt;<span style="color: #2c5dcd; font-weight: bold">label</span>&gt;E-mail&lt;/<span style="color: #2c5dcd; font-weight: bold">label</span>&gt;
+              &lt;<span style="color: #2c5dcd; font-weight: bold">md-input</span> <span style="color: #2c5dcd; font-style: italic">v-model</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;user.email&quot;</span>&gt;&lt;/<span style="color: #2c5dcd; font-weight: bold">md-input</span>&gt;
+            &lt;/<span style="color: #2c5dcd; font-weight: bold">md-input-container</span>&gt;
+
+            &lt;<span style="color: #2c5dcd; font-weight: bold">md-input-container</span> <span style="color: #2c5dcd; font-style: italic">md-has-password</span>&gt;
+              &lt;<span style="color: #2c5dcd; font-weight: bold">label</span>&gt;Senha&lt;/<span style="color: #2c5dcd; font-weight: bold">label</span>&gt;
+              &lt;<span style="color: #2c5dcd; font-weight: bold">md-input</span> <span style="color: #2c5dcd; font-style: italic">type</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;password&quot;</span> <span style="color: #2c5dcd; font-style: italic">v-model</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;user.password&quot;</span>&gt;&lt;/<span style="color: #2c5dcd; font-weight: bold">md-input</span>&gt;
+            &lt;/<span style="color: #2c5dcd; font-weight: bold">md-input-container</span>&gt;
+
+            &lt;<span style="color: #2c5dcd; font-weight: bold">md-button</span> <span style="color: #2c5dcd; font-style: italic">type</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;submit&quot;</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;md-raised md-primary&quot;</span>&gt;&lt;<span style="color: #2c5dcd; font-weight: bold">md-icon</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;&quot;</span>&gt;send&lt;/<span style="color: #2c5dcd; font-weight: bold">md-icon</span>&gt; Entrar&lt;/<span style="color: #2c5dcd; font-weight: bold">md-button</span>&gt;
+            &lt;<span style="color: #2c5dcd; font-weight: bold">router-link</span> <span style="color: #2c5dcd; font-style: italic">to</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;signup&quot;</span> <span style="color: #2c5dcd; font-style: italic">tag</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;md-button&quot;</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;md-primary&quot;</span>&gt;Quero me cadastrar&lt;/<span style="color: #2c5dcd; font-weight: bold">router-link</span>&gt;
+
+          &lt;/<span style="color: #2c5dcd; font-weight: bold">form</span>&gt;
+
+
+        &lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
+      &lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
+    &lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
+  &lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
+</pre></div>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
+  name<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;login&#39;</span>,
+  data () {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> {
+      user<span style="color: #2c5dcd">:</span> {
+        email<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">null</span>,
+        password<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">null</span>
+      }
+    }
+  },
+  methods<span style="color: #2c5dcd">:</span> {
+    handleSubmit<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">function</span> () {
+      console.log(<span style="color: #2c5dcd; font-weight: bold">this</span>.user)
+    }
+  }
+}
+</pre></div>
+</p>
+
+<h2 id="variáveis-de-ambiente">Variáveis de Ambiente</h2>
+
+<p>Caso estejamos no ambiente de desenvolvimento, a URL da nossa API será <code>http://lvh.me:9001/</code>.</p>
+
+<p>Caso estejamos no ambiente de produção, a URL da nossa API será <code>http://api.0e1dev.com/</code>.</p>
+
+<p>Para termos esta informação dinâmica na nossa aplicação, vamos preenchê-la nos arquivos de configuração.</p>
+
+<p>Estes arquivos encontram-se em <code>config/</code>.</p>
+
+<p>A ordem de prioridades desta pasta é:</p>
+
+<p>1) prod.env.js
+2) dev.env.js
+3) test.env.js</p>
+
+<p>Ou seja, se você definir uma constante somente no <code>prod.env.js</code>, o ambiente de desenvolvimento e testes irá herdar esta configuração.</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// config/prod.env.js</span>
+module.exports <span style="color: #2c5dcd">=</span> {
+  NODE_ENV<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;&quot;production&quot;&#39;</span>,
+  API<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;&quot;http://api.0e1dev.com/&quot;&#39;</span>
+}
+</pre></div>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// config/dev.env.js</span>
+module.exports <span style="color: #2c5dcd">=</span> {
+  NODE_ENV<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;&quot;production&quot;&#39;</span>,
+  API<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;&quot;http://localhost:9001/&quot;&#39;</span>
+}
+</pre></div>
+
+Pronto. Nós teremos acesso a esta informação na nossa aplicação através de <code>process.env.API</code>.</p>
+
+<h2 id="instalando-vue-resource">Instalando vue-resource</h2>
+
+<p>Este é o componente que nós iremos utilizar para fazer as requisições AJAX.</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ npm install vue-resource --save
+</pre></div>
+
+Agora abra o <code>main.js</code> e indique ao Vue que nós vamos usá-lo:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// src/main.js</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> VueResource from <span style="color: #00cc66">&#39;vue-resource&#39;</span>
+
+Vue.use(VueResource)
+
+<span style="color: #0080ff; font-style: italic">// Define a base da URL das requisições AJAX será</span>
+<span style="color: #0080ff; font-style: italic">// a constante API que configuramos</span>
+Vue.http.options.root <span style="color: #2c5dcd">=</span> process.env.API
+</pre></div>
+
+Agora que nossa requisição está pronta, vamos importar uma biblioteca para nos auxiliar na camada de autenticação.</p>
+
+<p>Ela é a <a href="https://github.com/websanova/vue-auth">vue-auth</a>. Para instalá-la:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ npm install @websanova/vue-auth
+</pre></div>
+
+Vamos configurá-la. Abra o <code>src/main.js</code>.</p>
+
+<p>Após nossa declaração de rotas, vamos fazer um monkeypatch para o <em>vue-auth</em> identificar nossas rotas:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>Vue.router <span style="color: #2c5dcd">=</span> router
+</pre></div>
+
+Agora vamos configurar a autenticação em si.</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>Vue.use(require(<span style="color: #00cc66">&#39;@websanova/vue-auth&#39;</span>), {
+  auth<span style="color: #2c5dcd">:</span> require(<span style="color: #00cc66">&#39;@websanova/vue-auth/drivers/auth/bearer.js&#39;</span>),
+  http<span style="color: #2c5dcd">:</span> require(<span style="color: #00cc66">&#39;@websanova/vue-auth/drivers/http/vue-resource.1.x.js&#39;</span>),
+  router<span style="color: #2c5dcd">:</span> require(<span style="color: #00cc66">&#39;@websanova/vue-auth/drivers/router/vue-router.2.x.js&#39;</span>),
+  rolesVar<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;type&#39;</span>,
+  loginData<span style="color: #2c5dcd">:</span> {url<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;user_token&#39;</span>, method<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;POST&#39;</span>, redirect<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/&#39;</span>, fetchUser<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">false</span>},
+  fetchData<span style="color: #2c5dcd">:</span> {url<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;auth/user&#39;</span>, method<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;GET&#39;</span>},
+  refreshData<span style="color: #2c5dcd">:</span> {url<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;auth/refresh&#39;</span>, method<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;GET&#39;</span>, atInit<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">false</span>}
+})
+</pre></div>
+
+Algumas considerações nesta configuração:</p>
+
+<h3 id="por-que-esse-bando-de-require">Por que esse bando de require?</h3>
+
+<p>Este plugin é bem extensível, então ele trabalha sob o conceito de <strong>Drivers</strong>.</p>
+
+<p>O autor fez isto principalmente para que o mesmo plugin possa suportar versões diferentes do Vue (1 e 2), e também para que a autenticação seja algo customizável caso assim desejado pelo desenvolvedor.</p>
+
+<p>O plugin já vem com 3 drivers de autenticação: <em>Basic</em>, <em>Bearer</em> (o que nós vamos usar para fazer JWT) e <em>Devise</em> (usando devise-token-auth no Rails).</p>
+
+<h3 id="o-que-é-esse-rolesvar">O que é esse rolesVar?</h3>
+
+<p>É o atributo que o plugin irá usar para definir os cargos do objeto do Usuário. Isso fará mais sentido depois.</p>
+
+<h3 id="o-que-é-esse-logindata">O que é esse loginData?</h3>
+
+<p>É o <strong>endpoint</strong> que nós vamos consumir ao efetuar o login. Você pode alterar para a URL que quiser, assim como o método a ser usado.</p>
+
+<p>O atributo <code>fetchUser</code> indica se nós queremos que após o login, ele recupere os dados do usuário. O padrão é <code>true</code>. Nós desabilitamos para não ter que criar nenhum endpoint extra na nossa API. Caso você tenha um endpoint que retorne os dados do usuário, basta deixar este parâmetro como verdadeiro, e apontar no <code>fetchData</code> qual é este endpoint.</p>
+
+<h3 id="o-que-é-esse-fetchdata">O que é esse fetchData?</h3>
+
+<p>É o <strong>endpoint</strong> que nós vamos consumir os dados do usuário. Caso você queira recuperar o nome, por exemplo, ele usará este endpoint para recuperar esta informação.
+No caso do <code>fetchUser</code> estar habilitado, após logar ele fará requisição a este endpoint também.</p>
+
+<h3 id="o-que-é-esse-refreshdata">O que é esse refreshData?</h3>
+
+<p>É o <strong>endpoint</strong> que vai validar se o nosso token é válido ou não.</p>
+
+<p><img src="https://media.giphy.com/media/d3bQVBHZ7oIPE73W/giphy.gif" alt="" /></p>
+
+<p>Eu não vou entrar muito no foco de como a API deve estar configurada para ele rodar corretamente, pois vai ficar para um outro post.</p>
+
+<p>No caso nós vamos trabalhar com uma app com Rails 5 e a gem <a href="https://github.com/nsarno/knock">Knock</a>. Ela nos permitirá adicionar uma camada de autenticação JWT de forma simples e leve. E por ser JWT, usar o Bearer Token, tem suporte nativo do <strong>vue-auth</strong>.</p>
+
+<p>Um exemplo de action para este endpoint de refresh com o Knock:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd">include</span> <span style="color: #318495">Knock</span><span style="color: #2c5dcd">::</span><span style="color: #318495">Authenticable</span>
+before_action <span style="color: #c5060b; font-weight: bold">:authenticate_user</span>, <span style="color: #c5060b; font-weight: bold">only</span>: <span style="color: #2c5dcd">[</span><span style="color: #c5060b; font-weight: bold">:refresh</span><span style="color: #2c5dcd">]</span>
+
+<span style="color: #2c5dcd; font-weight: bold">def</span> <span style="color: #ff8000; font-weight: bold">refresh</span>
+  render <span style="color: #c5060b; font-weight: bold">json</span>: <span style="color: #2c5dcd">[]</span>, <span style="color: #c5060b; font-weight: bold">status</span>: <span style="color: #c5060b; font-weight: bold">:ok</span>
+<span style="color: #2c5dcd; font-weight: bold">end</span>
+</pre></div>
+
+Assim o <strong>refresh</strong> fica protegido. Caso a requisição tenha um token válido, ele vai retornar nada.</p>
+
+<p>Caso a requisição tenha um token inválido ou vazio, ele vai retornar 401 Unauthorized.</p>
+
+<p>O <strong>Laravel</strong> tem um middleware chamado <em>jwt.refresh</em>, funciona da mesma forma.</p>
+
+<p>Caso você esteja em dúvida quanto a esta parte do server side, <a href="https://github.com/websanova/laravel-api-demo/blob/master/app/Http/Controllers/Api/v1/AuthController.php">você pode olhar o código de exemplo do autor do plugin</a>.</p>
+
+<p>Caso você queira usar o Devise, temos o <a href="https://github.com/lynndylanhurley/devise_token_auth">Devise Token Auth</a> que tem suporte nativo do <strong>vue-auth</strong>.</p>
+
+<p>Duas coisas importantes de se esclarecer:</p>
+
+<p><img src="https://media.giphy.com/media/zxf6g67Kq8zgQ/giphy.gif" alt="" /></p>
+
+<h3 id="cors">CORS</h3>
+
+<p>Você precisará ter o <strong>CORS</strong> habilitado na sua API.</p>
+
+<p>Exemplo da minha configuração de CORS:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic"># config/initializers/cors.rb</span>
+<span style="color: #318495">Rails</span><span style="color: #2c5dcd">.</span>application<span style="color: #2c5dcd">.</span>config<span style="color: #2c5dcd">.</span>middleware<span style="color: #2c5dcd">.</span>insert_before <span style="color: #5918bb; font-weight: bold">0</span>, <span style="color: #318495">Rack</span><span style="color: #2c5dcd">::</span><span style="color: #318495">Cors</span> <span style="color: #2c5dcd; font-weight: bold">do</span>
+  allow <span style="color: #2c5dcd; font-weight: bold">do</span>
+    origins <span style="color: #00cc66">&#39;*&#39;</span>
+    resource <span style="color: #00cc66">&#39;*&#39;</span>,
+      <span style="color: #c5060b; font-weight: bold">headers</span>: <span style="color: #c5060b; font-weight: bold">:any</span>,
+      <span style="color: #5918bb; font-weight: bold">methods</span>: <span style="color: #2c5dcd">[</span><span style="color: #c5060b; font-weight: bold">:get</span>, <span style="color: #c5060b; font-weight: bold">:post</span>, <span style="color: #c5060b; font-weight: bold">:put</span>, <span style="color: #c5060b; font-weight: bold">:patch</span>, <span style="color: #c5060b; font-weight: bold">:delete</span>, <span style="color: #c5060b; font-weight: bold">:options</span>, <span style="color: #c5060b; font-weight: bold">:head</span><span style="color: #2c5dcd">]</span>,
+      <span style="color: #c5060b; font-weight: bold">expose</span>: <span style="color: #2c5dcd">[</span><span style="color: #00cc66">&#39;Authorization&#39;</span><span style="color: #2c5dcd">]</span>
+  <span style="color: #2c5dcd; font-weight: bold">end</span>
+<span style="color: #2c5dcd; font-weight: bold">end</span>
+</pre></div>
+
+Observe o <code>expose</code>. Ele é a peça-chave para a segunda coisa importante&hellip;</p>
+
+<h3 id="token-no-header">Token no Header</h3>
+
+<p>Além do CORS, <strong>TODAS</strong> suas requisições (inclusive a do login), devem incluir no cabeçalho o header <strong>Authorization</strong>.</p>
+
+<p>PS: Para este header ser lido, seu CORS precisa <strong>expor</strong> ele.</p>
+
+<p>Exemplo da minha action de Login:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">def</span> <span style="color: #ff8000; font-weight: bold">create</span>
+  response<span style="color: #2c5dcd">.</span>headers<span style="color: #2c5dcd">[</span><span style="color: #00cc66">&#39;Authorization&#39;</span><span style="color: #2c5dcd">]</span> <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;Bearer &#39;</span> <span style="color: #2c5dcd">+</span> auth_token<span style="color: #2c5dcd">.</span>token
+  render <span style="color: #c5060b; font-weight: bold">json</span>: auth_token, <span style="color: #c5060b; font-weight: bold">status</span>: <span style="color: #c5060b; font-weight: bold">:created</span>
+<span style="color: #2c5dcd; font-weight: bold">end</span>
+</pre></div>
+
+Pontos esclarecidos, vamos voltar para nosso front-end.</p>
+
+<h2 id="requisição-no-formulário">Requisição no formulário</h2>
+
+<p><img src="https://media.giphy.com/media/3o7TKKxPt2DhOdqeSQ/source.gif" alt="" /></p>
+
+<p>Vamos voltar para o componente do Login, e refatorar o nosso <code>handleSubmit()</code>:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>methods<span style="color: #2c5dcd">:</span> {
+  handleSubmit<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">function</span> (e) {
+    e.preventDefault()
+
+    <span style="color: #0080ff; font-style: italic">// Auth</span>
+    <span style="color: #2c5dcd; font-weight: bold">this</span>.$auth.login({
+      params<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">this</span>.user},
+      success<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">function</span> () {
+        console.log(<span style="color: #00cc66">&#39;Usuário logado com sucesso.&#39;</span>)
+      },
+      error<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">function</span> () {
+        console.log(<span style="color: #00cc66">&#39;Usuário e/ou senha inválidos.&#39;</span>)
+      },
+      rememberMe<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">true</span>,
+      redirect<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/signup&#39;</span>
+    })
+  }
+}
+</pre></div>
+
+Os parâmetros <em>rememberMe</em> e <em>redirect</em> são opcionais.</p>
+
+<p>No caso da nossa aplicação de teste, a página de cadastro só deverá carregar para usuários logados.</p>
+
+<p>E a página de login só deverá carregar para usuários não-logados.</p>
+
+<p>Nossas rotas ficam assim então:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// src/main.js</span>
+<span style="color: #0080ff; font-style: italic">// Routes</span>
+<span style="color: #2c5dcd; font-weight: bold">const</span> routes <span style="color: #2c5dcd">=</span> [
+  {
+    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/&#39;</span>,
+    redirect<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/login&#39;</span>
+  },
+  {
+    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/signup&#39;</span>,
+    component<span style="color: #2c5dcd">:</span> SignUp,
+    meta<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">true</span>}
+  },
+  {
+    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/login&#39;</span>,
+    component<span style="color: #2c5dcd">:</span> Login,
+    meta<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">false</span>}
+  }
+]
+</pre></div>
+
+Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto para não-logados), basta não declarar o atributo <code>meta</code>.</p>
+
+<p>Se a gente quisesse montar uma rota somente para 1 role em específico, seria:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// src/main.js</span>
+<span style="color: #0080ff; font-style: italic">// Routes</span>
+<span style="color: #2c5dcd; font-weight: bold">const</span> routes <span style="color: #2c5dcd">=</span> [
+  {
+    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/admin&#39;</span>,
+    component<span style="color: #2c5dcd">:</span> Admin,
+    meta<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;admin&#39;</span>}
+  },
+  {
+    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/manager&#39;</span>,
+    component<span style="color: #2c5dcd">:</span> Manager,
+    meta<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;manager&#39;</span>}
+  }
+]
+</pre></div>
+
+
+<h2 id="testando-nossa-aplicação">Testando nossa aplicação</h2>
+
+<p>Vamos para a tela de Login:</p>
+
+<p><img src="2.png" alt="" /></p>
+
+<p>A requisição deverá ser semelhante a isto:</p>
+
+<p><img src="3.png" alt="" /></p>
+
+<p>Agora, se você visualizar o <em>Local Storage</em>, terá algo semelhante a isto:</p>
+
+<p><img src="4.png" alt="" /></p>
+
+<p>E é claro, nossa esperada tela de cadastro pós-login:</p>
+
+<p><img src="5.png" alt="" /></p>
+
+<h2 id="conclusão">Conclusão</h2>
+
+<p><img src="https://media.giphy.com/media/l0MYDGA3Du1hBR4xG/giphy.gif" alt="" /></p>
+
+<p>Espero que tenham gostado desta segunda parte da nossa série.</p>
+
+<p>Os próximos posts falarão sobre:</p>
+
+<ul>
+<li>CRUDs com o Vue;</li>
+<li>Como montar uma API com Autenticação via JWT com Rails 5.</li>
+</ul>
+
+<p>Fiquem ligados! :)</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/auth"><span class="tag">Auth</span></a></li>
+        
+          <li><a href="/tags/jwt"><span class="tag">Jwt</span></a></li>
+        
+          <li><a href="/tags/vue"><span class="tag">Vue</span></a></li>
+        
+          <li><a href="/tags/spa"><span class="tag">Spa</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>256</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

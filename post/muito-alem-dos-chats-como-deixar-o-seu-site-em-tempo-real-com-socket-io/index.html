@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Muito além dos chats: como deixar o seu site em tempo real com Socket.IO</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Aplicações em tempo real estão mais acessíveis do que nunca. Hoje em dia, qualquer site que se preze tem algo neste esquema. Por um simples motivo: você consegue fazer uma conversão de acessos enorme com isto.
+Continue lendo o tutorial e você aprenderá:
+ Fazer uma comunicação em tempo real entre cliente x servidor; Transmitir essas informações para os outros usuários no seu site; E de quebra aprender como configurar tudo isto dentro do Apache." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Muito além dos chats: como deixar o seu site em tempo real com Socket.IO" />
+    <meta name="twitter:description" content="Aplicações em tempo real estão mais acessíveis do que nunca. Hoje em dia, qualquer site que se preze tem algo neste esquema. Por um simples motivo: você consegue fazer uma conversão de acessos enorme com isto.
+Continue lendo o tutorial e você aprenderá:
+ Fazer uma comunicação em tempo real entre cliente x servidor; Transmitir essas informações para os outros usuários no seu site; E de quebra aprender como configurar tudo isto dentro do Apache." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Muito além dos chats: como deixar o seu site em tempo real com Socket.IO</h1>
+      <p class="post-meta">@lhas · 06/08/2016 · 12 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Aplicações em <strong>tempo real</strong> estão mais <strong>acessíveis</strong> do que nunca. Hoje em dia, qualquer site que se preze tem algo neste esquema. Por um simples motivo: você consegue fazer uma <strong>conversão de acessos enorme</strong> com isto.</p>
+
+<p>Continue lendo o tutorial e você aprenderá:</p>
+
+<ul>
+<li>Fazer uma comunicação em tempo real entre cliente x servidor;</li>
+<li>Transmitir essas informações para os outros usuários no seu site;</li>
+<li>E de quebra aprender como configurar tudo isto dentro do Apache.</li>
+</ul>
+
+<p>Legal, não? FrontEnd + BackEnd + DevOps numa tacada só. =D</p>
+
+<p>Além dos sites que nós já conhecemos como <em>Trello, Facebook, Twitter</em>, tem uns outros cases muito interessantes que usufruem deste tipo de recurso.</p>
+
+<p>Dê uma olhada neles se tiver tempo:</p>
+
+<h3 id="no-homophobes">No Homophobes</h3>
+
+<p><img src="Selection_002.png" alt="" /></p>
+
+<p>URL: <a href="http://www.nohomophobes.com/#!/today/">http://www.nohomophobes.com/#!/today/</a></p>
+
+<p>Este site acompanha em tempo real <strong>tweets</strong> no dia <strong>de hoje</strong> que fazem <em>referência a termos homofóbicos</em>. Muito <em>bacana</em> do ponto de vista <em>tecnológico</em> porém <strong>triste</strong> do ponto de vista social, mas enfim. <em>Palmas para os desenvolvedores</em>!</p>
+
+<p>PS: Feito com Angular1. =O</p>
+
+<h3 id="gifhell">GIFHell</h3>
+
+<p><img src="Selection_003.png" alt="" /></p>
+
+<p>URL: <a href="http://gifhell.com/">http://gifhell.com/</a></p>
+
+<p>Este site mostra os gifs mais populares do Twitter em tempo real.</p>
+
+<p>Se você se convenceu de que é uma boa ideia tentar algo do tipo, continue lendo. :-)</p>
+
+<h1 id="dependências-do-socket-io">Dependências do Socket.IO</h1>
+
+<p>Para nosso amiguinho funcionar, vamos precisar que ele rode em dois ambientes diferentes:</p>
+
+<h2 id="no-lado-do-servidor">No lado do servidor</h2>
+
+<p>Ele vai rodar no servidor através do NodeJS e alguma instância de um HTTP Server.</p>
+
+<p>99% das pessoas usam o ExpressJS para isto e é o que nós usaremos aqui.</p>
+
+<h2 id="no-lado-do-cliente">No lado do cliente</h2>
+
+<p>É só mais uma biblioteca JavaScript. Vamos instalá-la com Bower.</p>
+
+<p>Ela também é disponibilizada junto ao lado do servidor.</p>
+
+<p>Porém pode ser meio complicado para você de carregá-la, pois você precisaria indicar o caminho absoluto para o servidor, e isso pode variar no ambiente de desenvolvimento para de produção, p.e.</p>
+
+<p>Vamos começar pelo cliente pois acredito que seja mais fácil para os navegantes de primeira viagem:</p>
+
+<h1 id="no-lado-do-cliente-1">No lado do cliente</h1>
+
+<p>Primeiro precisamos instalá-lo o client via Bower:</p>
+
+<h2 id="instalando-via-bower">Instalando via bower:</h2>
+
+<pre><code class="language-bash">bower install socket.io-client angular-socket-io --save
+</code></pre>
+
+<p>Se você estiver usando injeção automática do Bower (gulp-wiredep), irá reparar que o socket.io-client não carrega nada, só o angular-socket-io.</p>
+
+<p>Para resolver isso, basta abrir o seu bower.json e adicionar esta propriedade:</p>
+
+<pre><code class="language-json">overrides: {
+  &quot;socket.io-client&quot;: {
+    &quot;main&quot;: [
+      &quot;socket.io.js&quot;
+    ]
+  }
+}
+</code></pre>
+
+<p>Assim ele irá carregá-lo.</p>
+
+<p><em>PS: Se você não for usar o Angular, não precisa instalar o angular-socket-io.</em></p>
+
+<h2 id="injetar-dependência-no-angular">Injetar dependência no angular</h2>
+
+<p>No nosso exemplo, vamos fazer essa comunicação dentro de um Single Page Application feito com Angular. Você pode fazer o mesmo com seu site mesmo que ele não use o Angular. Neste caso é somente uma demonstração pois é o meu framework predileto para front-end.</p>
+
+<pre><code class="language-js">/* app.module.js */
+(function(){
+
+angular
+  .module('app', ['ui.router', 'btford.socket-io'])
+
+})();
+</code></pre>
+
+<h2 id="criar-uma-factory-para-lidarmos-com-o-socket-io">Criar uma factory para lidarmos com o Socket.IO</h2>
+
+<p>src/app/shared/realtime/realtime.factory.js:</p>
+
+<pre><code class="language-js">/* realtime.factory.js */
+(function(){
+  'use strict';
+
+  angular
+    .module('app.realtime', [])
+    .factory('realtimeFactory', realtimeFactory);
+
+    realtimeFactory.$inject = ['socketFactory'];
+    function realtimeFactory(socketFactory) {
+      var ioConnect = io.connect('http://localhost:3010');
+      var realtimeSocket = socketFactory({
+        ioSocket: ioConnect
+      });
+
+      return realtimeSocket;
+    }
+})();
+</code></pre>
+
+<p>Se você fizer os passos acima direitinho, no seu console irá aparecer isso aqui:</p>
+
+<p><img src="Selection_001.png" alt="" /></p>
+
+<h1 id="no-lado-do-servidor-1">No lado do servidor:</h1>
+
+<p><strong>Crie um arquivo chamado server.js. Não faça nada nele ainda.</strong></p>
+
+<h3 id="senta-que-lá-vem-história">Senta que lá vem história&hellip;</h3>
+
+<p>Eu coloquei ele dentro da minha pasta do client/, pois eu vou criar um webserver SÓ para o SocketIO.</p>
+
+<p>Na minha aplicação atual, o meu backend é em PHP, então eu não posso configurar o socketIO dentro dele, pois ele exige que o ambiente seja nodeJS, então vou criar um server só para ele.</p>
+
+<p>No caso de uma aplicação PHP como a minha, temos diversas camadas:</p>
+
+<ul>
+<li><strong>Web/ExpressJS</strong> (front-end e back-end):</li>
+</ul>
+
+<p>Através do ExpressJS, nós apontamos ele para a pasta &ldquo;dist/&rdquo; do nosso SPA. Além disto, ele irá hospedar o SocketIO, e o prerender.io (no caso eu preciso fazer SEO na minha aplicação em Angular1). Ele poderia rodar numa porta 8080, p.e.</p>
+
+<ul>
+<li><strong>API</strong> (back-end):</li>
+</ul>
+
+<p>Usada pelo usuário final para recuperar/enviar dados do site para o banco de dados. Feita em Laravel, rodando em uma porta 80 através do Apache, p.e.</p>
+
+<ul>
+<li><strong>Admin</strong> (back-end):</li>
+</ul>
+
+<p>Usada pelo cliente, para administar o conteúdo do site no banco de dados. Mesmo que acima, feita em Laravel (são a mesma aplicação admin e api), rodando na porta 80 através do Apache.</p>
+
+<p>Faz sentido?</p>
+
+<p><img src="https://media.giphy.com/media/rpdPBecp8imfS/giphy.gif" alt="" /></p>
+
+<h2 id="exemplos-de-virtualhost">Exemplos de <code>&lt;VirtualHost&gt;</code></h2>
+
+<p>Se você tem um VPS/servidor dedicado, conseguirá facilmente fazer essas alterações no VirtualHost. Isso só não funciona em hospedagens compartilhadas.</p>
+
+<p>Estou exemplificando com Apache, mas com Nginx seria mesmo esquema. Basta você pesquisar como efetuar &ldquo;proxy reverse with nginx&rdquo; no Google.</p>
+
+<p>No caso da nossa app, o usuário final acessaria o site através do domínio <a href="http://abacate.com">http://abacate.com</a></p>
+
+<p>O Apache que está configurado com este domínio, vai ter um VirtualHost assim:</p>
+
+<pre><code class="language-apache">&lt;VirtualHost *:80&gt;
+    ServerName abacate.com   
+    ProxyPass / http://abacate.com:3010/
+    ProxyPassReverse / http://abacate.com:3010/
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Ou seja, o domínio abacate.com vai apontar para abacate.com:3010, mas o usuário final vai se manter no mesmo domínio.</p>
+
+<p>O <a href="http://abacate.com:3010/">http://abacate.com:3010/</a> vai ser o nosso server.js rodando.</p>
+
+<p>No caso, seria o item Web/ExpressJS. Ele irá apontar para a pasta &ldquo;dist/&rdquo; do nosso app. E inicializar o SocketIO na mesma porta.</p>
+
+<p>Já nossa API e Admin, vamos precisar de um VirtualHost para cada:</p>
+
+<pre><code class="language-apache">&lt;VirtualHost *:80&gt;
+    ServerName api.abacate.com
+    DocumentRoot &quot;/home/root/public_html/laravel/public&quot;
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<pre><code class="language-apache">&lt;VirtualHost *:80&gt;
+    ServerName admin.abacate.com
+    DocumentRoot &quot;/home/root/public_html/laravel/public&quot;
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>No meu caso, Admin e API são a mesma coisa então apontei para a mesma pasta.</p>
+
+<p><img src="https://media.giphy.com/media/AtRaEatCSjC0w/giphy.gif" alt="" /></p>
+
+<p>Se tratando de domínios temos agora:</p>
+
+<p><a href="http://abacate.com/">http://abacate.com/</a> - para usuários finais
+<a href="http://abacate.com:3010/">http://abacate.com:3010/</a> - para expressJS e socketIO
+<a href="http://api.abacate.com/">http://api.abacate.com/</a> - API
+<a href="http://admin.abacate.com/">http://admin.abacate.com/</a> - Admin</p>
+
+<p>Parece confuso, mas cada camada é importante, bem distinta e se comunica bem com a outra.</p>
+
+<p>Isto ficaria mais simples se o back-end também fosse em NodeJS, pois aí não precisaríamos separar API/Admin/ExpressJS, seria tudo uma coisa só.</p>
+
+<p>Mas como nossa vida é feita de gambiarras&hellip;</p>
+
+<p><img src="https://media.giphy.com/media/SqE4ICLOfgV4Q/giphy.gif" alt="" /></p>
+
+<h2 id="voltando-ao-server-js">Voltando ao server.js</h2>
+
+<p>Vou colocar aqui um exemplo do ExpressJS com Socket.io. É o mínimo que você precisa para ter ambos funcionando.</p>
+
+<p>Primeiro instale as dependências:</p>
+
+<pre><code class="language-bash">npm install express socket.io --save
+</code></pre>
+
+<p>Agora vamos preencher o server.js:</p>
+
+<p>client/server.js:</p>
+
+<pre><code class="language-js">var express = require('express');
+var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+// Se estiver em desenvolvimento, servirá as pastas .tmp/, src/ e bower_components/
+if(app.get('env') == &quot;development&quot;) {
+  app.use(express.static(&quot;.tmp&quot;));
+  app.use(express.static(&quot;src&quot;));
+  app.use('/bower_components', express.static(&quot;bower_components&quot;));
+} else {
+  // Do contrário, se estiver em produção, servirá a pasta dist/
+  app.use(express.static(&quot;dist&quot;));
+}
+
+// Todas as rotas apontarão para o index.html
+app.get('*', function(req, res){ 
+  var fileName = (app.get('env') == &quot;development&quot;) ? '/.tmp/index.html' : '/dist/index.html';
+
+  return res.sendFile(__dirname + fileName);
+});
+
+// Exemplo do Socket.IO que nós vamos trabalhar
+// Toda vez que algum usuário final criar um job, nós receberemos aqui
+// E emitiremos para todos os sockets online que o servidor acabou de salvar um novo job
+io.on('connection', function(socket){
+
+  socket.on('client:created:job', function(data) {
+    io.sockets.emit('server:created:job', data);
+  });
+
+});
+
+// Iniciando servidor
+http.listen(3010, function(){
+  console.log('Escutando em *:3010');
+});
+</code></pre>
+
+<p>Se rodarmos no terminal agora:</p>
+
+<pre><code class="language-bash">node server.js
+</code></pre>
+
+<p><img src="Selection_005.png" alt="" /></p>
+
+<p>Se abrirmos <a href="http://localhost:3010/socket.io/socket.io.js:">http://localhost:3010/socket.io/socket.io.js:</a></p>
+
+<p><img src="Selection_006.png" alt="" /></p>
+
+<p>Isso significa que nosso servidor está pronto.</p>
+
+<h1 id="definindo-próximos-passos">Definindo próximos passos</h1>
+
+<p>Vou usar como exemplo o seguinte:</p>
+
+<p>Um site de vagas de emprego. Na home, temos um espaço destinado para as vagas mais recentes. Esta área se parece com isso:</p>
+
+<p><img src="Selection_007.png" alt="" /></p>
+
+<p>As próximas etapas serão:</p>
+
+<ul>
+<li>Na página de <em>cadastro da vaga</em>, <strong>após</strong> a vaga ser <strong>cadastrada</strong> com sucesso e recebida pela API, <strong>vamos emitir um evento de &ldquo;job:created&rdquo;</strong>.</li>
+<li>Na página da <em>Home</em>, dentro do <em>componente de Oportunidades Mais Recentes</em>, vamos <strong>observar</strong> se ocorre alguma <strong>transmissão do evento &ldquo;job:created&rdquo;</strong>.
+Se <em>houver</em>, vamos <em>atualizar</em> a listagem dos jobs.</li>
+</ul>
+
+<h1 id="observação-caso-você-esteja-usando-browsersync">Observação (caso você esteja usando BrowserSync)</h1>
+
+<p><img src="https://media.giphy.com/media/qzIXcoKH4CIWk/giphy.gif" alt="" /></p>
+
+<p>Caso você esteja usando o <strong>BrowserSync</strong>, precisamos fazer uma adaptação nele para ele funcionar sem atritos com o Socket.IO (por que o BrowserSync naturalmente já usa ele).</p>
+
+<p>Ao invés de você inicializar um servidor do BrowserSync, você rodará ele como proxy.</p>
+
+<p>Se você está usando algum gerador do <em>Yeoman</em> ou algo parecido, provavelmente você vai ter de mudá-lo.</p>
+
+<p>No meu caso, eu uso o FountainJS. A configuração do meu BrowserSync fica em: conf/browsersync.conf.js</p>
+
+<pre><code class="language-js">// Antigo
+module.exports = function () {
+  return {
+    server: {
+      baseDir: [
+        conf.paths.tmp,
+        conf.paths.src
+      ],
+      routes: {
+        '/bower_components': 'bower_components'
+      }
+    },
+    open: false
+  };
+};
+
+// Novo
+module.exports = function () {
+  return {
+    proxy: {
+			target: &quot;localhost:3010&quot;,
+			ws: true
+		},
+    open: false
+  };
+};
+</code></pre>
+
+<p><img src="https://media.giphy.com/media/bl2FKRXQaFgf6/giphy.gif" alt="" /></p>
+
+<p>Além disto, se você quiser fazer testes no desenvolvimento, você precisa desabilitar o <code>Ghost Mode</code>.</p>
+
+<p>O Ghost Mode é o que faz ele replicar os cliques, scrolls da tela, para todas as conexões.</p>
+
+<p>O problema disso é que se você tentar abrir a home numa aba, e abrir o cadastro da vaga em outra aba, vai dar merda, afinal, as telas estarão sincronizadas.</p>
+
+<p>Caso você por este problema, veja se na config. do seu BrowserSync não tem uma linha assim:</p>
+
+<pre><code class="language-js">browserSync.use(spa());
+</code></pre>
+
+<p>Se tiver, comente-a. Isto irá desabilitar o ghost mode. Quando você quiser reativar o esquema, basta descomentá-la.</p>
+
+<p>Feito a adaptação para o BrowserSync, vamos seguir para&hellip;</p>
+
+<h1 id="adaptação-do-gulp">Adaptação do Gulp</h1>
+
+<p>Precisamos de um responsável para iniciar o nosso server.js.</p>
+
+<p>No <strong>ambiente de desenvolvimento</strong> o responsável é o: <em>Gulp</em></p>
+
+<p>No <strong>ambiente de produção</strong> o responsável é o: <em>PM2</em> (ou outro automatizador de nodeJs para amb. de produção)</p>
+
+<p>Vamos criar uma task para o nosso Gulp, para que ele possa iniciar o server:</p>
+
+<p>Crie o arquivo gulp_tasks/server.js (ou coloque dentro do gulpfile):</p>
+
+<pre><code class="language-js">const path = require('path');
+
+const gulp = require('gulp');
+
+const conf = require('../conf/gulp.conf');
+
+const exec = require('child_process').exec;
+
+gulp.task('server', server);
+
+function server() {
+  exec('node server.js', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+}
+</code></pre>
+
+<p>Se você fizer um teste rodando <code>gulp server</code> e abrir no seu navegador <a href="http://localhost:3010">http://localhost:3010</a> irá funcionar.</p>
+
+<p>Agora precisamos incluir esta task server, na fila de tasks quando rodamos <code>gulp serve</code> (lembra, é só pro amb. de desenvolvimento).</p>
+
+<p>Abra o gulpfile.js. Procure a linha que defina a task do serve. A minha estava assim:</p>
+
+<pre><code class="language-js">// Antigo
+gulp.task('serve', gulp.series('clean', 'ng-config:serve', 'partials', 'inject', 'watch', 'browsersync'));
+// Novo
+gulp.task('serve', gulp.series('clean', 'ng-config:serve', 'partials', 'inject', 'watch', 'browsersync', 'server'));
+</code></pre>
+
+<p>Ou seja, depois dele fazer todo o processo de servir o app, ele irár rodar o server.js (no caso o Express).</p>
+
+<p>Pronto. Gulp configurado!</p>
+
+<p><img src="https://media.giphy.com/media/HqctpzTRCVpi8/giphy.gif" alt="" /></p>
+
+<p>Se você abrir <a href="http://localhost:3000">http://localhost:3000</a> verá o nosso app rodando com o <code>BrowserSync</code>.
+Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o nosso app direto no <code>ExpressJS</code>.</p>
+
+<p>Chega de configurar coisas, né? Vamos tocar nas regras de negócio.</p>
+
+<h1 id="dizendo-o-app-o-que-fazer-quando-novas-vagas-forem-cadastradas">Dizendo o app o que fazer quando novas vagas forem cadastradas</h1>
+
+<p>Se você reparar, no server.js tem um trecho assim:</p>
+
+<pre><code class="language-js">socket.on('client:created:job', function(data) {
+  io.sockets.emit('server:created:job', data);
+});
+</code></pre>
+
+<p>Isso significa que:</p>
+
+<p>Toda vez que nosso socket observar um evento novo em <code>client:created:job</code>, ele irá emitir um outro evento denominado <code>server:created:job</code>.</p>
+
+<p>Por que isso é necessário?</p>
+
+<p>Pois nós não podemos emitir um evento novo e tratá-lo diretamente no cliente. Precisamos dessa mãozinha através do servidor.</p>
+
+<p>A variável <code>data</code> vai retornar o que nós quisermos transportar no evento.</p>
+
+<p>Seja um ID, um objeto JSON, ou um simples booleano (verdadeiro/falso).</p>
+
+<p>No nosso caso, será um simples booleano, <em>for simplicity&rsquo;s sake</em>.</p>
+
+<p><img src="https://media.giphy.com/media/HkV87Alo6J1fy/giphy.gif" alt="" /></p>
+
+<h1 id="editando-o-nosso-controller-de-cadastro-de-vagas">Editando o nosso controller de cadastro de vagas</h1>
+
+<p>Digamos que este seja o controller da nossa página de cadastro de vagas:</p>
+
+<p>PS: Observe que eu já injetei o realtimeFactory que criamos lá em cima. :-)</p>
+
+<pre><code class="language-js">/* create.controller.js */
+(function() {
+
+  angular
+    .module('app.job.create', [])
+    .component('tesJobCreate', {
+      templateUrl: 'app/components/job/create/create.html',
+      controller: CreateController
+    });
+
+  CreateController.$inject = ['JobService', 'realtimeFactory', 'Notification', '$cookies', '$state'];
+  
+  function CreateController(JobService, realtimeFactory, Notification, $cookies, $state) {
+    var vm = this;
+    var job = $cookies.getObject('job');
+
+    vm.job = job;
+    vm.create = create;
+
+    /* Função chamada quando o formulário é enviado (ng-submit=&quot;$ctrl.create($ctrl.job)&quot;, por exemplo) */
+    function create(job) {
+
+      // Salva a vaga através de um Service, e define os callbacks
+      JobService.create(job).then(success, error);
+
+      /* Callback de sucesso - será acionado caso a vaga tenha sido salva */
+      function success(result) {
+        // Notifica o usuário
+        Notification.primary('O seu anúncio foi criado com sucesso!');
+
+        // Redireciona para a home
+        $state.go('home');
+      }
+
+      /* Callback de erro - será acionado caso a API retorne algum erro ou a conexão tenha sido perdida */
+      function error(error) {
+        // Notifica o usuário
+        Notification.error('Ocorreu um problema ao cadastrar a vaga. Tente novamente.');
+      }
+    }
+  }
+
+})();
+</code></pre>
+
+<p>Vamos colocar na função create(), dentro do callback de sucesso, a seguinte linha:</p>
+
+<pre><code class="language-js">/* Callback de sucesso - será acionado caso a vaga tenha sido salva */
+function success(result) {
+  // Transmite um evento para o servidor indicando que uma vaga foi criada com sucesso por um cliente
+  realtimeFactory.emit('client:created:job');
+
+  // Notifica o usuário
+  Notification.primary('O seu anúncio foi criado com sucesso!');
+
+  // Redireciona para a home
+  $state.go('home');
+}
+</code></pre>
+
+<p>Pronto, o nosso servidor já irá identificar que vagas foram criadas e vai emitir o tal do <code>server:created:job</code> (indicando que ele fez a parte dele também).</p>
+
+<p>É hora de tratarmos este evento do servidor!</p>
+
+<h1 id="atualizando-a-lista-de-vagas-recentes">Atualizando a lista de vagas recentes</h1>
+
+<p>No caso do nosso exemplo, a lista de vagas recentes é um componente só para isto (como deve ser feito, não me venha com apps não-componentizados para cima de mim).</p>
+
+<p>O nosso componente está assim até então:</p>
+
+<p>PS: Observe que eu já injetei o realtimeFactory que criamos lá em cima. :-)</p>
+
+<pre><code class="language-js">/* recent-jobs.controller.js */
+(function(){
+    'use strict';
+
+    angular
+        .module('app.job.RecentJobs', [])
+        .component('tesRecentJobs', {
+            templateUrl: 'app/components/job/recent-jobs/recent-jobs.html',
+            controller: RecentJobsController
+        });
+    
+    RecentJobsController.$inject = ['JobService', 'realtimeFactory'];
+
+    function RecentJobsController(JobService, realtimeFactory) {
+        var vm = this;
+        var jobs = undefined;
+
+        vm.jobs = jobs;
+
+        activate();
+
+        function activate() {
+          JobService.getAll().then(success, error);
+
+          function success(result) {
+              vm.jobs = result.data.jobs;
+          }
+
+          function error(error) {
+              console.log(error);
+          }
+        }
+
+    }
+})();
+</code></pre>
+
+<p>Observe a função activate(). Ela é acionada toda vez que nosso componente é carregado.</p>
+
+<p>Se você deixar seu código sempre bem estruturado, esta vai ser a parte mais fácil para você.</p>
+
+<p>Pelo bem da simplicidade, mais uma vez, vamos fazer com que quando seja cadastrado uma nova vaga, o componente de vagas inteiro se atualize, ou seja, vamos somente chamar a função activate() de novo.</p>
+
+<p>Se fôssemos fazer algo mais caprichado, o ideal seria que os dados da vaga nova se transportassem dentro do evento e você ao invés de atualizar o componente de novo,apenas desse um <code>vm.jobs.push(job);</code></p>
+
+<p>O problema de dar um <code>.push()</code>, é que você tem que observar caso o número limite de itens dentro do array não ultrapasse o limitado pelo layout, se não vai ficar algo enorme.</p>
+
+<p>Depois da função activate, vamos adicionar o observador para nosso evento disparado pelo servidor:</p>
+
+<pre><code class="language-js">realtimeFactory.on('server:created:job', function(ev, data) {
+  activate();
+});
+</code></pre>
+
+<p>Ele faz exatamente o que eu expliquei ali em cima. Toda vez que houver um evento de <code>server:created:job</code>, nós iremos chamar a função activate(), que irá atualizar a lista de jobs.</p>
+
+<p><img src="https://media.giphy.com/media/VR19WcrVHM44E/giphy.gif" alt="" /></p>
+
+<h1 id="concluído">Concluído!</h1>
+
+<p>Simples, não?</p>
+
+<p>Agora faça um teste aí, tente &ldquo;&rdquo;&ldquo;&ldquo;cadastrar uma nova vaga&rdquo;&ldquo;&rdquo;&rdquo; (use o seu projeto atual de teste), e você verá tudo funcionando.</p>
+
+<p>O ideal aqui para vocês visualizarem o funcionar seria um vídeo ou uma URL de teste, mas tive uns contra-tempos que me impedem no momento de fazer isso.</p>
+
+<p>Espero que gostem da explicação e desse caso de uso diferente do de chat.</p>
+
+<p>Ainda assim é um caso de uso simples, beeeem simples, antes que vocês reclamem =P.</p>
+
+<p>Mas pode te fazer enxergar como os sockets funcionam de uma forma melhor e possa te fornecer alguns insights bacanas para seu app.</p>
+
+<p>Além de é claro, você aprender como funciona na prática a organização de VirtualHosts com aplicações que rodam em portas diferentes. Esse é um conhecimento útil quando você trabalha com NodeJS, Ruby, Python, entre outros, no lado do servidor.</p>
+
+<p>Os desenvolvedores do PHP tendem a estar acostumados com o Apache funcionando na porta 80 e fazendo toda a mágica acontecer por trás.</p>
+
+<p><img src="https://media.giphy.com/media/WIncQE8O5D94c/giphy.gif" alt="" /></p>
+
+<p>Até a próxima! :D</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/tempo-real"><span class="tag">Tempo Real</span></a></li>
+        
+          <li><a href="/tags/realtime"><span class="tag">Realtime</span></a></li>
+        
+          <li><a href="/tags/socket.io"><span class="tag">Socket.io</span></a></li>
+        
+          <li><a href="/tags/angular"><span class="tag">Angular</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>383</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

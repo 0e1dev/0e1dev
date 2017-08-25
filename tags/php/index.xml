@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Php on 0e1dev</title>
+    <link>https://blog.0e1dev.com/tags/php/</link>
+    <description>Recent content in Php on 0e1dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 21 Nov 2016 01:42:32 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.0e1dev.com/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pagamentos Recorrentes com PayPal: Guia Completo! (em PHP)</title>
+      <link>https://blog.0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/</link>
+      <pubDate>Mon, 21 Nov 2016 01:42:32 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/</guid>
+      <description>Faz um tempo que não escrevo por aqui. Hoje resolvi escrever a respeito de um assunto que tirou o meu sono durante algumas noites.
+O motivo é simples. &amp;ldquo;PayPal is a mess.&amp;rdquo; disse um comentário perdido de 2014 no blog deles. E é uma bagunça mesmo.
+Só quem já precisou trabalhar com este gateway sabe como a documentação deles é estranha.
+Atualmente, o PayPal tem 2 métodos de integração: (a) Clássico ou (b) REST API.</description>
+    </item>
+    
+  </channel>
+</rss>

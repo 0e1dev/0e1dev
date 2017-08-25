@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crud on 0e1dev</title>
+    <link>https://blog.0e1dev.com/tags/crud/</link>
+    <description>Recent content in Crud on 0e1dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 07 Jan 2017 12:02:12 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.0e1dev.com/tags/crud/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Montando CRUD com Vue 2</title>
+      <link>https://blog.0e1dev.com/post/montando-crud-com-vue-2/</link>
+      <pubDate>Sat, 07 Jan 2017 12:02:12 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/post/montando-crud-com-vue-2/</guid>
+      <description>Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o Vue 2.
+Caso você queira acompanhar os posts anteriores:
+ Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2  Pré-Requisitos  Vue Vue-resource Vue-router (opcional, mas útil caso você queira páginas separadas para cada ação)  Nosso projeto Atualmente, o projeto encontra-se assim:
+Vamos começar pelo Index (Listagem de Registros).</description>
+    </item>
+    
+  </channel>
+</rss>

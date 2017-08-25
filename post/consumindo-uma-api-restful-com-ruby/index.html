@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Consumindo uma API RESTful com Ruby</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Este é um assunto bem simples de se trabalhar quando falamos de Ruby. Ainda mais com gems poderosas que temos acesso como rest-client ou ActiveResource.
+Hoje nós vamos trabalhar com a rest-client.
+Quanto a API a ser utilizada, podemos usar qualquer uma famosa para reproduzir este tutorial.
+Eu vou usar a do MyFinance pois é a minha demanda atual de trabalho integrá-la.
+Sugestões de API para consumir Algumas sugestões para você incrementar seu conhecimento:" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Consumindo uma API RESTful com Ruby" />
+    <meta name="twitter:description" content="Este é um assunto bem simples de se trabalhar quando falamos de Ruby. Ainda mais com gems poderosas que temos acesso como rest-client ou ActiveResource.
+Hoje nós vamos trabalhar com a rest-client.
+Quanto a API a ser utilizada, podemos usar qualquer uma famosa para reproduzir este tutorial.
+Eu vou usar a do MyFinance pois é a minha demanda atual de trabalho integrá-la.
+Sugestões de API para consumir Algumas sugestões para você incrementar seu conhecimento:" />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/img/avatar.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/consumindo-uma-api-restful-com-ruby/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Consumindo uma API RESTful com Ruby</h1>
+      <p class="post-meta">@lhas · 22/11/2016 · 4 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Este é um assunto bem simples de se trabalhar quando falamos de Ruby. Ainda mais com gems poderosas que temos acesso como <a href="https://github.com/rest-client/rest-client">rest-client</a> ou <a href="https://github.com/rails/activeresource">ActiveResource</a>.</p>
+
+<p>Hoje nós vamos trabalhar com a <strong>rest-client</strong>.</p>
+
+<p>Quanto a API a ser utilizada, podemos usar qualquer uma famosa para reproduzir este tutorial.</p>
+
+<p>Eu vou usar a do <a href="https://app.myfinance.com.br/docs/api">MyFinance</a> pois é a minha demanda atual de trabalho integrá-la.</p>
+
+<h1 id="sugestões-de-api-para-consumir">Sugestões de API para consumir</h1>
+
+<p>Algumas sugestões para você incrementar seu conhecimento:</p>
+
+<ul>
+<li><a href="https://dev.twitter.com/rest/public">Twitter</a></li>
+<li><a href="https://developers.google.com/maps/">Google Maps</a></li>
+<li><a href="https://developer.spotify.com/web-api/">Spotify</a></li>
+<li><a href="https://developers.pinterest.com/docs/getting-started/introduction/">Pinterest</a></li>
+</ul>
+
+<p><img src="1.jpg" alt="" /></p>
+
+<h1 id="instalando-a-gem">Instalando a gem</h1>
+
+<p>Adicione no <code>Gemfile</code>:</p>
+
+<pre><code>gem 'rest-client'
+</code></pre>
+
+<p>Depois execute:</p>
+
+<pre><code>bundle
+</code></pre>
+
+<p><img src="2.jpg" alt="" /></p>
+
+<h1 id="iniciando-nossa-classe">Iniciando nossa classe</h1>
+
+<p>No meu caso, como é um projeto em Rails, ele conta com toda uma arquitetura já pré-definida. Isso me leva a criar uma <code>Service</code>. Mas se tratando de Ruby puro, uma simples classe resolveria o problema da mesma forma.</p>
+
+<pre><code class="language-ruby">class MyFinanceService
+  attr_reader :authentication_token, :account_id, :base_url
+end
+</code></pre>
+
+<p>Vamos adicionar ao construtor da nossa classe 2 parâmetros:</p>
+
+<ul>
+<li><strong>authentication_token</strong>: O token requisitado pela nossa API</li>
+<li><strong>account_id</strong>: (opcional) Este é um parâmetro extra que a API que nós iremos consumir pede. Ela será adicionada no nosso header.</li>
+</ul>
+
+<pre><code class="language-ruby">def initialize(authentication_token, account_id)
+    @authentication_token = authentication_token
+    @account_id           = account_id
+    @base_url             = 'https://app.myfinance.com.br'
+end
+</code></pre>
+
+<p>Agora nós já temos estes 3 atributos como constantes em nossa classe podemos seguir.</p>
+
+<h1 id="autenticação">Autenticação</h1>
+
+<p>A autenticação do MyFinance é feita com HTTP Basic.</p>
+
+<p>Só que ao invés do típico <code>username:password</code>, o <code>username</code> é o <code>@authentication_token</code> em <code>Base64</code>, e a senha é sempre <code>X</code>.</p>
+
+<p>Vamos supor que:</p>
+
+<pre><code class="language-ruby">@authentication_token = '7c6eea82bb824805e1e03498eb70f40e4e5d09816c1bb2e'
+@account_id = 25641
+</code></pre>
+
+<p>O nosso <code>authorization_hash</code> (vamos chamá-lo assim) será:</p>
+
+<p><code>N2M2ZWVhODJiYjgyNDgwNWUxZTAzNDk4ZWI3MGY0MGU0ZTVkMDk4MTZjMWJiMmU=</code></p>
+
+<p><img src="3.jpg" alt="" /></p>
+
+<p>Para calcular nosso <em>authorization_hash</em>, vamos criar um novo método:</p>
+
+<pre><code class="language-ruby">def authorization_hash
+  Base64.strict_encode64(@authentication_token)
+end
+</code></pre>
+
+<p>Vamos preparar um método que já defina nossos headers por padrão. Como eu disse acima, o <em>account_id</em> é enviado através do Header, então vamos colocá-lo aqui.</p>
+
+<pre><code class="language-ruby">def headers
+  {
+    'Accept': 'application/json',
+    'Content-type': 'application/json',
+    'ACCOUNT_ID': @account_id,
+    'Authorization': &quot;Basic #{authorization_hash}:X&quot;
+  }
+end
+</code></pre>
+
+<p>Já temos tudo necessário para podermos fazer requisições autenticadas.</p>
+
+<p>Vamos fazer um teste para ver se está tudo ok, acessando um endpoint protegido chamado <code>entities</code>.</p>
+
+<pre><code class="language-ruby">def entities
+  url     = @base_url + '/entities.json'
+  request = RestClient.get(url, headers)
+
+  JSON.parse(request.body)
+end
+</code></pre>
+
+<p>A variável <code>url</code> é apenas um helper para definirmos a URL absoluta final.
+A variável <code>request</code> faz a solicitação, usando o nosso método <code>headers</code> como helper também para enviar cabeçalhos pré-definidos, incluindo nossa autenticação.</p>
+
+<p>A última linha é necessária para converter o retorno da requisição em um objeto Ruby válido.</p>
+
+<p>Este é um exemplo simples porém funcional. Mas caso a gente queira ir um pouco além, manipulando todo o recurso do Endpoint como um todo?</p>
+
+<p><img src="4.jpg" alt="" /></p>
+
+<h1 id="usando-apis-como-resources">Usando APIs como Resources</h1>
+
+<p>No caso, precisaríamos refatorar nosso método para algo assim:</p>
+
+<pre><code class="language-ruby">def entities
+  url     = @base_url + '/entities'
+  RestClient::Resource.new(url, { headers: headers } )
+end
+</code></pre>
+
+<p>Precisamos matar o <code>JSON.parse</code>, pois agora teremos um acesso completo ao endpoint.</p>
+
+<p>Para facilitar as coisas, podemos escrever um helper que faça esse trabalho sujo de parsear as strings:</p>
+
+<pre><code class="language-ruby">def parse(request)
+  JSON.parse(request.body)
+end
+</code></pre>
+
+<p>Agora podemos manipular nosso endpoint da seguinte forma:</p>
+
+<h2 id="get-entities">GET /entities</h2>
+
+<pre><code class="language-ruby"># Recupera as entidades
+entities = @service.entities.get
+
+# Transforma em JSON
+@service.parse(entitites)
+</code></pre>
+
+<p>Isto irá retornar um Array com todas as entidades do endpoint.</p>
+
+<h2 id="get-entities-id">GET /entities/:id</h2>
+
+<pre><code class="language-ruby"># Recupera a entidade
+entity = @service.entities['/1'].get
+
+# Transforma em JSON
+@service.parse(entity)
+</code></pre>
+
+<p>Isto irá retornar especificamente a entidade solicitada através do parâmetro passado.</p>
+
+<h2 id="put-entities-id">PUT /entities/:id</h2>
+
+<pre><code class="language-ruby"># Recupera a entidade (sem carregá-la diretamente)
+entity = @service.entities['/28698']
+
+# Edita ela
+payload = { entity: { name: 'Abacate Editado' } }
+entity.put payload
+
+# Recupera a entidade editada
+@service.parse(entity.get)
+</code></pre>
+
+<p>Isto irá editar a entidade solicitada, usando o <strong>payload</strong> enviado como parâmetro.</p>
+
+<h2 id="post-entities">POST /entities</h2>
+
+<pre><code class="language-ruby"># Cria a nova entidade
+payload = { entity: { name: 'Abacate Editado' } }
+entity = @service.entities.post payload
+
+# Recupera a entidade criada
+@service.parse(entity)
+</code></pre>
+
+<p>Isto irá criar uma nova entidade, usando o <strong>payload</strong> como parâmetro.</p>
+
+<h2 id="delete-entities-id">DELETE /entities/:id</h2>
+
+<pre><code class="language-ruby">@service.entities['/28698'].delete
+</code></pre>
+
+<p>Isto irá deletar nossa entidade.</p>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>Como vocês podem ver, 2 linhas de método com esta gem te dá o poder de manipular 100% uma API RESTful. As possibilidades são infinitas.</p>
+
+<p>Obrigado e até a próxima! :)</p>
+
+<p><img src="https://media.giphy.com/media/FpaOqwlhaST0k/giphy.gif" alt="" /></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/ruby"><span class="tag">Ruby</span></a></li>
+        
+          <li><a href="/tags/api"><span class="tag">Api</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>275</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

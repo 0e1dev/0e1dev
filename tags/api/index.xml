@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Api on 0e1dev</title>
+    <link>https://blog.0e1dev.com/tags/api/</link>
+    <description>Recent content in Api on 0e1dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Tue, 22 Nov 2016 09:53:27 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.0e1dev.com/tags/api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Consumindo uma API RESTful com Ruby</title>
+      <link>https://blog.0e1dev.com/post/consumindo-uma-api-restful-com-ruby/</link>
+      <pubDate>Tue, 22 Nov 2016 09:53:27 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/post/consumindo-uma-api-restful-com-ruby/</guid>
+      <description>Este é um assunto bem simples de se trabalhar quando falamos de Ruby. Ainda mais com gems poderosas que temos acesso como rest-client ou ActiveResource.
+Hoje nós vamos trabalhar com a rest-client.
+Quanto a API a ser utilizada, podemos usar qualquer uma famosa para reproduzir este tutorial.
+Eu vou usar a do MyFinance pois é a minha demanda atual de trabalho integrá-la.
+Sugestões de API para consumir Algumas sugestões para você incrementar seu conhecimento:</description>
+    </item>
+    
+    <item>
+      <title>Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)</title>
+      <link>https://blog.0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/</link>
+      <pubDate>Fri, 05 Aug 2016 02:54:13 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/</guid>
+      <description>Graças a internet, empresas que no passado dependiam do mercado local para ofertar e adquirir serviços, agora podem escalar seu empreendimento a nível global.
+Por esta exposição, se faz necessário adaptar-se ao idioma local do público alvo desejado.
+Além disto, o inglês tornou-se idioma padrão em muitos ambientes de trabalho e até mesmo no nosso lazer (jogos, quadrinhos, livros, filmes, etc).
+Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lançando uma startup*, ou até mesmo *apoiando causas sociais*, é interessante que você possa conectar-se ao máximo possível de pessoas nesta era cyber.</description>
+    </item>
+    
+  </channel>
+</rss>

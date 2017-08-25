@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Usando Socket.IO em uma hospedagem compartilhada (como Locaweb, HostGator, etc)</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Hoje vou ensinar como trabalhar com o Socket.IO para transformar sua aplicação web em tempo real.
+O que é Socket.IO? Segundo a descrição no site deles, &amp;ldquo;THE FASTEST AND MOST RELIABLE REAL-TIME ENGINE&amp;rdquo;.
+Ele permite que você crie aplicações em tempo real de forma bi-direcional (tanto o cliente quanto o servidor podem se comunicar), orientado a eventos.
+Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter problemas." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Usando Socket.IO em uma hospedagem compartilhada (como Locaweb, HostGator, etc)" />
+    <meta name="twitter:description" content="Hoje vou ensinar como trabalhar com o Socket.IO para transformar sua aplicação web em tempo real.
+O que é Socket.IO? Segundo a descrição no site deles, &amp;ldquo;THE FASTEST AND MOST RELIABLE REAL-TIME ENGINE&amp;rdquo;.
+Ele permite que você crie aplicações em tempo real de forma bi-direcional (tanto o cliente quanto o servidor podem se comunicar), orientado a eventos.
+Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter problemas." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Usando Socket.IO em uma hospedagem compartilhada (como Locaweb, HostGator, etc)</h1>
+      <p class="post-meta">@lhas · 14/07/2016 · 5 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Hoje vou ensinar como trabalhar com o Socket.IO para transformar sua aplicação web em tempo real.</p>
+
+<h1 id="o-que-é-socket-io">O que é Socket.IO?</h1>
+
+<p>Segundo a descrição no <a href="http://socket.io/">site</a> deles, &ldquo;THE FASTEST AND MOST RELIABLE REAL-TIME ENGINE&rdquo;.</p>
+
+<p>Ele permite que você crie aplicações em tempo real de forma bi-direcional (tanto o cliente quanto o servidor podem se comunicar), orientado a eventos.</p>
+
+<p>Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter problemas.</p>
+
+<p>Sites como o <a href="https://trello.com">Trello</a> usam e abusam deste recurso para fazer o site funcionar em tempo real, seja com as notificações ou as interações nos cards.</p>
+
+<p>O foco deste tutorial é somente de instalá-lo e usá-lo em um site básico que possa estar hospedado em uma hospedagem compartilhada. Outros tutoriais virão sobre como usá-lo o Socket.IO melhor.</p>
+
+<h1 id="o-que-vou-precisar">O que vou precisar?</h1>
+
+<ul>
+<li>Terminal</li>
+<li>Node.JS</li>
+<li>Conhecimento em JavaScript</li>
+<li>Um VPS (e acesso SSH a ele)</li>
+</ul>
+
+<h1 id="começando">Começando&hellip;</h1>
+
+<p>1) Acesse o servidor que vai hospedar a aplicação via SSH.</p>
+
+<pre><code class="language-bash">ssh root@0e1dev.com
+</code></pre>
+
+<p>2) Instale o Node.JS (não abordarei isto aqui, você pode aprender sobre <a href="https://www.digitalocean.com/community/tutorials/como-instalar-o-node-js-em-um-servidor-ubuntu-14-04-pt">aqui</a>).
+3) Instale o PM2:</p>
+
+<pre><code class="language-bash">npm install pm2 -g
+</code></pre>
+
+<p>4) Vamos montar nosso script? Bora:</p>
+
+<p>Crie uma pasta para nosso app, e dentro um arquivo chamado server.js.</p>
+
+<pre><code>/app
+- server.js
+</code></pre>
+
+<p>Primeiro precisamos instalar nossas dependências (Express e o Socket.IO). O Express é necessário pois para o Socket.IO rodar ele precisa de um processo HTTP já rodando em algum lugar. Para instalar rode este comando na pasta do app:</p>
+
+<pre><code class="language-bash">npm install --save-dev express socket.io
+</code></pre>
+
+<p>Agora, vamos editar o server.js.</p>
+
+<p>No começo do nosso script, vamos importar as dependencias que instalamos:</p>
+
+<pre><code class="language-javascript">var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+</code></pre>
+
+<p>Caso você queira criar uma rota para testar o funcionamento do Express na nossa app, adicione logo depois:</p>
+
+<pre><code class="language-javascript">app.get('/', function(req, res){
+  res.send('&lt;h1&gt;Hello world&lt;/h1&gt;');
+});
+</code></pre>
+
+<p>Como caso de uso, vamos fazer um counter de usuários acessando nosso site. Para isto, vamos declarar uma variável que vai armazenar este total. Depois, vamos manipular o evento &ldquo;connection&rdquo; e &ldquo;disconnect&rdquo; disponíveis dentro do socket. Quando ocorrer uma nova &ldquo;connection&rdquo;, vamos acrescentar esta variável total. Quando ocorrer um &ldquo;disconnect&rdquo;, vamos reduzir essa variável.</p>
+
+<p>Sim, o Socket.IO permite que nós detectamos quando um usuário &ldquo;sai&rdquo; do nosso site. Isso é muito bom, levando em conta que a um tempo atrás não era possível fazer esse tipo de detecção client-side apenas.</p>
+
+<p>Chega de papo e vamos pro código:</p>
+
+<pre><code class="language-javascript">// Armazena o total de usuários
+var totalUsers = 0;
+
+// Evento - Ao ocorrer uma conexão (um novo socket disponível)
+io.on('connection', function(socket){
+
+  // Acrescentar total
+  totalUsers++;
+
+  // Vamos emitir um evento chamado &quot;refresh users&quot;. Ele será usado depois
+  io.emit('refresh users', totalUsers);
+
+  // Caso ocorra um disconnect, reduzimos o total de usuários e emitimos o evento &quot;refresh users&quot; novamente, com o novo total.
+  socket.on('disconnect', function() {
+    totalUsers--;
+
+    io.emit('refresh users', totalUsers);
+  });
+
+});
+</code></pre>
+
+<p>Feito isso, precisamos inicializar nosso servidor web. Continue escrevendo:</p>
+
+<pre><code class="language-javascript">http.listen(3000, function(){
+  console.log('listening on *:3000');
+});
+</code></pre>
+
+<p>Pronto! Já temos um script que configura o ambiente do Socket.IO através da porta 3000. Basta rodá-lo seja na sua máquina quanto no seu servidor/VPS que estará funcionando.</p>
+
+<h1 id="como-colocar-ele-pra-funcionar-no-servidor">Como colocar ele pra funcionar no servidor?</h1>
+
+<p>No começo sugeri que instalasse o PM2. Ele é um gerenciador de aplicações Node.JS. Perfeito para ambientes de produção.</p>
+
+<p>O mais bacana de usar o PM2 para este tipo de situação é usar em paralelo a ferramenta deles chamada <a href="https://keymetrics.io/">Keymetrics</a>. É uma ferramenta muito bacana e eu sugiro que você a experimente <strong>AGORA</strong>!</p>
+
+<p>Você pode monitorar em TEMPO REAL (UAU!) suas aplicações escritas em Node. Isso significa que se por exemplo, sua aplicação lançar uma exceção, eles te notificarão por e-mail que uma exceção ocorreu na aplicação X na hora Y pelo usuário Z. É muito foda, apenas use.</p>
+
+<p>Enfim, após instalar o PM2 você terá alguns comandos disponíveis:</p>
+
+<pre><code class="language-bash">// Mostra todas as aplicações startadas usando o PM2
+pm2 list
+// Inicia uma nova aplicação com o PM2, basta rodá-lo na pasta do script
+pm2 start server.js
+//  Mostra informações sobre memória e CPU sendo consumidas pelas aplicações
+pm2 monit
+// Reinicia o NOME_APP
+pm2 restart [NOME_APP]
+</code></pre>
+
+<p>Basta subir o script para o servidor, acessar a pasta onde o script está localizado por SSH e rodar:</p>
+
+<pre><code class="language-bash">pm2 start server.js
+</code></pre>
+
+<p>Agora caso você abra <a href="http://seu.servidor:3000/">http://seu.servidor:3000/</a></p>
+
+<p>Você vai ver o Hello World.</p>
+
+<p>Para manipular o Socket.IO no seu site agora, basta importá-lo usando a URL do seu servidor:</p>
+
+<pre><code class="language-html">  &lt;script src=&quot;http://0e1dev.com:3000/socket.io/socket.io.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+    var socket = io();
+
+    socket.on('refresh users', function(data) {
+      console.log(&quot;Total de usuários logados: &quot; + data);
+    });
+  &lt;/script&gt;
+</code></pre>
+
+<h1 id="e-se-eu-não-tiver-acesso-a-um-vps">E se eu não tiver acesso a um VPS?</h1>
+
+<p>Você pode recorrer a alternativas como o <a href="https://www.heroku.com/">Heroku</a> ou <a href="https://www.openshift.com/">OpenShift</a> (mantido pela Red Hat). Ambos contém planos gratuitos onde você hospedar esta aplicação em Node.JS tranquilamente.</p>
+
+<p>É apenas uma alternativa usar esses PaaS e <strong>não recomendo</strong> esta solução para um projeto que vá realmente para o ambiente de <strong>produção</strong>.</p>
+
+<h1 id="quais-são-os-benefícios-de-utilizar-este-recurso">Quais são os benefícios de utilizar este recurso?</h1>
+
+<p>Você pode incrementar qualquer site com recursos bacanas. No caso de uma rede social por exemplo, você pode desenvolver chats em tempo real, notificações (quem visitou seu perfil, comentou, curtiu algo), jogos(por que não?), etc.</p>
+
+<p>Sites que usam deste tipo de recurso costumam ser mais bem vistos em comparação aos seus concorrentes. Além de é claro, contribuir para uma melhor navegabilidade e experiência pro usuário final.</p>
+
+<h1 id="quais-são-as-limitações-dele">Quais são as limitações dele?</h1>
+
+<p>Como qualquer aplicação Node.JS ele precisará de um ambiente que permita este tipo de aplicação. Por embaixo dos panos, ele trabalha com o WebSocket. Outras ferramentas fazem essa mesma integração com o WebSocket, como é o caso do <a href="https://github.com/sockjs/sockjs-client">SockJS</a>.</p>
+
+<p>O Trello em 2012 teve um problema com ter mais de 10 mil conexões simultâneas. Eles fizeram um patch para resolver isso na época, mas hoje em dia o problema aparentemente foi solucionado por parte do Socket.IO. <a href="http://blog.fogcreek.com/the-trello-tech-stack/">Saiba mais sobre o caso aqui</a>.</p>
+
+<p>Pela internet você encontra vários artigos de pessoas relatando terem conseguido até UM MILHÃO de conexões simultâneas. Mas são situações bem específicas. Neste caso o ideal é escalar.</p>
+
+<h1 id="isso-é-uma-gambiarra">Isso é uma gambiarra?</h1>
+
+<p>Sim. &gt;:-)</p>
+
+<h1 id="fim">FIM!</h1>
+
+<p>Por enquanto é isso.</p>
+
+<p>Espero que seja produtivo para alguém a leitura disto.</p>
+
+<p>No meu caso, estou desenvolvendo uma aplicação que a princípio ficará em uma hospedagem compartilhada mas que nós na 0e1 precisamos entregar features em tempo real nos próximos sprints.</p>
+
+<p>Nós rodamos o Socket.IO no nosso servidor a penas fazemos a referência a ele no nosso site final. E tudo funciona perfeitamente bem! ;-)</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/node.js"><span class="tag">Node.js</span></a></li>
+        
+          <li><a href="/tags/socket.io"><span class="tag">Socket.io</span></a></li>
+        
+          <li><a href="/tags/hospedagem-compartilhada"><span class="tag">Hospedagem Compartilhada</span></a></li>
+        
+          <li><a href="/tags/vps"><span class="tag">Vps</span></a></li>
+        
+          <li><a href="/tags/digitalocean"><span class="tag">Digitalocean</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>407</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

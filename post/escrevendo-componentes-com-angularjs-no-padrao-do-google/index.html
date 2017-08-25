@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Escrevendo componentes com AngularJS no padrão do Google</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Depois de ter passado por um bloqueio criativo de duas semanas, resolvi escrever sobre um assunto que perpetuou minha cabeça nos últimos dias.
+Foi complexo pensar em alguma informação para compartilhar no blog sem parecer repetitivo, já que alguns autores gringos já abordaram este assunto como aqui.
+Independente do fato de se discutir se o Angular 2 vai vingar ou não, é interessante que devs de Angular1 aprendam a organizar suas aplicações sob a perspectiva de componentes, pois isso beneficia todo o time envolvido como veremos mais abaixo." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Escrevendo componentes com AngularJS no padrão do Google" />
+    <meta name="twitter:description" content="Depois de ter passado por um bloqueio criativo de duas semanas, resolvi escrever sobre um assunto que perpetuou minha cabeça nos últimos dias.
+Foi complexo pensar em alguma informação para compartilhar no blog sem parecer repetitivo, já que alguns autores gringos já abordaram este assunto como aqui.
+Independente do fato de se discutir se o Angular 2 vai vingar ou não, é interessante que devs de Angular1 aprendam a organizar suas aplicações sob a perspectiva de componentes, pois isso beneficia todo o time envolvido como veremos mais abaixo." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/escrevendo-componentes-com-angularjs-no-padrao-do-google.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Escrevendo componentes com AngularJS no padrão do Google</h1>
+      <p class="post-meta">@lhas · 02/08/2016 · 5 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Depois de ter passado por um bloqueio criativo de duas semanas, resolvi escrever sobre um assunto que perpetuou minha cabeça nos últimos dias.</p>
+
+<p>Foi complexo pensar em alguma informação para compartilhar no blog sem parecer repetitivo, já que alguns autores gringos já abordaram este assunto <a href="http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html">como aqui</a>.</p>
+
+<p>Independente do fato de se discutir se o <a href="https://angular.io/">Angular 2</a> vai vingar ou não,
+é interessante que devs de Angular1 aprendam a organizar suas aplicações sob a perspectiva
+de componentes, pois isso beneficia todo o time envolvido como veremos mais abaixo.</p>
+
+<h1 id="o-que-é-este-component-style">O que é este &ldquo;Component Style&rdquo;?</h1>
+
+<p>Provavelmente a aplicação que você está mexendo agora segue numa estrutura semelhante a isto:</p>
+
+<pre><code>/app/
+- controllers/
+- services/
+- factories/
+- directives/
+- models/
+</code></pre>
+
+<p>Se esta suposição estiver correta, sinto lhe informar mas&hellip;</p>
+
+<p><img src="youre-doing-it-wrong.jpg" alt="You're doing it wrong" /></p>
+
+<p>O problema desta arquitetura é que conforme a aplicação vai se formando, a manutenção do mesmo se torna complexa e trabalhosa.</p>
+
+<p>Um exemplo prático: digamos que queremos refatorar algo na página Matrix. Para isto vamos precisar modificar:</p>
+
+<pre><code>/app/controllers/MatrixController.js
+/app/services/MatrixService.js
+/app/directives/MatrixListDirective.js
+/app/models/Matrix.js
+</code></pre>
+
+<p>Mesmo que seja uma modificação simples, vamos precisar mexer em 4 pastas diferentes para conseguirmos mexer em uma única página.</p>
+
+<p>Isso sem contar se além disto, você precisar modificar algo na camada de autenticação ou nos testes, coloque mais 4 arquivos diferentes em pastas diferentes e o caos está formado.</p>
+
+<p>Foi pensando nisso que a equipe do Google resolveu expor uma arquitetura diferente para nós desenvolvedores organizarmos melhor nosso código e podermos fazer manutenções em tempo recorde.</p>
+
+<p>A arquitetura de componentes não é algo novo e já é usado inclusive por alguns frameworks. É mais comum você ver este approach em stacks NodeJS.</p>
+
+<p>No caso do nosso exemplo acima, no padrão de componentes seria assim:</p>
+
+<pre><code>/app/
+- matrix/
+- - matrix.controller.js
+- - matrix.controller.spec.js (se estiver mexendo com testes)
+- - matrix.service.js
+- - matrix.service.spec.js (se estiver mexendo com testes)
+- - matrix.html
+- - matrix.scss
+</code></pre>
+
+<p>No caso, temos todo o CSS, toda a camada de testes, toda a camada de visualização, dentros de uma única pasta.</p>
+
+<p>Imagine que vamos fazer uma nova aplicação chamada MatrixRevolution, e nisto vamos reaproveitar a nossa amada página Matrix.</p>
+
+<p>Se fôssemos manter o nosso primeiro exemplo como padrão, seria uma loucura no Ctrl+C/Ctrl+V, pois você precisaria acessar a pasta de cada camada.</p>
+
+<p>No padrão dos componentes, você só copia a pasta matrix/ e pronto. Todo CSS, HTML, Testes, JS em um só lugar. Simples, não?</p>
+
+<p>Mas não para por aí.</p>
+
+<h1 id="como-usar-componentes">Como usar componentes</h1>
+
+<p>Você deve estar se perguntando. É mais fácil do que parece.</p>
+
+<p>Você pode inclusive ir adaptando aos poucos a sua aplicação para que
+esta mudança seja progressiva e não-agressiva ao resto da equipe de desenvolvimento.</p>
+
+<p>Vamos ao exemplo prático:</p>
+
+<p>Precisamos que você faça um <strong>fórum</strong> dentra nossa atual aplicação.</p>
+
+<p>Crie dentro da pasta da aplicação uma pasta chamada &ldquo;forum&rdquo;.</p>
+
+<p><strong>Dentro do fórum, temos:</strong>
+- Listagem de seções <strong>(board.list)</strong>
+- Dentro da seção, temos a listagem de tópicos <strong>(board)</strong>
+- Dentro do tópico, temos a listagem de respostas <strong>(topic)</strong></p>
+
+<p>Nossa estrutura de pastas será:</p>
+
+<pre><code>app/
+- forum/
+- - board/
+- - - list/
+- - topic/
+</code></pre>
+
+<p>Neste tutorial, vou explicar somente a parte do tópico.</p>
+
+<p>Quem sabe depois escrevo o resto dos outros componentes.</p>
+
+<p>Para o tópico vamos precisar:</p>
+
+<h2 id="controller">Controller</h2>
+
+<p>Os arquivos serão:</p>
+
+<pre><code>app/forum/topic/topic.controller.js
+app/forum/topic/topic.controller.spec.js
+</code></pre>
+
+<p>Dentro do controller, vou colocar aqui um exemplo que já está nos padrões de código do <a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md">John Papa, o Angular 1 Style Guide</a></p>
+
+<pre><code class="language-js">/* topic.controller.js */
+(function(){
+    'use strict';
+
+    angular
+        .module('app.forum.topic', [])
+        .component('matrixTopic', {
+            templateUrl: 'app/forum/topic/topic.html',
+            controller: TopicController,
+            controllerAs: 'ctrl'
+        })
+
+        TopicController.$inject = ['$stateParams', 'TopicService'];
+
+        function TopicService($stateParams, TopicService) {
+            var vm = this;
+            var topic = undefined;
+
+            vm.topic = topic;
+            
+            activate();
+
+            function activate() {
+                if(vm.topic == undefined) {
+                    TopicService.getOne($stateParams.id).then(success, error);
+
+                    function success(result) {
+                        vm.topic = result.data.topic;
+                    }
+
+                    function error(error) {
+                        console.log('Error ocurred: ' + error);
+                    }
+                }
+            }
+        }
+})();
+</code></pre>
+
+<p>Nosso controller está pronto!</p>
+
+<p>Recuperando o tópico com o TopicService e atualizando nosso ViewModel (daí o vm)
+com o retorno da API.</p>
+
+<h2 id="service">Service</h2>
+
+<p>Os arquivos serão:</p>
+
+<pre><code>app/forum/topic/topic.service.js
+app/forum/topic/topic.service.spec.js
+</code></pre>
+
+<p>Esta é a camada que vai entrar em contato com a API. Ela é usada no nosso controller acima.</p>
+
+<p>Nosso código nos padrões do John Papa:</p>
+
+<pre><code class="language-js">/* topic.service.js */
+(function() {
+  'use strict';
+
+  angular
+    .module('app.forum.topic')
+    .service('TopicService', TopicService);
+
+  TopicService.$inject = ['$http', 'API_URL', '$translate'];
+
+  // API_URL no caso seria uma constante
+  function TopicService($http, API_URL) {
+
+    var service = {
+      getAll: getAll,
+      getFeatured: getFeatured,
+      getOne: getOne
+    };
+
+    return service;
+    
+    /** Get all topics from the API. */
+    function getAll() {
+      return $http.get(API_URL + 'topic', {
+        params: {
+          language: 'br'
+        }
+      });
+    }
+    
+    /** Get featured topics from the API. */
+    function getFeatured(limit) {
+      return $http.get(API_URL + 'topic/featured');
+    }
+
+    /** Get one single topic from the API. */
+    function getOne(id) {
+      return $http.get(API_URL + 'topic/' + id, {
+        params: {
+          language: 'br'
+        }
+      });
+    }
+
+  }
+
+})();
+</code></pre>
+
+<h2 id="view">View</h2>
+
+<p>O arquivo será:</p>
+
+<pre><code>app/forum/topic/topic.html
+</code></pre>
+
+<p>A parte mais simples de todas. É o que vai renderizar dentro do nosso componente.</p>
+
+<pre><code class="language-html">&lt;!-- topic.html --&gt;
+&lt;div class=&quot;topic well&quot;&gt;
+    &lt;h1&gt;{{ctrl.topic.title}}&lt;/h1&gt;
+
+    &lt;p&gt;{{ctrl.topic.content}}&lt;/p&gt;
+
+    &lt;h2&gt;Respostas&lt;/h2&gt;
+
+    &lt;ul class=&quot;list-group&quot;&gt;
+        &lt;li class=&quot;list-group-item&quot; ng-repeat=&quot;reply in ctrl.topic.replies&quot;&gt;
+            {{reply.author}} disse:
+
+            &lt;p&gt;{{reply.content}}&lt;/p&gt;
+
+            &lt;em&gt;{{reply.created_at | date 'd/m/Y'}}&lt;/em&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+</code></pre>
+
+<h2 id="scss">SCSS</h2>
+
+<p>O arquivo será:</p>
+
+<pre><code>app/forum/topic/topic.scss
+</code></pre>
+
+<p>A segunda parte mais simples aqui.</p>
+
+<pre><code class="language-scss">    .topic {
+        background: #F00;
+        color: #FFF;
+    }
+</code></pre>
+
+<p>É importante na view e no CSS você usar classes ao invés de IDs, pois o conceito por trás dos componentes é que eles sejam reutilizáveis o máximo possível.</p>
+
+<p>Não esqueça de incorporar o topic.scss no seu main.scss com um @import da vida:</p>
+
+<pre><code class="language-scss">    @import &quot;app/forum/topic/topic.scss&quot;;
+</code></pre>
+
+<p>Agora só chamar no seu index.html:</p>
+
+<pre><code class="language-html">    &lt;script src=&quot;app/forum/topic/topic.controller.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;app/forum/topic/topic.service.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>E no seu module.js incluir o seu novo módulo como dependência:</p>
+
+<pre><code class="language-js">(function(){
+
+    angular
+        .module('app', ['app.forum.topic']);
+})();
+</code></pre>
+
+<p>Agora para usar o componente, digamos no seu routes.js usando o UI Router:</p>
+
+<pre><code class="language-js">angular
+  .module('app')
+  .config(routesConfig);
+
+routesConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+
+function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+  $locationProvider.html5Mode(true).hashPrefix('!');
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+    .state('home', {
+      url: '/',
+      template: '&lt;matrix-home&gt;&lt;/matrix-home&gt;'
+    })
+    .state('topic', {
+      url: '/topic/{id}',
+      template: '&lt;matrix-topic&gt;&lt;/matrix-topic&gt;'
+    });
+}
+</code></pre>
+
+<p>Pronto! :D</p>
+
+<p>Agora toda vez que você quiser mostrar um tópico na aplicação, só colocar em qualquer HTML:</p>
+
+<pre><code class="language-html">&lt;matrix-topic&gt;&lt;/matrix-topic&gt;
+</code></pre>
+
+<p>Espero que gostem. Quero aprofundar mais este assunto aqui depois.</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/components"><span class="tag">Components</span></a></li>
+        
+          <li><a href="/tags/angularjs"><span class="tag">Angularjs</span></a></li>
+        
+          <li><a href="/tags/google"><span class="tag">Google</span></a></li>
+        
+          <li><a href="/tags/patterns"><span class="tag">Patterns</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>387</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

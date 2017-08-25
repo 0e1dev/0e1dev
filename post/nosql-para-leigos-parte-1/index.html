@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>NoSQL para Leigos, Parte 1</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Estava eu, no meu cantinho, fazendo o que eu sei fazer de melhor: caçar bugs. Até que o CTO da empresa que trabalho me fez um pedido muito interessante:
+&amp;ldquo;Explique para o setor de Marketing como eles podem rodar consultas na nossa base de dados em MongoDB.&amp;rdquo;
+Situação perfeita para eu realinhar o meu conhecimento com NoSQL e escrever mais um pouco para este bendito blog.
+Contexto Temos uma base de dados com diversos CNPJs, que contém informações como: atividades, data de registro, razão social, natureza jurídica, etc." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="NoSQL para Leigos, Parte 1" />
+    <meta name="twitter:description" content="Estava eu, no meu cantinho, fazendo o que eu sei fazer de melhor: caçar bugs. Até que o CTO da empresa que trabalho me fez um pedido muito interessante:
+&amp;ldquo;Explique para o setor de Marketing como eles podem rodar consultas na nossa base de dados em MongoDB.&amp;rdquo;
+Situação perfeita para eu realinhar o meu conhecimento com NoSQL e escrever mais um pouco para este bendito blog.
+Contexto Temos uma base de dados com diversos CNPJs, que contém informações como: atividades, data de registro, razão social, natureza jurídica, etc." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/nosql-para-leigos-parte-1.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/nosql-para-leigos-parte-1/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">NoSQL para Leigos, Parte 1</h1>
+      <p class="post-meta">@lhas · 15/12/2016 · 6 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Estava eu, no meu cantinho, fazendo o que eu sei fazer de melhor: caçar bugs. Até que o CTO da empresa que trabalho me fez um pedido muito interessante:</p>
+
+<p>&ldquo;Explique para o setor de Marketing como eles podem rodar consultas na nossa base de dados em MongoDB.&rdquo;</p>
+
+<p>Situação perfeita para eu realinhar o meu conhecimento com NoSQL e escrever mais um pouco para este bendito blog.</p>
+
+<h1 id="contexto">Contexto</h1>
+
+<p>Temos uma base de dados com diversos CNPJs, que contém informações como: atividades, data de registro, razão social, natureza jurídica, etc.</p>
+
+<p>A ideia é que através de alguns snippets o pessoal possa <em>mineirar</em> estes dados.</p>
+
+<p><img src="mineiros.jpg" alt="" />
+<em>São bombeiros ou mineiros? Eis a questão.</em></p>
+
+<p>Então antes de sair espalhando <em>receitas de miojo</em>, gostaria de introduzir a ferramenta com <strong>20%</strong> teoria e <strong>80%</strong> de prática.</p>
+
+<p><img src="pareto.jpg" alt="" />
+<em>Valeu Pareto! Tamo junto.</em></p>
+
+<h1 id="o-que-é-mongodb">O que é MongoDB?</h1>
+
+<p>É o software da base de dados que nós usamos. Apesar de usarmos esta solução, existem dezenas, talvez centenas, de outras soluções concorrentes ao MongoDB, com o foco de solucionar o mesmo problema: <strong>NoSQL</strong>.</p>
+
+<h1 id="o-que-é-nosql">O que é NoSQL?</h1>
+
+<p>Sempre que falamos de base de dados, temos como referência uma tabela ou uma planilha.</p>
+
+<p>A magia do NoSQL é justamente essa. Ela é totalmente o oposto de uma planilha.</p>
+
+<p>NoSQL é um tipo de base de dados que fornece o armazenamento e recuperação de dados em diversos modelos (chave-valor, grafos ou documentos).</p>
+
+<p>O MongoDB especificamente trabalha com o modelo de <strong>Documentos</strong>.</p>
+
+<p>Colocando um exemplo prático da coisa:</p>
+
+<p>1 base de dados MongoDB tem:</p>
+
+<ul>
+<li>Diversas Collections (&ldquo;tabelas&rdquo;);</li>
+<li>Dentro das collections, temos os documentos;</li>
+<li>Documentos são a entidade mais básica da base, é o objeto que nós queremos manipular por si só.</li>
+</ul>
+
+<p>Exemplo prático:</p>
+
+<p><img src="1.png" alt="" /></p>
+
+<p>Temos a nossa base <em>CNPJ Robot AWS</em>.</p>
+
+<p>Dentro da nossa base, temos a coleção de <em>CNPJs</em>.</p>
+
+<p>Dentro da nossa coleção, temos os nossos documentos:</p>
+
+<p><img src="2.png" alt="" /></p>
+
+<p>Dentro destes documentos, temos nossos dados, no formato de chave-valor:</p>
+
+<p><img src="3.png" alt="" /></p>
+
+<p>Esta é a nossa estrutura de dados.</p>
+
+<p>Através destes documentos, que nós iremos rodar nossas <em>consultas</em> para identificar somente os documentos que desejamos, semelhante as funções do Excel.</p>
+
+<h1 id="como-acessar-a-base-de-dados">Como acessar a base de dados?</h1>
+
+<p>Você irá precisar de um cliente. Existem diversos clientes hoje para MongoDB, mas o que eu recomendo atualmente é o <a href="https://mongobooster.com/">MongoBooster</a>.</p>
+
+<p>Ele está disponível para Windows, Mac e Linux. Você pode baixá-lo <a href="https://mongobooster.com/downloads">aqui</a>.</p>
+
+<p>Existem algumas outras alternativas como o <a href="http://3t.io/mongochef/">MongoChef</a>.</p>
+
+<p>O importante é que ele tenha uma ferramenta para Exportar dados, que é o mais importante para nós aqui.</p>
+
+<p>Após rodarmos nossas consultas, podemos exportar os dados dela para um CSV.</p>
+
+<p>Após instalá-lo, você vai precisar:</p>
+
+<ul>
+<li>Endereço IP do banco;</li>
+<li>Usuário;</li>
+<li>Senha.</li>
+</ul>
+
+<p>Para adquirir estas credenciais, solicite o responsável.</p>
+
+<p>Voltando para nossa base de dados, para enxergamos estes dados, precisamos rodar <em>consultas</em>.</p>
+
+<h1 id="o-que-é-uma-consulta">O que é uma consulta?</h1>
+
+<p>É algo parecido com isto:</p>
+
+<pre><code class="language-sql">db.cnpj.find({})
+</code></pre>
+
+<p>Basicamente, estamos dizendo ao banco de dados para retornar todos os documentos da coleção de CNPJ.</p>
+
+<h1 id="e-se-quisesessemos">E se quisesessemos&hellip;</h1>
+
+<h2 id="recuperar-somente-empresas-ativas">Recuperar somente empresas ativas?</h2>
+
+<pre><code class="language-sql">db.cnpj.find({&quot;situacao&quot;: &quot;ATIVA&quot;})
+</code></pre>
+
+<p>Como pode ver, a diferença ocorreu dentro das chaves do <code>find</code>.</p>
+
+<p>A chave, é o nome da coluna que você deseja filtrar a informação.</p>
+
+<p>O valor, é o que você deseja pesquisar.</p>
+
+<p>Vamos para outros exemplos.</p>
+
+<h2 id="recuperar-somente-empresas-ativas-do-df">Recuperar somente empresas ativas do DF?</h2>
+
+<pre><code class="language-sql">db.cnpj.find({&quot;situacao&quot;: &quot;ATIVA&quot;, &quot;uf&quot;: &quot;DF&quot;})
+</code></pre>
+
+<p>Como você pode ver, basta adicionar um novo chave-valor separado por vírgula, para você fazer uma consulta em múltiplas colunas.</p>
+
+<h2 id="recuperar-empresas-em-uma-atividade-principal">Recuperar empresas em uma atividade principal?</h2>
+
+<p>Como as empresas podem ter mais de uma atividade principal, a estrutura de dados para este campo, é no formtao de <em>Listas</em> (Array).</p>
+
+<p>Pelo fato de ser uma lista, para nós consultarmos este tipo de dado, precisamos fazer de uma forma um pouco diferente.</p>
+
+<p>Veja o exemplo abaixo:</p>
+
+<pre><code class="language-sql">db.cnpj.find({&quot;atividade_principal.code&quot;: &quot;43.30-4-05&quot;})
+</code></pre>
+
+<p>Basicamente, indicamos a segunda coluna através de um ponto final.</p>
+
+<p>Exemplos:</p>
+
+<ul>
+<li>atividade_principal.code</li>
+<li>atividade_principal.text</li>
+<li>qsa.qual</li>
+<li>qsa.nome</li>
+</ul>
+
+<h2 id="recuperar-empresas-com-um-capital-social-maior-que-x">Recuperar empresas com um capital social MAIOR que X</h2>
+
+<p>Para podermos fazer esta consulta em campos que são números, como é o caso do capital social, precisamos usar algumas palavras-chaves.</p>
+
+<p>No caso de uma consulta com empresas ativas que tenham o capital social maior que dez mil reais:</p>
+
+<pre><code class="language-sql">db.cnpj.find({&quot;situacao&quot;: &quot;ATIVA&quot;, &quot;capital_social&quot;: { $gt: &quot;10000.00&quot; }  })
+</code></pre>
+
+<p>Para coisas <code>Maior que X</code>, usamos <code>$gt</code> (greater than). Para saber mais sobre este operador, <a href="https://docs.mongodb.com/v3.2/reference/operator/query/gt/">clique aqui</a>.</p>
+
+<h2 id="recuperar-empresas-com-um-capital-social-menor-que-x">Recuperar empresas com um capital social MENOR que X</h2>
+
+<p>Mesma lógica que a opção acima, porém usamos uma outra palavra-chave.</p>
+
+<p>Para coisas <code>Menor que X</code>, usamos <code>$lt</code> (less than). Para saber mais sobre este operador, <a href="https://docs.mongodb.com/v3.2/reference/operator/query/lt/">clique aqui</a>.</p>
+
+<p>No caso de uma consulta com empresas ativas que tenham o capital social maior que dez mil reais:</p>
+
+<pre><code class="language-sql">db.cnpj.find({&quot;situacao&quot;: &quot;ATIVA&quot;, &quot;capital_social&quot;: { $gt: &quot;10000.00&quot; }  })
+</code></pre>
+
+<h3 id="observação">Observação</h3>
+
+<p>Caso você queira, <code>Maior ou IGUAL</code>/<code>Menor ou IGUAL</code>, você precisa por um <code>e</code> no fim do operador. Sendo assim:</p>
+
+<ul>
+<li><strong>Maior ou igual a 10.000 reais</strong></li>
+</ul>
+
+<pre><code class="language-sql">{&quot;capital_social&quot;: { $gte: &quot;10000.00&quot; } }
+</code></pre>
+
+<ul>
+<li><strong>Menor ou igual a 10.000 reais</strong></li>
+</ul>
+
+<pre><code class="language-sql">{&quot;capital_social&quot;: { $lte: &quot;10000.00&quot; } }
+</code></pre>
+
+<h2 id="recuperar-empresas-que-tenham-sido-fundadas-abertas-atualizadas-em-x">Recuperar empresas que tenham sido fundadas/abertas/atualizadas em X</h2>
+
+<p>Para filtrarmos estas colunas que na verdade são data (dia/mês/ano), vamos precisar usar Expressões Regulares (abreviado como Regex).</p>
+
+<p>Sem aprofundar muito o que são expressões regulares, vamos aos exemplos:</p>
+
+<h3 id="abertas-em-2016">Abertas em 2016</h3>
+
+<pre><code class="language-sql">db.cnpj.find({ &quot;abertura&quot;: {$regex: /2016/} })
+</code></pre>
+
+<h3 id="atualizadas-em-2016">Atualizadas em 2016</h3>
+
+<pre><code class="language-sql">db.cnpj.find({ &quot;ultima_atualizacao&quot;: {$regex: /2016/} })
+</code></pre>
+
+<h3 id="empresas-que-tiveram-a-situação-atualizada-para-ativa-em-2016">Empresas que tiveram a situação atualizada para ATIVA em 2016</h3>
+
+<pre><code class="language-sql">db.cnpj.find({ &quot;situacao&quot;: &quot;ATIVA&quot;, &quot;data_situacao&quot;: {$regex: /2016/} })
+</code></pre>
+
+<h3 id="empresas-abertas-em-janeiro-de-2015">Empresas abertas em Janeiro de 2015</h3>
+
+<pre><code class="language-sql">db.cnpj.find({ &quot;abertura&quot;: {$regex: /01\/2015/} })
+</code></pre>
+
+<h2 id="como-exportar-estes-dados">Como exportar estes dados?</h2>
+
+<p>Ok, você já filtrou os dados que queria. E agora, como jogar esta belezinha para uma planilha?</p>
+
+<p>Se você estiver usando o software recomendado <strong>(MongoBooster)</strong>, esta etapa será muito simples.</p>
+
+<p>Siga os passos abaixo:</p>
+
+<ul>
+<li>Vamos exportar todas as empresas que encontram-se ATIVAS e que foram abertas DESDE 2015 no PARANÁ. A consulta será esta:</li>
+</ul>
+
+<pre><code class="language-sql">db.cnpj.find({ &quot;situacao&quot;: &quot;ATIVA&quot;, &quot;uf&quot;: &quot;PR&quot;, &quot;abertura&quot;: {$regex: /01\/2015/} })
+</code></pre>
+
+<ul>
+<li>Após rodar a consulta, vamos clicar em Export:</li>
+</ul>
+
+<p><img src="4.png" alt="" />
+<em>Última opção do print, é a quinta opção do menu</em></p>
+
+<ul>
+<li>Depois selecione a primeira opção (Export to JSON, BSON, CSV|TSV and SQL (mongoexport not require)&hellip;)</li>
+</ul>
+
+<p>Abrirá uma janela semelhante a esta:</p>
+
+<p><img src="5.png" alt="" /></p>
+
+<h3 id="source">Source</h3>
+
+<p>É a origem dos dados. Por padrão será a consulta que você acabou de rodar. Caso queira exportar TODOS os registros da base, basta alterar esta opção para &ldquo;Entire collection&rdquo;.</p>
+
+<h3 id="format">Format</h3>
+
+<p>Temos diversos formatos disponíveis. O que nós vamos usá-lo é o CSV (.csv).</p>
+
+<h3 id="target">Target</h3>
+
+<p>É onde o arquivo final deverá ser salvo.</p>
+
+<h3 id="delimiter">Delimiter</h3>
+
+<p>Se você selecionar o CSV, este campo irá aparecer.</p>
+
+<p>Ele é o delimitador das colunas do CSV. Por padrão virá como vírgula.</p>
+
+<p>Abaixo destas opções, temos o <strong>Fields Selection</strong>.</p>
+
+<p>Aqui você indicará quais as colunas você deseja que apareça no CSV.</p>
+
+<p>Se você quiser filtrar estas colunas, primeiro clique em &ldquo;All Fields&rdquo;, para desmarcá-lo.</p>
+
+<p>Após, basta selecionar as colunas desejadas. Exemplo abaixo, exportarei somente o CNPJ e o e-mail:</p>
+
+<p><img src="6.png" alt="" /></p>
+
+<p>Depois de você exportar e abrir o CSV, o resultado será semelhante a este:</p>
+
+<p><img src="7.png" alt="" /></p>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>É uma ferramenta simples e extremamente robusta para nós usarmos no dia-a-dia.</p>
+
+<p>A facilidade em filtrar dados é o fator mais crítico aqui.</p>
+
+<p>Espero que tenham gostado e caso algum tópico não tenha ficado esclarecido, basta solicitar.</p>
+
+<p><img src="https://media.giphy.com/media/l3vRdrQufHD93FTFK/giphy.gif" alt="" /></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/nosql"><span class="tag">Nosql</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>252</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

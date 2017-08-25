@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Iniciando um projeto com Vue 2</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada VueJS.
+O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos React e Angular 2. Porém, apesar de ocupar este &amp;ldquo;terceiro&amp;rdquo; lugar, a sua popularidade aumenta cada dia.
+O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Iniciando um projeto com Vue 2" />
+    <meta name="twitter:description" content="Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada VueJS.
+O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos React e Angular 2. Porém, apesar de ocupar este &amp;ldquo;terceiro&amp;rdquo; lugar, a sua popularidade aumenta cada dia.
+O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/iniciando-um-projeto-com-vue-2.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/iniciando-um-projeto-com-vue-2/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Iniciando um projeto com Vue 2</h1>
+      <p class="post-meta">@lhas · 11/12/2016 · 8 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada <a href="https://vuejs.org/">VueJS</a>.</p>
+
+<p>O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos <a href="https://facebook.github.io/react/">React</a> e <a href="https://angular.io/">Angular 2</a>. Porém, apesar de ocupar este &ldquo;terceiro&rdquo; lugar, a sua popularidade aumenta cada dia.</p>
+
+<p>O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas.</p>
+
+<p>Se você quiser conhecer mais sobre a comparação do Vue com outras ferramentas, <a href="https://vuejs.org/v2/guide/comparison.html">veja esta página</a> na documentação deles em que eles comparam com os principais frameworks do mercado.</p>
+
+<h1 id="benefícios">Benefícios</h1>
+
+<ul>
+<li>Muito, muito, leve (17kb gzip)</li>
+<li>Aplicação de Virtual DOM extremamente eficiente (comparável ao React)</li>
+<li>Sintaxe simples</li>
+<li>Comunidade bem ativa</li>
+</ul>
+
+<h1 id="desvantagens">Desvantagens</h1>
+
+<ul>
+<li>Não é apoiado por uma grande corporação como Google e Facebook (é uma boa coisa dependendo do ponto de vista)</li>
+<li>Comunidade em menor número (em comparação aos outros 2)</li>
+</ul>
+
+<h1 id="performance">Performance</h1>
+
+<p>Existe um projeto no GitHub que compara o desempenho do Vue 2 com o React, e o resultado é promissor. Caso você queira rodar na sua máquina, <a href="https://github.com/chrisvfritz/vue-render-performance-comparisons">o projeto encontra-se aqui</a>.</p>
+
+<p>O resultado na minha máquina foi:</p>
+
+<p><img src="1.png" alt="" />
+<em>React</em></p>
+
+<p><img src="2.png" alt="" />
+<em>Vue</em></p>
+
+<h1 id="instalação">Instalação</h1>
+
+<p><img src="https://media.giphy.com/media/10m4dzpr5uiw6s/giphy.gif" alt="" /></p>
+
+<p>Graças a equipe do Vue, nós temos um CLI que gera um projeto novo para gente com <a href="https://webpack.github.io/">Webpack</a> (ou <a href="http://browserify.org/">Browserify</a>), Hot Reload, Lint-on-save, e ainda faz build para produção.</p>
+
+<p>É um dos CLI&rsquo;s mais interessantes que eu trabalhei nos ultimos meses se tratando de front-end. E como ele é bem modular, trabalhando sob conceito de templates, você pode criar o seu próprio template para novos projetos e assim extender o CLI as suas necessidades individuais.</p>
+
+<p>Você pode começar um novo projeto em questão de minutos com todas as ferramentas mais modernas disponíveis.</p>
+
+<p>Caso você queira ver o código-fonte do Vue-CLI, <a href="https://github.com/vuejs/vue-cli">clique aqui</a>.</p>
+
+<p>Para instalá-lo, é muito simples. Você só precisa do NodeJS na sua máquina:</p>
+
+<pre><code class="language-bash">$ npm install -g vue-cli
+</code></pre>
+
+<h1 id="criando-novo-projeto">Criando novo projeto</h1>
+
+<p>Agora que temos nosso CLI disponível na máquina, vamos criar um novo projeto usando o template do Webpack que ele nos disponibiliza.  Caso você queira conhecer os templates disponíveis, <a href="https://github.com/vuejs-templates">clique aqui</a>.</p>
+
+<pre><code class="language-bash">$ vue init webpack vue-app
+</code></pre>
+
+<p>Ele vai fazer algumas perguntas como:
+- se você quer ter uma camada de testes;
+- se você deseja usar ESLint (super recomendo);
+- entre outros.</p>
+
+<p><img src="https://media.giphy.com/media/xT9KVhQXZUwyPZZRtu/giphy.gif" alt="" /></p>
+
+<p>PS: <code>vue-app</code> é opcional, você pode chamá-lo como quiser. Porém é uma convenção interessante usar o nome da principal tecnologia no nome do seu repositório como prefixo.</p>
+
+<p>Agora vamos instalar as dependências e rodar o projeto. Para isto:</p>
+
+<pre><code class="language-bash">$ cd vue-app/
+$ npm install
+$ npm run dev
+</code></pre>
+
+<p>Seu browser deve abrir automaticamente esta página:</p>
+
+<p><img src="4.png" alt="" /></p>
+
+<p>Este post poderia finalizar aqui, mas eu acho que esta etapa inicial é tão simples e gostosa de se por em prática, que merece incluir mais 2 sub-tópicos:</p>
+
+<ul>
+<li>Usando componentes em <code>Material Design</code></li>
+<li>Usando rotas</li>
+</ul>
+
+<p>Com esta base de <code>Routes</code> + <code>Material Design</code>, já dá para produzir muito app simples, prático, bonito e o mais importante, <strong>leve</strong>. Se tiver uma API para tu consumir alguns dados, melhor ainda.</p>
+
+<p>Antes de começarmos a programar de fato, gostaria de esclarecer alguns aspectos que fazem o Vue ser tão poderoso:</p>
+
+<h2 id="estilização-comportamento-e-estrutura-de-componentes-em-1-arquivo">Estilização, Comportamento e Estrutura de Componentes em 1 arquivo</h2>
+
+<p>Como <code>talk is cheap</code>, vamos para o <code>code</code>:</p>
+
+<p><img src="https://camo.githubusercontent.com/14e5f4477f49cf0fc0d8f228facb17772a0b1025/687474703a2f2f626c6f672e6576616e796f752e6d652f696d616765732f7675652d636f6d706f6e656e742e706e67" alt="" /></p>
+
+<p>Seriously. Vocês também concordam que esta estrutura é <code>FODA</code>?</p>
+
+<p>As possibilidades são infinitas neste screenshot.</p>
+
+<p>Você pode:</p>
+
+<ul>
+<li>Definir os <code>preprocessors</code> que você quiser (Pug/Jade, SASS, Stylus, etc etc)</li>
+<li>Implementar a view no mesmo arquivo da lógica</li>
+<li>Módulos em <a href="https://webpack.github.io/docs/commonjs.html">CommonJS</a></li>
+<li>Ter todo o CSS incluído na história</li>
+<li>Você pode opcionalmente fazer com que seu CSS seja <code>escopado</code> <a href="https://github.com/vuejs/vue-loader/blob/master/docs/en/features/scoped-css.md">(Veja mais sobre Scoped CSS)</a></li>
+</ul>
+
+<p>Tudo isto com um maravilhoso <code>Hot Reload</code> já configurado que faz a mágica ser ainda mais intensa. O <code>create-react-app</code> até o momento não tem um HotReload como esse, ele dá 1 refresh na página igual BrowserSync.</p>
+
+<p>Faça um teste você mesmo, divida sua tela em seu browser e seu editor preferido. Agora abra o arquivo <code>app/components/Hello.vue</code>. Escreva qualquer bosta e salve. Observe atenciosamente o browser. NO RELOADS, NO WORRIES, BITCHES!</p>
+
+<p><img src="5.png" alt="" /></p>
+
+<h2 id="os-componentes-mais-importantes-são-mantidos-pela-própria-equipe">Os componentes mais importantes são mantidos pela própria equipe</h2>
+
+<p>Diferente do React que deixa algumas questões mais complexas como Rotas abertas a comunidade, o Vue adotou a postura de se responsabilizar por estes pilares.</p>
+
+<p>Então caso você queira usar:</p>
+
+<ul>
+<li>Routes</li>
+<li>State Management Pattern (Flux/Redux)</li>
+<li>AJAX (Resource)</li>
+<li>Firebase</li>
+<li>DevTools</li>
+<li>RxJS</li>
+<li>Syntax Highlight para os principais editores</li>
+</ul>
+
+<p>Todos estes componentes são mantidos pela própria equipe do Vue. Você pode encontrá-los no repositório deles no <a href="https://github.com/vuejs">GitHub</a>.</p>
+
+<p>Falando em componentes externos, a comunidade produziu uma lista denominada <code>Awesome Vue</code> em que contém uma lista de recursos como Tutoriais, componentes feito peloa comunidade, entre várias outras coisas.</p>
+
+<p>Vale a pena conferir a <a href="https://github.com/vuejs/awesome-vue">Awesome Vue</a>.</p>
+
+<h2 id="voltando-para-nosso-projeto">Voltando para nosso projeto</h2>
+
+<p>Vamos primeiro instalar o <a href="https://github.com/marcosmoura/vue-material">Vue Material</a>.</p>
+
+<p>1) Edite o index.html e inclua as dependências:</p>
+
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;//fonts.googleapis.com/icon?family=Material+Icons&quot;&gt;
+</code></pre>
+
+<p>2) Instale o Vue Material:</p>
+
+<pre><code class="language-bash">$ npm install --save vue-material
+</code></pre>
+
+<p>3) Inclua o Vue Material como dependência do projeto:</p>
+
+<pre><code class="language-js">// src/main.js
+import Vue from 'vue'
+// incluimos ele (e seu CSS para o Webpack poder processar)
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.css'
+
+// dizemos ao Vue para importá-lo
+Vue.use(VueMaterial)
+
+// definimos um tema padrão para nosso MD
+// você pode escolher qualquer uma na palheta do próprio Google
+// link: https://material.google.com/style/color.html#color-color-palette
+Vue.material.theme.register('default', {
+  primary: 'light-blue',
+  accent: 'pink'
+})
+</code></pre>
+
+<p>Agora vamos declarar que nosso <code>App</code> use o tema padrão:</p>
+
+<pre><code class="language-html">&lt;!-- src/App.vue --&gt;
+
+&lt;!-- Ao invés de: --&gt;
+&lt;div id=&quot;app&quot;&gt;
+
+&lt;!-- Vamos aplicar o tema padrão do Material Design (você pode registrar quantos temas quiser) --&gt;
+&lt;div id=&quot;app&quot; v-md-theme=&quot;'default'&quot;&gt;
+</code></pre>
+
+<p>Isto é suficiente para termos o <code>Vue Material</code> rodando no nosso app;</p>
+
+<p>Vamos testá-lo abrindo o componente <code>Hello.vue</code>:</p>
+
+<pre><code class="language-html">  &lt;div class=&quot;hello&quot;&gt;
+    &lt;md-toolbar&gt;
+      &lt;md-button class=&quot;md-icon-button&quot;&gt;
+        &lt;md-icon&gt;menu&lt;/md-icon&gt;
+      &lt;/md-button&gt;
+
+      &lt;h2 class=&quot;md-title&quot; style=&quot;flex: 1&quot;&gt;Default&lt;/h2&gt;
+
+      &lt;md-button class=&quot;md-icon-button&quot;&gt;
+        &lt;md-icon&gt;favorite&lt;/md-icon&gt;
+      &lt;/md-button&gt;
+    &lt;/md-toolbar&gt;
+
+    &lt;md-tabs md-centered&gt;
+      &lt;md-tab md-label=&quot;Movies&quot; md-icon=&quot;ondemand_video&quot;&gt;
+
+        &lt;div class=&quot;field-group&quot;&gt;
+          &lt;md-input-container&gt;
+            &lt;label for=&quot;movie&quot;&gt;Movie&lt;/label&gt;
+            &lt;md-select name=&quot;movie&quot; id=&quot;movie&quot; v-model=&quot;movie&quot;&gt;
+              &lt;md-option value=&quot;fight_club&quot;&gt;Fight Club&lt;/md-option&gt;
+              &lt;md-option value=&quot;godfather&quot;&gt;Godfather&lt;/md-option&gt;
+              &lt;md-option value=&quot;godfather_ii&quot;&gt;Godfather II&lt;/md-option&gt;
+              &lt;md-option value=&quot;godfather_iii&quot;&gt;Godfather III&lt;/md-option&gt;
+              &lt;md-option value=&quot;godfellas&quot;&gt;Godfellas&lt;/md-option&gt;
+              &lt;md-option value=&quot;pulp_fiction&quot;&gt;Pulp Fiction&lt;/md-option&gt;
+              &lt;md-option value=&quot;scarface&quot;&gt;Scarface&lt;/md-option&gt;
+            &lt;/md-select&gt;
+          &lt;/md-input-container&gt;
+        &lt;/div&gt;
+
+          &lt;md-card style=&quot;width: 320px;&quot; class=&quot;card-ripple&quot; md-with-hover&gt;
+            &lt;md-card-media&gt;
+              &lt;md-ink-ripple&gt;&lt;/md-ink-ripple&gt;
+              &lt;img src=&quot;https://vuematerial.github.io/assets/card-image-1.jpg&quot; alt=&quot;People&quot;&gt;
+            &lt;/md-card-media&gt;
+
+            &lt;md-card-actions&gt;
+              &lt;md-button class=&quot;md-icon-button&quot;&gt;
+                &lt;md-icon&gt;favorite&lt;/md-icon&gt;
+              &lt;/md-button&gt;
+
+              &lt;md-button class=&quot;md-icon-button&quot;&gt;
+                &lt;md-icon&gt;bookmark&lt;/md-icon&gt;
+              &lt;/md-button&gt;
+
+              &lt;md-button class=&quot;md-icon-button&quot;&gt;
+                &lt;md-icon&gt;share&lt;/md-icon&gt;
+              &lt;/md-button&gt;
+            &lt;/md-card-actions&gt;
+          &lt;/md-card&gt;
+      
+      &lt;/md-tab&gt;
+
+      &lt;md-tab md-label=&quot;Music&quot; md-icon=&quot;music_note&quot;&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.&lt;/p&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.&lt;/p&gt;
+      &lt;/md-tab&gt;
+
+      &lt;md-tab md-label=&quot;Books&quot; md-icon=&quot;books&quot;&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.&lt;/p&gt;
+      &lt;/md-tab&gt;
+
+      &lt;md-tab md-label=&quot;Pictures&quot; md-icon=&quot;photo&quot;&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.&lt;/p&gt;
+      &lt;/md-tab&gt;
+    &lt;/md-tabs&gt;
+  &lt;/div&gt;
+</code></pre>
+
+<p>Você deverá ver algo igual a isto:</p>
+
+<p><img src="6.png" alt="" /></p>
+
+<p>Irado, não?!</p>
+
+<p>Agora vamos instalar o <code>vue-router</code> para termos algumas páginas customizadas.</p>
+
+<h2 id="instalando-o-vue-router">Instalando o vue-router</h2>
+
+<pre><code class="language-bash">$ npm install vue-router --save
+</code></pre>
+
+<p>Vamos dizer para nossa página principal (<code>index.html</code>) que iremos usar rotas neste app. Para isto:</p>
+
+<pre><code class="language-html">&lt;div id=&quot;app&quot; v-md-theme=&quot;'default'&quot;&gt;
+  &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Vamos editar o <code>src/main.js</code>. Vamos incluir 2 rotas padrões - Hello e About Us.</p>
+
+<p>Esta segunda rota (About Us), vamos criar em seguida.</p>
+
+<p>Vou inserir o código completo do <code>main.js</code> para não ficar dúvidas.</p>
+
+<pre><code class="language-js">import Vue from 'vue'
+import VueMaterial from 'vue-material'
+import VueRouter from 'vue-router'
+import 'vue-material/dist/vue-material.css'
+
+import Hello from './components/Hello'
+import AboutUs from './components/AboutUs.vue'
+
+Vue.use(VueMaterial)
+Vue.use(VueRouter)
+
+Vue.material.theme.register('default', {
+  primary: 'light-blue',
+  accent: 'pink'
+})
+
+const routes = [
+  { path: '/', redirect: '/hello' },
+  { path: '/hello', component: Hello },
+  { path: '/about-us', component: AboutUs }
+]
+
+const router = new VueRouter({
+  routes
+})
+
+new Vue({
+  router
+}).$mount('#app')
+</code></pre>
+
+<h2 id="plus-outra-feature-bacana-do-vue">PLUS: Outra feature bacana do Vue</h2>
+
+<p>Se você tentar navegar na nossa aplicação agora, verá a seguinte tela:</p>
+
+<p><img src="7.png" alt="" /></p>
+
+<p>Olha que ESLint lindo, mano! Porra. :&lsquo;)</p>
+
+<p>Para corrigir este erro, precisamos criar o arquivo <code>src/components/AboutUs.vue</code>.</p>
+
+<p>Só de criar, o problema já se resolve. Mas vamos preenchê-lo com nossa informação estática.</p>
+
+<pre><code class="language-js">// src/components/AboutUs.vue
+&lt;template&gt;
+  &lt;div class=&quot;about-us&quot;&gt;
+    &lt;h1&gt;About Us&lt;/h1&gt;
+
+    &lt;p&gt;Powered by 0e1dev.com&lt;/p&gt;
+
+    &lt;router-link tag=&quot;md-button&quot; class=&quot;md-raised md-primary&quot; to=&quot;/hello&quot;&gt;
+      &lt;md-icon&gt;arrow_back&lt;/md-icon&gt; Back to Hello
+    &lt;/router-link&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: 'about-us',
+  data () {
+    return {
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+<p>Agora que nossa <code>About Us</code> está redonda, vamos fazer com que através da Home nós possamos redirecionar o usuário para a segunda página.</p>
+
+<p>Abra o <code>src/components/Hello.vue</code> e insira depois do nosso <code>&lt;/md-tabs&gt;</code>:</p>
+
+<pre><code class="language-js">// src/components/Hello.vue
+
+&lt;router-link tag=&quot;md-button&quot; class=&quot;md-raised md-primary&quot; to=&quot;/about-us&quot;&gt;
+  &lt;md-icon&gt;navigate_next&lt;/md-icon&gt; Go to About Us
+&lt;/router-link&gt;
+</code></pre>
+
+<h2 id="pronto">Pronto!</h2>
+
+<p>Agora podemos navegar entre nossas rotas:</p>
+
+<p><img src="8.png" alt="" />
+<em>Home da nossa app</em></p>
+
+<p><img src="9.png" alt="" />
+<em>About Us da nossa app</em></p>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>Este foi nosso post de hoje sobre como iniciar um novo projeto usando Vue 2 com pé direito.</p>
+
+<p>Tem muita coisa que dá para melhorar. Por exemplo, esta library <code>vue-material</code> não vem com Grid nem nada do tipo. Ela é somente com os componentes para você trabalhar, você é livre para manipulá-los como desejar.</p>
+
+<p>É uma liberdade interessante já que você pode usar <code>Flexbox</code> ou outra solução qualquer.</p>
+
+<p>Eu costumo usar o <a href="http://flexboxgrid.com/">Flexbox Grid</a>. É bem fácil de usar já que tem a sintaxe idêntica a do Bootstrap 3 que já estamos carecas de saber.</p>
+
+<p>Espero que tenham gostado.</p>
+
+<p>A ideia é fazer uma série de postagens sobre o Vue 2. Esta é a primeira etapa.</p>
+
+<p>No nosso próximo post aprenderemos como fazer a camada de autenticação usando <a href="https://jwt.io/">JSON Web Tokens</a> e <a href="http://rubyonrails.org/">Ruby on Rails 5</a>.</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/front-end"><span class="tag">Front-End</span></a></li>
+        
+          <li><a href="/tags/spa"><span class="tag">Spa</span></a></li>
+        
+          <li><a href="/tags/vue"><span class="tag">Vue</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>256</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

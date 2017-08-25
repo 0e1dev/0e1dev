@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Front End on 0e1dev</title>
+    <link>https://blog.0e1dev.com/tags/front-end/</link>
+    <description>Recent content in Front End on 0e1dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sun, 11 Dec 2016 06:02:43 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.0e1dev.com/tags/front-end/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Iniciando um projeto com Vue 2</title>
+      <link>https://blog.0e1dev.com/post/iniciando-um-projeto-com-vue-2/</link>
+      <pubDate>Sun, 11 Dec 2016 06:02:43 +0000</pubDate>
+      
+      <guid>https://blog.0e1dev.com/post/iniciando-um-projeto-com-vue-2/</guid>
+      <description>Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada VueJS.
+O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos React e Angular 2. Porém, apesar de ocupar este &amp;ldquo;terceiro&amp;rdquo; lugar, a sua popularidade aumenta cada dia.
+O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas.</description>
+    </item>
+    
+  </channel>
+</rss>

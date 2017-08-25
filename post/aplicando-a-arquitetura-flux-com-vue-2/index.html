@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Aplicando a Arquitetura Flux com Vue 2</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Olá a todos!
+Depois de termos implementado um CRUD através do Vue 2, agora iremos profissionalizar a arquitetura do mesmo.
+Caso você esteja desenvolvendo um SPA de médio a grande porte, é interessante que você tenha uma arquitetura que seja escalável.
+E uma destas patterns escaláveis que temos hoje em dia é o Flux.
+Caso você queira conhecer os outros posts desta série de Vue 2:
+ Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2 Montando CRUD com Vue 2  O que é Flux?" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Aplicando a Arquitetura Flux com Vue 2" />
+    <meta name="twitter:description" content="Olá a todos!
+Depois de termos implementado um CRUD através do Vue 2, agora iremos profissionalizar a arquitetura do mesmo.
+Caso você esteja desenvolvendo um SPA de médio a grande porte, é interessante que você tenha uma arquitetura que seja escalável.
+E uma destas patterns escaláveis que temos hoje em dia é o Flux.
+Caso você queira conhecer os outros posts desta série de Vue 2:
+ Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2 Montando CRUD com Vue 2  O que é Flux?" />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/aplicando-a-arquitetura-flux-com-vue-2.png" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Aplicando a Arquitetura Flux com Vue 2</h1>
+      <p class="post-meta">@lhas · 10/01/2017 · 14 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Olá a todos!</p>
+
+<p>Depois de termos implementado um CRUD através do Vue 2, agora iremos profissionalizar a arquitetura do mesmo.</p>
+
+<p>Caso você esteja desenvolvendo um SPA de médio a grande porte, é interessante que você tenha uma arquitetura que seja escalável.</p>
+
+<p>E uma destas patterns escaláveis que temos hoje em dia é o <a href="https://facebook.github.io/flux/">Flux</a>.</p>
+
+<p>Caso você queira conhecer os outros posts desta série de Vue 2:</p>
+
+<ul>
+<li><a href="http://blog.0e1dev.com/2016/12/11/Iniciando-um-projeto-com-Vue-2/">Iniciando um projeto com Vue 2</a></li>
+<li><a href="http://blog.0e1dev.com/2016/12/11/Autenticacao-com-JWT-e-Vue-2/">Autenticação com JWT e Vue 2</a></li>
+<li><a href="http://blog.0e1dev.com/2017/01/07/Montando-CRUD-com-Vue-2/">Montando CRUD com Vue 2</a></li>
+</ul>
+
+<h1 id="o-que-é-flux">O que é Flux?</h1>
+
+<p><img src="https://media.giphy.com/media/3o6wrdG8vt4X86Pauc/giphy.gif" alt="" /></p>
+
+<p>É um modelo de arquitetura para User Interfaces que mantém um fluxo de dados uni-direcional.</p>
+
+<p>Este fluxo permite que o desenvolvedor gerencie de forma centralizada os dados de toda a aplicação.</p>
+
+<p>Uma das regras é que você não pode alterar os dados diretamente. Você tem que fazer uma solicitação de mudança (commit, literalmente) para que aquele dado seja modificado. Esta solicitação é enfileirada e direcionada para a ação desejada.</p>
+
+<p>Esta explicação é um resumo e é normal que não faça muito sentido até que coloquemos a mão no código.</p>
+
+<h1 id="quais-os-benefícios-deste-pattern">Quais os benefícios deste pattern?</h1>
+
+<p>Os benefícios são diversos:</p>
+
+<ul>
+<li>Dados da aplicação ficam centralizados em um lugar só (store);</li>
+<li>Os dados não podem ser modificados diretamente, prevenindo possíveis comportamentos anormais;</li>
+<li>É possível fazer uma viagem no tempo para debugar o que nossa aplicação está fazendo;</li>
+<li>Você pode importar/exportar os fluxos para debugar melhor.</li>
+<li>Entre outros&hellip;</li>
+</ul>
+
+<h1 id="eu-realmente-preciso-disto">Eu realmente preciso disto?</h1>
+
+<p>Como dito anteriormente, só vale a  pena fazer este tipo de  implementação caso você tenha certeza de que a sua aplicação irá crescer com o tempo. Para projetos pequenos, isto pode ser matar uma formiga com uma bazuca. Uma frase dita por Dan Abramov, autor do Redu, define bem:</p>
+
+<blockquote>
+<p>Flux libraries are like glasses: you’ll know when you need them.
+<strong>Dan Abramov</strong></p>
+</blockquote>
+
+<h1 id="implementando">Implementando&hellip;</h1>
+
+<p>Caso você esteja vindo do nosso post anterior, <a href="http://blog.0e1dev.com/2017/01/07/Montando-CRUD-com-Vue-2/">Montando CRUD com Vue 2</a>, você terá a seguinte situação:</p>
+
+<ul>
+<li>Um componente de Index (listando todos os registros);</li>
+<li>Este componente consumindo uma API;</li>
+<li>Esta API está sendo acessada através do vue-resource, diretamente no Componente.</li>
+</ul>
+
+<p>Antes de colocarmos a mão na massa quanto a arquitetura, precisamos fazer um isolamento de responsabilidade aí.</p>
+
+<p>Precisamos que nosso Componente deixe de se comunicar diretamente com a API.</p>
+
+<p>Para isto, vamos precisar de um Service, que fará esta comunicação.</p>
+
+<h1 id="criando-services-com-vue">Criando Services com Vue</h1>
+
+<p>Para quem já tem um background de Angular 1, os Services aqui terão um comportamento semelhante.</p>
+
+<p>A diferença aqui é que nosso Service será apenas um módulo JS, sem muita magia por baixo dos panos (ainda bem).</p>
+
+<p>Já que estamos trabalhando com <em>Aulas</em> (Lessons), faremos um Service para o mesmo.</p>
+
+<p>Para isto:
+- Vamos criar uma pasta para armazenar nossos services;
+- Criar um arquivo base que será usado por todos os services;
+- Criar o service de Lessons.</p>
+
+<p>Supondo que você está na pasta da nossa app:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic"># Cria a pasta</span>
+mkdir src/services
+
+<span style="color: #0080ff; font-style: italic"># Inicializa a base dos services</span>
+touch src/services/index.js
+
+<span style="color: #0080ff; font-style: italic"># Inicializa o service de Lessons</span>
+touch src/services/lessons.js
+</pre></div>
+
+
+<h1 id="base-dos-services">Base dos Services</h1>
+
+<p>Este código-base é necessário caso você não queira ficar repetindo código entre os services.</p>
+
+<p>É bem simples e ficará assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> Vue from <span style="color: #00cc66">&#39;vue&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> VueResource from <span style="color: #00cc66">&#39;vue-resource&#39;</span>
+
+Vue.use(VueResource)
+
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> Vue
+</pre></div>
+
+
+<p>Basicamente, ele cria uma instância do Vue e incorpora o vue-resource nesta instância.</p>
+
+<p>Isto se faz necessário para podermos efetuar as requisições XHR nos nossos services.</p>
+
+<h1 id="service-de-lessons">Service de Lessons</h1>
+
+<p>Este módulo precisa fazer todas as nossas operações de CRUD - Adicionar, Ler, Editar e Deletar.</p>
+
+<p>Ficará assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> service from <span style="color: #00cc66">&#39;./index&#39;</span>
+
+<span style="color: #2c5dcd; font-weight: bold">const</span> resource <span style="color: #2c5dcd">=</span> service.resource(<span style="color: #00cc66">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>)
+<span style="color: #2c5dcd; font-weight: bold">const</span> currentProfile <span style="color: #2c5dcd">=</span> JSON.parse(<span style="color: #5918bb; font-weight: bold">window</span>.localStorage.getItem(<span style="color: #00cc66">&#39;current-profile&#39;</span>))
+
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
+  <span style="color: #0080ff; font-style: italic">// Read</span>
+  getAll () {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.get({})
+  },
+  getOne (id) {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.get({id<span style="color: #2c5dcd">:</span> id})
+  },
+  <span style="color: #0080ff; font-style: italic">// Delete</span>
+  deleteOne (lesson) {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.<span style="color: #2c5dcd; font-weight: bold">delete</span>({id<span style="color: #2c5dcd">:</span> lesson.id})
+  },
+  <span style="color: #0080ff; font-style: italic">// Create</span>
+  createOne (lesson) {
+    lesson[<span style="color: #00cc66">&#39;student_id&#39;</span>] <span style="color: #2c5dcd">=</span> currentProfile.student.id
+    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.save({}, lesson)
+  },
+  <span style="color: #0080ff; font-style: italic">// Update</span>
+  updateOne (lesson) {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.update({id<span style="color: #2c5dcd">:</span> lesson.id}, lesson)
+  }
+}
+</pre></div>
+
+
+<p>Caso você precise adicionar valores de campos padrão, este é um ótimo lugar. Eu mesmo fiz isso na linha 20. Pego o ID do estudante atual e acoplo ele ao novo registro de aula.</p>
+
+<h1 id="começando-com-vuex">Começando com Vuex</h1>
+
+<p>Primeiro, instale ele como dependência do seu projeto:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>npm install vuex --save
+</pre></div>
+
+
+<p>Agora, vamos criar a nossa <em>Store</em>.</p>
+
+<h1 id="o-que-é-uma-store">O que é uma Store?</h1>
+
+<p>Toda aplicação que usufrua desta arquitetura terá uma Store.</p>
+
+<p>Store é o nosso &ldquo;centralizador de dados&rdquo;. Ele irá armazenar todos os estados dos dados atuais da nossa aplicação, como se fosse um objeto global.</p>
+
+<p>É como se ele fosse a nossa base de dados front-end.</p>
+
+<h1 id="qual-a-diferença-entre-uma-store-e-um-objeto-global-plain-global-object">Qual a diferença entre uma Store e um objeto global (plain global object)?</h1>
+
+<p>A primeira diferença que os dados dentro do Store são reativos. Então caso o componente X mude o dado Y, o componente Z que usufrui do mesmo dado Y também receberá a modificação.</p>
+
+<p>A segunda diferença é que você não tem permissão alguma para modificar os dados dentro do Store diretamente.</p>
+
+<p>Para você fazer qualquer tipo de mudança, você deve solicitar ela explicitamente através de <strong>commits</strong>.</p>
+
+<p>Os <em>commits</em> funcionam de uma forma semelhante aos commits do Git, anexando mudanças.</p>
+
+<p>Estas mudanças ocorrem através das <strong>mutações</strong> (mutations).</p>
+
+<p>Isto garante que cada modificação no estado da aplicação seja traçável e navegável, permitindo que o desenvolvedor tenha um passo-a-passo do que a sua aplicação está de fato fazendo e evitando possíveis gargalos ou sobrescrever alguma informação.</p>
+
+<h3 id="exemplo-de-store">Exemplo de Store</h3>
+
+<p><img src="https://media.giphy.com/media/jog2TsnJMXqX6/giphy.gif" alt="" /></p>
+
+<p>Eu vou re-aproveitar o exemplo da própria documentação do Vuex pois acho ela muito boa para dar uma visão do que ocorre por baixo dos panos:</p>
+
+<p>Dado a seguinte store:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> store <span style="color: #2c5dcd">=</span> <span style="color: #2c5dcd; font-weight: bold">new</span> Vuex.Store({
+  state<span style="color: #2c5dcd">:</span> {
+    count<span style="color: #2c5dcd">:</span> <span style="color: #5918bb; font-weight: bold">0</span>
+  },
+  mutations<span style="color: #2c5dcd">:</span> {
+    increment (state) {
+      state.count<span style="color: #2c5dcd">++</span>
+    }
+  }
+})
+</pre></div>
+
+
+<p>Imagine que o state seja na verdade o <code>data()</code>.</p>
+
+<p>E os mutations sejam na verdade os <code>methods</code>.</p>
+
+<p>Para você recuperar o count atual:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>store.state.count
+</pre></div>
+
+
+<p>Para você rodar o método <code>increment</code> e consequentemente modificar o count:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>store.commit(<span style="color: #00cc66">&#39;increment&#39;</span>)
+</pre></div>
+
+
+<p>Após rodar a linha acima, o <code>store.state.count</code> será igual a <code>1</code>.</p>
+
+<h1 id="o-que-é-state">O que é State?</h1>
+
+<p>Como dito anteriormente, o state é a nossa camada de dados.</p>
+
+<p>Ela será a nossa <code>única fonte da verdade</code> (single source of truth).</p>
+
+<p>Apesar de ser algo centralizado, nós podemos criar <em>módulos</em> que terão <em>states</em> próprios, como veremos mais a frente.</p>
+
+<p>Após você injetar o Vuex e o Store na sua aplicação, você poderá acessá-lo assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">this</span>.$store; <span style="color: #0080ff; font-style: italic">// -&gt; retornará todo o Store</span>
+<span style="color: #2c5dcd; font-weight: bold">this</span>.$store.state; <span style="color: #0080ff; font-style: italic">// -&gt; retornará todos os States disponíveis</span>
+<span style="color: #2c5dcd; font-weight: bold">this</span>.$store.commit(<span style="color: #00cc66">&#39;exemplo&#39;</span>); <span style="color: #0080ff; font-style: italic">// -&gt; rodará o commit &#39;exemplo&#39;</span>
+</pre></div>
+
+
+<p>Chega de teoria e vamos para a prática.</p>
+
+<h1 id="aplicando-o-vuex">Aplicando o Vuex</h1>
+
+<p>Vamos precisar de uma pasta para armazenar nosso Store.</p>
+
+<p>Dentro desta pasta, teremos:</p>
+
+<ul>
+<li>Um módulo para nosso Store, que irá inicializá-lo;</li>
+<li>Um módulo para armazenar os nossos tipos de mutação (veremos mais a frente).</li>
+</ul>
+
+<p>Para isto:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir src/store
+touch src/store/index.js
+touch src/store/mutation-types.js
+</pre></div>
+
+
+<p>Com nossa pasta e arquivos criados, vamos começar pelo nosso módulo para Store.</p>
+
+<h2 id="módulo-da-store">Módulo da Store</h2>
+
+<p>Ele ficará assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> Vue from <span style="color: #00cc66">&#39;vue&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> Vuex from <span style="color: #00cc66">&#39;vuex&#39;</span>
+
+Vue.use(Vuex)
+
+<span style="color: #2c5dcd; font-weight: bold">const</span> debug <span style="color: #2c5dcd">=</span> process.env.NODE_ENV <span style="color: #2c5dcd">!==</span> <span style="color: #00cc66">&#39;production&#39;</span>
+
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> <span style="color: #2c5dcd; font-weight: bold">new</span> Vuex.Store({
+  strict<span style="color: #2c5dcd">:</span> debug
+})
+</pre></div>
+
+
+<h1 id="importando-store-na-app">Importando Store na App</h1>
+
+<p>Abra seu <code>main.js</code>.</p>
+
+<p>Primeiro vamos precisar importar o Store que acabamos de criar.</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> store from <span style="color: #00cc66">&#39;./store&#39;</span>
+</pre></div>
+
+
+<p>Depois vamos injetá-lo dentro da nossa instância do Vue.</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">new</span> Vue({
+  el<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;#app&#39;</span>,
+  router,
+  store
+})
+</pre></div>
+
+
+<p>Pronto! Agora teremos acesso ao nosso Store através do <code>this.$store</code>.</p>
+
+<h1 id="módulos">Módulos</h1>
+
+<p>Para nosso código ficar mais organizado possível, vamos separar nossa store em módulos.</p>
+
+<p>Para isto, vamos precisar de uma pasta &ldquo;modules&rdquo;:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir src/store/modules
+</pre></div>
+
+
+<p>Vamos começar com um módulo simples, que será o de <strong>Alertas</strong>.</p>
+
+<h2 id="módulo-de-alertas">Módulo de Alertas</h2>
+
+<p><img src="https://media.giphy.com/media/11nAv843yJ4Flm/giphy.gif" alt="" /></p>
+
+<p>Este módulo será muito simples, ele apenas mostrará informações para nossos usuários com um <code>alert()</code>.</p>
+
+<p>Para isto, vamos precisar de uma pasta para este módulo:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir src/store/modules/alerts
+</pre></div>
+
+
+<p>Como ele será um módulo bem simples, podemos fazer toda implementação dentro de um único JS:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>touch src/store/modules/alerts/index.js
+</pre></div>
+
+
+<p>Vamos editá-lo agora.</p>
+
+<h3 id="state-de-alertas">State de Alertas</h3>
+
+<p>Nosso state será assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> state <span style="color: #2c5dcd">=</span> {
+  message<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">null</span>,
+  delay<span style="color: #2c5dcd">:</span> <span style="color: #5918bb; font-weight: bold">4000</span>
+}
+</pre></div>
+
+
+<h3 id="actions-de-alertas">Actions de Alertas</h3>
+
+<p>Nosso módulo terá uma ação chamada <code>createOne</code>, que fará a criação do alerta.</p>
+
+<p>Nossa action será assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> actions <span style="color: #2c5dcd">=</span> {
+  createOne ({ commit, state }, alert) {
+    commit(types.ALERTS_CHANGE_MESSAGE, alert.message)
+    commit(types.ALERTS_DISPLAY)
+  }
+}
+</pre></div>
+
+
+<p>Como você pode ver, nossa ação efetua <strong>2 commits</strong>.</p>
+
+<ul>
+<li>O primeiro para modificar o nosso estado de mensagem;</li>
+<li>O segundo para mostrar o alerta.</li>
+</ul>
+
+<p>Só que para efetuar estes commits, ele utiliza 2 constantes: <code>ALERTS_CHANGE_MESSAGE</code> e <code>ALERTS_DISPLAY</code>.</p>
+
+<p>Ambas oriúndas do <code>types</code>.</p>
+
+<h3 id="mutation-types-de-alertas">Mutation Types de Alertas</h3>
+
+<p>Lembra que criamos um <code>mutation-types.js</code>? Vamos precisar modificá-lo e incluir o mesmo no nosso módulo de alertas.</p>
+
+<p>Para incluir ele, insira na primeira linha do módulo:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> <span style="color: #2c5dcd">*</span> as types from <span style="color: #00cc66">&#39;../../mutation-types&#39;</span>
+</pre></div>
+
+Agora vamos preencher o <strong>mutation types</strong> com as constantes necessárias para nossas ações:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">const</span> ALERTS_CHANGE_MESSAGE <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;ALERTS_CHANGE_MESSAGE&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">const</span> ALERTS_DISPLAY <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;ALERTS_DISPLAY&#39;</span>
+</pre></div>
+
+
+<p><strong>Pronto!</strong> Até aqui, já temos um módulo de alertas com <strong>2 states</strong>, <strong>2 commits</strong>, <strong>2 mutation types</strong> e <strong>1 action</strong>.</p>
+
+<p><strong>Observação:</strong> Para cada state, você sempre terá um mutation/commit/mutation type.</p>
+
+<p>No caso do nosso módulo de Alertas, ficou faltando somente as <strong>Mutations</strong>.</p>
+
+<h1 id="o-que-são-mutations">O que são Mutations?</h1>
+
+<p><img src="https://media.giphy.com/media/zpoDwr92f7UJ2/giphy.gif" alt="" /></p>
+
+<p>As mutações são a única forma que você tem para modificar os dados do <strong>State</strong>.</p>
+
+<p>Como dito anteriormente, você não pode modificar os dados do <strong>State</strong> diretamente, você precisa antes efetuar um <strong>commit</strong> com as mudanças necessárias.</p>
+
+<p><strong>Cada commit precisará de um mutation.</strong></p>
+
+<h3 id="mutations-de-alertas">Mutations de Alertas</h3>
+
+<p>Para nosso módulo, estas serão as mutações necessárias:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> mutations <span style="color: #2c5dcd">=</span> {
+  [types.ALERTS_CHANGE_MESSAGE] (state, message) {
+    state.message <span style="color: #2c5dcd">=</span> message
+  },
+  [types.ALERTS_DISPLAY] (state) {
+    setTimeout(() =&gt; {
+      alert(state.message)
+    }, state.delay)
+  }
+}
+</pre></div>
+
+
+<p><strong>Observação:</strong> Caso esta sintaxe pareça estranha para você, pesquise mais sobre ES6. Mas de forma resumida, o ES6 permite que criemos uma função com nome igual a uma constante. Para isto, basta encapsular a constante entre colchetes [].</p>
+
+<p>Toda mutação recebe como primeiro parâmetro, o <strong>state</strong> da aplicação.</p>
+
+<p>O segundo parâmetro é o <strong>payload</strong>. Ele é opcional e é através dele que você pode enviar os dados para seu commit.</p>
+
+<p>No caso de efetuarmos um <em>commit</em> para mudar a mensagem, o nosso <em>payload</em> é a mensagem a se mostrada.</p>
+
+<h1 id="finalizando-módulo-de-alertas">Finalizando módulo de Alertas</h1>
+
+<p>Para finalizar, precisamos exportar ele como módulo de fato. Para isto, no fim do nosso arquivo, você deverá incluir:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
+  namespaced<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">true</span>,
+  state,
+  actions,
+  mutations
+}
+</pre></div>
+
+
+<h1 id="resultado-do-alertas">Resultado do Alertas</h1>
+
+<p>Você pode ver o resultado do código explicado acima abaixo. Clique em <strong>Result</strong>:</p>
+
+<script async src="//jsfiddle.net/7e0z2qye/3/embed/"></script>
+
+<h1 id="voltando-para-o-crud">Voltando para o CRUD</h1>
+
+<p>Acima implementamos um módulo bem simples, mas agora faremos a implementação do módulo de Lessons, que envolve o CRUD criado no tópico anterior.</p>
+
+<p>O primeiro passo é&hellip;</p>
+
+<h1 id="criar-módulo-de-lessons">Criar módulo de Lessons</h1>
+
+<p>Nossa Store precisa de um módulo só para nossas aulas. Aqui entra a questão de apesar do <strong>Store</strong> ser algo centralizado, nós podemos ter <strong>States</strong> independentes dentro de cada módulo.</p>
+
+<p>Para criá-lo:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir src/store/modules/lessons
+touch src/store/modules/lessons/index.js
+touch src/store/modules/lessons/actions.js
+touch src/store/modules/lessons/getters.js
+touch src/store/modules/lessons/index.js
+touch src/store/modules/lessons/mutations.js
+touch src/store/modules/lessons/state.js
+</pre></div>
+
+
+<p>Como este módulo pode vir a ser mais complexo no futuro, faremos o isolamento de cada camada em módulos separados.</p>
+
+<p>Vamos começar pela base (index.js).</p>
+
+<h2 id="módulo-base-de-lessons">Módulo base de Lessons</h2>
+
+<p>Ele irá basicamente centralizar os sub-módulos. Nenhum mistério aqui:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> actions from <span style="color: #00cc66">&#39;./actions&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> getters from <span style="color: #00cc66">&#39;./getters&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> mutations from <span style="color: #00cc66">&#39;./mutations&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> state from <span style="color: #00cc66">&#39;./state&#39;</span>
+
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
+  namespaced<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">true</span>,
+  state,
+  getters,
+  actions,
+  mutations
+}
+</pre></div>
+
+
+<h2 id="state-de-lessons">State de Lessons</h2>
+
+<p>Vamos para o State que são os nossos dados, é a segunda parte mais simples aqui:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> state <span style="color: #2c5dcd">=</span> {
+  lessons<span style="color: #2c5dcd">:</span> [],
+  lesson<span style="color: #2c5dcd">:</span> {}
+}
+
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> state
+</pre></div>
+
+
+<h2 id="getters-de-lessons">Getters de Lessons</h2>
+
+<p><img src="https://media.giphy.com/media/AlRP5F1t3nLry/giphy.gif" alt="" /></p>
+
+<p>Existe duas formas de você recuperar os dados do <strong>State</strong>:</p>
+
+<p><strong>1) Acessar o State diretamente</strong></p>
+
+<p>A maneira mais simples:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">this</span>.$store.states.NOME_DO_MODULO.NOME_DO_STATE;
+<span style="color: #0080ff; font-style: italic">// exemplo:</span>
+<span style="color: #2c5dcd; font-weight: bold">this</span>.$store.states.lessons.lesson; <span style="color: #0080ff; font-style: italic">// -&gt; estamos acessando nosso módulo &quot;lessons&quot; e recuperando o state &quot;lesson&quot;; neste exemplo, fica meio redundante mesmo</span>
+</pre></div>
+
+
+<p><strong>2) Usar um getter</strong></p>
+
+<p>Getters são úteis quando você precisa fazer algum tipo de manipulação no dado do <em>state</em> antes de enviá-lo.</p>
+
+<p>Um exemplo clássico seria:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> getters <span style="color: #2c5dcd">=</span> {
+  lessonsDone<span style="color: #2c5dcd">:</span> (state) =&gt; {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> state.lessons.filter(lesson =&gt; lesson.done)
+  }
+}
+</pre></div>
+
+
+<p>Ou seja, ao invés de repetirmos este filtro em todo componente que quisermos mostrar esta informação, fazemos o filtro dentro de um Getter, e quando quisermos mostrar o mesmo, acessamos apenas o getter assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">this</span>.$store.getters[<span style="color: #00cc66">&#39;lessons/lessonsDone&#39;</span>]; <span style="color: #0080ff; font-style: italic">// -&gt; nome_do_modulo/nome_do_getter</span>
+</pre></div>
+
+
+<h2 id="mutation-types-de-lessons">Mutation Types de Lessons</h2>
+
+<p>Como explicado anteriormente, para cada mutation, vamos precisar de uma constante que chamamos de mutation types para modificá-lo.</p>
+
+<p>No caso, basta adicionar estas 2 linhas no nosso <code>mutation-types.js</code> atual:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">const</span> GET_ALL_LESSONS <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;GET_ALL_LESSONS&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">const</span> GET_ONE_LESSON <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;GET_ONE_LESSON&#39;</span>
+</pre></div>
+
+
+<h2 id="mutations-de-lessons">Mutations de Lessons</h2>
+
+<p>Como explicado anteriormente, para cada dado no state, vamos precisar de um mutation para poder modificá-lo.</p>
+
+<p>Como no nosso módulo temos 2 states (<strong>lesson</strong> e <strong>lessons</strong>), teremos 2 mutations:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> <span style="color: #2c5dcd">*</span> as types from <span style="color: #00cc66">&#39;../../mutation-types&#39;</span>
+
+<span style="color: #2c5dcd; font-weight: bold">const</span> mutations <span style="color: #2c5dcd">=</span> {
+  [types.GET_ALL_LESSONS] (state, { lessons }) {
+    state.lessons <span style="color: #2c5dcd">=</span> lessons
+  },
+  [types.GET_ONE_LESSON] (state, { lesson }) {
+    state.lesson <span style="color: #2c5dcd">=</span> lesson
+  }
+}
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> mutations
+</pre></div>
+
+
+<p><strong>Pronto!</strong> Já temos Getters, Mutations e State.</p>
+
+<p>Ficou faltando as nossas queridas&hellip;</p>
+
+<h2 id="ações-de-lessons">Ações de Lessons</h2>
+
+<p>Aqui que o bixo costuma pegar. Caso você precise fazer manipulações assíncronas, este é o lugar. Em todos os outros se parte do princípio que serão manipulações síncronas.</p>
+
+<p>No nosso exemplo, nossas ações serão bem semelhantes aos mesmos métodos do nosso <strong>Service</strong>. Inclusive, é aqui que iremos importá-lo.</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> <span style="color: #2c5dcd">*</span> as types from <span style="color: #00cc66">&#39;../../mutation-types&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> LessonsService from <span style="color: #00cc66">&#39;../../../services/lessons&#39;</span>
+
+<span style="color: #2c5dcd; font-weight: bold">const</span> actions <span style="color: #2c5dcd">=</span> {
+  getAll ({ commit, state }) {
+    LessonsService.getAll().then((response) =&gt; {
+      commit(types.GET_ALL_LESSONS, {
+        lessons<span style="color: #2c5dcd">:</span> response.data
+      })
+    })
+  },
+  getOne ({ commit, state }, lesson) {
+    commit(types.GET_ONE_LESSON, lesson)
+  },
+  deleteOne ({ commit, state }, lesson) {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> LessonsService.deleteOne(lesson)
+  },
+  createOne ({ commit, state }, lesson) {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> LessonsService.createOne(lesson)
+  },
+  updateOne ({ commit, state }, lesson) {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> LessonsService.updateOne(lesson)
+  }
+}
+
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> actions
+</pre></div>
+
+
+<p>No caso do <code>getAll()</code>, por exemplo, primeiro fazemos a requisição XHR com o nosso Service.</p>
+
+<p>Somente após esta requisição, caso a mesma seja bem sucedida, efetuamos o commit de <code>GET_ALL_LESSONS</code>, indicando que recuperamos todas as aulas.</p>
+
+<p>Junto com nosso <strong>commit</strong>, enviamos no <strong>payload</strong> todas as aulas que nós queremos que apareça.</p>
+
+<p>Os outros casos como deleteOne(), createOne() e updateOne(), não precisamos efetuar commits, pois estes não afetarão diretamente nosso <strong>State</strong>. Mais a frente você entenderá o por quê.</p>
+
+<p><strong>Pronto!</strong> Toda a implementação necessária quanto a arquitetura já foi feita.</p>
+
+<p><img src="https://media.giphy.com/media/3otPon0xX7E4KWwVlC/giphy.gif" alt="" /></p>
+
+<p>Agora podemos usufruir da mesma na nossa <strong>View</strong>.</p>
+
+<h2 id="usando-o-flux-nas-views">Usando o Flux nas Views</h2>
+
+<p>Esta é a parte mais fácil e definitivamente a que você vai ver vantagens.</p>
+
+<p>Se antes a nossa View era responsável por se comunicar com a API, manipular e transferir os dados, agora ela só fará uma coisa:</p>
+
+<p><strong>Despachará ações.</strong></p>
+
+<p>Não entendeu? Eu explico. Nosso componente Index atualmente encontra-se assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> InputsCreate from <span style="color: #00cc66">&#39;./Create&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> InputsUpdate from <span style="color: #00cc66">&#39;./Update&#39;</span>
+
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
+  name<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;DashboardInputsIndex&#39;</span>,
+  data () {
+    <span style="color: #2c5dcd; font-weight: bold">return</span> {
+      resource<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">this</span>.$resource(<span style="color: #00cc66">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>),
+      lessons<span style="color: #2c5dcd">:</span> [],
+      lesson<span style="color: #2c5dcd">:</span> {}
+    }
+  },
+  methods<span style="color: #2c5dcd">:</span> {
+    initialize () {
+      <span style="color: #2c5dcd; font-weight: bold">this</span>.resource.get({}).then((response) =&gt; {
+        <span style="color: #2c5dcd; font-weight: bold">this</span>.lessons <span style="color: #2c5dcd">=</span> response.data
+      })
+    },
+    handleDelete (lesson) {
+      <span style="color: #2c5dcd; font-weight: bold">this</span>.resource.<span style="color: #2c5dcd; font-weight: bold">delete</span>({id<span style="color: #2c5dcd">:</span> lesson.id}).then((response) =&gt; {
+        <span style="color: #2c5dcd; font-weight: bold">this</span>.$emit(<span style="color: #00cc66">&#39;deleted&#39;</span>)
+      })
+    },
+    handleUpdate (lesson) {
+      <span style="color: #2c5dcd; font-weight: bold">this</span>.lesson <span style="color: #2c5dcd">=</span> lesson
+      <span style="color: #5918bb; font-weight: bold">window</span>.jQuery(<span style="color: #00cc66">&#39;#modal2&#39;</span>).modal(<span style="color: #00cc66">&#39;open&#39;</span>)
+    },
+    eventDeleted () {
+      <span style="color: #2c5dcd; font-weight: bold">this</span>.initialize()
+      <span style="color: #0080ff; font-style: italic">// notifica o usuário</span>
+      <span style="color: #2c5dcd; font-weight: bold">let</span> message <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;Aula removida!&#39;</span>
+      alert(message)
+    }
+  },
+  created () {
+    <span style="color: #2c5dcd; font-weight: bold">this</span>.initialize()
+    <span style="color: #2c5dcd; font-weight: bold">this</span>.$on(<span style="color: #00cc66">&#39;deleted&#39;</span>, () =&gt; {
+      <span style="color: #2c5dcd; font-weight: bold">this</span>.eventDeleted()
+    })
+  },
+  components<span style="color: #2c5dcd">:</span> {
+    <span style="color: #00cc66">&#39;Inputs-Create&#39;</span><span style="color: #2c5dcd">:</span> InputsCreate,
+    <span style="color: #00cc66">&#39;Inputs-Update&#39;</span><span style="color: #2c5dcd">:</span> InputsUpdate
+  }
+}
+</pre></div>
+
+
+<p>Agora, com a arquitetura Flux implementada, ele funcionará assim:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> InputsCreate from <span style="color: #00cc66">&#39;./Create&#39;</span>
+<span style="color: #2c5dcd; font-weight: bold">import</span> InputsUpdate from <span style="color: #00cc66">&#39;./Update&#39;</span>
+
+<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
+  name<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;DashboardInputsIndex&#39;</span>,
+  computed<span style="color: #2c5dcd">:</span> {
+    lessons () {
+      <span style="color: #2c5dcd; font-weight: bold">return</span> <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.getters[<span style="color: #00cc66">&#39;lessons/lessons&#39;</span>]
+    },
+    lesson () {
+      <span style="color: #2c5dcd; font-weight: bold">return</span> <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.getters[<span style="color: #00cc66">&#39;lessons/lesson&#39;</span>]
+    }
+  },
+  methods<span style="color: #2c5dcd">:</span> {
+    initialize () {
+      <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/getAll&#39;</span>)
+    },
+    handleDelete (lesson) {
+      <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/deleteOne&#39;</span>, lesson).then(() =&gt; {
+        <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/getAll&#39;</span>)
+        <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;alerts/createOne&#39;</span>, {
+          message<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;Aula removida!&#39;</span>
+        })
+      })
+    },
+    handleUpdate (lesson) {
+      <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/getOne&#39;</span>, {lesson})
+      <span style="color: #5918bb; font-weight: bold">window</span>.jQuery(<span style="color: #00cc66">&#39;#modal2&#39;</span>).modal(<span style="color: #00cc66">&#39;open&#39;</span>)
+    }
+  },
+  created () {
+    <span style="color: #2c5dcd; font-weight: bold">this</span>.initialize()
+  },
+  components<span style="color: #2c5dcd">:</span> {
+    <span style="color: #00cc66">&#39;Inputs-Create&#39;</span><span style="color: #2c5dcd">:</span> InputsCreate,
+    <span style="color: #00cc66">&#39;Inputs-Update&#39;</span><span style="color: #2c5dcd">:</span> InputsUpdate
+  }
+}
+</pre></div>
+
+
+<p>Além de termos economizado 7 linhas, o código ficou MUITO mais legível.</p>
+
+<p>Tenha como comparação nossa função <code>handleDelete()</code>:</p>
+
+<h3 id="antes">Antes</h3>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>handleDelete (lesson) {
+  <span style="color: #2c5dcd; font-weight: bold">this</span>.resource.<span style="color: #2c5dcd; font-weight: bold">delete</span>({id<span style="color: #2c5dcd">:</span> lesson.id}).then((response) =&gt; {
+    <span style="color: #2c5dcd; font-weight: bold">this</span>.$emit(<span style="color: #00cc66">&#39;deleted&#39;</span>)
+  })
+}
+
+<span style="color: #2c5dcd; font-weight: bold">this</span>.$on(<span style="color: #00cc66">&#39;deleted&#39;</span>, () =&gt; {
+  <span style="color: #2c5dcd; font-weight: bold">this</span>.eventDeleted()
+})
+
+eventDeleted () {
+  <span style="color: #2c5dcd; font-weight: bold">this</span>.initialize()
+  <span style="color: #0080ff; font-style: italic">// notifica o usuário</span>
+  <span style="color: #2c5dcd; font-weight: bold">let</span> message <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;Aula removida!&#39;</span>
+  alert(message)
+}
+</pre></div>
+
+
+<h3 id="depois">Depois</h3>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>handleDelete (lesson) {
+  <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/deleteOne&#39;</span>, lesson).then(() =&gt; {
+    <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/getAll&#39;</span>)
+    <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;alerts/createOne&#39;</span>, {
+      message<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;Aula removida!&#39;</span>
+    })
+  })
+}
+</pre></div>
+
+
+<p><img src="https://media.giphy.com/media/Unhhb0W1IaDHG/giphy.gif" alt="" /></p>
+
+<p>Mesmo sem conhecer previamente o resto do código, ao você ler o código do <strong>Depois</strong>, fica muito claro o que está acontecendo:</p>
+
+<ul>
+<li>Despacha uma ação para deletar a aula selecionada;</li>
+<li>Caso seja bem sucedida, despacha uma ação para carregar todas as aulas (para atualizá-las);</li>
+<li>Despacha uma ação para criar um novo alerta.</li>
+</ul>
+
+<p>Não precisamos mais de eventos e funções extras. Tudo acontece de forma transparente e legível.</p>
+
+<p>E o mais importante, o componente de <strong>View</strong> deixa de fazer outras coisas que vão além de sua responsabilidade, e ele faz somente a parte dele, que é <strong>Visualizar</strong>.</p>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>Este é um assunto muito polêmico, que tornou-se em alta junto com a popularidade do <a href="https://facebook.github.io/react/">React</a>.</p>
+
+<p>Eu mesmo fui aprender sobre recentemente pela necessidade de mexer em um projeto que usufrui desta arquitetura.</p>
+
+<p>Depois que aprendi, eu percebi que em outros projetos no passado, eu havia feito diversas implementações que se assemelham na lógica descrita pela pattern. Obviamente, minhas implementações eram cheias de possíveis falhas pois eu não conseguia depurar todas as situações possíveis.</p>
+
+<p>Esta é a vantagem de se utilizar um <strong>design pattern</strong>: Você resolve problemas de antemão, sem precisar vivenciá-los diretamente para saber que a maneira X ou Y deve ser evitada ou feita de outra maneira.</p>
+
+<p>Espero que este artigo ajude os mais novatos a entender este assunto tão complexo mas que depois que você absorve, percebe a beleza e simplicidade que tem por trás do mesmo.</p>
+
+<h2 id="obrigado-por-ler-até-aqui">Obrigado por ler até aqui! :-)</h2>
+
+<h4 id="referências">Referências</h4>
+
+<ul>
+<li><a href="https://vuejs.org/v2/guide/">https://vuejs.org/v2/guide/</a></li>
+<li><a href="https://vuex.vuejs.org/en/">https://vuex.vuejs.org/en/</a></li>
+<li><a href="https://facebook.github.io/flux/">https://facebook.github.io/flux/</a></li>
+</ul>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/flux"><span class="tag">Flux</span></a></li>
+        
+          <li><a href="/tags/vuex"><span class="tag">Vuex</span></a></li>
+        
+          <li><a href="/tags/vue"><span class="tag">Vue</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>226</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

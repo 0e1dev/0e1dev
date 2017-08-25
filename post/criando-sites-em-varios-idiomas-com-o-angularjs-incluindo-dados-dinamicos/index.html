@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Graças a internet, empresas que no passado dependiam do mercado local para ofertar e adquirir serviços, agora podem escalar seu empreendimento a nível global.
+Por esta exposição, se faz necessário adaptar-se ao idioma local do público alvo desejado.
+Além disto, o inglês tornou-se idioma padrão em muitos ambientes de trabalho e até mesmo no nosso lazer (jogos, quadrinhos, livros, filmes, etc).
+Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lançando uma startup*, ou até mesmo *apoiando causas sociais*, é interessante que você possa conectar-se ao máximo possível de pessoas nesta era cyber." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)" />
+    <meta name="twitter:description" content="Graças a internet, empresas que no passado dependiam do mercado local para ofertar e adquirir serviços, agora podem escalar seu empreendimento a nível global.
+Por esta exposição, se faz necessário adaptar-se ao idioma local do público alvo desejado.
+Além disto, o inglês tornou-se idioma padrão em muitos ambientes de trabalho e até mesmo no nosso lazer (jogos, quadrinhos, livros, filmes, etc).
+Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lançando uma startup*, ou até mesmo *apoiando causas sociais*, é interessante que você possa conectar-se ao máximo possível de pessoas nesta era cyber." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)</h1>
+      <p class="post-meta">@lhas · 05/08/2016 · 10 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p><img src="cover.jpg" alt="" /></p>
+
+<p>Graças a internet, <strong>empresas</strong> que no <strong>passado</strong> dependiam do <strong>mercado local</strong> para <strong>ofertar</strong> e <strong>adquirir serviços</strong>, agora podem <strong>escalar seu empreendimento</strong> a <strong>nível global</strong>.</p>
+
+<p>Por esta <strong>exposição</strong>, se faz necessário <strong>adaptar-se</strong> ao idioma local do <strong>público</strong> alvo <strong>desejado</strong>.</p>
+
+<p>Além disto, o <strong>inglês</strong> tornou-se <strong>idioma padrão</strong> em muitos ambientes de trabalho e até mesmo no nosso lazer (jogos, quadrinhos, livros, filmes, etc).</p>
+
+<p>Então se você está *abrindo uma <strong>loja</strong>*, *alugando uma <strong>sala comercial</strong>*, *lançando uma <strong>startup</strong>*, ou até mesmo *apoiando <strong>causas sociais</strong>*, é interessante que você possa conectar-se ao máximo possível de pessoas nesta era cyber.</p>
+
+<p>Existem dezenas formas de resolver este problema hoje em dia, principalmente dependendo da tecnologia que o seu site funciona por trás.</p>
+
+<p>O <a href="http://br.wordpress.org">WordPress</a> por exemplo, tem até o momento deste post <em>MIL CENTO E OITENTA (1.180)</em> plugins com o nome &ldquo;translate&rdquo;.</p>
+
+<p>Mas hoje iremos aprender como resolver esta demanda usando nosso querido <a href="http://angularjs.org">AngularJS</a>.</p>
+
+<p>Você verá como é fácil, prático e supeeer organizado deixar o seu site multi-idiomas.</p>
+
+<p><strong>Tu vai levar menos de 30 minutos para reproduzir este tutorial.</strong></p>
+
+<p>*E vai ter um <strong>resultado fantástico</strong> para o seu cliente.*</p>
+
+<p><strong>JAVASCRIPT MOTHERFUCKERS, DO YOU WRITE IT?</strong></p>
+
+<h1 id="o-cenário">O cenário</h1>
+
+<p>Nosso site atual será este aqui:</p>
+
+<p><img src="site_atual.png" alt="" /></p>
+
+<p>Você pode ter um igualzinho na sua máquina se você usar o <strong><a href="http://yeoman.io/">Yeoman</a></strong> e o generator deles <strong><a href="http://fountainjs.io/">FountainJS</a></strong>.</p>
+
+<h1 id="iniciando-o-projeto">Iniciando o projeto</h1>
+
+<p><img src="apresentacao.jpg" alt="" /></p>
+
+<pre><code class="language-bash"># Crie a pasta para o nosso projeto
+mkdir pulp-fiction/
+# Entre na pasta
+cd pulp-fiction/
+# Instale o Yeoman e o gerador que iremos usar
+# (este passo é totalmente opcional para fazermos a tradução, é só para termos um site de base mas aqui poderia ser o código fonte do seu site)
+# O Gulp também é opcional, só instale caso você não tenha ainda na sua máquina
+npm install -g yo generator-fountain-webapp gulp-cli
+# Inicializando o gerador do FountainJS
+yo fountain-webapp
+# Selecione (na ordem):
+# - Angular 1
+# - None with Bower and Script injection
+# - Pure old Javascript
+# - SASS
+# - A working landing page
+# - Angular UI Router
+</code></pre>
+
+<p>Após rodar os comandos acima, ele irá <strong>instalar</strong> as <strong>dependências</strong> listadas no <strong>package.json</strong> e depois instalar nossas <strong>dependências</strong> de <em>front-end</em> no <strong>bower.json</strong>.</p>
+
+<p>Para <strong>rodar o projeto</strong> o comando é:</p>
+
+<pre><code>gulp serve
+</code></pre>
+
+<p>Você poderar acessar o projeto em <a href="http://localhost:3000/">http://localhost:3000/</a>.</p>
+
+<p>O <em>bacana</em> do gerador que nós utilizamos, o <em>FountainJS</em>, é que além dele gerar o código usado pelo Angular no <em>padrão já sugerido pelo Google</em>, ele também vem incluso uma <strong>suíte de testes unitários e E2E</strong>.</p>
+
+<p>Pode ficar meio lento na hora de instalar mas acredite vale MUITO a pena!</p>
+
+<p>E nas próximas instalações graças ao cacheamento do NPM ela será mais rápida.</p>
+
+<h1 id="preparando-o-terreno">Preparando o terreno</h1>
+
+<p><img src="preparando.jpg" alt="" /></p>
+
+<p>Vamos colocar um <strong>Bootstrap</strong> <em>maroto</em>? <strong>Vamos</strong>. Abra um novo terminal, vá até a pasta do projeto e rode:</p>
+
+<pre><code class="language-bash"># Não se esqueça do --save, ele é importante neste processo
+bower install bootstrap-scss --save
+</code></pre>
+
+<p>A <strong>magia</strong> começa a acontecer aqui: após você instalar o <em>Bootstrap</em> na última versão com o <em>Bower</em>, o <em>FountainJS</em> deixou o <em>Gulp</em> preparado de uma forma tão mágica, que ele irá <strong>observar (watch)</strong> novas instalações no <em>bower.json</em> e irá injetar os <em>scripts principais</em> do mesmo no nosso <em>HTML</em>.</p>
+
+<p><strong>Não acredita?</strong> Olha o código fonte do nosso site agora. Você vai ver algo parecido com isso:</p>
+
+<pre><code class="language-html">&lt;!-- build:js({.tmp,src}) scripts/vendor.js --&gt;
+  &lt;!-- bower:js --&gt;
+  &lt;script src=&quot;../bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../bower_components/angular-ui-router/release/angular-ui-router.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../bower_components/bootstrap-css/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+  &lt;!-- endbower --&gt;
+  &lt;!-- endbuild --&gt;
+</code></pre>
+
+<p>Só tem um <em>probleminha</em> aqui. O nosso <em>Bootstrap</em> inclui por padrão o <em>bootstrap.min.js</em>.</p>
+
+<p>Nós não vamos usá-lo, já que ele depende do <strong>jQuery</strong> e o ideal é que nós deixemos de usá-lo.</p>
+
+<p>Não entrarei em detalhes do por que aqui, mas se você tiver iniciando um projeto com AngularJS <strong>evite o máximo possível</strong> depender de bibliotecas que precisem do <strong>jQuery</strong>.</p>
+
+<p>Você pode saber mais sobre isso neste <strong><a href="http://nomadev.com.br/largue-o-jquery-agora/">ótimo artigo do Suissa</a></strong> ou na referência dele <strong><a href="http://youmightnotneedjquery.com/">You might not need jQuery</a></strong>.</p>
+
+<p>Para removermos esse maldito bootstrap.min.js dali, vamos usar a propriedade &ldquo;overrides&rdquo; do bower.</p>
+
+<p>Para isto, edite o nosso bower.json para isto aqui:</p>
+
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;fountain-inject&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;dependencies&quot;: {
+    &quot;angular&quot;: &quot;^1.5.0&quot;,
+    &quot;angular-ui-router&quot;: &quot;^0.3.1&quot;,
+    &quot;bootstrap-css&quot;: &quot;^3.3.6&quot;
+  },
+  // Você deverá incluir este overrides aqui, exatamente embaixo do dependencies
+  &quot;overrides&quot;: {
+    &quot;bootstrap-css&quot;: {
+      &quot;main&quot;: [
+        &quot;css/bootstrap.min.css&quot;
+      ]
+    }
+  },
+  &quot;devDependencies&quot;: {
+    &quot;angular-mocks&quot;: &quot;^1.5.0&quot;
+  }
+}
+</code></pre>
+
+<p>Se você salvar esta modificação no bower.json e atualizar o código-fonte do nosso site verá que o bootstrap.min.js sumiu!</p>
+
+<pre><code class="language-html">&lt;!-- build:js({.tmp,src}) scripts/vendor.js --&gt;
+  &lt;!-- bower:js --&gt;
+  &lt;script src=&quot;../bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../bower_components/angular-ui-router/release/angular-ui-router.js&quot;&gt;&lt;/script&gt;
+  &lt;!-- endbower --&gt;
+  &lt;!-- endbuild --&gt;
+</code></pre>
+
+<p><img src="https://media.giphy.com/media/iUYwiYC4K2gF2/giphy.gif" alt="" /></p>
+
+<h1 id="adicionando-botões-para-trocar-o-idioma">Adicionando botões para trocar o idioma</h1>
+
+<p>Agora que nosso terreno já está preparado, com AngularJS e Bootstrap, vamos adicionar os botões que permitirão ao nosso usuário final que ele troque de idioma.</p>
+
+<p>Uma observação muito interessante aqui para quem não conhece muito bem como as coisas funcionam com Angular, é que se você estiver usando as rotas através do Angular (com ngRoute ou uiRouter) corretamente, quando o usuário efetuar a troca de idiomas, o site não irá recarregar por completo, somente os dados da View que envolvem o Translate sofrerão modificações. Isso é muito bacana se tratando de usabilidade, já que o usuário não perde desempenho recarregando o site só para trocar o idioma.</p>
+
+<p>Edite o arquivo src/app/header.html:</p>
+
+<p>Dentro do .header-date, vamos adicionar os botões de idioma:</p>
+
+<pre><code class="language-html">&lt;p class=&quot;header-date&quot;&gt;
+  
+  &lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;button&quot; ng-click=&quot;$ctrl.changeLanguage('pt_BR')&quot; class=&quot;btn btn-success&quot;&gt;Português (BR)&lt;/button&gt;
+    &lt;button type=&quot;button&quot; ng-click=&quot;$ctrl.changeLanguage('en_US')&quot; class=&quot;btn btn-primary&quot;&gt;English (US)&lt;/button&gt;
+    &lt;button type=&quot;button&quot; ng-click=&quot;$ctrl.changeLanguage('es_ES')&quot; class=&quot;btn btn-danger&quot;&gt;Español (ES)&lt;/button&gt;
+  &lt;/div&gt;
+  
+&lt;/p&gt;
+</code></pre>
+
+<p>Já vi menus mais bonitos, mas para um exemplo tá valendo:</p>
+
+<p><img src="Selection_001.png" alt="" /></p>
+
+<h2 id="dando-vida-a-função-changelanguage">Dando vida a função changeLanguage()</h2>
+
+<p>Como você deve ter reparado, ali em cima usamos ng-click=&ldquo;$ctrl.changeLanguage(&rsquo;<LOCALE>&rsquo;)&rdquo; nos nossos botões.</p>
+
+<p>Esta função ainda não existe, precisamos criá-la. Para isto, abra o arquivo src/app/header.js:</p>
+
+<p>Substitua o conteúdo do header.js por este:</p>
+
+<pre><code class="language-js">/* header.js */
+(function(){
+  'use strict';
+
+  angular
+    .module('app')
+    .component('fountainHeader', {
+      templateUrl: 'app/header.html',
+      controller: HeaderController
+    });
+
+    HeaderController.$inject = [];
+    function HeaderController() {
+      var vm = this;
+
+      vm.changeLanguage = changeLanguage;
+      
+      /* Esta função modifica o idioma do nosso app. */
+      function changeLanguage(locale) {
+        alert('Você selecionou o idioma: ' + locale);
+      }
+    }
+})();
+</code></pre>
+
+<p><img src="Selection_002.png" alt="" /></p>
+
+<p>O <em>principal</em> está entre a <strong>linha 16 e 21</strong>. Ainda não mudamos o idioma, mas já conseguimos <strong>identificar</strong> qual o <strong>idioma</strong> que o <strong>usuário deseja carregar</strong>.</p>
+
+<h1 id="instalando-o-angular-translate">Instalando o angular-translate</h1>
+
+<p>Esta é a biblioteca que iremos utilizar para facilitar a nossa vida.</p>
+
+<p>Para instalá-la rode:</p>
+
+<pre><code class="language-bash">bower install angular-translate --save
+</code></pre>
+
+<p>Agora adicione o módulo dele como dependência do nosso app.</p>
+
+<p>Para isto, edite o src/index.js e deixe assim:</p>
+
+<pre><code class="language-js">angular
+  .module('app', ['ui.router', 'pascalprecht.translate']);
+</code></pre>
+
+<h2 id="configurando-o-angular-translate">Configurando o angular-translate</h2>
+
+<p>Precisamos efetuar algumas configurações como:
+- Indicar o idioma padrão (preferido);
+- Carregar as traduções de cada idioma;
+- Adaptar as strings do conteúdo do nosso site para serem mutáveis ao idioma selecionado;</p>
+
+<p><img src="https://media.giphy.com/media/Ua48yqUY0x5uM/giphy.gif" alt="" /></p>
+
+<p>Vamos configurar os dois primeiros itens primeiro.</p>
+
+<p>Para isto, vamos usar novamente o arquivo src/index.js.</p>
+
+<p>Coloque no final do conteúdo deste arquivo o seguinte:</p>
+
+<pre><code class="language-js">/* Configuração do angular-translate */
+angular
+  .module('app')
+  .config(translateConfig);
+  
+  translateConfig.$inject = ['$translateProvider'];
+
+  function translateConfig($translateProvider) {
+    // Carregamos as traduções de cada idioma
+
+    // English (US)
+    $translateProvider.translations('en_US', {
+      'allo_allo': 'Hello, hello!',
+      'always_a_pleasure': 'Its always a pleasure to watch Pulp Fiction.'
+    });
+
+    // Português (BR)
+    $translateProvider.translations('pt_BR', {
+      'allo_allo': 'Olá, olá!',
+      'always_a_pleasure': 'É sempre um prazer assistir a Pulp Fiction.'
+    });
+
+    // Español (ES)
+    $translateProvider.translations('en_ES', {
+      'allo_allo': 'Hola, hola!',
+      'always_a_pleasure': 'Mi gusta churritos. :-)'
+    });
+    
+    // Definimos o idioma padrão
+    $translateProvider.preferredLanguage('pt_BR');
+
+    // Se você preferir que o idioma padrão seja detectado pelo idioma do browser
+    // use as linhas abaixo:
+    //
+    // $translateProvider
+    //  .uniformLanguageTag()
+    //  .determinePreferredLanguage();
+  }
+</code></pre>
+
+<p><img src="https://media.giphy.com/media/e5BASCeekXYoo/giphy.gif" alt="" /></p>
+
+<h1 id="configurando-o-conteúdo-do-nosso-site">Configurando o conteúdo do nosso site</h1>
+
+<p>Precisamos adaptá-lo para que ele possa interpretar as traduções definidas pela gente.</p>
+
+<p>Para isto, abra o arquivo <strong>src/app/title.html</strong> e deixe da seguinte forma:</p>
+
+<pre><code class="language-html">&lt;div class=&quot;title&quot;&gt;
+  &lt;h1 class=&quot;title-h1&quot;&gt;{{'allo_allo' | translate}}&lt;/h1&gt;
+  &lt;div&gt;
+    &lt;img class=&quot;title-logo&quot; src=&quot;http://fountainjs.io/assets/imgs/yeoman.png&quot;/&gt;
+    &lt;img class=&quot;title-logo&quot; src=&quot;http://fountainjs.io/assets/imgs/fountain.png&quot;/&gt;
+  &lt;/div&gt;
+  &lt;h2 class=&quot;title-h2&quot;&gt;{{'always_a_pleasure' | translate}}&lt;/h2&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>No caso, a sintaxe necessária para traduzirmos é esta:</p>
+
+<pre><code class="language-html">  {{'identificador_aqui' | translate}}
+
+</code></pre>
+
+<p><strong>&lsquo;identificador_aqui&rsquo;</strong>: é o nome que nós demos no src/index.js para cada tradução. É uma espécie de chave primária.</p>
+
+<p><strong>translate</strong>: é uma diretiva que nos é disponibilizada através do angular-translate. Por ser uma diretiva carregada por ele, você pode usá-la onde quiser, mesmo fora do escopo de um controller.</p>
+
+<p>As <strong>chaves { { } }</strong> significam que nós queremos dar um &ldquo;output&rdquo; na informação retornada pela expressão que nós definimos.</p>
+
+<p><img src="https://media.giphy.com/media/CRNx7WgCoZfAQ/giphy.gif" alt="" /></p>
+
+<h2 id="perfeito">Perfeito!</h2>
+
+<p>A nossa tradução já está funcionando. Se você abrir o site agora, verá que o conteúdo carrega no idioma padrão:</p>
+
+<p><img src="Selection_003.png" alt="" /></p>
+
+<p>Só que falta uma coisa. Se você clicar nos botões de idiomas, eles ainda não serão trocados.</p>
+
+<p>Para fazermos eles funcionarem é muito simples:</p>
+
+<h1 id="fazendo-os-botões-de-tradução-traduzirem">Fazendo os botões de tradução traduzirem</h1>
+
+<p>Edite novamente o arquivo src/app/header.js:</p>
+
+<pre><code class="language-js">// Antigo
+    HeaderController.$inject = [];
+    function HeaderController() { }
+// Novo
+    HeaderController.$inject = ['$translate', '$state'];
+    function HeaderController($translate, $state) { }
+</code></pre>
+
+<p>No caso injetamos 2 Services:</p>
+
+<p><strong>$translate</strong>: Service oriundo do angular-translate. Ele que irá nos ajudar a efetuar a troca de idioma.</p>
+
+<p><strong>$state</strong>: Service oriundo do ui-router. No caso do ngRoute é outro nome mas a ideia é a mesma. Ele que irá nos ajudar a atualizar a rota atual (sem atualizar todo o browser, só recarregando o template).</p>
+
+<p>Agora vamos editar a função changeLanguage() para fazer a mágica explicada acima.</p>
+
+<p>Ela ficará assim:</p>
+
+<pre><code class="language-js">
+/* Esta função modifica o idioma do nosso app. */
+function changeLanguage(locale) {
+  /* Define o novo idioma atual */
+  $translate.use(locale);
+
+  /* Recarrega o template (sem recarregar o browser) */
+  $state.reload();
+}
+</code></pre>
+
+<h1 id="pronto-de-verdade">Pronto (de verdade)!</h1>
+
+<p><img src="https://media.giphy.com/media/fKBh0mt02CypW/giphy.gif" alt="" /></p>
+
+<p>Viu como é fácil fazer um site multi-idiomas com Angular1?</p>
+
+<p>Você deve estar agora se perguntando algumas coisas como:</p>
+
+<ul>
+<li>Como deixar as URLs dinâmicas</li>
+<li>Como fazer com que o site carregue o idioma padrão do sistema operacional</li>
+<li>Como definir as traduções em um arquivo externo ao invés do js</li>
+<li>Como fazer com que o site armazene o ultimo idioma selecionado para futuras visitas</li>
+</ul>
+
+<p>Eu explicaria todas elas aqui, mas o artigo ficaria mais longo do que já está.</p>
+
+<p>Então vou deixar links que podem ser úteis para você descobrir estas respostas você mesmo:</p>
+
+<h1 id="referências">Referências</h1>
+
+<p>Armazenar último idioma: <a href="https://angular-translate.github.io/docs/#/guide/10_storages">https://angular-translate.github.io/docs/#/guide/10_storages</a>
+Arquivos de tradução em JSON externo: <a href="https://angular-translate.github.io/docs/#/guide/12_asynchronous-loading">https://angular-translate.github.io/docs/#/guide/12_asynchronous-loading</a>
+URLs dinâmicas: <a href="http://stackoverflow.com/questions/24281652/localize-urls-with-ui-router-and-angular-translate">http://stackoverflow.com/questions/24281652/localize-urls-with-ui-router-and-angular-translate</a></p>
+
+<p>Para carregar o idioma padrão eu fiz um comentário no código do index.js, basta lê-lo com calma.</p>
+
+<p>Site oficial do angular-translate: <a href="https://angular-translate.github.io/">https://angular-translate.github.io/</a>
+Documentação oficial: <a href="https://angular-translate.github.io/docs/#/guide/02_getting-started">https://angular-translate.github.io/docs/#/guide/02_getting-started</a>
+Outro tutorial gringo com abordagem diferente: <a href="https://scotch.io/tutorials/internationalization-of-angularjs-applications">https://scotch.io/tutorials/internationalization-of-angularjs-applications</a></p>
+
+<p><img src="https://media.giphy.com/media/kbyqTFFUh07NS/giphy.gif" alt="" /></p>
+
+<h1 id="dica-de-última-hora">Dica de última hora</h1>
+
+<p>Até então tratamos de dados estáticos. Mas e os dados dinâmicos?</p>
+
+<p>Vamos supor que no nosso blog, ao cadastrar um post o usuário possa definir o idioma do mesmo.</p>
+
+<p>Se tratando de base de dados seria algo como:</p>
+
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;integer&quot;,
+  &quot;title&quot;: &quot;string&quot;,
+  &quot;content&quot;: &quot;text&quot;,
+  &quot;language&quot;: {
+    &quot;type&quot;: &quot;enum&quot;,
+    &quot;values&quot;: [&quot;en_US&quot;, &quot;es_ES&quot;, &quot;pt_BR&quot;]
+}
+</code></pre>
+
+<p>Supomos que já tenhamos um PostService que busque estes dados na nossa API:</p>
+
+<pre><code class="language-js">(function() {
+  'use strict';
+
+  angular
+    .module('app')
+    .service('PostService', PostService);
+
+    PostService.$inject = ['$http'];
+    function PostService($http) {
+      var service = {
+        getAll: getAll,
+        getOne: getOne
+      };
+
+      return service;
+
+      function getAll() {
+        return $http.get('http://localhost:4000/api/post/');
+      }
+
+      function getOne(id) {
+        return $http.get('http://localhost:4000/api/post/' + id);
+      }
+    }
+})();
+</code></pre>
+
+<p>A gente só precisaria adaptar uma coisa nas nossas requições $http:</p>
+
+<pre><code class="language-js">      function getAll() {
+        return $http.get('http://localhost:4000/api/post/', {
+          params: {
+            language: $translate.proposedLanguage()
+          }
+        });
+      }
+
+      function getOne(id) {
+        return $http.get('http://localhost:4000/api/post/' + id, {
+          params: {
+            language: $translate.proposedLanguage()
+          }
+        });
+      }
+</code></pre>
+
+<p>Não se esquecendo de injetar o service $translate no nosso PostService:</p>
+
+<pre><code class="language-js">  PostService.$inject = ['$http', '$translate'];
+  function PostService($http, $translate) { }
+</code></pre>
+
+<p>Esta função <strong>$translate.proposedLanguage()</strong> retorna o idioma atual.</p>
+
+<p>Daí é só você através da sua API adaptar como você achar mais prático para a informação retornada ser correta.</p>
+
+<p>Você receberá esta variável &ldquo;language&rdquo; como querystring (parâmetro GET) na API.</p>
+
+<h1 id="notou-algo-escrito-errado">Notou algo escrito errado?</h1>
+
+<p>Por favor, não deixe de me informar, seja aqui no blog, no Facebook, ou no meu e-mail pessoal luizhrqas@gmail.com.</p>
+
+<h1 id="código-fonte">Código-fonte</h1>
+
+<p>Todo o código fonte trabalhado aqui está disponível no GitHub: <a href="https://github.com/lhas/pulp-fiction-angular-translate-sample">clique aqui</a>.</p>
+
+<p>Você também pode ver a aplicação funcionando aqui: <a href="http://0e1dev.com/samples/pulp-fiction-angular-translate-sample/">clique aqui</a>.</p>
+
+<p>Observação: a aplicação foi gerada usando <code>gulp dist</code> do FountainJS. Tudo comprimido e perfeitamente bem acabado para o ambiente de produção! :-)</p>
+
+<p>Muuuuuuuuuuito obrigado se você leu até aqui. :-D</p>
+
+<p><img src="https://media.giphy.com/media/R9ewQ8bnxOUjC/giphy.gif" alt="" /></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/i18n"><span class="tag">I18n</span></a></li>
+        
+          <li><a href="/tags/multi-idiomas"><span class="tag">Multi-Idiomas</span></a></li>
+        
+          <li><a href="/tags/internacionaliza%C3%A7%C3%A3o"><span class="tag">Internacionalização</span></a></li>
+        
+          <li><a href="/tags/angularjs"><span class="tag">Angularjs</span></a></li>
+        
+          <li><a href="/tags/api"><span class="tag">Api</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>384</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

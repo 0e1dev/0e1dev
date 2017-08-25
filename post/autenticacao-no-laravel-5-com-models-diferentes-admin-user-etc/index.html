@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Autenticação no Laravel 5 com models diferentes (Admin/User/etc)</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Passei recentemente por um problema que eu tinha certeza que era simples de se resolver mas nenhuma informação que eu encontrei na internet disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documentação oficial do Laravel.
+Então resolvi escrever sobre.
+O cenário Temos uma aplicação em Laravel 5 onde ela serve como Gerenciador de Conteúdo (CMS) e API (WebService) para a parte do front-end.
+Se tratando de rotas, seria:" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Autenticação no Laravel 5 com models diferentes (Admin/User/etc)" />
+    <meta name="twitter:description" content="Passei recentemente por um problema que eu tinha certeza que era simples de se resolver mas nenhuma informação que eu encontrei na internet disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documentação oficial do Laravel.
+Então resolvi escrever sobre.
+O cenário Temos uma aplicação em Laravel 5 onde ela serve como Gerenciador de Conteúdo (CMS) e API (WebService) para a parte do front-end.
+Se tratando de rotas, seria:" />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Autenticação no Laravel 5 com models diferentes (Admin/User/etc)</h1>
+      <p class="post-meta">@lhas · 04/08/2016 · 4 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Passei recentemente por um problema que eu tinha certeza que era simples de se resolver mas nenhuma informação que eu encontrei na internet
+disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documentação oficial do Laravel.</p>
+
+<p>Então resolvi escrever sobre.</p>
+
+<h1 id="o-cenário">O cenário</h1>
+
+<p>Temos uma aplicação em Laravel 5 onde ela serve como <strong>Gerenciador de Conteúdo (CMS)</strong> e <strong>API (WebService)</strong> para a parte do front-end.</p>
+
+<p>Se tratando de rotas, seria:</p>
+
+<pre><code>/admin/
+/admin/post
+/admin/post/&lt;id&gt;/comment
+
+/api/
+/api/post
+/api/post/&lt;id&gt;comment
+</code></pre>
+
+<h1 id="primeiros-passos">Primeiros passos</h1>
+
+<p>Você já rodou este comando abaixo na sua app? Se não, faça-o:</p>
+
+<pre><code>php artisan make:auth
+</code></pre>
+
+<p>Este comando irá gerar rotas, views e controllers para a autenticação.</p>
+
+<h1 id="configurando-a-autenticação">Configurando a autenticação</h1>
+
+<p>Abra o <strong>config/auth.app</strong>. Vamos trabalhar aqui em 2 índices: <strong>&lsquo;guards&rsquo;</strong> e <strong>&lsquo;providers&rsquo;</strong>.</p>
+
+<p>Em <strong>&lsquo;guards&rsquo;</strong> vamos deixar assim:</p>
+
+<pre><code class="language-php">// Antigo
+'guards' =&gt; [
+    'web' =&gt; [
+        'driver' =&gt; 'session',
+        'provider' =&gt; 'users',
+    ],
+    'api' =&gt; [
+        'driver' =&gt; 'token',
+        'provider' =&gt; 'users',
+    ],
+],
+// Novo
+'guards' =&gt; [
+    'web' =&gt; [
+        'driver' =&gt; 'session',
+        'provider' =&gt; 'users',
+    ],
+    'admin' =&gt; [
+        'driver' =&gt; 'session',
+        'provider' =&gt; 'admins',
+    ],
+    'api' =&gt; [
+        'driver' =&gt; 'token',
+        'provider' =&gt; 'users',
+    ],
+],
+</code></pre>
+
+<p>Em <strong>&lsquo;providers&rsquo;</strong> vamos deixar assim:</p>
+
+<pre><code class="language-php">// Antigo
+'providers' =&gt; [
+    'users' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model' =&gt; App\User::class,
+    ],
+],
+// Novo
+'providers' =&gt; [
+    'admins' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model' =&gt; App\Admin::class,
+    ],
+    'users' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model' =&gt; App\User::class,
+    ],
+],
+</code></pre>
+
+<p>No caso, apesar de termos um guard para API feita já pelo Laravel, não vamos usá-la.</p>
+
+<p>Ela já vem com uma pré-configuração onde se faz necessário uma coluna &ldquo;api_token&rdquo; na tabela do model a ser autenticado.</p>
+
+<p>É uma implementação fora do padrão do <strong>JWT</strong> por exemplo.</p>
+
+<p>Então criamos um novo guard chamado admin (e consequentemente um novo provider para servir ao nosso model de Admin), que será usado pelas rotas do admin e a API usará o guard padrão que é o web.</p>
+
+<h1 id="adaptando-os-controllers">Adaptando os controllers</h1>
+
+<p>Após fazer os passos acima, vamos mexer nos controllers.</p>
+
+<p>Abra o controller <strong>AuthController.php</strong> que o artisan gerou para nós no primeiro passo.</p>
+
+<p>Ele se encontra em <strong>app/Http/Controllers/Auth/AuthController.php</strong>.</p>
+
+<p>Aqui iremos indicar qual deve ser o guard usado por esta autenticação.</p>
+
+<p>Aproximadamente na linha 31, embaixo do $redirectTo, vamos definir o guard.</p>
+
+<pre><code class="language-php">    protected $redirectTo = '/';
+
+    // Aqui nossa nova linha
+    protected $guard = 'admin';
+</code></pre>
+
+<p><strong>(Opcional)</strong> Se você for usar a página de registro, deve alterar o model de User para Admin no método create() também:</p>
+
+<pre><code class="language-php">    protected function create(array $data)
+    {
+        return Admin::create([
+            'name' =&gt; $data['name'],
+            'email' =&gt; $data['email'],
+            'password' =&gt; bcrypt($data['password']),
+        ]);
+    }
+</code></pre>
+
+<p>Agora, temos que indicar ao middleware do Auth, que queremos usar o nosso guard admin.</p>
+
+<p>Para isto, vamos editar 2 controllers:</p>
+
+<p><strong>HomeController.php</strong> - gerado pelo nosso primeiro comando.
+<strong>AdminController.php</strong> - Este por padrão não existe, mas recomendo que você crie e use-o como classe pai para as suas páginas do Admin. Assim ele vai herdar os middlewares que nós configurarmos.</p>
+
+<p><strong>app/Http/Controllers/HomeController.php:</strong></p>
+
+<pre><code class="language-php">// Antigo
+public function __construct()
+{
+    $this-&gt;middleware('auth');
+}
+// Novo
+public function __construct()
+{
+    $this-&gt;middleware('auth:admin');
+}
+</code></pre>
+
+<p><strong>app/Http/Controllers/Admin/AdminController.php:</strong></p>
+
+<pre><code class="language-php">// Antigo
+public function __construct()
+{
+    $this-&gt;middleware('auth');
+}
+// Novo
+public function __construct()
+{
+    $this-&gt;middleware('auth:admin');
+}
+</code></pre>
+
+<h1 id="corrigindo-as-views-do-admin">Corrigindo as views do admin</h1>
+
+<p>Se você abrir o layout que é gerado pelo Artisan, verá algumas linhas fazendo referência ao Auth desta forma:</p>
+
+<pre><code class="language-php">@if (Auth::guest())
+@endif
+</code></pre>
+
+<p>Neste caso, você deverá trocar para o seguinte:</p>
+
+<pre><code class="language-php">@if (Auth::guard('admin')-&gt;guest())
+@endif
+</code></pre>
+
+<p>Isso significa que ele vai analisar se há alguma sessão especificamente no guard de admin.</p>
+
+<p>PRONTO!</p>
+
+<h2 id="conclusão">Conclusão</h2>
+
+<p>Se você tentar abrir a página de login do seu administrador agora e tentar efetuar o login, vai ver que ele vai verificar a tabela de Admins.</p>
+
+<p>Se a sua API estiver configurada corretamente e você tentar requisitar algum endpoint protegido, ele usará por padrão o guard &lsquo;web&rsquo;, que no caso vai acionar a tabela de Users.</p>
+
+<p>Espero que gostem. Eu quebrei a cabeça com este assunto, encontrei diversas soluções na internet, mas que envolviam geração de middlewares customizados, etc.</p>
+
+<p>Coisas que eu acredito não serem necessárias já que o Laravel tem um bom suporte a camada de Autenticação por padrão, bastamos apenas nós extendermos ela.</p>
+
+<h2 id="referências">Referências</h2>
+
+<p>Posts que eu li que me ajudaram a abstrair esta ideia:
+- <a href="https://scotch.io/tutorials/role-based-authentication-in-laravel-with-jwt">https://scotch.io/tutorials/role-based-authentication-in-laravel-with-jwt</a>
+- <a href="http://imrealashu.in/code/laravel/multi-auth-with-laravel-5-2-2/">http://imrealashu.in/code/laravel/multi-auth-with-laravel-5-2-2/</a>
+- <a href="https://laravel.com/docs/5.2/authentication">https://laravel.com/docs/5.2/authentication</a></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/autentica%C3%A7%C3%A3o"><span class="tag">Autenticação</span></a></li>
+        
+          <li><a href="/tags/laravel"><span class="tag">Laravel</span></a></li>
+        
+          <li><a href="/tags/admin"><span class="tag">Admin</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>385</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

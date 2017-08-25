@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Pagamentos Recorrentes com PayPal: Guia Completo! (em PHP)</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Faz um tempo que não escrevo por aqui. Hoje resolvi escrever a respeito de um assunto que tirou o meu sono durante algumas noites.
+O motivo é simples. &amp;ldquo;PayPal is a mess.&amp;rdquo; disse um comentário perdido de 2014 no blog deles. E é uma bagunça mesmo.
+Só quem já precisou trabalhar com este gateway sabe como a documentação deles é estranha.
+Atualmente, o PayPal tem 2 métodos de integração: (a) Clássico ou (b) REST API." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Pagamentos Recorrentes com PayPal: Guia Completo! (em PHP)" />
+    <meta name="twitter:description" content="Faz um tempo que não escrevo por aqui. Hoje resolvi escrever a respeito de um assunto que tirou o meu sono durante algumas noites.
+O motivo é simples. &amp;ldquo;PayPal is a mess.&amp;rdquo; disse um comentário perdido de 2014 no blog deles. E é uma bagunça mesmo.
+Só quem já precisou trabalhar com este gateway sabe como a documentação deles é estranha.
+Atualmente, o PayPal tem 2 métodos de integração: (a) Clássico ou (b) REST API." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/img/avatar.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Pagamentos Recorrentes com PayPal: Guia Completo! (em PHP)</h1>
+      <p class="post-meta">@lhas · 21/11/2016 · 13 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p><img src="never-give-up_o_1608723.jpg" alt="" /></p>
+
+<p>Faz um tempo que não escrevo por aqui. Hoje resolvi escrever a respeito de um assunto que tirou o meu sono durante algumas noites.</p>
+
+<p>O motivo é simples. <em>&ldquo;PayPal is a mess.&rdquo;</em> disse um comentário perdido de 2014 no blog deles. E é uma bagunça mesmo.</p>
+
+<p>Só quem já precisou trabalhar com este gateway sabe como a documentação deles é estranha.</p>
+
+<p>Atualmente, o PayPal tem 2 métodos de integração: <strong>(a) Clássico</strong> ou <strong>(b) REST API</strong>.</p>
+
+<p>Nós iremos abordar aqui o segundo método, através da REST API deles.</p>
+
+<p><strong>Por que a REST e não a Clássica?</strong>
+R: A Clássica é uma bosta para configurarmos o retorno automático, para fazer as coisas funcionarem você não tem uma biblioteca padrão suportada pelo PayPal e a qualquer momento este método será abandonado.</p>
+
+<p>Para quem já fez integração com eles alguma vez, sabe que existe o Express Checkout, o IPN (Instant Payment Notification), entre outros.</p>
+
+<p>Então, não usaremos nada disto, hehe. &gt;:)</p>
+
+<p>Tópicos do nosso papo de hoje:</p>
+
+<ul>
+<li>** ** (estamos aqui)</li>
+<li><strong>Tokens de Acesso</strong> (OAuth)</li>
+<li><strong>Instalando SDK</strong> (Composer)</li>
+<li><strong>Definindo nossos modelos de cobrança</strong> (Billing Plans)</li>
+<li><strong>Criando um acordo para nosso usuário</strong> (Billing Agreements)</li>
+<li><strong>Notificações Automáticas</strong> (Webhooks)</li>
+<li><strong>Saindo de Sandbox para o mundo</strong> (Environments)</li>
+</ul>
+
+<p>&ldquo;<em>Talk is cheap, show me the code!</em>&ldquo;</p>
+
+<p>Antes de qualquer coisa, iremos precisar de&hellip;</p>
+
+<h1 id="tokens-de-acesso">Tokens de Acesso</h1>
+
+<p><img src="oauth.jpg" alt="" /></p>
+
+<p>1) Acesse <a href="https://developer.paypal.com/">https://developer.paypal.com/</a>
+2) Faça Login, depois clique em <a href="https://developer.paypal.com/developer/applications/">Dashboard</a>
+3) Em <em>&ldquo;REST API apps&rdquo;</em>, clique em <strong>Create App</strong></p>
+
+<p><img src="0.png" alt="" /></p>
+
+<p>4) Insira um nome em <em>App Name</em>, guarde o <em>Sandbox developer account</em>. Clique em <em>Create App</em>.</p>
+
+<p><img src="1.jpg" alt="" />
+<img src="2.png" alt="" /></p>
+
+<p>5) Guarde o <strong>Client ID</strong> e  o <strong>Secret</strong>. Precisa clicar em <em>Show</em> para ver o Secret Key.</p>
+
+<p>Com nosso token em mãos, vamos seguir para o próximo tópico&hellip;</p>
+
+<h1 id="instalando-sdk">Instalando SDK</h1>
+
+<p>Para este tópico, iremos trabalhar com o <a href="https://getcomposer.org/">Composer</a>. Tem como instalar sem ele, mas se você ainda não usa o Composer em pleno 2016, desista agora da nossa carreira.</p>
+
+<p><img src="3.png" alt="" /></p>
+
+<p><strong>1)</strong> Crie uma pasta para nosso projeto;</p>
+
+<p><code>mkdir pagamentos-recorrentes-com-paypal</code></p>
+
+<p><strong>2)</strong> Dentro desta pasta, inicialize o repositório Git;</p>
+
+<p><code>git init</code></p>
+
+<p><strong>3)</strong> Agora, inicialize o Composer;</p>
+
+<p><code>composer init</code></p>
+
+<p><strong>3.1)</strong> Confirme as informações apertando enter, quando ele perguntar a respeito das Dependências responda &ldquo;no&rdquo; para tudo.</p>
+
+<p><strong>4)</strong> Agora, vamos adicionar a SDK do PayPal como dependência:</p>
+
+<p><code>composer require &quot;paypal/rest-api-sdk-php:*&quot;</code></p>
+
+<p>Esta etapa pode demorar alguns minutos.</p>
+
+<p><img src="4.png" alt="" /></p>
+
+<p>Agora que temos a faca e o queijo na mão, vamos programar de verdade.</p>
+
+<p>Vamos fazer da maneira mais lúdica possível, pelo bem da simplicidade.</p>
+
+<p>Crie um arquivo chamado <code>checkout.php</code>.</p>
+
+<p>Agora, vamos chamar as dependências administradas pelo Composer:</p>
+
+<pre><code class="language-php">&lt;?php
+require_once __DIR__  . '/vendor/autoload.php';
+</code></pre>
+
+<p>Vamos inserir nosso token de acesso:</p>
+
+<pre><code class="language-php">// Lembrando de substituir o Client ID e o Client Secret abaixo
+$apiContext = new \PayPal\Rest\ApiContext(
+    new \PayPal\Auth\OAuthTokenCredential(
+        'AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS',     // ClientID
+        'EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL'      // ClientSecret
+    )
+);
+</code></pre>
+
+<p>Lembre-se de substituir as duas chaves acima com o <strong>Client ID</strong> e <strong>Secret Key</strong> que nós pegamos no segundo tópico, <strong>Tokens de Acesso</strong>.</p>
+
+<p>Pronto! Nós já estamos nos conectando com a API do PayPal. O token só será validado ao executar alguma requisição mas a príncipio já estamos com parte do caminho andado.</p>
+
+<p>Vamos para a próxima etapa que é&hellip;</p>
+
+<h1 id="definindo-nossos-modelos-de-cobrança">Definindo nossos modelos de cobrança</h1>
+
+<p>Antes de começarmos este tópico, gostaria de fazer uma explicação bem objetiva de como funciona esta arquitetura que iremos trabalhar.</p>
+
+<p><img src="diagrama.png" alt="" /></p>
+
+<p>Não tem muito mistério:</p>
+
+<p>1) Acessamos a API com tokens adquiridos pelo OAuth;
+2) Criamos um Billing Plan caso ainda não tenha criado(plano de cobrança), que descreve coisas como preço, periodicidade (diário, semanal, mensal), duração do ciclo (durante 6 meses, 12 meses, infinito);
+3) Criamos um Billing Agreement e relacionamos ele com nosso usuário;
+4) Redirecionamos usuário para o Paypal, onde ele efetuará o pagamento;
+5) Nosso sistema será notificado sobre atrazualições através dos Webhooks (se o pagamento foi aprovado, recusado, cancelado, etc);</p>
+
+<p>Voltando ao código, após importarmos as nossas dependências do Composer, vamos precisar importar explícitamente as classes que iremos trabalhar.</p>
+
+<p>Para isto, basta:</p>
+
+<pre><code class="language-php">
+use PayPal\Api\ChargeModel;
+use PayPal\Api\Currency;
+use PayPal\Api\MerchantPreferences;
+use PayPal\Api\PaymentDefinition;
+use PayPal\Api\Patch;
+use PayPal\Api\PatchRequest;
+use PayPal\Api\Plan;
+use PayPal\Common\PayPalModel;
+</code></pre>
+
+<p>Vamos criar uma função que gere o plano:</p>
+
+<pre><code class="language-php">function createPlan($apiContext, $name, $description, $frequency, $frequencyInterval, $cycles, $amountValue, $amountCurrency) {
+    
+}
+</code></pre>
+
+<p>Nossos parâmetros nesta função são:</p>
+
+<ul>
+<li><strong>$apiContext:</strong> Passa nossa conexão com a API;</li>
+<li><strong>$name:</strong> Definirá o nome do nosso plano;</li>
+<li><strong>$description:</strong> Resumo rápido que irá aparecer na tela de Checkout do Paypal;</li>
+<li><strong>$frequency:</strong> Frequencia do plano: Mensal, semanal, diária, etc;</li>
+<li><strong>$frequencyInterval:</strong> Intervalo da frequencia: a cada 1 mes, a cada 1 semana, a cada 1 dia, etc;</li>
+<li><strong>$amountValue:</strong> Valor total que será cobrado no plano</li>
+<li><strong>$amountCurrency:</strong> Moeda que será usada no valor total do plano</li>
+</ul>
+
+<p>PS: Uma boa prática de programação é não exceder 4 parâmetros em um método. Como é apenas um tutorial, botamos mais, mas o ideal aqui seria usar um array com as configurações extras.</p>
+
+<p>Com os nossos parâmetros, vamos efetuar o código necessário para criar um plano:</p>
+
+<pre><code class="language-php">function createPlan($apiContext, $name, $description, $frequency, $frequencyInterval, $cycles, $amountValue, $amountCurrency) {
+  // Definições de pagamento
+  $paymentDefinition = new PaymentDefinition();
+
+  $paymentDefinition-&gt;setName('Regular Payments')
+    -&gt;setType('REGULAR')
+    -&gt;setFrequency($frequency)
+    -&gt;setFrequencyInterval($frequencyInterval)
+    -&gt;setCycles($cycles)
+    -&gt;setAmount(new Currency(array('value' =&gt; $amountValue, 'currency' =&gt; $amountCurrency)));
+
+  // Definições do plano
+  $plan = new Plan();
+
+  $plan-&gt;setName($name)
+    -&gt;setDescription($description)
+    -&gt;setType('fixed');
+
+  // Relaciona plano com definições de pagamento
+  $plan-&gt;setPaymentDefinitions(array($paymentDefinition));
+
+  // Define algumas configurações de vendedor
+  $plan = setMerchantPreferences($plan, 'http://localhost/pagamentos-recorrentes-com-paypal');
+
+  // Retorna o objeto do plano
+  return $plan;
+}
+</code></pre>
+
+<p>Na linha 23, rodamos uma outra função chamada <code>setMerchantPreferences()</code>. Nós ainda não criamos ela. Vamos criá-la agora:</p>
+
+<pre><code class="language-php">function setMerchantPreferences($plan, $baseUrl, $returnUrl = '/ExecuteAgreement.php?success=true', $cancelUrl = '/ExecuteAgreement.php?success=false') {
+  $merchantPreferences = new MerchantPreferences();
+
+  $merchantPreferences-&gt;setReturnUrl($baseUrl . $returnUrl)
+    -&gt;setCancelUrl($baseUrl . $cancelUrl)
+    -&gt;setAutoBillAmount(&quot;yes&quot;)
+    -&gt;setInitialFailAmountAction(&quot;CONTINUE&quot;)
+    -&gt;setMaxFailAttempts(&quot;0&quot;);
+
+  $plan-&gt;setMerchantPreferences($merchantPreferences);
+
+  return $plan;
+}
+</code></pre>
+
+<p><img src="5.png" alt="" /></p>
+
+<p>Pronto! Para nós criarmos nosso plano, precisamos das seguintes etapas:</p>
+
+<p>1) Criar um objeto <strong>PaymentDefinition</strong>;
+2) Configurar o <strong>PaymentDefinition</strong> com preço, duração, ciclo, etc;
+3) Criar um objeto <strong>Plan</strong>;
+4) Configurar o <strong>Plan</strong>;
+5) Relacionar o <strong>Plan</strong> com o <strong>PaymentDefinition</strong>;
+6) Definir as <strong>MerchantPreferences</strong> (URL de retorno com sucesso/falha) do plano.</p>
+
+<p>Agora que já conseguimos criar planos, vamos criar um chamado <strong>User Premium Plan</strong>, que será usado para transformar nossos simples usuários em usuários PREMIUM!</p>
+
+<pre><code class="language-php">// Criamos um plano chamado &quot;User Premium Plan&quot;.
+// Este plano será cobrado a cada 1 ($frequencyInterval) mês ($frequency) durante 12 meses ($cycles)
+// com um preço de R$ 50 ($amountCurrency e $amountValue).
+$userPremiumPlan = createPlan($apiContext, 'User Premium Plan', 'A premium plan for our users on 0e1dev.com', 'Month', '1', '12', 50, 'BRL');
+</code></pre>
+
+<p>Após nós criarmos nosso plano, vamos precisar ativá-lo. É uma burocracia idiota do PayPal, afinal, o plano já poderia vir ativado, não? Whatever, sou apenas um programador cheio de incertezas, provavelmente tem um motivo para ser assim (?).</p>
+
+<p><img src="https://media.giphy.com/media/FFb9yZK6t0oDu/giphy.gif" alt="" /></p>
+
+<h1 id="ativando-o-plano">Ativando o plano</h1>
+
+<p>Nossa função se resume a:</p>
+
+<pre><code class="language-php">function activatePlan($apiContext, $plan) {
+  $patch = new Patch();
+
+  $value = new PayPalModel('{
+     &quot;state&quot;:&quot;ACTIVE&quot;
+   }');
+
+  $patch-&gt;setOp('replace')
+    -&gt;setPath('/')
+    -&gt;setValue($value);
+
+  $patchRequest = new PatchRequest();
+  $patchRequest-&gt;addPatch($patch);
+
+  $plan-&gt;update($patchRequest, $apiContext);
+
+  return Plan::get($plan-&gt;getId(), $apiContext);
+}
+</code></pre>
+
+<p>O lance de Patch/PatchRequest é uma abstração necessária para efetuar a comunicação com a API através do cURL. Eles poderiam deixar isto dentro do $plan-&gt;update(), mas novamente foda-se.</p>
+
+<p>Após atualizar o plano, retornamos o nosso objeto Plan, limpo, atualizado, e o mais importante, ativado.</p>
+
+<p>Se o plano <strong>NÃO</strong> estiver ativado, a assinatura <strong>NÃO</strong> vai funcionar.</p>
+
+<h2 id="observação">Observação</h2>
+
+<p>É interessante que num código que vá para produção, esta etapa de plano seja efetuada apenas uma vez. Nas vezes seguintes, o ideal é que o sistema armazene o ID do plano. Eu não sei no que pode impactar você criar um plano novo toda vez que for fazer uma nova assinatura, mas esta é uma recomendação que encontra-se disponível diretamente na documentação oficial da SDK deles.</p>
+
+<p><img src="https://media.giphy.com/media/3otPoOrOg3KTKs9AJi/giphy.gif" alt="" /></p>
+
+<h1 id="criando-a-assinatura">Criando a assinatura</h1>
+
+<p>Agora que temos um plano cadastrado e ativado na API, podemos finalmente fazer a assinatura.</p>
+
+<pre><code class="language-php">function createAgreement($apiContext, $createdPlan) {
+  $agreement = new Agreement();
+
+  $agreement-&gt;setName('Assinatura para Plano User Premium')
+    -&gt;setDescription('Assinatura para Plano User Premium')
+    -&gt;setStartDate('2019-06-17T9:45:04Z');
+
+  $plan = new Plan();
+  $plan-&gt;setId($createdPlan-&gt;getId());
+  $agreement-&gt;setPlan($plan);
+
+  $payer = new Payer();
+  $payer-&gt;setPaymentMethod('paypal');
+  $agreement-&gt;setPayer($payer);
+
+  return $agreement-&gt;create($apiContext);
+}
+</code></pre>
+
+<p>Sem muito mistério aqui. Criamos um objeto Agreement, configuramos ele com algumas infos básicas, definimos qual plano esta assinatura irá usar, e o método de pagamento, que é dentro do próprio Paypal.</p>
+
+<p>Se sua conta tiver autorização para efetuar checkout transparente, isto é, pagamento na mesma página da sua app, nesta etapa ao invés do paymentmethod ser paypal ele seria credit_card.</p>
+
+<p><img src="https://media.giphy.com/media/3oz8xLBAFDyupo6jcs/source.gif" alt="" /></p>
+
+<p>Até aqui, nós já conseguimos fazer todas as etapas necessárias para nossa integração:</p>
+
+<p>1) Criamos um plano e ativamos ele;
+2) Criamos uma assinatura e ativamos ela;
+3) Relacionamos o plano com a assinatura.</p>
+
+<p>Se você debugar o que retorna desta nossa nova função <code>createAgreement()</code>, verá que ele tem um <code>approval_url</code>, que já é a nossa URL final para o usuário poder efetuar o pagamento dentro do Paypal. Mas aqui nós iremos além disto, além de redirecioná-lo, vamos fazer o retorno automático destes pagamentos, além de ativá-lo para o modo de produção. Keep watching!</p>
+
+<h1 id="redirecionando-usuário">Redirecionando usuário</h1>
+
+<p>Vamos usar um simples helper para isto:</p>
+
+<pre><code class="language-php">function redirectUser($url) {
+  header('Location: ' . $url);
+}
+</code></pre>
+
+<p>No fim nosso código de checkout ficará assim:</p>
+
+<pre><code class="language-php">$apiContext = new \PayPal\Rest\ApiContext(
+    new \PayPal\Auth\OAuthTokenCredential(
+        'AXci_kc19uu4SkOsq5eTBG5dMw8DhM4ZnbMBv4V_yMqGZgMRzJaY92JFQF-Wh98uKyrn_aqm3zdlW5sb',     // ClientID
+        'EH_N4TdOkFK5NALPhMNAIUMWF1ELYTXbakjykRRa1AhC3mHJ21Met-15D7AcBL2ewwSjW69T9wuo8Zay'      // ClientSecret
+    )
+);
+
+// Criamos um plano chamado &quot;User Premium&quot;.
+// Este plano será cobrado a cada 1 ($frequencyInterval) mês ($frequency) durante 12 meses ($cycles)
+// com um preço de R$ 50 ($amountCurrency e $amountValue).
+$userPremiumPlan = createPlan($apiContext, 'User Premium Plan', 'A premium plan for our users on 0e1dev.com', 'Month', '1', '12', 50, 'BRL');
+
+// Agora vamos ativar o plano
+$userPremiumPlan = activatePlan($apiContext, $userPremiumPlan);
+
+// Criamos a assinatura
+$userPremiumAgreement = createAgreement($apiContext, $userPremiumPlan);
+
+// Redirecionamos usuário para a página de pagamento
+redirectUser($userPremiumAgreement-&gt;getApprovalLink());
+</code></pre>
+
+<h2 id="outra-observação">Outra observação</h2>
+
+<p>Antes de redirecionar o usuário, é interessante que o seu sistema armazene o ID da Assinatura. Este ID é a única maneira do seu sistema identificar a quem se refere o pagamento quando nós configurarmos o Webhook.</p>
+
+<p>Então este é o momento de criar uma migration, adicionar uma coluna chamada <code>billing_agreement_id</code> na nossa tabela de usuários (ou fazer uma nova tabela, fica a seu critério). O importante aqui é termos uma maneira de relacionar o pagamento (a assinatura na verdade) com o usuário.</p>
+
+<p>Para recuperar o ID da assinatura, é muy simple:</p>
+
+<pre><code class="language-php">// Criamos a assinatura
+$userPremiumAgreement = createAgreement($apiContext, $userPremiumPlan);
+
+// Recuperamos o ID da assinatura
+$userPremiumAgreementID = $userPremiumAgreement-&gt;getId();
+
+// Redirecionamos usuário para a página de pagamento
+// redirectUser($userPremiumAgreement-&gt;getApprovalLink());
+</code></pre>
+
+<h1 id="checkout-concluído">Checkout concluído!</h1>
+
+<p>Agora que nossa etapa de checkout está pronta, vamos fazer a etapa seguinte, que é a tela de pós-pagamento, em que nós vamos mostar uma mensagem de sucesso ou de erro, de acordo com  o status do pagamento feito pelo usuário, ou caso ele tenha cancelado.</p>
+
+<p>Para isto, crie o arquivo <code>ExecuteAgreement.php</code>.</p>
+
+<p>O conteúdo dele será:</p>
+
+<pre><code class="language-php">// Inclui as dependencias do Composer
+require_once __DIR__  . '/vendor/autoload.php';
+
+// Importa classe de Assinaturas
+use PayPal\Api\Agreement;
+
+// Nossas credenciais
+$apiContext = new \PayPal\Rest\ApiContext(
+    new \PayPal\Auth\OAuthTokenCredential(
+        'AXci_kc19uu4SkOsq5eTBG5dMw8DhM4ZnbMBv4V_yMqGZgMRzJaY92JFQF-Wh98uKyrn_aqm3zdlW5sb',     // ClientID
+        'EH_N4TdOkFK5NALPhMNAIUMWF1ELYTXbakjykRRa1AhC3mHJ21Met-15D7AcBL2ewwSjW69T9wuo8Zay'      // ClientSecret
+    )
+);
+
+// Se o status for igual a sucesso, significa que usuário efetuou pagamento sem problemas
+if (isset($_GET['success']) &amp;&amp; $_GET['success'] == 'true') {
+  var_dump('Usuário efetuou o pagamento com sucesso.');
+
+  // Recupera o token e faz a assinatura começar a rodar (executa ela)
+  // a partir daqui ela começará a contar
+  $token = $_GET['token'];
+  $agreement = new Agreement();
+
+  try {
+      $agreement-&gt;execute($token, $apiContext);
+  } catch (Exception $ex) {
+      exit(1);
+  }
+
+  // Recupera os dados da assinatura e exibe ele (apenas para testes)
+  $agreement = Agreement::get($agreement-&gt;getId(), $apiContext);
+  var_dump($agreement);
+} else {
+  var_dump('Usuário cancelou pagamento/não conseguiu pagar.');
+}
+</code></pre>
+
+<p>O código é auto-explicativo. Se o usuário tiver pago, executamos a assinatura, para ela começar a contar, do contrário, não fazemos nada. Podemos exibir uma mensagem de alerta indicando que ocorreu um problema ao efetuar o pagamento do usuário.</p>
+
+<h1 id="testando-nossa-aplicação">Testando nossa aplicação</h1>
+
+<p>Temos o checkout, temos a página pós-checkout.</p>
+
+<p>Já podemos testar, certo? Certo!</p>
+
+<p>Para isto, abra a página <code>checkout.php</code> no seu navegador.</p>
+
+<p>Após alguns segundos, o resultado será mais ou menos igual a este:</p>
+
+<p><img src="6.png" alt="" /></p>
+
+<p>Mas e agora? Vou ter que usar meu cartão de crédito para testar, @lhas?</p>
+
+<p>Nãããão!!!!!</p>
+
+<p>Por padrão, as apps no Paypal vem em modo Sandbox. Graças a este modo, podemos criar contas &ldquo;de mentirinha&rdquo;. Através destas contas, temos cartões de crédito &ldquo;de mentirinha&rdquo;. Com esta integração, você pode validar se a sua aplicação está executando tudo corretamente, repetindo as etapas de um usuário final pagando a sua aplicação.</p>
+
+<p>Para você ter o usuário e senha desta conta de Sandbox, vá <a href="https://developer.paypal.com/developer/accounts/">aqui</a>. Você precisa estar logado no Console do Paypal.</p>
+
+<p><img src="7.png" alt="" /></p>
+
+<p>Você deverá ter 2 registros igual a imagem abaixo, um é o <strong>Buyer</strong> e o outro <strong>Facilitator</strong>. O Facilitator é o dono da loja, que receberá o pagamento. O Buyer é obviamente nosso usuário pagador. Clique no <em>Buyer</em> então. Depois em <em>Profile</em>. Deverá abrir uma modal igual a esta:</p>
+
+<p><img src="8.png" alt="" /></p>
+
+<p>Para definir a senha da conta de teste, clique em <em>Change Password</em>.</p>
+
+<p>Após isto, vá na aba <em>Funding</em>.</p>
+
+<p><img src="9.png" alt="" /></p>
+
+<p>Tela auto-explicativa, não? Teu cartão de mentira, junto com teu saldo de mentira.</p>
+
+<p>Volta para nossa tela de checkout, autentique-se com o e-mail do Buyer e a nova senha que você definiu anteriormente. Após isto, o pagamento será concluído e você verá as seguintes telas:</p>
+
+<p><img src="10.png" alt="" /></p>
+
+<p><img src="11.png" alt="" /></p>
+
+<h3 id="parabéns-filho-da-puta">Parabéns, filho da puta!</h3>
+
+<p>Você conseguiu. Você vai ficar rico agora.</p>
+
+<p><img src="https://media.giphy.com/media/1PMVNNKVIL8Ig/giphy.gif" alt="" /></p>
+
+<p>Mas antes de comemorar, falta um grande detalhe.</p>
+
+<p>Precisamos que nosso sistema seja notificado quando o pagamento do  usuário for efetuado/cancelado.</p>
+
+<p>Imagine a seguinte situação:</p>
+
+<blockquote>
+<ul>
+<li><em>Lucas é estagiário de Direito.</em></li>
+<li><em>Lucas entra no site da Academia XYZ.</em></li>
+<li>*Lucas se inscreve com o <strong>plano básico</strong> mensal de 100 reais.*</li>
+<li>*Lucas paga o <strong>primeiro</strong> mês do plano básico.*</li>
+<li>*Lucas paga o <strong>segundo</strong> mês do plano básico.*</li>
+<li><em>No terceiro mês, Lucas tem o contrato de estágio finalizado, e logo fica desempregado.</em></li>
+<li><em>Por estar desempregado, ele não pode pagar o cartão de crédito, então cancela ele.</em></li>
+<li><em>Quando chega a data de cobrança do Paypal, o mesmo tenta cobrar aquele cartão que está no histórico deles.</em></li>
+<li>*Como o Paypal não conseguirá efetuar a cobrança, a assinatura do Lucas ficará em um status de <strong>RECUSADO</strong>.*</li>
+</ul>
+</blockquote>
+
+<p>A Academia XYZ precisa saber que a assinatura do Lucas passou de <strong>ATIVA</strong> para <strong>RECUSADA</strong>.</p>
+
+<p>E a a Academia XYZ saberá destá informação através dos&hellip;</p>
+
+<p><img src="12.gif" alt="" /></p>
+
+<h1 id="configurando-webhooks">Configurando Webhooks</h1>
+
+<p>Volte para a tela de <a href="https://developer.paypal.com/developer/applications/">Dashboard</a> do Paypal.</p>
+
+<p>Clique no App que você criou no começo do tutorial.</p>
+
+<p>Você verá um bloco chamado &ldquo;SANDBOX WEBHOOKS&rdquo;.</p>
+
+<p>Clique em &ldquo;Add Webhook&rdquo;.</p>
+
+<p>Em &ldquo;Webhook URL&rdquo;, coloque uma URL acessível pela internet. Ou seja, aqui não podemos usar Localhost, e sim um link válido. Eu botei <a href="https://0e1dev.com/clients/paypal/webhook.php">https://0e1dev.com/clients/paypal/webhook.php</a></p>
+
+<h3 id="observação-ultra-importante">Observação ultra importante</h3>
+
+<p>Você só pode configurar um webhook para uma URL com HTTPS. Ou seja, caso sua aplicação ainda não tenha um certificado SSL, ela não poderá ter o retorno automático configurado.</p>
+
+<p>Em &ldquo;Event types&rdquo;, como tem muitas opções, marque &ldquo;All events&rdquo;. Se você quiser algo mais específico, selecione.</p>
+
+<p>Agora, crie um arquivo chamado <code>webhook.php</code>.</p>
+
+<p>No conteúdo dele, caso você queira aprender sobre cada evento disparado numa típica transação no Paypal, use o seguinte código:</p>
+
+<pre><code class="language-php">&lt;?php
+$file_handle = fopen('post.log', 'a+');
+fwrite($file_handle, print_r($_POST,true));
+fwrite($file_handle, file_get_contents('php://input'));
+fclose($file_handle);
+</code></pre>
+
+<p>Isso fará com que todo conteúdo recebido pelo Webhook (vem diretamente do canal POST), seja armazenado em um arquivo chamado post.log.</p>
+
+<h1 id="testando-o-webhook">Testando o webhook</h1>
+
+<p>Caso você queira testar o que cada evento faz, você pode:</p>
+
+<p>a) Fazer todo o procedimento de checkout manualmente com a conta no modo Sandbox;
+b) Usar o <strong>Webhook Simulator</strong>. <a href="https://developer.paypal.com/developer/webhooksSimulator/">Clique aqui</a>.</p>
+
+<p>Mesmo o Simulator vai precisar de uma URL com HTTPS.</p>
+
+<h1 id="saindo-do-modo-sandbox-para-produção">Saindo do modo Sandbox para Produção</h1>
+
+<p>Quando você configurar o Webhook do jeito que você quer, a sua aplicação está finalizada para finalmente ir para o ambiente de produção.</p>
+
+<p>Quando chegar esta hora, você vai precisar fazer uma alteração no seu código.</p>
+
+<p>O token de produção é diferente do de Sandbox. As configurações de Webhook também são separadas. Para conseguir ver estas configurações do modo de produção (eles chamam de Live), você tem que ir na Dashboard, selecionar o aplicativo que você criou, e no botão a direita, clicar em &ldquo;Live&rdquo;:</p>
+
+<p><img src="13.png" alt="" /></p>
+
+<p>Pronto, aqui estará suas credenciais de acesso e as configurações de Webhook para produção. Cadastre seu webhook novamente e bons negócios! :-)</p>
+
+<h1 id="código-fonte">Código-fonte</h1>
+
+<p>O código fonte deste tutorial encontra-se no <a href="https://github.com/lhas/pagamentos-recorrentes-com-paypal">GitHub</a>.</p>
+
+<h1 id="agradecimento">Agradecimento</h1>
+
+<p>Obrigado a quem leu até aqui.</p>
+
+<p><em>Keep it real.</em></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/recurring-payments"><span class="tag">Recurring Payments</span></a></li>
+        
+          <li><a href="/tags/paypal"><span class="tag">Paypal</span></a></li>
+        
+          <li><a href="/tags/php"><span class="tag">Php</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>277</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

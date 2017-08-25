@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Subindo uma aplicação Ruby on Rails 5 em um servidor Linux (AWS/DigitalOcean/Linode/entre outros)</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Este é um processo que se faz necessário de vez em quando na vida de um desenvolvedor Ruby. Muitos dirão &amp;ldquo;ah usa Heroku&amp;rdquo;, mas acredite jovem padawan, caminho melhor a seguir.
+Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo lhe permite que deixe falhas críticas na segurança. Mas é só você estudar um pouco e tomar bastante cuidado que a sua segurança não estará tão comprometida." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Subindo uma aplicação Ruby on Rails 5 em um servidor Linux (AWS/DigitalOcean/Linode/entre outros)" />
+    <meta name="twitter:description" content="Este é um processo que se faz necessário de vez em quando na vida de um desenvolvedor Ruby. Muitos dirão &amp;ldquo;ah usa Heroku&amp;rdquo;, mas acredite jovem padawan, caminho melhor a seguir.
+Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo lhe permite que deixe falhas críticas na segurança. Mas é só você estudar um pouco e tomar bastante cuidado que a sua segurança não estará tão comprometida." />
+    <meta name="twitter:image" content="https://blog.0e1dev.com/covers/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.26" />
+
+
+<link rel="canonical" href="https://blog.0e1dev.com/post/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Subindo uma aplicação Ruby on Rails 5 em um servidor Linux (AWS/DigitalOcean/Linode/entre outros)</h1>
+      <p class="post-meta">@lhas · 23/11/2016 · 14 mins. de leitura</p>
+    </header>
+    <article class="post-content">
+
+<p>Este é um processo que se faz necessário de vez em quando na vida de um desenvolvedor Ruby. Muitos dirão &ldquo;ah usa Heroku&rdquo;, mas acredite jovem padawan, caminho melhor a seguir.</p>
+
+<p>Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo lhe permite que deixe falhas críticas na segurança. Mas é só você estudar um pouco e tomar bastante cuidado que a sua segurança não estará tão comprometida.</p>
+
+<p>Eu resolvi escrever este post também para documentar passo-a-passo qual o procedimento que eu costumo fazer neste tipo de situação. Alguns amigos sempre me questionam como fazê-lo e esta será a forma mais prazerosa tanto para mim quanto para vocês de aprender.</p>
+
+<p>Resumão do que faremos hoje:</p>
+
+<ul>
+<li><strong>Criando uma máquina virtual</strong></li>
+<li><strong>Instalando Rbenv</strong></li>
+<li><strong>Instalando Ruby</strong></li>
+<li><strong>Instalando Node.JS</strong></li>
+<li><strong>Instalando Rails</strong></li>
+<li><strong>Instalando PostgreSQL</strong></li>
+<li><strong>Instalando Nginx</strong></li>
+<li><strong>Instalando Passenger</strong></li>
+<li><strong>Considerações finais</strong></li>
+</ul>
+
+<h1 id="criando-uma-máquina-virtual">Criando uma máquina virtual</h1>
+
+<p>Esta etapa é padrão independente do ambiente que você irá trabalhar, seja Amazon Web Services ou Digital Ocean, Linode, etc. O que muda é a forma como você estrutura seu servidor. Na AWS você tem 1 espécie de Marketplace com imagens Linux já pré-configuradas. Arrisco dizer que é a forma mais fácil (mas não necessariamente a melhor). Vale a sugestão para quem já está acostumado a fazer este processo e gostaria de automatizar um pouco mais.</p>
+
+<p><img src="1.png" alt="" />
+<em>olha que delícia</em></p>
+
+<p>Hoje eu vou usar a <a href="https://digitalocean.com">DigitalOcean</a>.</p>
+
+<p>As configurações serão:</p>
+
+<ul>
+<li>S.O CentOS 7.2 x64;</li>
+<li>Plano US$ 10 -&gt; 1 GB, 1 CPU, 30 GB SSD, 2 TB transferência;</li>
+<li>Datacenter NYC 3;</li>
+</ul>
+
+<p><img src="2.png" alt="" /></p>
+
+<h2 id="por-que-centos">Por que CentOS?</h2>
+
+<p><img src="4.jpg" alt="" /></p>
+
+<p>Sou a favor de quebrar esta homogenidade que o Ubuntu criou no Linux. O Linux vai muito além do Ubuntu, tem muita coisa bacana para se usar. Eu digo isso pois durante muito tempo fui a favor desta ditadura Ubuntuniana.</p>
+
+<p>Hoje eu uso Arch Linux na minha máquina pessoal e abstrai as possibilidades que vão além do <code>apt-get</code>. O <code>Pacman</code> com o <code>AUR</code> é superior a qualquer coisa que já vi nesta vida. Eu consigo instalar praticamente qualquer software relevante de hoje em dia só pelo terminal sem qualquer esforço. Slack, Skype, Sublime Text, VS Code. Qualquer coisa. Foda-se os .debs depois disso. :D</p>
+
+<h1 id="por-que-este-plano-de-10-dólares">Por que este plano de 10 dólares?</h1>
+
+<p>O ideal é que se tenha pelo menos 1 GB de memória para ambientes de produção. O plano inicial de 5 trumps só tem 512 mb e isso sempre estoura facilmente. Arrisco dizer que memória é o recurso mais &ldquo;chato&rdquo; (leia-se caro) de se trabalhar.</p>
+
+<h1 id="por-que-o-nyc-3">Por que o NYC 3?</h1>
+
+<p><img src="3.jpg" alt="" /></p>
+
+<p>É o que tem a menor latência para o Brasil. É nesse ponto que com certeza a Amazon ganha para nós, brasileiros. Eles tem um datacenter em São Paulo e isso contribui muito para um bom desempenho das suas aplicações.</p>
+
+<p>Aproveitei para adicionar a minha chave SSH na minha instância e sugiro fortemente que você faça o mesmo. <a href="https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-digitalocean-droplets">Caso não saiba o que é isso</a>.</p>
+
+<h1 id="acessando-nosso-servidor">Acessando nosso servidor</h1>
+
+<p>Agora que já criamos nossa instância e ela está rodando, basta rodar o comando abaixo para acessarmos nossa máquina via SSH:</p>
+
+<p><code>ssh root@IP.DA.MAQUINA</code></p>
+
+<p><img src="5.png" alt="" /></p>
+
+<p>Agora que já estamos dentro, a primeira coisa que devemos fazer é&hellip;</p>
+
+<h1 id="criar-um-novo-usuário">Criar um novo usuário</h1>
+
+<p>É uma boa prática evitar usar o usuário <strong>root</strong>. Mas por enquanto vamos trabalhar com ele.</p>
+
+<p>Para adicionar um novo usuário, rode:</p>
+
+<p><code>adduser lhas</code></p>
+
+<p>Eu coloquei <em>lhas</em> mas você deve colocar o <em>username</em> que lhe for conveniente.
+Ele vem sem senha por padrão, vamos colocar uma senha:</p>
+
+<p><code>passwd lhas</code></p>
+
+<p>Agora você deverá digitar a nova senha e confirmar.</p>
+
+<p><img src="6.png" alt="" /></p>
+
+<p>Vamos agora colocar ele como <strong>super usuário</strong>. Isto dará a ele as permissões de sudo (superusuário).</p>
+
+<p><code>gpasswd -a lhas wheel</code></p>
+
+<p><strong>wheel</strong> é o nome do grupo que vamos adicionar o usuário. Este grupo, no CentOS, é um grupo que tem as permissões de <strong>sudo</strong>.</p>
+
+<h1 id="desabilitar-acesso-root">Desabilitar acesso root</h1>
+
+<p>Segurança, lembra? Tão importante no mundo digital quanto no real.</p>
+
+<p>Para isto vamos ter que editar o arquivo <code>/etc/ssh/sshd_config</code>.</p>
+
+<p>Podemos usar o <code>vi</code> que vem por padrão.</p>
+
+<p>Eu não gosto muito, prefiro o <code>nano</code>, acho bem mais intuitivo. Para quem não gosta do <code>vi</code>, sugestão:
+<code>sudo yum install -y nano</code></p>
+
+<p>E agora podemos editar nosso arquivo:</p>
+
+<p><code>nano /etc/ssh/sshd_config</code></p>
+
+<p>Aperte <code>Ctrl+W</code> para pesquisar por uma string, digite <em>PermitRootLogin</em> e dê enter. Ele vai mudar o ponteiro diretamente para a linha. Descomente ela, e mude para <code>no</code>.</p>
+
+<pre><code>PermitRootLogin no
+</code></pre>
+
+<p><code>Ctrl+X</code> para sair, <code>Y</code> para confirmar, enter para confirmar o overwrite e FOI!</p>
+
+<p>Reinicie o serviço de SSH (opcional porém interessante fazê-lo):</p>
+
+<p><code>systemctl reload sshd</code></p>
+
+<p>Agora, podemos sair do usuário root, e finalmente logarmos com nosso novo usuário.</p>
+
+<p><code>exit</code>
+<code>ssh lhas@ip.aqui</code></p>
+
+<p><img src="7.png" alt="" /></p>
+
+<p>Próximo passo&hellip;</p>
+
+<h1 id="instalando-ruby">Instalando Ruby</h1>
+
+<p>Para esta tarefa, vamos usar o <strong>Rbenv</strong>.</p>
+
+<p>Antes de instalarmos o <em>Rbenv</em>, vamos precisar instalar alguns compiladores na nossa máquina.</p>
+
+<p>Isso pode soar estranho se você for um novato nesta área, mas acredite, é normal. No Ubuntu temos um facilitador que é o pacote <code>build-essentials</code>, para quem conhece. Aqui é basicamente o mesmo pacote só que sem estar compacto.</p>
+
+<p>Copie a sopa de letrinhas a seguir:</p>
+
+<pre><code>sudo yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
+</code></pre>
+
+<p><img src="8.png" alt="" /></p>
+
+<p>Se você ver algo parecido com isto, deu tudo certo.</p>
+
+<h1 id="instalando-rbenv">Instalando Rbenv</h1>
+
+<p>Mais uma sopa de letrinhas explicada em comentários:</p>
+
+<pre><code># Vai para a pasta do nosso usuário
+cd ~/
+
+# Clona o rbenv em uma pasta .rbenv
+git clone git://github.com/sstephenson/rbenv.git .rbenv
+
+# Adiciona o executável do rbenv na nossa variável PATH
+echo 'export PATH=&quot;$HOME/.rbenv/bin:$PATH&quot;' &gt;&gt; ~/.bash_profile
+echo 'eval &quot;$(rbenv init -)&quot;' &gt;&gt; ~/.bash_profile
+exec $SHELL
+
+# Aqui ele vai instalar as dependencias necessárias para compilar o Ruby
+git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH=&quot;$HOME/.rbenv/plugins/ruby-build/bin:$PATH&quot;' &gt;&gt; ~/.bash_profile
+exec $SHELL
+</code></pre>
+
+<p>Após rodar estes comandos, nós teremos o executável <code>rbenv</code> disponível para nosso usuário. Caso você não consiga executar o comando rbenv, experimente fazer logout e acessar de novo. Costuma resolver, pois ele recarrega os perfis de terminal.</p>
+
+<h1 id="instalando-de-fato-o-ruby">Instalando (de fato) o Ruby</h1>
+
+<p>A versão atual na escrita deste post do Ruby é 2.3.1.</p>
+
+<p>Então para instalá-la, vamos rodar:</p>
+
+<pre><code># Vai instalar a versão que nós desejamos
+rbenv install -v 2.3.1
+
+# Vai definir ela como versão global da nossa máquina
+rbenv global 2.3.1
+</code></pre>
+
+<p>Vai tomar um café que esse momento é lerdo pra cacete mesmo.</p>
+
+<p>Ele vai compilar a porra toda e isso é um processo demorado.</p>
+
+<p>O resultado deverá ser o seguinte:</p>
+
+<p><img src="9.png" alt="" /></p>
+
+<p>Você já pode rodar <code>ruby -v</code> para confirmar que está funcionando.</p>
+
+<p>Passo opcional: caso você não queira que o RubyGems fique gerando documentação na instalação de cada gem, rode o seguinte comando para que isto não ocorra:</p>
+
+<pre><code>echo &quot;gem: --no-document&quot; &gt; ~/.gemrc
+</code></pre>
+
+<p>Agora podemos instalar o <strong>Bundler</strong>:</p>
+
+<pre><code>gem install bundler
+</code></pre>
+
+<p>Agora, devemos remover o Ruby velho que tem na sua máquina provavelmente, e forçar o binário do Ruby instalado pelo Rbenv. Para isto, rode:</p>
+
+<pre><code class="language-bash"># Remove o binário antigo
+sudo rm -rf /usr/bin/ruby
+
+# Descobre o caminho do binário atual - copie o retorno deste comando (para mim foi /home/lhas/.rbenv/versions/2.3.1/bin/ruby)
+rbenv which ruby
+
+# Isto criará um symlink (atalho de binário) entre o Ruby do rbenv e a pasta de binários da máquina
+sudo ln -s /home/lhas/.rbenv/versions/2.3.1/bin/ruby /usr/bin/ruby
+</code></pre>
+
+<h1 id="instalando-o-rails">Instalando o Rails</h1>
+
+<p>Esta é a etapa mais fácil. Como vamos instalar a versão mais recente, isto basta;</p>
+
+<pre><code>gem install rails
+</code></pre>
+
+<p>Caso após este comando você não consiga rodar o Rails, experimente rodar isto aqui:</p>
+
+<pre><code>rbenv rehash
+</code></pre>
+
+<p>Ele recarrega todos os executáveis reconhecidos pelo Ruby.</p>
+
+<p>Agora podemos confirmar que o Rails está instalado com <code>rails -v</code>.</p>
+
+<p><img src="10.png" alt="" /></p>
+
+<h1 id="instalando-o-node-js">Instalando o Node.JS</h1>
+
+<p>Esta etapa pode ser necessária para rodar o Asset Pipeline disponível no Rails.</p>
+
+<p>Como este não é o foco do tutorial, eu vou colocar os comandos necessários para instalar o <a href="https://github.com/creationix/nvm">nvm</a> e a versão mais estável.</p>
+
+<pre><code># Instalar nvm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+
+# Rode isto para poder enxergar o binário do nvm nesta sessão (se não só fazer logout e logar de novo)
+export NVM_DIR=&quot;$HOME/.nvm&quot; [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;
+
+# Instala a versão mais estável
+nvm install node --default
+</code></pre>
+
+<p>O resultado será este:</p>
+
+<p><img src="11.png" alt="" /></p>
+
+<p>Próximo passo&hellip;</p>
+
+<h1 id="instalando-postgres">Instalando Postgres</h1>
+
+<p>Aqui poderia ser o MySQL por exemplo. Mas é uma convenção na comunidade rubista utilizar o PostgreSQL para tudo ao invés do MySQL.</p>
+
+<p>Para instalar o Postgres, basta rodar:</p>
+
+<pre><code class="language-bash">sudo yum install -y postgresql-server postgresql-contrib
+</code></pre>
+
+<p>É importante instalar 2 pacotes que permitirão que nós instalemos nossa gem <code>pg</code>:</p>
+
+<pre><code class="language-bash">sudo yum install -y postgresql-libs postgresql-devel
+</code></pre>
+
+<p>Agora vamos inicializar a configuração padrão dele:</p>
+
+<pre><code>sudo postgresql-setup initdb
+</code></pre>
+
+<h1 id="configurando-o-postgres">Configurando o Postgres</h1>
+
+<p>Por padrão, o Postgres não permite autenticação com senha. Vamos mudar esta configuração editando um arquivo chamado HBA (Host-based Authentication):</p>
+
+<pre><code>sudo nano /var/lib/pgsql/data/pg_hba.conf
+</code></pre>
+
+<p>Pesquise pela linha &ldquo;# IPv4 local connections:&ldquo;.</p>
+
+<p>Abaixo dela, você verá algo assim:</p>
+
+<pre><code>host    all             all             127.0.0.1/32            ident
+host    all             all             ::1/128                 ident
+</code></pre>
+
+<p>Mude-o para o seguinte:</p>
+
+<pre><code>host    all             all             127.0.0.1/32            md5
+host    all             all             0.0.0.0/0               md5
+host    all             all             ::1/128                 md5
+</code></pre>
+
+<p>A linha extra, do meio, é para permitir que possamos fazer acesso remoto no nosso banco de dados. A mudança de ident para md5 é necessária para ele levar o campo de senha em consideração na autenticação.</p>
+
+<p><img src="20.jpg" alt="" /></p>
+
+<h2 id="criando-nosso-usuário-para-acessar-o-banco">Criando nosso usuário para acessar o banco</h2>
+
+<p>Acesse com o usuário postgres para poder rodar comandos no ambiente dele:</p>
+
+<pre><code>sudo -i -u postgres
+</code></pre>
+
+<p>Agora vamos rodar o comando para criar o usuário:</p>
+
+<pre><code>createuser --interactive
+</code></pre>
+
+<p>Ele vai pedir o nome, e depois se deve ser um superusuário. Confirme para superusuário com &ldquo;y&rdquo;.</p>
+
+<p>É um padrão do Postgres pesquisar por uma base de dados com o mesmo nome do usuário a logar. Mesmo que esta base de dados fique vazia, é apenas um comportamento padrão dele. Para evitar futuros problemas, podemos criar uma base para nosso usuário:</p>
+
+<pre><code>createdb lhas
+</code></pre>
+
+<p>Agora, podemos sair do usuário postgres e voltar para nosso usuário <code>lhas</code>:</p>
+
+<pre><code>exit
+</code></pre>
+
+<p>Após fazer isto, precisamos fazer mais 2 etapas:</p>
+
+<p>a) Permitir o Postgres que IPs remotos o acessem;
+b) Alterar a senha do usuário (role) que nós criamos.</p>
+
+<h2 id="permitindo-o-postgres-que-ips-remotos-o-acessem">Permitindo o Postgres que IPs remotos o acessem</h2>
+
+<p>Acesse com o usuário postgres para poder editar os arquivos dele:</p>
+
+<pre><code>sudo -i -u postgres
+</code></pre>
+
+<p>Agora, edite o arquivo de configuração dele:</p>
+
+<pre><code>nano /var/lib/pgsql/data/postgresql.conf
+</code></pre>
+
+<p>Aperte Ctrl+W, pesquise por &ldquo;listen_addresses&rdquo;. Descomente esta linha, e modifique de <em>&ldquo;localhost&rdquo;</em> para <em>&ldquo;</em>&rdquo;&ldquo;. Ficando assim:</p>
+
+<p><img src="12.png" alt="" /></p>
+
+<p>Aperte Ctrl+X para sair, Y, enter.</p>
+
+<p>Próximo passo&hellip;</p>
+
+<h2 id="alterando-a-senha-do-usuário-role-que-nós-criamos">Alterando a senha do usuário (role) que nós criamos</h2>
+
+<p>Isto é muito simples. Nosso usuário já tem permissão para acessar o postgres, o problema é caso tentemos acessar remotamente, pois ele pedirá a senha, e nós não definimos nenhuma.</p>
+
+<p>Para isto, saia do usuário postgres com <code>exit</code>.</p>
+
+<p>Voltando para nosso usuário <code>lhas</code> (no meu caso), vamos acessar o <strong>Console</strong> do Postgres:</p>
+
+<pre><code>psql
+</code></pre>
+
+<p>Agora basta rodar este comando SQL para mudar a senha:</p>
+
+<pre><code>ALTER USER lhas PASSWORD 'nova_senha_aqui';
+</code></pre>
+
+<p>Pronto, isto basta.</p>
+
+<h2 id="acessando-nosso-banco-de-dados">Acessando nosso banco de dados</h2>
+
+<p>Se você usar um programa como <a href="http://dbeaver.jkiss.org/">DBeaver</a>, você já poderá acessar o nosso banco usando o nosso IP como Host, o usuário que nós criamos, e a senha que criamos acima.</p>
+
+<p><img src="21.jpg" alt="" /></p>
+
+<h1 id="iniciando-postgres">Iniciando Postgres</h1>
+
+<p>Rode os seguintes comandos:</p>
+
+<pre><code># Inicializa o serviço do Postgres que está desligado por padrão
+sudo systemctl start postgresql
+# Habilita o serviço do postgres ao ligar a máquina
+sudo systemctl enable postgresql
+</code></pre>
+
+<p>Próximo passo&hellip;</p>
+
+<h1 id="instalando-passenger-e-nginx">Instalando Passenger e Nginx</h1>
+
+<p><img src="22.jpg" alt="" /></p>
+
+<p>Primeiro passo é habilitar o <a href="https://fedoraproject.org/wiki/EPEL">EPEL</a>. Para isto:</p>
+
+<pre><code>sudo yum install -y epel-release yum-utils
+sudo yum-config-manager --enable epel
+</code></pre>
+
+<p>Agora vamos instalar o <strong>Passenger</strong> junto com o <strong>Nginx</strong> em si:</p>
+
+<pre><code># Adicionando repositório do Passenger
+sudo curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
+
+# Instalando o Passenger e Nginx
+sudo yum install -y passenger nginx
+</code></pre>
+
+<p><strong>Observação importante</strong>: Caso você já tenha o Nginx instalado, você tem que desinstalá-lo completamente com <code>sudo yum remove -y nginx*</code> antes de instalar o Passenger e o Nginx juntos.</p>
+
+<p>Isto é necessário pois o Nginx que vem do repositório do Passenger é diferente do Nginx que vem do repositório oficial do CentOS. Esta diferença inclui os módulos necessários para o Passenger funcionar. Caso ele insista em instalar o Nginx do CentOS, dê uma olhada no <a href="http://dev.antoinesolutions.com/yum-priorities">Yum Priorities</a>.</p>
+
+<p>Agora, se abrirmos no nosso browser <code>http://nosso.ip.aqui/</code>, poderemos ver uma tela semelhante a esta:</p>
+
+<p><img src="13.png" alt="" /></p>
+
+<p>Após instalar o Nginx, vamos rodar 2 comandos:</p>
+
+<pre><code># Inicializa o serviço do nginx
+sudo systemctl start nginx
+
+# Configura ele para ser bootável
+sudo systemctl enable nginx
+</code></pre>
+
+<h1 id="configurando-o-nginx-e-passenger">Configurando o Nginx e Passenger</h1>
+
+<p>Esta é uma etapa necessária para indicarmos ao Passenger qual binário do Ruby usar e quais configurações ele deve trabalhar também.</p>
+
+<p>Para isto, precisamos saber onde está o arquivo de configuração do Passenger. Basta rodar:</p>
+
+<p><code>passenger-config --root</code></p>
+
+<p>Ele vai retornar um caminho. Aqui para mim foi:</p>
+
+<p><code>/usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini</code></p>
+
+<p>Anote este caminho. Ele será nosso <strong>passenger_root</strong>. Agora, vamos descobrir onde está o nosso binário do Ruby:</p>
+
+<p><code>rbenv which ruby</code></p>
+
+<p>Para mim retornou: <code>/home/lhas/.rbenv/versions/2.3.1/bin/ruby</code></p>
+
+<p>Anote este caminho também. Ele será nosso <strong>passenger_ruby</strong>.</p>
+
+<p>Agora vamos editar o arquivo que o Passenger incluiu na nossa configuração do Nginx:</p>
+
+<pre><code>sudo nano /etc/nginx/conf.d/passenger.conf
+</code></pre>
+
+<p>Você verá um conteúdo semelhante a este:</p>
+
+<pre><code>#passenger_root /usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini;
+#passenger_ruby /usr/bin/ruby;
+#passenger_instance_registry_dir /var/run/passenger-instreg;
+</code></pre>
+
+<p>Vamos descomentar estas 3 linhas, e mudar o <strong>passenger_root</strong> e o <strong>passenger_ruby</strong> para os caminhos que nós anotamos ali em cima:</p>
+
+<pre><code>passenger_root /usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini;
+passenger_ruby ~/.rbenv/shims/ruby;
+passenger_instance_registry_dir /var/run/passenger-instreg;
+</code></pre>
+
+<p>Após finalizar estas alterações, salve e feche o arquivo.</p>
+
+<p>Agora vamos reiniciar o Nginx e conferir se está tudo:</p>
+
+<pre><code class="language-bash">sudo systemctl stop nginx
+sudo systemctl start nginx
+
+# Validando instalação do Passenger
+/usr/bin/passenger-config validate-install
+</code></pre>
+
+<p>Se rodarmos o comando a seguir, deveremos visualizar alguns processos tanto na aba de Nginx quanto do Passenger. Caso você não veja nenhum processo, algo na sua instalação deu errado:</p>
+
+<pre><code class="language-bash">/usr/sbin/passenger-memory-stats
+</code></pre>
+
+<p><img src="14.png" alt="" /></p>
+
+<p>Agora que já estamos com nossa <em>dobradinha</em> <strong>Nginx</strong> + <strong>Passenger</strong> instalado e configurado, vamos seguir para nossa aplicação de exemplo.</p>
+
+<h1 id="rodando-uma-aplicação">Rodando uma aplicação</h1>
+
+<p><img src="23.jpg" alt="" /></p>
+
+<p>O primeiro passo aqui é clonar um projeto em Rails existente.</p>
+
+<p>Eu tenho um, vou disponibilizar o caminho no código abaixo, vocês podem usá-lo de exemplo. Ele contém apenas 2 endpoints e alguns dados de seed, apenas para validar umas ideias.</p>
+
+<p>É importante definirmos uma pasta que irá armazenar nossos projetos. Fica a gosto do freguês.</p>
+
+<p>Eu vou usar a pasta <code>/home/lhas/apps</code> pois sou familiarizado com ela já. Outras pessoas usam <code>/var/www/apps</code> ou algo parecido.</p>
+
+<h2 id="clonando-o-projeto">Clonando o projeto</h2>
+
+<pre><code class="language-bash"># Cria nossa pasta que armazenará nossas aplicações em Rails
+mkdir ~/apps
+cd ~/apps
+
+# Clona o projeto
+git clone https://github.com/lhas/piratenstrasse-api.git
+</code></pre>
+
+<h2 id="configurando-o-projeto">Configurando o projeto</h2>
+
+<pre><code class="language-bash"># Abra a pasta do projeto
+cd piratenstrasse-api/
+
+# Instale as dependências do projeto
+bundle install
+</code></pre>
+
+<h2 id="configurando-database-yml-e-secrets-yml">Configurando database.yml e secrets.yml</h2>
+
+<pre><code class="language-bash"># Edita a base de dados de exemplo
+# Você deve levar o atributo &quot;production&quot; em consideração
+nano config/database.yml
+
+# Gera uma nova secret key - copie ela
+bundle exec rake secret
+
+# Edita o arquivo de secrets keys - cole aqui
+# Você deve levar o atributo &quot;production&quot; em consideração
+nano config/secrets.yml
+</code></pre>
+
+<h2 id="rodando-as-migrações">Rodando as migrações</h2>
+
+<pre><code class="language-bash"># Cria a base de dados
+RAILS_ENV=production bundle exec rake db:create
+
+# Roda as migrações
+RAILS_ENV=production bundle exec rake db:migrate
+
+# Alimenta a base com os seeds
+RAILS_ENV=production bundle exec rake db:seed
+</code></pre>
+
+<h2 id="segurança-em-dados-sensíveis">Segurança em dados sensíveis</h2>
+
+<pre><code>chmod 700 config db
+chmod 600 config/database.yml config/secrets.yml
+</code></pre>
+
+<h1 id="configurando-permissões">Configurando permissões</h1>
+
+<p>Configurações necessárias para que o usuário e grupo <code>nginx</code> possa ler o conteúdo da pasta do app que pertence ao usuário e grupo <code>lhas</code>.</p>
+
+<pre><code># Na pasta do app
+sudo chmod g+x,o+x /home/lhas/apps/piratenstrasse-api
+
+# Na pasta dos apps
+sudo chmod g+x,o+x /home/lhas/apps
+
+# Na pasta do usuário
+sudo chmod g+x,o+x /home/lhas
+
+# Na pasta de usuários
+sudo chmod g+x,o+x /home/
+</code></pre>
+
+<h2 id="testando-se-a-app-roda">Testando se a app roda</h2>
+
+<pre><code>RAILS_ENV=production rails s
+</code></pre>
+
+<p>Se você abrir no seu navegador <a href="http://159.203.163.124:3000/students.json">http://159.203.163.124:3000/students.json</a>, verão a nossa app rodando. Não se esqueça de substituir pelo IP da sua máquina, é claro! ;)</p>
+
+<p>Se estiver funcionando corretamente, agora vamos fazer ela rodar através do Nginx.</p>
+
+<h2 id="rodando-app-através-do-nginx">Rodando app através do Nginx</h2>
+
+<p>Vamos criar um arquivo de configuração para ele:</p>
+
+<pre><code class="language-bash">sudo nano /etc/nginx/conf.d/nome_do_app.conf
+</code></pre>
+
+<p>Agora coloque as seguintes informações neste arquivo:</p>
+
+<pre><code class="language-bash">server {
+    listen 80;
+    server_name ip.da.maquina.aqui;
+
+    # Tell Nginx and Passenger where your app's 'public' directory is
+    root /home/lhas/apps/piratenstrasse-api/public;
+
+    # Turn on Passenger
+    passenger_enabled on;
+    # Você deve substituir o CAMINHO DO RUBY AQUI pelo caminho correto do binário do seu ruby através de &quot;rbenv which ruby&quot;
+    passenger_ruby /home/lhas/.rbenv/versions/2.3.1/bin/ruby;
+}
+</code></pre>
+
+<p>Salve o arquivo, saia dele.</p>
+
+<p>Agora, vamos reiniciar o Nginx:</p>
+
+<pre><code>sudo systemctl stop nginx
+sudo systemctl start nginx
+</code></pre>
+
+<p>Se tentarmos acessar nossa aplicação: <a href="http://159.203.163.124/students.json">http://159.203.163.124/students.json</a></p>
+
+<p>Você deverá ver algo parecido com isto:</p>
+
+<p><img src="16.png" alt="" /></p>
+
+<p>Se estiver visualizando isto (ou a sua aplicação) significa que deu tudo certo.</p>
+
+<p>Parabéns! :-D</p>
+
+<h1 id="dúvidas">Dúvidas?</h1>
+
+<p>Postem comentários com suas dúvidas e farei questão de ajudá-los a resolver problemas no processo deste tutorial.</p>
+
+<h1 id="problemas-comuns">Problemas comuns</h1>
+
+<h2 id="na-primeira-vez-que-abro-minha-aplicação-rola-um-delay-de-alguns-segundos-isso-é-normal">Na primeira vez que abro minha aplicação rola um delay de alguns segundos. Isso é normal?</h2>
+
+<p>Sim, é normal. O Passenger está &ldquo;ligando&rdquo; a sua aplicação na primeira requisição, caso ele fique muito tempo ocioso ele hiberna novamente.</p>
+
+<p>Você pode fazer com que ele fique sempre rodando através da diretiva <a href="https://www.phusionpassenger.com/library/config/nginx/reference/#passenger_pre_start">passenger_pre_start</a>.</p>
+
+<h2 id="apareceu-um-erro-500-como-posso-ver-o-log">Apareceu um erro 500. Como posso ver o log?</h2>
+
+<p><strong>Nginx</strong></p>
+
+<p><code>/var/log/nginx/error.log</code></p>
+
+<p><strong>Aplicação</strong></p>
+
+<p><code>/home/lhas/apps/piratenstrasse-api/log/production.log</code></p>
+
+<h2 id="como-posso-reiniciar-minha-aplicação">Como posso reiniciar minha aplicação?</h2>
+
+<p>Rode o comando abaixo:</p>
+
+<pre><code class="language-bash">passenger-config restart-app
+</code></pre>
+
+<p>Ele irá pedir para selecionar qual app deseja reiniciar:</p>
+
+<p><img src="17.png" alt="" /></p>
+
+<p>Aperte enter e tudo se resolverá.</p>
+
+<h2 id="fiz-modificações-no-meu-app-como-subir">Fiz modificações no meu app. Como subir?</h2>
+
+<p>O ideal para trabalhar profissionalmente com o processo de deploy é utilizar um automatizador para isto, como o <a href="http://capistranorb.com/">Capistrano</a>. Mas não irei abordar este assunto aqui para não fugir do tema.</p>
+
+<p>Da forma que nós fizemos, o processo é bem simples de qualquer forma:</p>
+
+<p>1) Envie as modificações para o seu repositório Git;</p>
+
+<p>2) Acesse via SSH seu servidor;</p>
+
+<pre><code class="language-bash">ssh root@192.168.0.1
+</code></pre>
+
+<p>3) Abra a pasta do nosso projeto;</p>
+
+<pre><code class="language-bash">cd ~/apps/piratenstrasse-api/
+</code></pre>
+
+<p>4) Receba as modificações do repositório remoto;</p>
+
+<pre><code class="language-bash">git pull --force
+</code></pre>
+
+<p>5) Instale novas gems;</p>
+
+<pre><code class="language-bash">bundle install
+</code></pre>
+
+<p>6) Rode migrações;</p>
+
+<pre><code class="language-bash">RAILS_ENV=production bundle exec rake db:migrate
+</code></pre>
+
+<p>7) Reinicie o Passenger.</p>
+
+<pre><code class="language-bash">passenger-config restart-app
+</code></pre>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>Espero que este tutorial torne-se referência quanto a discussão repetitiva de novatos de qual é a melhor solução para subir nossas aplicações no dia-a-dia.</p>
+
+<p>Muitos sugerem Heroku, mas existe vida depois do Heroku, acredite. E esta vida é mais divertida e econômica! :)</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/devops"><span class="tag">Devops</span></a></li>
+        
+          <li><a href="/tags/rails"><span class="tag">Rails</span></a></li>
+        
+          <li><a href="/tags/deploy"><span class="tag">Deploy</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        Este post foi publicado <strong>274</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>
