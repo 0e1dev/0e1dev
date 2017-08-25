@@ -3,7 +3,6 @@ title: 'Muito além dos chats: como deixar o seu site em tempo real com Socket.I
 date: 2016-08-06 10:17:46
 tags: ["tempo real", "realtime", "socket.io", "angular"]
 cover: /covers/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io.jpg
-url: /2016/08/06/Muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-Socket-IO
 author: lhas
 ---
 

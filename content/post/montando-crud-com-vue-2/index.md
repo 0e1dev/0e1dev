@@ -3,7 +3,6 @@ title: Montando CRUD com Vue 2
 date: 2017-01-07 12:02:12
 tags: ["vue", "crud", "flux"]
 cover: /covers/montando-crud-com-vue-2.png
-url: /2017/01/07/Montando-CRUD-com-Vue-2
 author: lhas
 ---
 #  

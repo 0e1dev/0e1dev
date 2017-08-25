@@ -3,7 +3,6 @@ title: Escrevendo componentes com AngularJS no padrão do Google
 date: 2016-08-02 11:28:49
 tags: ["components", "angularjs", "google", "patterns"]
 cover: /covers/escrevendo-componentes-com-angularjs-no-padrao-do-google.jpg
-url: /2016/08/02/Escrevendo-componentes-com-AngularJS-no-padrao-do-Google
 author: lhas
 ---
 

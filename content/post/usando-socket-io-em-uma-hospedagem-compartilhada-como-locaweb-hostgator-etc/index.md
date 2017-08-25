@@ -5,7 +5,6 @@ title: >-
 date: 2016-07-14 02:10:28
 tags: ["node.js", "socket.io", "hospedagem compartilhada", "vps", "digitalocean"]
 cover: /covers/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc.jpg
-url: /2016/07/14/Usando-Socket-IO-em-uma-hospedagem-compartilhada-como-Locaweb-HostGator-etc
 author: lhas
 ---
 

@@ -3,11 +3,9 @@ title: Autenticação com JWT e Vue 2
 date: 2016-12-11 12:30:40
 tags: ['auth', 'jwt', 'vue', 'spa']
 cover: /covers/autenticacao-com-jwt-e-vue-2.jpg
-url: /2016/12/11/Autenticacao-com-JWT-e-Vue-2
 author: lhas
 ---
 
-#  
 
 [Agora que iniciamos nosso projeto](http://blog.0e1dev.com/2016/12/11/Iniciando-um-projeto-com-Vue-2/), podemos fazer a próxima etapa que é inserir uma camada de **Autenticação** na nossa aplicação.
 
@@ -25,12 +23,11 @@ Caso você não tenha nenhuma e queira prosseguir com o tutorial, você pode usa
 
 Esta foi a tela que eu montei para seguir este tutorial:
 
-![](./1.png)
+![](1.png)
 
 Ela foi implementada com o `Vue-Material`, caso você queira reaproveitá-la, segue o código-fonte:
 
-`src/components/Login.vue`
-```html
+{{< highlight html >}}
   <div class="login">
     <md-toolbar class="center-xs">
       <div class="md-title">Plataforma de Ensino Personalizado</div>
@@ -64,9 +61,8 @@ Ela foi implementada com o `Vue-Material`, caso você queira reaproveitá-la, se
       </div>
     </div>
   </div>
-```
-
-```js
+{{</ highlight>}}
+{{< highlight js >}}
 export default {
   name: 'login',
   data () {
@@ -83,8 +79,7 @@ export default {
     }
   }
 }
-```
-
+{{</ highlight>}}
 ## Variáveis de Ambiente
 
 Caso estejamos no ambiente de desenvolvimento, a URL da nossa API será `http://lvh.me:9001/`.
@@ -103,35 +98,32 @@ A ordem de prioridades desta pasta é:
 
 Ou seja, se você definir uma constante somente no `prod.env.js`, o ambiente de desenvolvimento e testes irá herdar esta configuração.
 
-```js
+{{< highlight js >}}
 // config/prod.env.js
 module.exports = {
   NODE_ENV: '"production"',
   API: '"http://api.0e1dev.com/"'
 }
-```
-
-```js
+{{</ highlight>}}
+{{< highlight js >}}
 // config/dev.env.js
 module.exports = {
   NODE_ENV: '"production"',
   API: '"http://localhost:9001/"'
 }
-```
-
+{{</ highlight>}}
 Pronto. Nós teremos acesso a esta informação na nossa aplicação através de `process.env.API`.
 
 ## Instalando vue-resource
 
 Este é o componente que nós iremos utilizar para fazer as requisições AJAX. 
 
-```bash
+{{< highlight bash >}}
 $ npm install vue-resource --save
-```
-
+{{</ highlight>}}
 Agora abra o `main.js` e indique ao Vue que nós vamos usá-lo:
 
-```js
+{{< highlight js >}}
 // src/main.js
 import VueResource from 'vue-resource'
 
@@ -140,27 +132,24 @@ Vue.use(VueResource)
 // Define a base da URL das requisições AJAX será
 // a constante API que configuramos
 Vue.http.options.root = process.env.API
-```
-
+{{</ highlight>}}
 Agora que nossa requisição está pronta, vamos importar uma biblioteca para nos auxiliar na camada de autenticação.
 
 Ela é a [vue-auth](https://github.com/websanova/vue-auth). Para instalá-la:
 
-```bash
+{{< highlight bash >}}
 $ npm install @websanova/vue-auth
-```
-
+{{</ highlight>}}
 Vamos configurá-la. Abra o `src/main.js`.
 
 Após nossa declaração de rotas, vamos fazer um monkeypatch para o *vue-auth* identificar nossas rotas:
 
-```js
+{{< highlight js >}}
 Vue.router = router
-```
-
+{{</ highlight>}}
 Agora vamos configurar a autenticação em si.
 
-```js
+{{< highlight js >}}
 Vue.use(require('@websanova/vue-auth'), {
   auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
   http: require('@websanova/vue-auth/drivers/http/vue-resource.1.x.js'),
@@ -170,8 +159,7 @@ Vue.use(require('@websanova/vue-auth'), {
   fetchData: {url: 'auth/user', method: 'GET'},
   refreshData: {url: 'auth/refresh', method: 'GET', atInit: false}
 })
-```
-
+{{</ highlight>}}
 Algumas considerações nesta configuração:
 
 ### Por que esse bando de require?
@@ -209,15 +197,14 @@ No caso nós vamos trabalhar com uma app com Rails 5 e a gem [Knock](https://git
 
 Um exemplo de action para este endpoint de refresh com o Knock:
 
-```ruby
+{{< highlight ruby >}}
 include Knock::Authenticable
 before_action :authenticate_user, only: [:refresh]
 
 def refresh
   render json: [], status: :ok
 end
-```
-
+{{</ highlight>}}
 Assim o **refresh** fica protegido. Caso a requisição tenha um token válido, ele vai retornar nada.
 
 Caso a requisição tenha um token inválido ou vazio, ele vai retornar 401 Unauthorized.
@@ -238,7 +225,7 @@ Você precisará ter o **CORS** habilitado na sua API.
 
 Exemplo da minha configuração de CORS:
 
-```ruby
+{{< highlight ruby >}}
 # config/initializers/cors.rb
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
@@ -249,8 +236,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       expose: ['Authorization']
   end
 end
-```
-
+{{</ highlight>}}
 Observe o `expose`. Ele é a peça-chave para a segunda coisa importante...
 
 ### Token no Header
@@ -261,13 +247,12 @@ PS: Para este header ser lido, seu CORS precisa **expor** ele.
 
 Exemplo da minha action de Login:
 
-```ruby
+{{< highlight ruby >}}
 def create
   response.headers['Authorization'] = 'Bearer ' + auth_token.token
   render json: auth_token, status: :created
 end
-```
-
+{{</ highlight>}}
 Pontos esclarecidos, vamos voltar para nosso front-end.
 
 ## Requisição no formulário
@@ -276,7 +261,7 @@ Pontos esclarecidos, vamos voltar para nosso front-end.
 
 Vamos voltar para o componente do Login, e refatorar o nosso `handleSubmit()`:
 
-```js
+{{< highlight js >}}
 methods: {
   handleSubmit: function (e) {
     e.preventDefault()
@@ -295,8 +280,7 @@ methods: {
     })
   }
 }
-```
-
+{{</ highlight>}}
 Os parâmetros *rememberMe* e *redirect* são opcionais.
 
 No caso da nossa aplicação de teste, a página de cadastro só deverá carregar para usuários logados.
@@ -305,7 +289,7 @@ E a página de login só deverá carregar para usuários não-logados.
 
 Nossas rotas ficam assim então:
 
-```js
+{{< highlight js >}}
 // src/main.js
 // Routes
 const routes = [
@@ -324,13 +308,12 @@ const routes = [
     meta: {auth: false}
   }
 ]
-```
-
+{{</ highlight>}}
 Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto para não-logados), basta não declarar o atributo `meta`.
 
 Se a gente quisesse montar uma rota somente para 1 role em específico, seria:
 
-```js
+{{< highlight js >}}
 // src/main.js
 // Routes
 const routes = [
@@ -345,8 +328,7 @@ const routes = [
     meta: {auth: 'manager'}
   }
 ]
-```
-
+{{</ highlight>}}
 ## Testando nossa aplicação
 
 Vamos para a tela de Login:

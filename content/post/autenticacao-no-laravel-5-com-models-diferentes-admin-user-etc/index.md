@@ -3,7 +3,6 @@ title: Autenticação no Laravel 5 com models diferentes (Admin/User/etc)
 date: 2016-08-04 10:50:59
 tags: ["autenticação", "laravel", "admin"]
 cover: /covers/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc.jpg
-url: /2016/08/04/Autenticacao-no-Laravel-5-com-models-diferentes-Admin-User-etc
 author: lhas
 ---
 

@@ -3,7 +3,6 @@ title: Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmi
 date: 2016-08-05 02:54:13
 tags: ["i18n", "multi-idiomas", "internacionalização", "angularjs", "api"]
 cover: /covers/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos.jpg
-url: /2016/08/05/Criando-sites-em-varios-idiomas-com-o-AngularJS-incluindo-dados-dinamicos
 author: lhas
 ---
 

@@ -3,7 +3,6 @@ title: Aplicando a Arquitetura Flux com Vue 2
 date: 2017-01-10 22:46:07
 tags: ['flux', 'vuex', 'vue']
 cover: /covers/aplicando-a-arquitetura-flux-com-vue-2.png
-url: /2017/01/10/aplicando-a-arquitetura-flux-com-vue-2
 author: lhas
 ---
 
