@@ -81,7 +81,7 @@ Para isto:
 
 Supondo que você está na pasta da nossa app:
 
-```bash
+{{< highlight bash >}}
 # Cria a pasta
 mkdir src/services
 
@@ -90,7 +90,7 @@ touch src/services/index.js
 
 # Inicializa o service de Lessons
 touch src/services/lessons.js
-```
+{{</ highlight >}}
 
 # Base dos Services
 
@@ -98,14 +98,14 @@ Este código-base é necessário caso você não queira ficar repetindo código 
 
 É bem simples e ficará assim:
 
-```js
+{{< highlight js >}}
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
 
 export default Vue
-```
+{{</ highlight >}}
 
 Basicamente, ele cria uma instância do Vue e incorpora o vue-resource nesta instância.
 
@@ -117,7 +117,7 @@ Este módulo precisa fazer todas as nossas operações de CRUD - Adicionar, Ler,
 
 Ficará assim:
 
-```js
+{{< highlight js >}}
 import service from './index'
 
 const resource = service.resource('http://localhost:3000/lessons{/id}.json')
@@ -145,7 +145,7 @@ export default {
     return resource.update({id: lesson.id}, lesson)
   }
 }
-```
+{{</ highlight>}}
 
 Caso você precise adicionar valores de campos padrão, este é um ótimo lugar. Eu mesmo fiz isso na linha 20. Pego o ID do estudante atual e acoplo ele ao novo registro de aula.
 
@@ -153,9 +153,10 @@ Caso você precise adicionar valores de campos padrão, este é um ótimo lugar.
 
 Primeiro, instale ele como dependência do seu projeto:
 
-```bash
+
+{{< highlight bash >}}
 npm install vuex --save
-```
+{{</ highlight>}}
 
 Agora, vamos criar a nossa *Store*.
 
@@ -189,7 +190,7 @@ Eu vou re-aproveitar o exemplo da própria documentação do Vuex pois acho ela 
 
 Dado a seguinte store:
 
-```js
+{{< highlight js >}}
 const store = new Vuex.Store({
   state: {
     count: 0
@@ -200,7 +201,7 @@ const store = new Vuex.Store({
     }
   }
 })
-```
+{{</ highlight>}}
 
 Imagine que o state seja na verdade o `data()`.
 
@@ -208,15 +209,15 @@ E os mutations sejam na verdade os `methods`.
 
 Para você recuperar o count atual:
 
-```js
+{{< highlight js >}}
 store.state.count
-```
+{{</ highlight>}}
 
 Para você rodar o método `increment` e consequentemente modificar o count:
 
-```js
+{{< highlight js >}}
 store.commit('increment')
-```
+{{</ highlight>}}
 
 Após rodar a linha acima, o `store.state.count` será igual a `1`.
 
@@ -230,11 +231,11 @@ Apesar de ser algo centralizado, nós podemos criar *módulos* que terão *state
 
 Após você injetar o Vuex e o Store na sua aplicação, você poderá acessá-lo assim:
 
-```js
+{{< highlight js >}}
 this.$store; // -> retornará todo o Store
 this.$store.state; // -> retornará todos os States disponíveis
 this.$store.commit('exemplo'); // -> rodará o commit 'exemplo'
-```
+{{</ highlight>}}
 
 Chega de teoria e vamos para a prática.
 
@@ -249,11 +250,12 @@ Dentro desta pasta, teremos:
 
 Para isto:
 
-```bash
+
+{{< highlight bash >}}
 mkdir src/store
 touch src/store/index.js
 touch src/store/mutation-types.js
-```
+{{</ highlight>}}
 
 Com nossa pasta e arquivos criados, vamos começar pelo nosso módulo para Store.
 
@@ -261,7 +263,7 @@ Com nossa pasta e arquivos criados, vamos começar pelo nosso módulo para Store
 
 Ele ficará assim:
 
-```js
+{{< highlight js >}}
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -272,7 +274,7 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   strict: debug
 })
-```
+{{</ highlight>}}
 
 # Importando Store na App
 
@@ -280,19 +282,19 @@ Abra seu `main.js`.
 
 Primeiro vamos precisar importar o Store que acabamos de criar.
 
-```js
+{{< highlight js >}}
 import store from './store'
-```
+{{</ highlight>}}
 
 Depois vamos injetá-lo dentro da nossa instância do Vue.
 
-```js
+{{< highlight js >}}
 new Vue({
   el: '#app',
   router,
   store
 })
-```
+{{</ highlight>}}
 
 Pronto! Agora teremos acesso ao nosso Store através do `this.$store`.
 
@@ -302,9 +304,10 @@ Para nosso código ficar mais organizado possível, vamos separar nossa store em
 
 Para isto, vamos precisar de uma pasta "modules":
 
-```bash
+
+{{< highlight bash >}}
 mkdir src/store/modules
-```
+{{</ highlight>}}
 
 Vamos começar com um módulo simples, que será o de **Alertas**.
 
@@ -316,15 +319,17 @@ Este módulo será muito simples, ele apenas mostrará informações para nossos
 
 Para isto, vamos precisar de uma pasta para este módulo:
 
-```bash
+
+{{< highlight bash >}}
 mkdir src/store/modules/alerts
-```
+{{</ highlight>}}
 
 Como ele será um módulo bem simples, podemos fazer toda implementação dentro de um único JS:
 
-```bash
+
+{{< highlight bash >}}
 touch src/store/modules/alerts/index.js
-```
+{{</ highlight>}}
 
 Vamos editá-lo agora.
 
@@ -332,12 +337,12 @@ Vamos editá-lo agora.
 
 Nosso state será assim:
 
-```js
+{{< highlight js >}}
 const state = {
   message: null,
   delay: 4000
 }
-```
+{{</ highlight>}}
 
 ### Actions de Alertas
 
@@ -345,14 +350,14 @@ Nosso módulo terá uma ação chamada `createOne`, que fará a criação do ale
 
 Nossa action será assim:
 
-```js
+{{< highlight js >}}
 const actions = {
   createOne ({ commit, state }, alert) {
     commit(types.ALERTS_CHANGE_MESSAGE, alert.message)
     commit(types.ALERTS_DISPLAY)
   }
 }
-```
+{{</ highlight>}}
 
 Como você pode ver, nossa ação efetua **2 commits**.
 
@@ -369,15 +374,15 @@ Lembra que criamos um `mutation-types.js`? Vamos precisar modificá-lo e incluir
 
 Para incluir ele, insira na primeira linha do módulo:
 
-```js
+{{< highlight js >}}
 import * as types from '../../mutation-types'
-```
+{{</ highlight>}}
 Agora vamos preencher o **mutation types** com as constantes necessárias para nossas ações:
 
-```js
+{{< highlight js >}}
 export const ALERTS_CHANGE_MESSAGE = 'ALERTS_CHANGE_MESSAGE'
 export const ALERTS_DISPLAY = 'ALERTS_DISPLAY'
-```
+{{</ highlight>}}
 
 **Pronto!** Até aqui, já temos um módulo de alertas com **2 states**, **2 commits**, **2 mutation types** e **1 action**.
 
@@ -399,7 +404,7 @@ Como dito anteriormente, você não pode modificar os dados do **State** diretam
 
 Para nosso módulo, estas serão as mutações necessárias:
 
-```js
+{{< highlight js >}}
 const mutations = {
   [types.ALERTS_CHANGE_MESSAGE] (state, message) {
     state.message = message
@@ -410,7 +415,7 @@ const mutations = {
     }, state.delay)
   }
 }
-```
+{{</ highlight>}}
 
 **Observação:** Caso esta sintaxe pareça estranha para você, pesquise mais sobre ES6. Mas de forma resumida, o ES6 permite que criemos uma função com nome igual a uma constante. Para isto, basta encapsular a constante entre colchetes [].
 
@@ -424,14 +429,14 @@ No caso de efetuarmos um *commit* para mudar a mensagem, o nosso *payload* é a 
 
 Para finalizar, precisamos exportar ele como módulo de fato. Para isto, no fim do nosso arquivo, você deverá incluir:
 
-```js
+{{< highlight js >}}
 export default {
   namespaced: true,
   state,
   actions,
   mutations
 }
-```
+{{</ highlight>}}
 
 # Resultado do Alertas
 
@@ -451,7 +456,8 @@ Nossa Store precisa de um módulo só para nossas aulas. Aqui entra a questão d
 
 Para criá-lo:
 
-```bash
+
+{{< highlight bash >}}
 mkdir src/store/modules/lessons
 touch src/store/modules/lessons/index.js
 touch src/store/modules/lessons/actions.js
@@ -459,7 +465,7 @@ touch src/store/modules/lessons/getters.js
 touch src/store/modules/lessons/index.js
 touch src/store/modules/lessons/mutations.js
 touch src/store/modules/lessons/state.js
-```
+{{</ highlight>}}
 
 Como este módulo pode vir a ser mais complexo no futuro, faremos o isolamento de cada camada em módulos separados.
 
@@ -469,7 +475,7 @@ Vamos começar pela base (index.js).
 
 Ele irá basicamente centralizar os sub-módulos. Nenhum mistério aqui:
 
-```js
+{{< highlight js >}}
 import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
@@ -482,20 +488,20 @@ export default {
   actions,
   mutations
 }
-```
+{{</ highlight>}}
 
 ## State de Lessons
 
 Vamos para o State que são os nossos dados, é a segunda parte mais simples aqui:
 
-```js
+{{< highlight js >}}
 const state = {
   lessons: [],
   lesson: {}
 }
 
 export default state
-```
+{{</ highlight>}}
 
 ## Getters de Lessons
 
@@ -507,11 +513,11 @@ Existe duas formas de você recuperar os dados do **State**:
 
 A maneira mais simples:
 
-```js
+{{< highlight js >}}
 this.$store.states.NOME_DO_MODULO.NOME_DO_STATE;
 // exemplo:
 this.$store.states.lessons.lesson; // -> estamos acessando nosso módulo "lessons" e recuperando o state "lesson"; neste exemplo, fica meio redundante mesmo
-```
+{{</ highlight>}}
 
 **2) Usar um getter**
 
@@ -519,19 +525,19 @@ Getters são úteis quando você precisa fazer algum tipo de manipulação no da
 
 Um exemplo clássico seria:
 
-```js
+{{< highlight js >}}
 const getters = {
   lessonsDone: (state) => {
     return state.lessons.filter(lesson => lesson.done)
   }
 }
-```
+{{</ highlight>}}
 
 Ou seja, ao invés de repetirmos este filtro em todo componente que quisermos mostrar esta informação, fazemos o filtro dentro de um Getter, e quando quisermos mostrar o mesmo, acessamos apenas o getter assim:
 
-```js
+{{< highlight js >}}
 this.$store.getters['lessons/lessonsDone']; // -> nome_do_modulo/nome_do_getter
-```
+{{</ highlight>}}
 
 ## Mutation Types de Lessons
 
@@ -539,10 +545,10 @@ Como explicado anteriormente, para cada mutation, vamos precisar de uma constant
 
 No caso, basta adicionar estas 2 linhas no nosso `mutation-types.js` atual:
 
-```js
+{{< highlight js >}}
 export const GET_ALL_LESSONS = 'GET_ALL_LESSONS'
 export const GET_ONE_LESSON = 'GET_ONE_LESSON'
-```
+{{</ highlight>}}
 
 ## Mutations de Lessons
 
@@ -550,7 +556,7 @@ Como explicado anteriormente, para cada dado no state, vamos precisar de um muta
 
 Como no nosso módulo temos 2 states (**lesson** e **lessons**), teremos 2 mutations:
 
-```js
+{{< highlight js >}}
 import * as types from '../../mutation-types'
 
 const mutations = {
@@ -562,7 +568,7 @@ const mutations = {
   }
 }
 export default mutations
-```
+{{</ highlight>}}
 
 **Pronto!** Já temos Getters, Mutations e State.
 
@@ -574,7 +580,7 @@ Aqui que o bixo costuma pegar. Caso você precise fazer manipulações assíncro
 
 No nosso exemplo, nossas ações serão bem semelhantes aos mesmos métodos do nosso **Service**. Inclusive, é aqui que iremos importá-lo.
 
-```js
+{{< highlight js >}}
 import * as types from '../../mutation-types'
 import LessonsService from '../../../services/lessons'
 
@@ -601,7 +607,7 @@ const actions = {
 }
 
 export default actions
-```
+{{</ highlight>}}
 
 No caso do `getAll()`, por exemplo, primeiro fazemos a requisição XHR com o nosso Service.
 
@@ -627,7 +633,7 @@ Se antes a nossa View era responsável por se comunicar com a API, manipular e t
 
 Não entendeu? Eu explico. Nosso componente Index atualmente encontra-se assim:
 
-```js
+{{< highlight js >}}
 import InputsCreate from './Create'
 import InputsUpdate from './Update'
 
@@ -673,11 +679,11 @@ export default {
     'Inputs-Update': InputsUpdate
   }
 }
-```
+{{</ highlight>}}
 
 Agora, com a arquitetura Flux implementada, ele funcionará assim:
 
-```js
+{{< highlight js >}}
 import InputsCreate from './Create'
 import InputsUpdate from './Update'
 
@@ -716,7 +722,7 @@ export default {
     'Inputs-Update': InputsUpdate
   }
 }
-```
+{{</ highlight>}}
 
 Além de termos economizado 7 linhas, o código ficou MUITO mais legível.
 
@@ -724,7 +730,7 @@ Tenha como comparação nossa função `handleDelete()`:
 
 ### Antes
 
-```js
+{{< highlight js >}}
 handleDelete (lesson) {
   this.resource.delete({id: lesson.id}).then((response) => {
     this.$emit('deleted')
@@ -741,10 +747,10 @@ eventDeleted () {
   let message = 'Aula removida!'
   alert(message)
 }
-```
+{{</ highlight>}}
 ### Depois
 
-```js
+{{< highlight js >}}
 handleDelete (lesson) {
   this.$store.dispatch('lessons/deleteOne', lesson).then(() => {
     this.$store.dispatch('lessons/getAll')
@@ -753,7 +759,7 @@ handleDelete (lesson) {
     })
   })
 }
-```
+{{</ highlight>}}
 
 ![](https://media.giphy.com/media/Unhhb0W1IaDHG/giphy.gif)
 
