@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Laravel on 0e1dev</title>
-    <link>https://blog.0e1dev.com/tags/laravel/</link>
+    <link>https://0e1dev.com/tags/laravel/</link>
     <description>Recent content in Laravel on 0e1dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <lastBuildDate>Thu, 04 Aug 2016 10:50:59 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.0e1dev.com/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://0e1dev.com/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Autenticação no Laravel 5 com models diferentes (Admin/User/etc)</title>
-      <link>https://blog.0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</link>
+      <link>https://0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</link>
       <pubDate>Thu, 04 Aug 2016 10:50:59 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</guid>
+      <guid>https://0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</guid>
       <description>Passei recentemente por um problema que eu tinha certeza que era simples de se resolver mas nenhuma informação que eu encontrei na internet disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documentação oficial do Laravel.
 Então resolvi escrever sobre.
 O cenário Temos uma aplicação em Laravel 5 onde ela serve como Gerenciador de Conteúdo (CMS) e API (WebService) para a parte do front-end.

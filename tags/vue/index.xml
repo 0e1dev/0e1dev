@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vue on 0e1dev</title>
-    <link>https://blog.0e1dev.com/tags/vue/</link>
+    <link>https://0e1dev.com/tags/vue/</link>
     <description>Recent content in Vue on 0e1dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <lastBuildDate>Tue, 10 Jan 2017 22:46:07 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.0e1dev.com/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://0e1dev.com/tags/vue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Aplicando a Arquitetura Flux com Vue 2</title>
-      <link>https://blog.0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</link>
+      <link>https://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</link>
       <pubDate>Tue, 10 Jan 2017 22:46:07 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</guid>
+      <guid>https://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</guid>
       <description>Olá a todos!
 Depois de termos implementado um CRUD através do Vue 2, agora iremos profissionalizar a arquitetura do mesmo.
 Caso você esteja desenvolvendo um SPA de médio a grande porte, é interessante que você tenha uma arquitetura que seja escalável.
@@ -27,10 +27,10 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
     
     <item>
       <title>Montando CRUD com Vue 2</title>
-      <link>https://blog.0e1dev.com/post/montando-crud-com-vue-2/</link>
+      <link>https://0e1dev.com/post/montando-crud-com-vue-2/</link>
       <pubDate>Sat, 07 Jan 2017 12:02:12 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/montando-crud-com-vue-2/</guid>
+      <guid>https://0e1dev.com/post/montando-crud-com-vue-2/</guid>
       <description>Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o Vue 2.
 Caso você queira acompanhar os posts anteriores:
  Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2  Pré-Requisitos  Vue Vue-resource Vue-router (opcional, mas útil caso você queira páginas separadas para cada ação)  Nosso projeto Atualmente, o projeto encontra-se assim:
@@ -39,10 +39,10 @@ Vamos começar pelo Index (Listagem de Registros).</description>
     
     <item>
       <title>Autenticação com JWT e Vue 2</title>
-      <link>https://blog.0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</link>
+      <link>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</link>
       <pubDate>Sun, 11 Dec 2016 12:30:40 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</guid>
+      <guid>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</guid>
       <description>Agora que iniciamos nosso projeto, podemos fazer a próxima etapa que é inserir uma camada de Autenticação na nossa aplicação.
 Para isto, será necessário:
  Ter uma rota de login Um formulário com e-mail e senha Uma API que tenha autenticação via JWT  Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem.</description>
@@ -50,10 +50,10 @@ Para isto, será necessário:
     
     <item>
       <title>Iniciando um projeto com Vue 2</title>
-      <link>https://blog.0e1dev.com/post/iniciando-um-projeto-com-vue-2/</link>
+      <link>https://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</link>
       <pubDate>Sun, 11 Dec 2016 06:02:43 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/iniciando-um-projeto-com-vue-2/</guid>
+      <guid>https://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</guid>
       <description>Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada VueJS.
 O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos React e Angular 2. Porém, apesar de ocupar este &amp;ldquo;terceiro&amp;rdquo; lugar, a sua popularidade aumenta cada dia.
 O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas.</description>

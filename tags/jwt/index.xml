@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jwt on 0e1dev</title>
-    <link>https://blog.0e1dev.com/tags/jwt/</link>
+    <link>https://0e1dev.com/tags/jwt/</link>
     <description>Recent content in Jwt on 0e1dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <lastBuildDate>Sun, 11 Dec 2016 12:30:40 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.0e1dev.com/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://0e1dev.com/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Autenticação com JWT e Vue 2</title>
-      <link>https://blog.0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</link>
+      <link>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</link>
       <pubDate>Sun, 11 Dec 2016 12:30:40 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</guid>
+      <guid>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</guid>
       <description>Agora que iniciamos nosso projeto, podemos fazer a próxima etapa que é inserir uma camada de Autenticação na nossa aplicação.
 Para isto, será necessário:
  Ter uma rota de login Um formulário com e-mail e senha Uma API que tenha autenticação via JWT  Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem.</description>

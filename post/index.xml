@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 0e1dev</title>
-    <link>https://blog.0e1dev.com/post/</link>
+    <link>https://0e1dev.com/post/</link>
     <description>Recent content in Posts on 0e1dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <lastBuildDate>Tue, 10 Jan 2017 22:46:07 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.0e1dev.com/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://0e1dev.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Aplicando a Arquitetura Flux com Vue 2</title>
-      <link>https://blog.0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</link>
+      <link>https://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</link>
       <pubDate>Tue, 10 Jan 2017 22:46:07 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</guid>
+      <guid>https://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</guid>
       <description>Olá a todos!
 Depois de termos implementado um CRUD através do Vue 2, agora iremos profissionalizar a arquitetura do mesmo.
 Caso você esteja desenvolvendo um SPA de médio a grande porte, é interessante que você tenha uma arquitetura que seja escalável.
@@ -27,10 +27,10 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
     
     <item>
       <title>Montando CRUD com Vue 2</title>
-      <link>https://blog.0e1dev.com/post/montando-crud-com-vue-2/</link>
+      <link>https://0e1dev.com/post/montando-crud-com-vue-2/</link>
       <pubDate>Sat, 07 Jan 2017 12:02:12 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/montando-crud-com-vue-2/</guid>
+      <guid>https://0e1dev.com/post/montando-crud-com-vue-2/</guid>
       <description>Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o Vue 2.
 Caso você queira acompanhar os posts anteriores:
  Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2  Pré-Requisitos  Vue Vue-resource Vue-router (opcional, mas útil caso você queira páginas separadas para cada ação)  Nosso projeto Atualmente, o projeto encontra-se assim:
@@ -39,10 +39,10 @@ Vamos começar pelo Index (Listagem de Registros).</description>
     
     <item>
       <title>NoSQL para Leigos, Parte 1</title>
-      <link>https://blog.0e1dev.com/post/nosql-para-leigos-parte-1/</link>
+      <link>https://0e1dev.com/post/nosql-para-leigos-parte-1/</link>
       <pubDate>Thu, 15 Dec 2016 21:41:08 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/nosql-para-leigos-parte-1/</guid>
+      <guid>https://0e1dev.com/post/nosql-para-leigos-parte-1/</guid>
       <description>Estava eu, no meu cantinho, fazendo o que eu sei fazer de melhor: caçar bugs. Até que o CTO da empresa que trabalho me fez um pedido muito interessante:
 &amp;ldquo;Explique para o setor de Marketing como eles podem rodar consultas na nossa base de dados em MongoDB.&amp;rdquo;
 Situação perfeita para eu realinhar o meu conhecimento com NoSQL e escrever mais um pouco para este bendito blog.
@@ -51,10 +51,10 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
     
     <item>
       <title>Autenticação com JWT e Vue 2</title>
-      <link>https://blog.0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</link>
+      <link>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</link>
       <pubDate>Sun, 11 Dec 2016 12:30:40 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</guid>
+      <guid>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</guid>
       <description>Agora que iniciamos nosso projeto, podemos fazer a próxima etapa que é inserir uma camada de Autenticação na nossa aplicação.
 Para isto, será necessário:
  Ter uma rota de login Um formulário com e-mail e senha Uma API que tenha autenticação via JWT  Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem.</description>
@@ -62,10 +62,10 @@ Para isto, será necessário:
     
     <item>
       <title>Iniciando um projeto com Vue 2</title>
-      <link>https://blog.0e1dev.com/post/iniciando-um-projeto-com-vue-2/</link>
+      <link>https://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</link>
       <pubDate>Sun, 11 Dec 2016 06:02:43 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/iniciando-um-projeto-com-vue-2/</guid>
+      <guid>https://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</guid>
       <description>Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada VueJS.
 O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos React e Angular 2. Porém, apesar de ocupar este &amp;ldquo;terceiro&amp;rdquo; lugar, a sua popularidade aumenta cada dia.
 O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas.</description>
@@ -73,20 +73,20 @@ O motivo do aumento de sua popularidade se dá graças aos benefícios que este 
     
     <item>
       <title>Subindo uma aplicação Ruby on Rails 5 em um servidor Linux (AWS/DigitalOcean/Linode/entre outros)</title>
-      <link>https://blog.0e1dev.com/post/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros/</link>
+      <link>https://0e1dev.com/post/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros/</link>
       <pubDate>Wed, 23 Nov 2016 03:01:10 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros/</guid>
+      <guid>https://0e1dev.com/post/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros/</guid>
       <description>Este é um processo que se faz necessário de vez em quando na vida de um desenvolvedor Ruby. Muitos dirão &amp;ldquo;ah usa Heroku&amp;rdquo;, mas acredite jovem padawan, caminho melhor a seguir.
 Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo lhe permite que deixe falhas críticas na segurança. Mas é só você estudar um pouco e tomar bastante cuidado que a sua segurança não estará tão comprometida.</description>
     </item>
     
     <item>
       <title>Consumindo uma API RESTful com Ruby</title>
-      <link>https://blog.0e1dev.com/post/consumindo-uma-api-restful-com-ruby/</link>
+      <link>https://0e1dev.com/post/consumindo-uma-api-restful-com-ruby/</link>
       <pubDate>Tue, 22 Nov 2016 09:53:27 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/consumindo-uma-api-restful-com-ruby/</guid>
+      <guid>https://0e1dev.com/post/consumindo-uma-api-restful-com-ruby/</guid>
       <description>Este é um assunto bem simples de se trabalhar quando falamos de Ruby. Ainda mais com gems poderosas que temos acesso como rest-client ou ActiveResource.
 Hoje nós vamos trabalhar com a rest-client.
 Quanto a API a ser utilizada, podemos usar qualquer uma famosa para reproduzir este tutorial.
@@ -96,10 +96,10 @@ Sugestões de API para consumir Algumas sugestões para você incrementar seu co
     
     <item>
       <title>Pagamentos Recorrentes com PayPal: Guia Completo! (em PHP)</title>
-      <link>https://blog.0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/</link>
+      <link>https://0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/</link>
       <pubDate>Mon, 21 Nov 2016 01:42:32 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/</guid>
+      <guid>https://0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/</guid>
       <description>Faz um tempo que não escrevo por aqui. Hoje resolvi escrever a respeito de um assunto que tirou o meu sono durante algumas noites.
 O motivo é simples. &amp;ldquo;PayPal is a mess.&amp;rdquo; disse um comentário perdido de 2014 no blog deles. E é uma bagunça mesmo.
 Só quem já precisou trabalhar com este gateway sabe como a documentação deles é estranha.
@@ -108,10 +108,10 @@ Atualmente, o PayPal tem 2 métodos de integração: (a) Clássico ou (b) REST A
     
     <item>
       <title>Muito além dos chats: como deixar o seu site em tempo real com Socket.IO</title>
-      <link>https://blog.0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</link>
+      <link>https://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</link>
       <pubDate>Sat, 06 Aug 2016 10:17:46 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</guid>
+      <guid>https://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</guid>
       <description>Aplicações em tempo real estão mais acessíveis do que nunca. Hoje em dia, qualquer site que se preze tem algo neste esquema. Por um simples motivo: você consegue fazer uma conversão de acessos enorme com isto.
 Continue lendo o tutorial e você aprenderá:
  Fazer uma comunicação em tempo real entre cliente x servidor; Transmitir essas informações para os outros usuários no seu site; E de quebra aprender como configurar tudo isto dentro do Apache.</description>
@@ -119,10 +119,10 @@ Continue lendo o tutorial e você aprenderá:
     
     <item>
       <title>Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)</title>
-      <link>https://blog.0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/</link>
+      <link>https://0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/</link>
       <pubDate>Fri, 05 Aug 2016 02:54:13 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/</guid>
+      <guid>https://0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/</guid>
       <description>Graças a internet, empresas que no passado dependiam do mercado local para ofertar e adquirir serviços, agora podem escalar seu empreendimento a nível global.
 Por esta exposição, se faz necessário adaptar-se ao idioma local do público alvo desejado.
 Além disto, o inglês tornou-se idioma padrão em muitos ambientes de trabalho e até mesmo no nosso lazer (jogos, quadrinhos, livros, filmes, etc).
@@ -131,10 +131,10 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
     
     <item>
       <title>Autenticação no Laravel 5 com models diferentes (Admin/User/etc)</title>
-      <link>https://blog.0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</link>
+      <link>https://0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</link>
       <pubDate>Thu, 04 Aug 2016 10:50:59 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</guid>
+      <guid>https://0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</guid>
       <description>Passei recentemente por um problema que eu tinha certeza que era simples de se resolver mas nenhuma informação que eu encontrei na internet disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documentação oficial do Laravel.
 Então resolvi escrever sobre.
 O cenário Temos uma aplicação em Laravel 5 onde ela serve como Gerenciador de Conteúdo (CMS) e API (WebService) para a parte do front-end.
@@ -143,10 +143,10 @@ Se tratando de rotas, seria:</description>
     
     <item>
       <title>Escrevendo componentes com AngularJS no padrão do Google</title>
-      <link>https://blog.0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/</link>
+      <link>https://0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/</link>
       <pubDate>Tue, 02 Aug 2016 11:28:49 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/</guid>
+      <guid>https://0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/</guid>
       <description>Depois de ter passado por um bloqueio criativo de duas semanas, resolvi escrever sobre um assunto que perpetuou minha cabeça nos últimos dias.
 Foi complexo pensar em alguma informação para compartilhar no blog sem parecer repetitivo, já que alguns autores gringos já abordaram este assunto como aqui.
 Independente do fato de se discutir se o Angular 2 vai vingar ou não, é interessante que devs de Angular1 aprendam a organizar suas aplicações sob a perspectiva de componentes, pois isso beneficia todo o time envolvido como veremos mais abaixo.</description>
@@ -154,10 +154,10 @@ Independente do fato de se discutir se o Angular 2 vai vingar ou não, é intere
     
     <item>
       <title>Usando Socket.IO em uma hospedagem compartilhada (como Locaweb, HostGator, etc)</title>
-      <link>https://blog.0e1dev.com/post/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc/</link>
+      <link>https://0e1dev.com/post/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc/</link>
       <pubDate>Thu, 14 Jul 2016 02:10:28 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc/</guid>
+      <guid>https://0e1dev.com/post/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc/</guid>
       <description>Hoje vou ensinar como trabalhar com o Socket.IO para transformar sua aplicação web em tempo real.
 O que é Socket.IO? Segundo a descrição no site deles, &amp;ldquo;THE FASTEST AND MOST RELIABLE REAL-TIME ENGINE&amp;rdquo;.
 Ele permite que você crie aplicações em tempo real de forma bi-direcional (tanto o cliente quanto o servidor podem se comunicar), orientado a eventos.
@@ -166,10 +166,10 @@ Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter 
     
     <item>
       <title>Olá, mundo! Do inglês, Hello World!</title>
-      <link>https://blog.0e1dev.com/post/hello-world/</link>
+      <link>https://0e1dev.com/post/hello-world/</link>
       <pubDate>Wed, 13 Jul 2016 02:10:28 +0000</pubDate>
       
-      <guid>https://blog.0e1dev.com/post/hello-world/</guid>
+      <guid>https://0e1dev.com/post/hello-world/</guid>
       <description>Este é o primeiro post do blog da 0e1dev.
 O que é a 0e1dev? Uma startup que trabalha com desenvolvimento de novas tecnologias para o meio digital. Redes sociais, aplicativos, lojas virtuais, etc.
 Ela é mantida através da parceria com outras empresas do mesmo ramo como a Green Comunicação.
