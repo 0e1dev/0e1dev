@@ -7,7 +7,7 @@ url: /2017/01/10/aplicando-a-arquitetura-flux-com-vue-2
 author: lhas
 ---
 
-# Introdução
+#  
 
 Olá a todos!
 

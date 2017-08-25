@@ -7,7 +7,7 @@ url: /2016/12/11/Autenticacao-com-JWT-e-Vue-2
 author: lhas
 ---
 
-# Introdução
+#  
 
 [Agora que iniciamos nosso projeto](http://blog.0e1dev.com/2016/12/11/Iniciando-um-projeto-com-Vue-2/), podemos fazer a próxima etapa que é inserir uma camada de **Autenticação** na nossa aplicação.
 

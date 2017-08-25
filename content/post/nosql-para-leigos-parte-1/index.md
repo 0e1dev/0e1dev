@@ -4,9 +4,10 @@ date: 2016-12-15 21:41:08
 tags: ['nosql']
 cover: /covers/nosql-para-leigos-parte-1.jpg
 url: /2016/12/15/NoSQL-para-Leigos-Parte-1
+author: lhas
 ---
 
-# Introdução
+#  
 
 Estava eu, no meu cantinho, fazendo o que eu sei fazer de melhor: caçar bugs. Até que o CTO da empresa que trabalho me fez um pedido muito interessante:
 

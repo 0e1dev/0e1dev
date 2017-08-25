@@ -4,9 +4,10 @@ date: 2016-12-11 06:02:43
 tags: ['front-end', 'spa', 'vue']
 cover: /covers/iniciando-um-projeto-com-vue-2.jpg
 url: /2016/12/11/Iniciando-um-projeto-com-Vue-2
+author: lhas
 ---
 
-# Introdução
+#  
 
 Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada [VueJS](https://vuejs.org/).
 

@@ -5,7 +5,7 @@ tags: ['ruby', 'api']
 author: lhas
 ---
 
-# Introdução
+#  
 
 Este é um assunto bem simples de se trabalhar quando falamos de Ruby. Ainda mais com gems poderosas que temos acesso como [rest-client](https://github.com/rest-client/rest-client) ou [ActiveResource](https://github.com/rails/activeresource).
 

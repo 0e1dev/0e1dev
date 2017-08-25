@@ -2,11 +2,12 @@
 title: 'Pagamentos Recorrentes com PayPal: Guia Completo! (em PHP)'
 date: 2016-11-21 01:42:32
 tags: ['recurring payments', 'paypal', 'php']
+author: lhas
 ---
 
 ![](never-give-up_o_1608723.jpg)
 
-# Introdução
+#  
 
 
 Faz um tempo que não escrevo por aqui. Hoje resolvi escrever a respeito de um assunto que tirou o meu sono durante algumas noites.
@@ -28,7 +29,7 @@ Então, não usaremos nada disto, hehe. >:)
 
 Tópicos do nosso papo de hoje:
 
-- **Introdução** (estamos aqui)
+- ** ** (estamos aqui)
 - **Tokens de Acesso** (OAuth)
 - **Instalando SDK** (Composer)
 - **Definindo nossos modelos de cobrança** (Billing Plans)

@@ -6,9 +6,10 @@ date: 2016-11-23 03:01:10
 tags: ['devops', 'rails', 'deploy']
 cover: /covers/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros.jpg
 url: /2016/11/23/Subindo-uma-aplicacao-Ruby-on-Rails-5-em-um-servidor-Linux-AWS-DigitalOcean-Linode-entre-outros
+author: lhas
 ---
 
-# Introdução
+#  
 
 Este é um processo que se faz necessário de vez em quando na vida de um desenvolvedor Ruby. Muitos dirão "ah usa Heroku", mas acredite jovem padawan, caminho melhor a seguir.
 

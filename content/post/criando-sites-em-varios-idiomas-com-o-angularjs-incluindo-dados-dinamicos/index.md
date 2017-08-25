@@ -9,7 +9,7 @@ author: lhas
 
 ![](cover.jpg)
 
-# Apresentação
+ 
 
 Graças a internet, **empresas** que no **passado** dependiam do **mercado local** para **ofertar** e **adquirir serviços**, agora podem **escalar seu empreendimento** a **nível global**.
 

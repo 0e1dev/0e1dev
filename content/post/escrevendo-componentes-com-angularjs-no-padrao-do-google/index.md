@@ -11,7 +11,7 @@ Depois de ter passado por um bloqueio criativo de duas semanas, resolvi escrever
 
 Foi complexo pensar em alguma informação para compartilhar no blog sem parecer repetitivo, já que alguns autores gringos já abordaram este assunto [como aqui](http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html).
 
-# Introdução
+#  
 
 Independente do fato de se discutir se o [Angular 2](https://angular.io/) vai vingar ou não, 
 é interessante que devs de Angular1 aprendam a organizar suas aplicações sob a perspectiva 
