@@ -3,309 +3,309 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://0e1dev.com/sobre/</loc>
+    <loc>http://0e1dev.com/sobre/</loc>
     <lastmod>2017-09-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</loc>
+    <loc>http://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</loc>
     <lastmod>2017-01-10T22:46:07+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/montando-crud-com-vue-2/</loc>
+    <loc>http://0e1dev.com/post/montando-crud-com-vue-2/</loc>
     <lastmod>2017-01-07T12:02:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/nosql-para-leigos-parte-1/</loc>
+    <loc>http://0e1dev.com/post/nosql-para-leigos-parte-1/</loc>
     <lastmod>2016-12-15T21:41:08+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</loc>
+    <loc>http://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</loc>
     <lastmod>2016-12-11T12:30:40+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</loc>
+    <loc>http://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</loc>
     <lastmod>2016-12-11T06:02:43+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros/</loc>
+    <loc>http://0e1dev.com/post/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros/</loc>
     <lastmod>2016-11-23T03:01:10+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/consumindo-uma-api-restful-com-ruby/</loc>
+    <loc>http://0e1dev.com/post/consumindo-uma-api-restful-com-ruby/</loc>
     <lastmod>2016-11-22T09:53:27+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/</loc>
+    <loc>http://0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/</loc>
     <lastmod>2016-11-21T01:42:32+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</loc>
+    <loc>http://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</loc>
     <lastmod>2016-08-06T10:17:46+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/</loc>
+    <loc>http://0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/</loc>
     <lastmod>2016-08-05T02:54:13+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</loc>
+    <loc>http://0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/</loc>
     <lastmod>2016-08-04T10:50:59+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/</loc>
+    <loc>http://0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/</loc>
     <lastmod>2016-08-02T11:28:49+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc/</loc>
+    <loc>http://0e1dev.com/post/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc/</loc>
     <lastmod>2016-07-14T02:10:28+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/hello-world/</loc>
+    <loc>http://0e1dev.com/post/hello-world/</loc>
     <lastmod>2016-07-13T02:10:28+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/</loc>
+    <loc>http://0e1dev.com/</loc>
     <lastmod>2017-09-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/admin/</loc>
+    <loc>http://0e1dev.com/tags/admin/</loc>
     <lastmod>2016-08-04T10:50:59+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/angular/</loc>
+    <loc>http://0e1dev.com/tags/angular/</loc>
     <lastmod>2016-08-06T10:17:46+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/angularjs/</loc>
+    <loc>http://0e1dev.com/tags/angularjs/</loc>
     <lastmod>2016-08-05T02:54:13+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/api/</loc>
+    <loc>http://0e1dev.com/tags/api/</loc>
     <lastmod>2016-11-22T09:53:27+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/autentica%C3%A7%C3%A3o/</loc>
+    <loc>http://0e1dev.com/tags/autentica%C3%A7%C3%A3o/</loc>
     <lastmod>2016-08-04T10:50:59+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/auth/</loc>
+    <loc>http://0e1dev.com/tags/auth/</loc>
     <lastmod>2016-12-11T12:30:40+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/categories/</loc>
+    <loc>http://0e1dev.com/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/components/</loc>
+    <loc>http://0e1dev.com/tags/components/</loc>
     <lastmod>2016-08-02T11:28:49+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/crud/</loc>
+    <loc>http://0e1dev.com/tags/crud/</loc>
     <lastmod>2017-01-07T12:02:12+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/deploy/</loc>
+    <loc>http://0e1dev.com/tags/deploy/</loc>
     <lastmod>2016-11-23T03:01:10+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/devops/</loc>
+    <loc>http://0e1dev.com/tags/devops/</loc>
     <lastmod>2016-11-23T03:01:10+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/digitalocean/</loc>
+    <loc>http://0e1dev.com/tags/digitalocean/</loc>
     <lastmod>2016-07-14T02:10:28+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/flux/</loc>
+    <loc>http://0e1dev.com/tags/flux/</loc>
     <lastmod>2017-01-10T22:46:07+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/front-end/</loc>
+    <loc>http://0e1dev.com/tags/front-end/</loc>
     <lastmod>2016-12-11T06:02:43+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/google/</loc>
+    <loc>http://0e1dev.com/tags/google/</loc>
     <lastmod>2016-08-02T11:28:49+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/hospedagem-compartilhada/</loc>
+    <loc>http://0e1dev.com/tags/hospedagem-compartilhada/</loc>
     <lastmod>2016-07-14T02:10:28+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/i18n/</loc>
+    <loc>http://0e1dev.com/tags/i18n/</loc>
     <lastmod>2016-08-05T02:54:13+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/internacionaliza%C3%A7%C3%A3o/</loc>
+    <loc>http://0e1dev.com/tags/internacionaliza%C3%A7%C3%A3o/</loc>
     <lastmod>2016-08-05T02:54:13+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/jwt/</loc>
+    <loc>http://0e1dev.com/tags/jwt/</loc>
     <lastmod>2016-12-11T12:30:40+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/laravel/</loc>
+    <loc>http://0e1dev.com/tags/laravel/</loc>
     <lastmod>2016-08-04T10:50:59+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/multi-idiomas/</loc>
+    <loc>http://0e1dev.com/tags/multi-idiomas/</loc>
     <lastmod>2016-08-05T02:54:13+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/node.js/</loc>
+    <loc>http://0e1dev.com/tags/node.js/</loc>
     <lastmod>2016-07-14T02:10:28+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/nosql/</loc>
+    <loc>http://0e1dev.com/tags/nosql/</loc>
     <lastmod>2016-12-15T21:41:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/patterns/</loc>
+    <loc>http://0e1dev.com/tags/patterns/</loc>
     <lastmod>2016-08-02T11:28:49+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/paypal/</loc>
+    <loc>http://0e1dev.com/tags/paypal/</loc>
     <lastmod>2016-11-21T01:42:32+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/php/</loc>
+    <loc>http://0e1dev.com/tags/php/</loc>
     <lastmod>2016-11-21T01:42:32+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/post/</loc>
+    <loc>http://0e1dev.com/post/</loc>
     <lastmod>2017-01-10T22:46:07+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/rails/</loc>
+    <loc>http://0e1dev.com/tags/rails/</loc>
     <lastmod>2016-11-23T03:01:10+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/realtime/</loc>
+    <loc>http://0e1dev.com/tags/realtime/</loc>
     <lastmod>2016-08-06T10:17:46+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/recurring-payments/</loc>
+    <loc>http://0e1dev.com/tags/recurring-payments/</loc>
     <lastmod>2016-11-21T01:42:32+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/ruby/</loc>
+    <loc>http://0e1dev.com/tags/ruby/</loc>
     <lastmod>2016-11-22T09:53:27+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/socket.io/</loc>
+    <loc>http://0e1dev.com/tags/socket.io/</loc>
     <lastmod>2016-08-06T10:17:46+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/spa/</loc>
+    <loc>http://0e1dev.com/tags/spa/</loc>
     <lastmod>2016-12-11T12:30:40+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/</loc>
+    <loc>http://0e1dev.com/tags/</loc>
     <lastmod>2016-08-04T10:50:59+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/tempo-real/</loc>
+    <loc>http://0e1dev.com/tags/tempo-real/</loc>
     <lastmod>2016-08-06T10:17:46+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/vps/</loc>
+    <loc>http://0e1dev.com/tags/vps/</loc>
     <lastmod>2016-07-14T02:10:28+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/vue/</loc>
+    <loc>http://0e1dev.com/tags/vue/</loc>
     <lastmod>2017-01-10T22:46:07+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0e1dev.com/tags/vuex/</loc>
+    <loc>http://0e1dev.com/tags/vuex/</loc>
     <lastmod>2017-01-10T22:46:07+00:00</lastmod>
     <priority>0</priority>
   </url>

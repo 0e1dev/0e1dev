@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Spa on 0e1dev</title>
-    <link>https://0e1dev.com/tags/spa/</link>
+    <link>http://0e1dev.com/tags/spa/</link>
     <description>Recent content in Spa on 0e1dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <lastBuildDate>Sun, 11 Dec 2016 12:30:40 +0000</lastBuildDate>
     
-	<atom:link href="https://0e1dev.com/tags/spa/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://0e1dev.com/tags/spa/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Autenticação com JWT e Vue 2</title>
-      <link>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</link>
+      <link>http://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</link>
       <pubDate>Sun, 11 Dec 2016 12:30:40 +0000</pubDate>
       
-      <guid>https://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</guid>
+      <guid>http://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/</guid>
       <description>Agora que iniciamos nosso projeto, podemos fazer a próxima etapa que é inserir uma camada de Autenticação na nossa aplicação.
 Para isto, será necessário:
  Ter uma rota de login Um formulário com e-mail e senha Uma API que tenha autenticação via JWT  Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem.</description>
@@ -24,10 +24,10 @@ Para isto, será necessário:
     
     <item>
       <title>Iniciando um projeto com Vue 2</title>
-      <link>https://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</link>
+      <link>http://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</link>
       <pubDate>Sun, 11 Dec 2016 06:02:43 +0000</pubDate>
       
-      <guid>https://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</guid>
+      <guid>http://0e1dev.com/post/iniciando-um-projeto-com-vue-2/</guid>
       <description>Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada VueJS.
 O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos React e Angular 2. Porém, apesar de ocupar este &amp;ldquo;terceiro&amp;rdquo; lugar, a sua popularidade aumenta cada dia.
 O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas.</description>

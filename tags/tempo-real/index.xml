@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tempo Real on 0e1dev</title>
-    <link>https://0e1dev.com/tags/tempo-real/</link>
+    <link>http://0e1dev.com/tags/tempo-real/</link>
     <description>Recent content in Tempo Real on 0e1dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <lastBuildDate>Sat, 06 Aug 2016 10:17:46 +0000</lastBuildDate>
     
-	<atom:link href="https://0e1dev.com/tags/tempo-real/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://0e1dev.com/tags/tempo-real/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Muito além dos chats: como deixar o seu site em tempo real com Socket.IO</title>
-      <link>https://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</link>
+      <link>http://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</link>
       <pubDate>Sat, 06 Aug 2016 10:17:46 +0000</pubDate>
       
-      <guid>https://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</guid>
+      <guid>http://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/</guid>
       <description>Aplicações em tempo real estão mais acessíveis do que nunca. Hoje em dia, qualquer site que se preze tem algo neste esquema. Por um simples motivo: você consegue fazer uma conversão de acessos enorme com isto.
 Continue lendo o tutorial e você aprenderá:
  Fazer uma comunicação em tempo real entre cliente x servidor; Transmitir essas informações para os outros usuários no seu site; E de quebra aprender como configurar tudo isto dentro do Apache.</description>

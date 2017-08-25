@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Flux on 0e1dev</title>
-    <link>https://0e1dev.com/tags/flux/</link>
+    <link>http://0e1dev.com/tags/flux/</link>
     <description>Recent content in Flux on 0e1dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <lastBuildDate>Tue, 10 Jan 2017 22:46:07 +0000</lastBuildDate>
     
-	<atom:link href="https://0e1dev.com/tags/flux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://0e1dev.com/tags/flux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Aplicando a Arquitetura Flux com Vue 2</title>
-      <link>https://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</link>
+      <link>http://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</link>
       <pubDate>Tue, 10 Jan 2017 22:46:07 +0000</pubDate>
       
-      <guid>https://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</guid>
+      <guid>http://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/</guid>
       <description>Olá a todos!
 Depois de termos implementado um CRUD através do Vue 2, agora iremos profissionalizar a arquitetura do mesmo.
 Caso você esteja desenvolvendo um SPA de médio a grande porte, é interessante que você tenha uma arquitetura que seja escalável.
@@ -27,10 +27,10 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
     
     <item>
       <title>Montando CRUD com Vue 2</title>
-      <link>https://0e1dev.com/post/montando-crud-com-vue-2/</link>
+      <link>http://0e1dev.com/post/montando-crud-com-vue-2/</link>
       <pubDate>Sat, 07 Jan 2017 12:02:12 +0000</pubDate>
       
-      <guid>https://0e1dev.com/post/montando-crud-com-vue-2/</guid>
+      <guid>http://0e1dev.com/post/montando-crud-com-vue-2/</guid>
       <description>Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o Vue 2.
 Caso você queira acompanhar os posts anteriores:
  Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2  Pré-Requisitos  Vue Vue-resource Vue-router (opcional, mas útil caso você queira páginas separadas para cada ação)  Nosso projeto Atualmente, o projeto encontra-se assim:
