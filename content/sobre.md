@@ -6,7 +6,7 @@ menu: "main"
 weight: 40
 ---
 
-Olá! Meu nome é Luiz Almeida, sou um desenvolvedor de software apaixonado por novas tecnologias.
+Olá! Meu nome é Luiz Almeida, sou um desenvolvedor de software apaixonado por novas tecnologias. :heart:
 
 Minha principal especialidade é *Front-end*.
 
