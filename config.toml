@@ -1,7 +1,7 @@
 baseURL = "http://0e1dev.com/"
 languageCode = "pt-br"
 title = "0e1dev"
-theme = "hugo-nuo"
+theme = "0e1dev"
 enableEmoji = "true"
 pygmentsstyle = "rainbow_dash"
 disqusShortname = "0e1dev"
