@@ -5,3 +5,6 @@ theme = "0e1dev"
 enableEmoji = "true"
 pygmentsstyle = "rainbow_dash"
 disqusShortname = "0e1dev"
+
+[params]
+twitter = "01lhas"

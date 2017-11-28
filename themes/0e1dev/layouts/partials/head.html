@@ -1,8 +1,7 @@
 {{ $gohugoio := "gohugoio" }}
-{{ $avatar := "/img/avatar.jpg" }}
+{{ $avatar := "/img/marca-branca.png" }}
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 <!-- Site & Page Meta Data -->
 {{ if eq .Type "post" }}
@@ -18,6 +17,9 @@
     <meta name="twitter:title" content="{{ .Title }}" />
     <meta name="twitter:description" content="{{ .Summary | plainify }}" />
     <meta name="twitter:image" content="{{ .Params.cover | absURL }}" />
+    <meta name="og:title" content="{{ .Title }}" />
+    <meta name="og:description" content="{{ .Summary | plainify }}" />
+    <meta name="og:image" content="{{ .Params.cover | absURL }}" />
   {{ else }}
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@{{ .Site.Params.twitter | default $gohugoio }}" />
@@ -31,6 +33,7 @@
   <!-- Site Author & Description -->
   <meta name="author" content="{{ .Site.Params.author }}" />
   <meta name="description" content="{{ .Site.Params.description }}" />
+  <meta property="og:image" content="{{ $avatar | absURL }}" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
