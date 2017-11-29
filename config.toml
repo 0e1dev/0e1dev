@@ -3,7 +3,7 @@ languageCode = "pt-br"
 title = "0e1dev"
 theme = "0e1dev"
 enableEmoji = "true"
-pygmentsstyle = "rainbow_dash"
+pygmentsCodeFences = "true"
 disqusShortname = "0e1dev"
 
 [params]
