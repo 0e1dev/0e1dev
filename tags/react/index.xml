@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>React on 0e1dev</title>
+    <link>http://0e1dev.com/tags/react/</link>
+    <description>Recent content in React on 0e1dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Tue, 28 Nov 2017 14:20:47 -0200</lastBuildDate>
+    
+	<atom:link href="http://0e1dev.com/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ciclo de vida de um componente em React</title>
+      <link>http://0e1dev.com/post/ciclo-de-vida-de-um-componente-em-react/</link>
+      <pubDate>Tue, 28 Nov 2017 14:20:47 -0200</pubDate>
+      
+      <guid>http://0e1dev.com/post/ciclo-de-vida-de-um-componente-em-react/</guid>
+      <description>Olá a todos!
+Hoje o assunto a ser tratado no 0e1dev será componentes React. Especificamente, os ciclos de vida deles.
+É um assunto deveras simples, apesar de gerar bastante dúvida para os iniciantes.
+Componentes para o React tem um ciclo de vida comum, como qualquer ser vivo do nosso planeta.
+Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, os componentes tem a fase do componentDidMount, componentWillMount, componentWillReceiveProps, etc.</description>
+    </item>
+    
+  </channel>
+</rss>

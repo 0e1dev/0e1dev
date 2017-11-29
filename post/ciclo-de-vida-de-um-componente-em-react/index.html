@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Ciclo de vida de um componente em React</title>
+
+  
+  
+
+
+<meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-68682771-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-68682771-1');
+</script>
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Olá a todos!
+Hoje o assunto a ser tratado no 0e1dev será componentes React. Especificamente, os ciclos de vida deles.
+É um assunto deveras simples, apesar de gerar bastante dúvida para os iniciantes.
+Componentes para o React tem um ciclo de vida comum, como qualquer ser vivo do nosso planeta.
+Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, os componentes tem a fase do componentDidMount, componentWillMount, componentWillReceiveProps, etc." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@01lhas" />
+    <meta name="twitter:title" content="Ciclo de vida de um componente em React" />
+    <meta name="twitter:description" content="Olá a todos!
+Hoje o assunto a ser tratado no 0e1dev será componentes React. Especificamente, os ciclos de vida deles.
+É um assunto deveras simples, apesar de gerar bastante dúvida para os iniciantes.
+Componentes para o React tem um ciclo de vida comum, como qualquer ser vivo do nosso planeta.
+Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, os componentes tem a fase do componentDidMount, componentWillMount, componentWillReceiveProps, etc." />
+    <meta name="twitter:image" content="http://0e1dev.com/covers/ciclo-de-vida-de-um-componente-em-react.png" />
+    <meta name="og:title" content="Ciclo de vida de um componente em React" />
+    <meta name="og:description" content="Olá a todos!
+Hoje o assunto a ser tratado no 0e1dev será componentes React. Especificamente, os ciclos de vida deles.
+É um assunto deveras simples, apesar de gerar bastante dúvida para os iniciantes.
+Componentes para o React tem um ciclo de vida comum, como qualquer ser vivo do nosso planeta.
+Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, os componentes tem a fase do componentDidMount, componentWillMount, componentWillReceiveProps, etc." />
+    <meta name="og:image" content="http://0e1dev.com/covers/ciclo-de-vida-de-um-componente-em-react.png" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.30.2" />
+
+
+<link rel="canonical" href="http://0e1dev.com/post/ciclo-de-vida-de-um-componente-em-react/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+
+    <header class="post-header">
+      <h1 class="post-title">Ciclo de vida de um componente em React</h1>
+      <p class="post-meta">@lhas · 28/11/2017 · 7 mins. de leitura</p>
+    </header>
+
+    
+    <div title="Ciclo de vida de um componente em React" style="width: 100%; height: 250px; background: url(/covers/ciclo-de-vida-de-um-componente-em-react.png); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
+    <article class="post-content">
+
+<p>Olá a todos!</p>
+
+<p>Hoje o assunto a ser tratado no <strong>0e1dev</strong> será componentes React. Especificamente, os ciclos de vida deles.</p>
+
+<p>É um assunto deveras simples, apesar de gerar bastante dúvida para os iniciantes.</p>
+
+<p>Componentes para o React tem um ciclo de vida comum, como qualquer ser vivo do nosso planeta.</p>
+
+<p>Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, os componentes tem a fase do <em>componentDidMount</em>, <em>componentWillMount</em>, <em>componentWillReceiveProps</em>, etc.</p>
+
+<p>A única coisa que muda, é o parâmetro deste ciclo.</p>
+
+<p>No nosso caso, é bem simples, tempo.</p>
+
+<p><img src="https://media.giphy.com/media/YBSmU4HWkaamk/giphy.gif" alt="" /></p>
+
+<p>Já no caso de componentes React, esses parâmetros já são um pouco mais complexos e vão depender de outros fatores, p.e., se o usuário entrou/saiu de uma rota, ou se o usuário interagiu com alguma parte da interface que impactou nos ciclos de diversos componentes.</p>
+
+<p>O primeiro callback a ser chamado quando o componente é carregado:</p>
+
+<h1 id="componentwillmount">componentWillMount</h1>
+
+<p>Os callbacks do ciclo de vida tendem a ter três palavras no seu nome:</p>
+
+<p><strong>component</strong> + <strong>auxiliar (prefixo)</strong> + <strong>evento</strong></p>
+
+<p>Neste caso, o auxiliar é o <em>will</em> (ou seja, irá) e o evento é o <em>mount</em> (ou seja, carregar).</p>
+
+<p>Todo componente em React, antes de ser renderizado (<code>&lt;Exemplo /&gt;</code>), irá acionar o seu respectivo <code>componentWillMount</code>.</p>
+
+<p>Apesar deste ser o primeiro callback, ele é um dos mais inúteis. As razões são:</p>
+
+<ul>
+<li>Ele equivale ao <code>constructor()</code>;</li>
+<li>Após a versão 16, ele pode ser chamado várias vezes pela engine antes de, de fato, carregar o componente.</li>
+</ul>
+
+<p>Ele servia quando nós ainda construíamos nossos componentes com <code>React.createClass()</code>, pois como não eram classes de verdade, era impossível declarar algo dentro do seu constructor. Porém, no ECMAScript 6 (vulgo ES6), os componentes são declarados como classes, ou seja, perfeitamente tranquilo usar o constructor, se necessário.</p>
+
+<p>A maior utilidade deste callback aqui será caso você precise fazer qualquer tipo de manipulação <em>server-side</em>. Pois no lado do servidor, o <code>didMount</code> (ciclo ideal para ações assíncronas/com efeito colateral) não é chamado, sendo chamado no lado do servidor somente o <code>willMount</code>.</p>
+
+<p><img src="https://media.giphy.com/media/1X5kmAFCKmFry/giphy.gif" alt="" /></p>
+
+<h1 id="componentdidmount">componentDidMount</h1>
+
+<p>Este é a menina dos olhos de qualquer desenvolvedor React.</p>
+
+<p>Ele é o nosso personagem especial, que serve justamente para qualquer tipo de ação assíncrona, que envolva efeitos colaterais no nosso componente, seja alterando o estado do mesmo, ou enviando uma requisição para um ambiente externo.</p>
+
+<p>Use-o e abuse-o para qualquer tipo de colateralidade e manipulação de <strong>DOM</strong>.</p>
+
+<p>Quando ocorrer algum tipo de mudança no <strong>estado</strong> (state) do componente, estas mudanças irão engatilhar outros callbacks.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentDidMount</span><span style="color:#f92672">:</span> () =&gt; {
+  <span style="color:#75715e">// use e abuse! C&amp;A
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<h1 id="shouldcomponentupdate">shouldComponentUpdate</h1>
+
+<p>O primeiro callback a ser acionado quando ocorre alguma mudança no componente é o <code>shouldComponentUpdate</code>.</p>
+
+<p>Ele permite que você indique se o componente deve ou não aplicar uma re-renderização.</p>
+
+<p>Você deve sempre retornar um valor booleano, caso você use-o.</p>
+
+<p>Por padrão, este callback irá sempre retornar verdadeiro, ou seja, todo componente que tiver mudança de estado (seja state ou prop) irá acionar este callback, e consequentemente a re-renderização do mesmo por padrão.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">shouldComponentUpdate</span><span style="color:#f92672">:</span> () =&gt; {
+  <span style="color:#75715e">// você deve sempre retornar um booleano
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// ao usá-lo (por padrão ele sempre retornará true)
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+}</code></pre></div>
+<h1 id="componentwillupdate">componentWillUpdate</h1>
+
+<p>Assim que o <code>shouldComponentUpdate</code> é finalizado, caso o valor de retorno dele seja <code>true</code>, o <code>componentWillUpdate</code> irá ser acionado em seguida.</p>
+
+<p>Ele recebe 2 parâmetros: <code>nextProps</code> e <code>nextState</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentWillUpdate</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">nextProps</span>, <span style="color:#a6e22e">nextState</span>) =&gt; {
+  <span style="color:#75715e">// prefira usar o `componentDidUpdate` pelos motivos abaixo
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>Ele é bem semelhante ao <code>componentWillMount</code>, no sentido de que não é interessante que você utilize-o para aplicar efeitos colaterais ou manipulações de DOM.</p>
+
+<p>O <code>componentWillUpdate</code> só deve ser usado para fazer algum tipo de &ldquo;preparação&rdquo; pré-atualização. Se tu aplicar uma nova atualização aqui (seja com <code>setState()</code> ou acionando uma prop que irá modificar algo), ele irá desencadear outro <code>componentWillUpdate</code>, o que irá gerar uma recursão indesejada, causando o famoso loop infinito.</p>
+
+<p>Existem maneiras de previnir esse loop, mas não seria o correto do ponto de vista da arquitetura.</p>
+
+<h1 id="componentdidupdate">componentDidUpdate</h1>
+
+<p>Para qualquer tipo de ação com efeito colateral ou manipulação, você pode (e deve) usar o <code>componentDidUpdate</code>, que funciona bem parecido com o <code>componentDidMount</code>, com a diferença de que este só é chamado em alguma atualização após a primeira renderização do componente.</p>
+
+<p>Se tu quiser fazer alguma manipulação de DOM, consultar a API, etc, este é o (segundo) cara!</p>
+
+<p>Ele recebe 2 parâmetros: <code>prevProps</code> e <code>prevState</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentDidUpdate</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">prevProps</span>, <span style="color:#a6e22e">prevState</span>) =&gt; {
+  <span style="color:#75715e">// use e abuse! C&amp;A pt 2
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p><img src="https://media.giphy.com/media/o6Tkep8B99ydG/giphy.gif" alt="" /></p>
+
+<p>Depois que nosso componente foi renderizado com sucesso em nossa aplicação, nosso usuário resolver iterar com algum botão.</p>
+
+<p>Uma simples interação como um clique ou até mesmo um scroll do mouse, sob algum elemento, pode ocasionar em mudanças em alguns componentes.</p>
+
+<p>Isto significa que estas mudanças podem disparar outras mudanças nas <strong>props</strong> dos seus componentes e respectivos filhos.</p>
+
+<p>Exemplo prático: Temos um formulário de cadastro e um botão de enviar:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SignUpForm</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">submitted</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
+  }
+
+  <span style="color:#a6e22e">handleSubmit</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e</span>) =&gt; {
+    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({ <span style="color:#a6e22e">submitted</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> })
+  }
+
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">form</span> <span style="color:#a6e22e">onSubmit</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handleSubmit</span>}<span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">SubmitButton</span> <span style="color:#a6e22e">submitted</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">submitted</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/form&gt;</span>
+    )
+  }
+}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SubmitButton</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">componentWillReceiveProps</span>(<span style="color:#a6e22e">nextProps</span>, <span style="color:#a6e22e">oldProps</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Usuário acabou de enviar o formulário!&#39;</span>);
+  }
+
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span><span style="color:#f92672">&gt;</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">submitted</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;Enviado! :D&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Enviar&#39;</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+    )
+  }
+}</code></pre></div>
+<p>O usuário resolve enviar o formulário.</p>
+
+<p>Ao clicar no botão de enviar, <code>&lt;SubmitButton /&gt;</code> irá acionar a prop <code>onSubmit</code> do <code>&lt;form /&gt;</code>.</p>
+
+<p>Isto irá fazer com que <code>submitted</code> se torne <code>true</code>.</p>
+
+<p><code>submitted</code> está sendo enviado como <code>prop</code> para o <code>SubmitButton</code>.</p>
+
+<p>Quando o formulário é enviado e o valor de <code>submitted</code> é alterado no <code>state</code>, a prop também é alterada. Antes dela ser alterada, ela irá acionar:</p>
+
+<h1 id="componentwillreceiveprops">componentWillReceiveProps</h1>
+
+<p>Este é o callback utilizado para detectar possíveis mudanças nas props de um componente.</p>
+
+<p>Ela recebe sempre 2 parâmetros: <code>nextProps</code> e <code>oldProps</code>.</p>
+
+<p>Este callback <strong>NÃO</strong> é acionado na renderização inicial, somente quando após o componente já foi renderizado, alguma prop foi alterada.</p>
+
+<p>No caso do nosso exemplo acima, assim que o formulário fosse enviado, o <code>componentWillReceiveProps</code> do <code>&lt;SubmitButton /&gt;</code> iria ser acionado.</p>
+
+<p>Este callback é extremamente útil, principalmente quando você trabalha muito com vários componentes filhos ou com Redux, onde todo o estado do componente é enviado via prop para ele.</p>
+
+<p>Você pode (e deve) checar se alguma prop foi alterada comparando ela entre o <code>nextProps</code> e o <code>oldProps</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentWillReceiveProps</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">nextProps</span>, <span style="color:#a6e22e">oldProps</span>) =&gt; {
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">nextProps</span>.<span style="color:#a6e22e">submitted</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">oldProps</span>.<span style="color:#a6e22e">submitted</span>) {
+    <span style="color:#75715e">// nosso exemplo entraria aqui
+</span><span style="color:#75715e"></span>  }
+}</code></pre></div>
+<p>Continuando nosso exemplo, digamos que nosso usuário resolva sair da página de cadastro, e retornar a página inicial.</p>
+
+<p>A partir do momento que o nosso usuário clicou em &ldquo;Home&rdquo; e o <a href="https://reacttraining.com/react-router/">React Router</a> (ou <a href="https://ui-router.github.io/react/">UI Router</a>) detectou a mudança da rota, o componente do <code>&lt;SignUpForm /&gt;</code> vai ser <strong>DESMONTADO</strong>.</p>
+
+<h1 id="componentwillunmount">componentWillUnmount</h1>
+
+<p>Isto significa que este callback será acionado.</p>
+
+<p>Este tipo de callback é especialmente útil quando precisamos desconstruir algo que nós construimos quando o componente foi renderizado.</p>
+
+<p>Exemplo prático: digamos que tenhamos criado um Timer de 1 minuto no cadastro. Na tela, vai mostrar pro usuário este timer de forma decrescente, diminuindo a cada segundo. Este timer foi criado utilizando <code>setInterval()</code>.</p>
+
+<p>Funções como <code>setInterval()</code> ou <code>setTimeout()</code> ficam armazenadas na memória do navegador do usuário.</p>
+
+<p>Mesmo que o componente que gerou aquele timer seja desmontado, o timer irá continuar rodando na memória do mesmo.</p>
+
+<p>Graças a isso, você deverá utilizar o <code>componentWillUnmount</code> para remover este timer.</p>
+
+<p>Exemplo prático:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentWillUnmount</span><span style="color:#f92672">:</span> () =&gt; {
+  <span style="color:#a6e22e">clearInterval</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">interval</span>);
+}</code></pre></div>
+<p>Isto irá fazer o nosso serviço de &ldquo;garbage collector&rdquo;. Este é só um exemplo, existem outras situações que você vai querer fazer esta limpeza de dados.</p>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>Este assunto é deveras importante para qualquer desenvolvedor que esteja se aventurando no mundo do React.</p>
+
+<p>Apesar de ser importante, você quando está aprendendo React, espera instintivamente que ele tenha este tipo de recurso. É um recurso muito bacana, onde você pode alocar determinadas ações de acordo com o comportamento da sua interface.</p>
+
+<p>Em outras bibliotecas, mais antigas, isso era praticamente impossível de ser feito. Esse é uma das principais razões para esta lib ter se tornado tão famosa.</p>
+
+<p>Espero que tenham gostado e até a próxima!</p>
+
+<p><img src="https://media.giphy.com/media/l2R07TjNiUfpU5LdC/giphy.gif" alt="" /></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/ciclo-de-vida"><span class="tag">Ciclo De Vida</span></a></li>
+        
+          <li><a href="/tags/react"><span class="tag">React</span></a></li>
+        
+          <li><a href="/tags/componente"><span class="tag">Componente</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>
