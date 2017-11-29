@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -26,18 +25,23 @@ Independente do fato de se discutir se o Angular 2 vai vingar ou não, é intere
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Escrevendo componentes com AngularJS no padrão do Google" />
     <meta name="twitter:description" content="Depois de ter passado por um bloqueio criativo de duas semanas, resolvi escrever sobre um assunto que perpetuou minha cabeça nos últimos dias.
 Foi complexo pensar em alguma informação para compartilhar no blog sem parecer repetitivo, já que alguns autores gringos já abordaram este assunto como aqui.
 Independente do fato de se discutir se o Angular 2 vai vingar ou não, é interessante que devs de Angular1 aprendam a organizar suas aplicações sob a perspectiva de componentes, pois isso beneficia todo o time envolvido como veremos mais abaixo." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/escrevendo-componentes-com-angularjs-no-padrao-do-google.jpg" />
+    <meta name="og:title" content="Escrevendo componentes com AngularJS no padrão do Google" />
+    <meta name="og:description" content="Depois de ter passado por um bloqueio criativo de duas semanas, resolvi escrever sobre um assunto que perpetuou minha cabeça nos últimos dias.
+Foi complexo pensar em alguma informação para compartilhar no blog sem parecer repetitivo, já que alguns autores gringos já abordaram este assunto como aqui.
+Independente do fato de se discutir se o Angular 2 vai vingar ou não, é interessante que devs de Angular1 aprendam a organizar suas aplicações sob a perspectiva de componentes, pois isso beneficia todo o time envolvido como veremos mais abaixo." />
+    <meta name="og:image" content="http://0e1dev.com/covers/escrevendo-componentes-com-angularjs-no-padrao-do-google.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/" />
@@ -138,7 +142,9 @@ Independente do fato de se discutir se o Angular 2 vai vingar ou não, é intere
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -185,10 +191,16 @@ Independente do fato de se discutir se o Angular 2 vai vingar ou não, é intere
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Escrevendo componentes com AngularJS no padrão do Google</h1>
       <p class="post-meta">@lhas · 02/08/2016 · 5 mins. de leitura</p>
     </header>
+
+    
+    <div title="Escrevendo componentes com AngularJS no padrão do Google" style="width: 100%; height: 250px; background: url(/covers/escrevendo-componentes-com-angularjs-no-padrao-do-google.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Depois de ter passado por um bloqueio criativo de duas semanas, resolvi escrever sobre um assunto que perpetuou minha cabeça nos últimos dias.</p>
@@ -297,46 +309,43 @@ app/forum/topic/topic.controller.spec.js
 </code></pre>
 
 <p>Dentro do controller, vou colocar aqui um exemplo que já está nos padrões de código do <a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md">John Papa, o Angular 1 Style Guide</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* topic.controller.js */</span>
+(<span style="color:#66d9ef">function</span>(){
+    <span style="color:#e6db74">&#39;use strict&#39;</span>;
 
-<pre><code class="language-js">/* topic.controller.js */
-(function(){
-    'use strict';
-
-    angular
-        .module('app.forum.topic', [])
-        .component('matrixTopic', {
-            templateUrl: 'app/forum/topic/topic.html',
-            controller: TopicController,
-            controllerAs: 'ctrl'
+    <span style="color:#a6e22e">angular</span>
+        .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app.forum.topic&#39;</span>, [])
+        .<span style="color:#a6e22e">component</span>(<span style="color:#e6db74">&#39;matrixTopic&#39;</span>, {
+            <span style="color:#a6e22e">templateUrl</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;app/forum/topic/topic.html&#39;</span>,
+            <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">TopicController</span>,
+            <span style="color:#a6e22e">controllerAs</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ctrl&#39;</span>
         })
 
-        TopicController.$inject = ['$stateParams', 'TopicService'];
+        <span style="color:#a6e22e">TopicController</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$stateParams&#39;</span>, <span style="color:#e6db74">&#39;TopicService&#39;</span>];
 
-        function TopicService($stateParams, TopicService) {
-            var vm = this;
-            var topic = undefined;
+        <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">TopicService</span>(<span style="color:#a6e22e">$stateParams</span>, <span style="color:#a6e22e">TopicService</span>) {
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">vm</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">topic</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">undefined</span>;
 
-            vm.topic = topic;
+            <span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">topic</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">topic</span>;
             
-            activate();
+            <span style="color:#a6e22e">activate</span>();
 
-            function activate() {
-                if(vm.topic == undefined) {
-                    TopicService.getOne($stateParams.id).then(success, error);
+            <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">activate</span>() {
+                <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">topic</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">undefined</span>) {
+                    <span style="color:#a6e22e">TopicService</span>.<span style="color:#a6e22e">getOne</span>(<span style="color:#a6e22e">$stateParams</span>.<span style="color:#a6e22e">id</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">success</span>, <span style="color:#a6e22e">error</span>);
 
-                    function success(result) {
-                        vm.topic = result.data.topic;
+                    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">success</span>(<span style="color:#a6e22e">result</span>) {
+                        <span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">topic</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">topic</span>;
                     }
 
-                    function error(error) {
-                        console.log('Error ocurred: ' + error);
+                    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>) {
+                        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Error ocurred: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">error</span>);
                     }
                 }
             }
         }
-})();
-</code></pre>
-
+})();</code></pre></div>
 <p>Nosso controller está pronto!</p>
 
 <p>Recuperando o tópico com o TopicService e atualizando nosso ViewModel (daí o vm)
@@ -353,56 +362,53 @@ app/forum/topic/topic.service.spec.js
 <p>Esta é a camada que vai entrar em contato com a API. Ela é usada no nosso controller acima.</p>
 
 <p>Nosso código nos padrões do John Papa:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* topic.service.js */</span>
+(<span style="color:#66d9ef">function</span>() {
+  <span style="color:#e6db74">&#39;use strict&#39;</span>;
 
-<pre><code class="language-js">/* topic.service.js */
-(function() {
-  'use strict';
+  <span style="color:#a6e22e">angular</span>
+    .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app.forum.topic&#39;</span>)
+    .<span style="color:#a6e22e">service</span>(<span style="color:#e6db74">&#39;TopicService&#39;</span>, <span style="color:#a6e22e">TopicService</span>);
 
-  angular
-    .module('app.forum.topic')
-    .service('TopicService', TopicService);
+  <span style="color:#a6e22e">TopicService</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$http&#39;</span>, <span style="color:#e6db74">&#39;API_URL&#39;</span>, <span style="color:#e6db74">&#39;$translate&#39;</span>];
 
-  TopicService.$inject = ['$http', 'API_URL', '$translate'];
+  <span style="color:#75715e">// API_URL no caso seria uma constante
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">TopicService</span>(<span style="color:#a6e22e">$http</span>, <span style="color:#a6e22e">API_URL</span>) {
 
-  // API_URL no caso seria uma constante
-  function TopicService($http, API_URL) {
-
-    var service = {
-      getAll: getAll,
-      getFeatured: getFeatured,
-      getOne: getOne
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">service</span> <span style="color:#f92672">=</span> {
+      <span style="color:#a6e22e">getAll</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">getAll</span>,
+      <span style="color:#a6e22e">getFeatured</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">getFeatured</span>,
+      <span style="color:#a6e22e">getOne</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">getOne</span>
     };
 
-    return service;
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">service</span>;
     
-    /** Get all topics from the API. */
-    function getAll() {
-      return $http.get(API_URL + 'topic', {
-        params: {
-          language: 'br'
+    <span style="color:#75715e">/** Get all topics from the API. */</span>
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getAll</span>() {
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">API_URL</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;topic&#39;</span>, {
+        <span style="color:#a6e22e">params</span><span style="color:#f92672">:</span> {
+          <span style="color:#a6e22e">language</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;br&#39;</span>
         }
       });
     }
     
-    /** Get featured topics from the API. */
-    function getFeatured(limit) {
-      return $http.get(API_URL + 'topic/featured');
+    <span style="color:#75715e">/** Get featured topics from the API. */</span>
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getFeatured</span>(<span style="color:#a6e22e">limit</span>) {
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">API_URL</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;topic/featured&#39;</span>);
     }
 
-    /** Get one single topic from the API. */
-    function getOne(id) {
-      return $http.get(API_URL + 'topic/' + id, {
-        params: {
-          language: 'br'
+    <span style="color:#75715e">/** Get one single topic from the API. */</span>
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getOne</span>(<span style="color:#a6e22e">id</span>) {
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">API_URL</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;topic/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>, {
+        <span style="color:#a6e22e">params</span><span style="color:#f92672">:</span> {
+          <span style="color:#a6e22e">language</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;br&#39;</span>
         }
       });
     }
 
   }
 
-})();
-</code></pre>
-
+})();</code></pre></div>
 <h2 id="view">View</h2>
 
 <p>O arquivo será:</p>
@@ -411,28 +417,24 @@ app/forum/topic/topic.service.spec.js
 </code></pre>
 
 <p>A parte mais simples de todas. É o que vai renderizar dentro do nosso componente.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- topic.html --&gt;</span>
+&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;topic well&#34;</span>&gt;
+    &lt;<span style="color:#f92672">h1</span>&gt;{{ctrl.topic.title}}&lt;/<span style="color:#f92672">h1</span>&gt;
 
-<pre><code class="language-html">&lt;!-- topic.html --&gt;
-&lt;div class=&quot;topic well&quot;&gt;
-    &lt;h1&gt;{{ctrl.topic.title}}&lt;/h1&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;{{ctrl.topic.content}}&lt;/<span style="color:#f92672">p</span>&gt;
 
-    &lt;p&gt;{{ctrl.topic.content}}&lt;/p&gt;
+    &lt;<span style="color:#f92672">h2</span>&gt;Respostas&lt;/<span style="color:#f92672">h2</span>&gt;
 
-    &lt;h2&gt;Respostas&lt;/h2&gt;
-
-    &lt;ul class=&quot;list-group&quot;&gt;
-        &lt;li class=&quot;list-group-item&quot; ng-repeat=&quot;reply in ctrl.topic.replies&quot;&gt;
+    &lt;<span style="color:#f92672">ul</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;list-group&#34;</span>&gt;
+        &lt;<span style="color:#f92672">li</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;list-group-item&#34;</span> <span style="color:#a6e22e">ng-repeat</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;reply in ctrl.topic.replies&#34;</span>&gt;
             {{reply.author}} disse:
 
-            &lt;p&gt;{{reply.content}}&lt;/p&gt;
+            &lt;<span style="color:#f92672">p</span>&gt;{{reply.content}}&lt;/<span style="color:#f92672">p</span>&gt;
 
-            &lt;em&gt;{{reply.created_at | date 'd/m/Y'}}&lt;/em&gt;
-        &lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-</code></pre>
-
+            &lt;<span style="color:#f92672">em</span>&gt;{{reply.created_at | date &#39;d/m/Y&#39;}}&lt;/<span style="color:#f92672">em</span>&gt;
+        &lt;/<span style="color:#f92672">li</span>&gt;
+    &lt;/<span style="color:#f92672">ul</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;</code></pre></div>
 <h2 id="scss">SCSS</h2>
 
 <p>O arquivo será:</p>
@@ -441,66 +443,48 @@ app/forum/topic/topic.service.spec.js
 </code></pre>
 
 <p>A segunda parte mais simples aqui.</p>
-
-<pre><code class="language-scss">    .topic {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss">    .topic {
         background: #F00;
         color: #FFF;
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>É importante na view e no CSS você usar classes ao invés de IDs, pois o conceito por trás dos componentes é que eles sejam reutilizáveis o máximo possível.</p>
 
 <p>Não esqueça de incorporar o topic.scss no seu main.scss com um @import da vida:</p>
-
-<pre><code class="language-scss">    @import &quot;app/forum/topic/topic.scss&quot;;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss">    @import &#34;app/forum/topic/topic.scss&#34;;</code></pre></div>
 <p>Agora só chamar no seu index.html:</p>
-
-<pre><code class="language-html">    &lt;script src=&quot;app/forum/topic/topic.controller.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;app/forum/topic/topic.service.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app/forum/topic/topic.controller.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app/forum/topic/topic.service.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;</code></pre></div>
 <p>E no seu module.js incluir o seu novo módulo como dependência:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#66d9ef">function</span>(){
 
-<pre><code class="language-js">(function(){
-
-    angular
-        .module('app', ['app.forum.topic']);
-})();
-</code></pre>
-
+    <span style="color:#a6e22e">angular</span>
+        .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>, [<span style="color:#e6db74">&#39;app.forum.topic&#39;</span>]);
+})();</code></pre></div>
 <p>Agora para usar o componente, digamos no seu routes.js usando o UI Router:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">angular</span>
+  .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>)
+  .<span style="color:#a6e22e">config</span>(<span style="color:#a6e22e">routesConfig</span>);
 
-<pre><code class="language-js">angular
-  .module('app')
-  .config(routesConfig);
+<span style="color:#a6e22e">routesConfig</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$stateProvider&#39;</span>, <span style="color:#e6db74">&#39;$urlRouterProvider&#39;</span>, <span style="color:#e6db74">&#39;$locationProvider&#39;</span>];
 
-routesConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">routesConfig</span>(<span style="color:#a6e22e">$stateProvider</span>, <span style="color:#a6e22e">$urlRouterProvider</span>, <span style="color:#a6e22e">$locationProvider</span>) {
+  <span style="color:#a6e22e">$locationProvider</span>.<span style="color:#a6e22e">html5Mode</span>(<span style="color:#66d9ef">true</span>).<span style="color:#a6e22e">hashPrefix</span>(<span style="color:#e6db74">&#39;!&#39;</span>);
+  <span style="color:#a6e22e">$urlRouterProvider</span>.<span style="color:#a6e22e">otherwise</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
 
-function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider
-    .state('home', {
-      url: '/',
-      template: '&lt;matrix-home&gt;&lt;/matrix-home&gt;'
+  <span style="color:#a6e22e">$stateProvider</span>
+    .<span style="color:#a6e22e">state</span>(<span style="color:#e6db74">&#39;home&#39;</span>, {
+      <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>,
+      <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&lt;matrix-home&gt;&lt;/matrix-home&gt;&#39;</span>
     })
-    .state('topic', {
-      url: '/topic/{id}',
-      template: '&lt;matrix-topic&gt;&lt;/matrix-topic&gt;'
+    .<span style="color:#a6e22e">state</span>(<span style="color:#e6db74">&#39;topic&#39;</span>, {
+      <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/topic/{id}&#39;</span>,
+      <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&lt;matrix-topic&gt;&lt;/matrix-topic&gt;&#39;</span>
     });
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Pronto! :D</p>
 
 <p>Agora toda vez que você quiser mostrar um tópico na aplicação, só colocar em qualquer HTML:</p>
-
-<pre><code class="language-html">&lt;matrix-topic&gt;&lt;/matrix-topic&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">matrix-topic</span>&gt;&lt;/<span style="color:#f92672">matrix-topic</span>&gt;</code></pre></div>
 <p>Espero que gostem. Quero aprofundar mais este assunto aqui depois.</p>
 </article>
     <footer class="post-footer">
@@ -518,7 +502,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>391</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>484</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -540,8 +524,8 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

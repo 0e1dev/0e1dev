@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -27,19 +26,25 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="NoSQL para Leigos, Parte 1" />
     <meta name="twitter:description" content="Estava eu, no meu cantinho, fazendo o que eu sei fazer de melhor: caçar bugs. Até que o CTO da empresa que trabalho me fez um pedido muito interessante:
 &amp;ldquo;Explique para o setor de Marketing como eles podem rodar consultas na nossa base de dados em MongoDB.&amp;rdquo;
 Situação perfeita para eu realinhar o meu conhecimento com NoSQL e escrever mais um pouco para este bendito blog.
 Contexto Temos uma base de dados com diversos CNPJs, que contém informações como: atividades, data de registro, razão social, natureza jurídica, etc." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/nosql-para-leigos-parte-1.jpg" />
+    <meta name="og:title" content="NoSQL para Leigos, Parte 1" />
+    <meta name="og:description" content="Estava eu, no meu cantinho, fazendo o que eu sei fazer de melhor: caçar bugs. Até que o CTO da empresa que trabalho me fez um pedido muito interessante:
+&amp;ldquo;Explique para o setor de Marketing como eles podem rodar consultas na nossa base de dados em MongoDB.&amp;rdquo;
+Situação perfeita para eu realinhar o meu conhecimento com NoSQL e escrever mais um pouco para este bendito blog.
+Contexto Temos uma base de dados com diversos CNPJs, que contém informações como: atividades, data de registro, razão social, natureza jurídica, etc." />
+    <meta name="og:image" content="http://0e1dev.com/covers/nosql-para-leigos-parte-1.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/nosql-para-leigos-parte-1/" />
@@ -140,7 +145,9 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -187,10 +194,16 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">NoSQL para Leigos, Parte 1</h1>
       <p class="post-meta">@lhas · 15/12/2016 · 6 mins. de leitura</p>
     </header>
+
+    
+    <div title="NoSQL para Leigos, Parte 1" style="width: 100%; height: 250px; background: url(/covers/nosql-para-leigos-parte-1.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Estava eu, no meu cantinho, fazendo o que eu sei fazer de melhor: caçar bugs. Até que o CTO da empresa que trabalho me fez um pedido muito interessante:</p>
@@ -284,19 +297,13 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 <h1 id="o-que-é-uma-consulta">O que é uma consulta?</h1>
 
 <p>É algo parecido com isto:</p>
-
-<pre><code class="language-sql">db.cnpj.find({})
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{}</span>)</code></pre></div>
 <p>Basicamente, estamos dizendo ao banco de dados para retornar todos os documentos da coleção de CNPJ.</p>
 
 <h1 id="e-se-quisesessemos">E se quisesessemos&hellip;</h1>
 
 <h2 id="recuperar-somente-empresas-ativas">Recuperar somente empresas ativas?</h2>
-
-<pre><code class="language-sql">db.cnpj.find({&quot;situacao&quot;: &quot;ATIVA&quot;})
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;situacao&#34;</span>: <span style="color:#e6db74">&#34;ATIVA&#34;</span><span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <p>Como pode ver, a diferença ocorreu dentro das chaves do <code>find</code>.</p>
 
 <p>A chave, é o nome da coluna que você deseja filtrar a informação.</p>
@@ -306,10 +313,7 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 <p>Vamos para outros exemplos.</p>
 
 <h2 id="recuperar-somente-empresas-ativas-do-df">Recuperar somente empresas ativas do DF?</h2>
-
-<pre><code class="language-sql">db.cnpj.find({&quot;situacao&quot;: &quot;ATIVA&quot;, &quot;uf&quot;: &quot;DF&quot;})
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;situacao&#34;</span>: <span style="color:#e6db74">&#34;ATIVA&#34;</span>, <span style="color:#e6db74">&#34;uf&#34;</span>: <span style="color:#e6db74">&#34;DF&#34;</span><span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <p>Como você pode ver, basta adicionar um novo chave-valor separado por vírgula, para você fazer uma consulta em múltiplas colunas.</p>
 
 <h2 id="recuperar-empresas-em-uma-atividade-principal">Recuperar empresas em uma atividade principal?</h2>
@@ -319,10 +323,7 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 <p>Pelo fato de ser uma lista, para nós consultarmos este tipo de dado, precisamos fazer de uma forma um pouco diferente.</p>
 
 <p>Veja o exemplo abaixo:</p>
-
-<pre><code class="language-sql">db.cnpj.find({&quot;atividade_principal.code&quot;: &quot;43.30-4-05&quot;})
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;atividade_principal.code&#34;</span>: <span style="color:#e6db74">&#34;43.30-4-05&#34;</span><span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <p>Basicamente, indicamos a segunda coluna através de um ponto final.</p>
 
 <p>Exemplos:</p>
@@ -339,10 +340,7 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 <p>Para podermos fazer esta consulta em campos que são números, como é o caso do capital social, precisamos usar algumas palavras-chaves.</p>
 
 <p>No caso de uma consulta com empresas ativas que tenham o capital social maior que dez mil reais:</p>
-
-<pre><code class="language-sql">db.cnpj.find({&quot;situacao&quot;: &quot;ATIVA&quot;, &quot;capital_social&quot;: { $gt: &quot;10000.00&quot; }  })
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;situacao&#34;</span>: <span style="color:#e6db74">&#34;ATIVA&#34;</span>, <span style="color:#e6db74">&#34;capital_social&#34;</span>: <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#960050;background-color:#1e0010">$</span>gt: <span style="color:#e6db74">&#34;10000.00&#34;</span> <span style="color:#960050;background-color:#1e0010">}</span>  <span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <p>Para coisas <code>Maior que X</code>, usamos <code>$gt</code> (greater than). Para saber mais sobre este operador, <a href="https://docs.mongodb.com/v3.2/reference/operator/query/gt/">clique aqui</a>.</p>
 
 <h2 id="recuperar-empresas-com-um-capital-social-menor-que-x">Recuperar empresas com um capital social MENOR que X</h2>
@@ -352,10 +350,7 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 <p>Para coisas <code>Menor que X</code>, usamos <code>$lt</code> (less than). Para saber mais sobre este operador, <a href="https://docs.mongodb.com/v3.2/reference/operator/query/lt/">clique aqui</a>.</p>
 
 <p>No caso de uma consulta com empresas ativas que tenham o capital social maior que dez mil reais:</p>
-
-<pre><code class="language-sql">db.cnpj.find({&quot;situacao&quot;: &quot;ATIVA&quot;, &quot;capital_social&quot;: { $gt: &quot;10000.00&quot; }  })
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;situacao&#34;</span>: <span style="color:#e6db74">&#34;ATIVA&#34;</span>, <span style="color:#e6db74">&#34;capital_social&#34;</span>: <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#960050;background-color:#1e0010">$</span>gt: <span style="color:#e6db74">&#34;10000.00&#34;</span> <span style="color:#960050;background-color:#1e0010">}</span>  <span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <h3 id="observação">Observação</h3>
 
 <p>Caso você queira, <code>Maior ou IGUAL</code>/<code>Menor ou IGUAL</code>, você precisa por um <code>e</code> no fim do operador. Sendo assim:</p>
@@ -363,17 +358,11 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 <ul>
 <li><strong>Maior ou igual a 10.000 reais</strong></li>
 </ul>
-
-<pre><code class="language-sql">{&quot;capital_social&quot;: { $gte: &quot;10000.00&quot; } }
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;capital_social&#34;</span>: <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#960050;background-color:#1e0010">$</span>gte: <span style="color:#e6db74">&#34;10000.00&#34;</span> <span style="color:#960050;background-color:#1e0010">}</span> <span style="color:#960050;background-color:#1e0010">}</span></code></pre></div>
 <ul>
 <li><strong>Menor ou igual a 10.000 reais</strong></li>
 </ul>
-
-<pre><code class="language-sql">{&quot;capital_social&quot;: { $lte: &quot;10000.00&quot; } }
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;capital_social&#34;</span>: <span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#960050;background-color:#1e0010">$</span>lte: <span style="color:#e6db74">&#34;10000.00&#34;</span> <span style="color:#960050;background-color:#1e0010">}</span> <span style="color:#960050;background-color:#1e0010">}</span></code></pre></div>
 <h2 id="recuperar-empresas-que-tenham-sido-fundadas-abertas-atualizadas-em-x">Recuperar empresas que tenham sido fundadas/abertas/atualizadas em X</h2>
 
 <p>Para filtrarmos estas colunas que na verdade são data (dia/mês/ano), vamos precisar usar Expressões Regulares (abreviado como Regex).</p>
@@ -381,25 +370,13 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 <p>Sem aprofundar muito o que são expressões regulares, vamos aos exemplos:</p>
 
 <h3 id="abertas-em-2016">Abertas em 2016</h3>
-
-<pre><code class="language-sql">db.cnpj.find({ &quot;abertura&quot;: {$regex: /2016/} })
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#e6db74">&#34;abertura&#34;</span>: <span style="color:#960050;background-color:#1e0010">{$</span>regex: <span style="color:#f92672">/</span><span style="color:#ae81ff">2016</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">}</span> <span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <h3 id="atualizadas-em-2016">Atualizadas em 2016</h3>
-
-<pre><code class="language-sql">db.cnpj.find({ &quot;ultima_atualizacao&quot;: {$regex: /2016/} })
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#e6db74">&#34;ultima_atualizacao&#34;</span>: <span style="color:#960050;background-color:#1e0010">{$</span>regex: <span style="color:#f92672">/</span><span style="color:#ae81ff">2016</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">}</span> <span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <h3 id="empresas-que-tiveram-a-situação-atualizada-para-ativa-em-2016">Empresas que tiveram a situação atualizada para ATIVA em 2016</h3>
-
-<pre><code class="language-sql">db.cnpj.find({ &quot;situacao&quot;: &quot;ATIVA&quot;, &quot;data_situacao&quot;: {$regex: /2016/} })
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#e6db74">&#34;situacao&#34;</span>: <span style="color:#e6db74">&#34;ATIVA&#34;</span>, <span style="color:#e6db74">&#34;data_situacao&#34;</span>: <span style="color:#960050;background-color:#1e0010">{$</span>regex: <span style="color:#f92672">/</span><span style="color:#ae81ff">2016</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">}</span> <span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <h3 id="empresas-abertas-em-janeiro-de-2015">Empresas abertas em Janeiro de 2015</h3>
-
-<pre><code class="language-sql">db.cnpj.find({ &quot;abertura&quot;: {$regex: /01\/2015/} })
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#e6db74">&#34;abertura&#34;</span>: <span style="color:#960050;background-color:#1e0010">{$</span>regex: <span style="color:#f92672">/</span><span style="color:#ae81ff">01</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2015</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">}</span> <span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <h2 id="como-exportar-estes-dados">Como exportar estes dados?</h2>
 
 <p>Ok, você já filtrou os dados que queria. E agora, como jogar esta belezinha para uma planilha?</p>
@@ -411,10 +388,7 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
 <ul>
 <li>Vamos exportar todas as empresas que encontram-se ATIVAS e que foram abertas DESDE 2015 no PARANÁ. A consulta será esta:</li>
 </ul>
-
-<pre><code class="language-sql">db.cnpj.find({ &quot;situacao&quot;: &quot;ATIVA&quot;, &quot;uf&quot;: &quot;PR&quot;, &quot;abertura&quot;: {$regex: /01\/2015/} })
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">db.cnpj.find(<span style="color:#960050;background-color:#1e0010">{</span> <span style="color:#e6db74">&#34;situacao&#34;</span>: <span style="color:#e6db74">&#34;ATIVA&#34;</span>, <span style="color:#e6db74">&#34;uf&#34;</span>: <span style="color:#e6db74">&#34;PR&#34;</span>, <span style="color:#e6db74">&#34;abertura&#34;</span>: <span style="color:#960050;background-color:#1e0010">{$</span>regex: <span style="color:#f92672">/</span><span style="color:#ae81ff">01</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2015</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">}</span> <span style="color:#960050;background-color:#1e0010">}</span>)</code></pre></div>
 <ul>
 <li>Após rodar a consulta, vamos clicar em Export:</li>
 </ul>
@@ -481,7 +455,7 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>255</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>348</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -503,8 +477,8 @@ Contexto Temos uma base de dados com diversos CNPJs, que contém informações c
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

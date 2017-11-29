@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -26,18 +25,23 @@ Continue lendo o tutorial e você aprenderá:
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Muito além dos chats: como deixar o seu site em tempo real com Socket.IO" />
     <meta name="twitter:description" content="Aplicações em tempo real estão mais acessíveis do que nunca. Hoje em dia, qualquer site que se preze tem algo neste esquema. Por um simples motivo: você consegue fazer uma conversão de acessos enorme com isto.
 Continue lendo o tutorial e você aprenderá:
  Fazer uma comunicação em tempo real entre cliente x servidor; Transmitir essas informações para os outros usuários no seu site; E de quebra aprender como configurar tudo isto dentro do Apache." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io.jpg" />
+    <meta name="og:title" content="Muito além dos chats: como deixar o seu site em tempo real com Socket.IO" />
+    <meta name="og:description" content="Aplicações em tempo real estão mais acessíveis do que nunca. Hoje em dia, qualquer site que se preze tem algo neste esquema. Por um simples motivo: você consegue fazer uma conversão de acessos enorme com isto.
+Continue lendo o tutorial e você aprenderá:
+ Fazer uma comunicação em tempo real entre cliente x servidor; Transmitir essas informações para os outros usuários no seu site; E de quebra aprender como configurar tudo isto dentro do Apache." />
+    <meta name="og:image" content="http://0e1dev.com/covers/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/" />
@@ -138,7 +142,9 @@ Continue lendo o tutorial e você aprenderá:
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -185,10 +191,16 @@ Continue lendo o tutorial e você aprenderá:
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Muito além dos chats: como deixar o seu site em tempo real com Socket.IO</h1>
       <p class="post-meta">@lhas · 06/08/2016 · 12 mins. de leitura</p>
     </header>
+
+    
+    <div title="Muito além dos chats: como deixar o seu site em tempo real com Socket.IO" style="width: 100%; height: 250px; background: url(/covers/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Aplicações em <strong>tempo real</strong> estão mais <strong>acessíveis</strong> do que nunca. Hoje em dia, qualquer site que se preze tem algo neste esquema. Por um simples motivo: você consegue fazer uma <strong>conversão de acessos enorme</strong> com isto.</p>
@@ -252,23 +264,17 @@ Continue lendo o tutorial e você aprenderá:
 <p>Primeiro precisamos instalá-lo o client via Bower:</p>
 
 <h2 id="instalando-via-bower">Instalando via bower:</h2>
-
-<pre><code class="language-bash">bower install socket.io-client angular-socket-io --save
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bower install socket.io-client angular-socket-io --save</code></pre></div>
 <p>Se você estiver usando injeção automática do Bower (gulp-wiredep), irá reparar que o socket.io-client não carrega nada, só o angular-socket-io.</p>
 
 <p>Para resolver isso, basta abrir o seu bower.json e adicionar esta propriedade:</p>
-
-<pre><code class="language-json">overrides: {
-  &quot;socket.io-client&quot;: {
-    &quot;main&quot;: [
-      &quot;socket.io.js&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#960050;background-color:#1e0010">overrides:</span> {
+  <span style="color:#f92672">&#34;socket.io-client&#34;</span>: {
+    <span style="color:#f92672">&#34;main&#34;</span>: [
+      <span style="color:#e6db74">&#34;socket.io.js&#34;</span>
     ]
   }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Assim ele irá carregá-lo.</p>
 
 <p><em>PS: Se você não for usar o Angular, não precisa instalar o angular-socket-io.</em></p>
@@ -276,40 +282,34 @@ Continue lendo o tutorial e você aprenderá:
 <h2 id="injetar-dependência-no-angular">Injetar dependência no angular</h2>
 
 <p>No nosso exemplo, vamos fazer essa comunicação dentro de um Single Page Application feito com Angular. Você pode fazer o mesmo com seu site mesmo que ele não use o Angular. Neste caso é somente uma demonstração pois é o meu framework predileto para front-end.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* app.module.js */</span>
+(<span style="color:#66d9ef">function</span>(){
 
-<pre><code class="language-js">/* app.module.js */
-(function(){
+<span style="color:#a6e22e">angular</span>
+  .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>, [<span style="color:#e6db74">&#39;ui.router&#39;</span>, <span style="color:#e6db74">&#39;btford.socket-io&#39;</span>])
 
-angular
-  .module('app', ['ui.router', 'btford.socket-io'])
-
-})();
-</code></pre>
-
+})();</code></pre></div>
 <h2 id="criar-uma-factory-para-lidarmos-com-o-socket-io">Criar uma factory para lidarmos com o Socket.IO</h2>
 
 <p>src/app/shared/realtime/realtime.factory.js:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* realtime.factory.js */</span>
+(<span style="color:#66d9ef">function</span>(){
+  <span style="color:#e6db74">&#39;use strict&#39;</span>;
 
-<pre><code class="language-js">/* realtime.factory.js */
-(function(){
-  'use strict';
+  <span style="color:#a6e22e">angular</span>
+    .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app.realtime&#39;</span>, [])
+    .<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;realtimeFactory&#39;</span>, <span style="color:#a6e22e">realtimeFactory</span>);
 
-  angular
-    .module('app.realtime', [])
-    .factory('realtimeFactory', realtimeFactory);
-
-    realtimeFactory.$inject = ['socketFactory'];
-    function realtimeFactory(socketFactory) {
-      var ioConnect = io.connect('http://localhost:3010');
-      var realtimeSocket = socketFactory({
-        ioSocket: ioConnect
+    <span style="color:#a6e22e">realtimeFactory</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;socketFactory&#39;</span>];
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">realtimeFactory</span>(<span style="color:#a6e22e">socketFactory</span>) {
+      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ioConnect</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#e6db74">&#39;http://localhost:3010&#39;</span>);
+      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">realtimeSocket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">socketFactory</span>({
+        <span style="color:#a6e22e">ioSocket</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ioConnect</span>
       });
 
-      return realtimeSocket;
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">realtimeSocket</span>;
     }
-})();
-</code></pre>
-
+})();</code></pre></div>
 <p>Se você fizer os passos acima direitinho, no seu console irá aparecer isso aqui:</p>
 
 <p><img src="Selection_001.png" alt="" /></p>
@@ -357,14 +357,11 @@ angular
 <p>No caso da nossa app, o usuário final acessaria o site através do domínio <a href="http://abacate.com">http://abacate.com</a></p>
 
 <p>O Apache que está configurado com este domínio, vai ter um VirtualHost assim:</p>
-
-<pre><code class="language-apache">&lt;VirtualHost *:80&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;VirtualHost</span> <span style="color:#e6db74">*:80</span><span style="color:#f92672">&gt;</span>
     ServerName abacate.com   
     ProxyPass / http://abacate.com:3010/
     ProxyPassReverse / http://abacate.com:3010/
-&lt;/VirtualHost&gt;
-</code></pre>
-
+<span style="color:#f92672">&lt;/VirtualHost</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span></code></pre></div>
 <p>Ou seja, o domínio abacate.com vai apontar para abacate.com:3010, mas o usuário final vai se manter no mesmo domínio.</p>
 
 <p>O <a href="http://abacate.com:3010/">http://abacate.com:3010/</a> vai ser o nosso server.js rodando.</p>
@@ -372,19 +369,13 @@ angular
 <p>No caso, seria o item Web/ExpressJS. Ele irá apontar para a pasta &ldquo;dist/&rdquo; do nosso app. E inicializar o SocketIO na mesma porta.</p>
 
 <p>Já nossa API e Admin, vamos precisar de um VirtualHost para cada:</p>
-
-<pre><code class="language-apache">&lt;VirtualHost *:80&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;VirtualHost</span> <span style="color:#e6db74">*:80</span><span style="color:#f92672">&gt;</span>
     ServerName api.abacate.com
-    DocumentRoot &quot;/home/root/public_html/laravel/public&quot;
-&lt;/VirtualHost&gt;
-</code></pre>
-
-<pre><code class="language-apache">&lt;VirtualHost *:80&gt;
+    DocumentRoot <span style="color:#e6db74">&#34;/home/root/public_html/laravel/public&#34;</span>
+<span style="color:#f92672">&lt;/VirtualHost</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;VirtualHost</span> <span style="color:#e6db74">*:80</span><span style="color:#f92672">&gt;</span>
     ServerName admin.abacate.com
-    DocumentRoot &quot;/home/root/public_html/laravel/public&quot;
-&lt;/VirtualHost&gt;
-</code></pre>
-
+    DocumentRoot <span style="color:#e6db74">&#34;/home/root/public_html/laravel/public&#34;</span>
+<span style="color:#f92672">&lt;/VirtualHost</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span></code></pre></div>
 <p>No meu caso, Admin e API são a mesma coisa então apontei para a mesma pasta.</p>
 
 <p><img src="https://media.giphy.com/media/AtRaEatCSjC0w/giphy.gif" alt="" /></p>
@@ -409,58 +400,49 @@ angular
 <p>Vou colocar aqui um exemplo do ExpressJS com Socket.io. É o mínimo que você precisa para ter ambos funcionando.</p>
 
 <p>Primeiro instale as dependências:</p>
-
-<pre><code class="language-bash">npm install express socket.io --save
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install express socket.io --save</code></pre></div>
 <p>Agora vamos preencher o server.js:</p>
 
 <p>client/server.js:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>).<span style="color:#a6e22e">Server</span>(<span style="color:#a6e22e">app</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">io</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;socket.io&#39;</span>)(<span style="color:#a6e22e">http</span>);
 
-<pre><code class="language-js">var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
-// Se estiver em desenvolvimento, servirá as pastas .tmp/, src/ e bower_components/
-if(app.get('env') == &quot;development&quot;) {
-  app.use(express.static(&quot;.tmp&quot;));
-  app.use(express.static(&quot;src&quot;));
-  app.use('/bower_components', express.static(&quot;bower_components&quot;));
-} else {
-  // Do contrário, se estiver em produção, servirá a pasta dist/
-  app.use(express.static(&quot;dist&quot;));
+<span style="color:#75715e">// Se estiver em desenvolvimento, servirá as pastas .tmp/, src/ e bower_components/
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;env&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;development&#34;</span>) {
+  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#34;.tmp&#34;</span>));
+  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#34;src&#34;</span>));
+  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#e6db74">&#39;/bower_components&#39;</span>, <span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#34;bower_components&#34;</span>));
+} <span style="color:#66d9ef">else</span> {
+  <span style="color:#75715e">// Do contrário, se estiver em produção, servirá a pasta dist/
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#34;dist&#34;</span>));
 }
 
-// Todas as rotas apontarão para o index.html
-app.get('*', function(req, res){ 
-  var fileName = (app.get('env') == &quot;development&quot;) ? '/.tmp/index.html' : '/dist/index.html';
+<span style="color:#75715e">// Todas as rotas apontarão para o index.html
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;*&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>){ 
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fileName</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;env&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;development&#34;</span>) <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;/.tmp/index.html&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/dist/index.html&#39;</span>;
 
-  return res.sendFile(__dirname + fileName);
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">sendFile</span>(<span style="color:#a6e22e">__dirname</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">fileName</span>);
 });
 
-// Exemplo do Socket.IO que nós vamos trabalhar
-// Toda vez que algum usuário final criar um job, nós receberemos aqui
-// E emitiremos para todos os sockets online que o servidor acabou de salvar um novo job
-io.on('connection', function(socket){
+<span style="color:#75715e">// Exemplo do Socket.IO que nós vamos trabalhar
+</span><span style="color:#75715e">// Toda vez que algum usuário final criar um job, nós receberemos aqui
+</span><span style="color:#75715e">// E emitiremos para todos os sockets online que o servidor acabou de salvar um novo job
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;connection&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">socket</span>){
 
-  socket.on('client:created:job', function(data) {
-    io.sockets.emit('server:created:job', data);
+  <span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;client:created:job&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">data</span>) {
+    <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">sockets</span>.<span style="color:#a6e22e">emit</span>(<span style="color:#e6db74">&#39;server:created:job&#39;</span>, <span style="color:#a6e22e">data</span>);
   });
 
 });
 
-// Iniciando servidor
-http.listen(3010, function(){
-  console.log('Escutando em *:3010');
-});
-</code></pre>
-
+<span style="color:#75715e">// Iniciando servidor
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3010</span>, <span style="color:#66d9ef">function</span>(){
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Escutando em *:3010&#39;</span>);
+});</code></pre></div>
 <p>Se rodarmos no terminal agora:</p>
-
-<pre><code class="language-bash">node server.js
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">node server.js</code></pre></div>
 <p><img src="Selection_005.png" alt="" /></p>
 
 <p>Se abrirmos <a href="http://localhost:3010/socket.io/socket.io.js:">http://localhost:3010/socket.io/socket.io.js:</a></p>
@@ -496,35 +478,32 @@ Se <em>houver</em>, vamos <em>atualizar</em> a listagem dos jobs.</li>
 <p>Se você está usando algum gerador do <em>Yeoman</em> ou algo parecido, provavelmente você vai ter de mudá-lo.</p>
 
 <p>No meu caso, eu uso o FountainJS. A configuração do meu BrowserSync fica em: conf/browsersync.conf.js</p>
-
-<pre><code class="language-js">// Antigo
-module.exports = function () {
-  return {
-    server: {
-      baseDir: [
-        conf.paths.tmp,
-        conf.paths.src
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Antigo
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">server</span><span style="color:#f92672">:</span> {
+      <span style="color:#a6e22e">baseDir</span><span style="color:#f92672">:</span> [
+        <span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">tmp</span>,
+        <span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">paths</span>.<span style="color:#a6e22e">src</span>
       ],
-      routes: {
-        '/bower_components': 'bower_components'
+      <span style="color:#a6e22e">routes</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#39;/bower_components&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;bower_components&#39;</span>
       }
     },
-    open: false
+    <span style="color:#a6e22e">open</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
   };
 };
 
-// Novo
-module.exports = function () {
-  return {
-    proxy: {
-			target: &quot;localhost:3010&quot;,
-			ws: true
+<span style="color:#75715e">// Novo
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">proxy</span><span style="color:#f92672">:</span> {
+			<span style="color:#a6e22e">target</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;localhost:3010&#34;</span>,
+			<span style="color:#a6e22e">ws</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
 		},
-    open: false
+    <span style="color:#a6e22e">open</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
   };
-};
-</code></pre>
-
+};</code></pre></div>
 <p><img src="https://media.giphy.com/media/bl2FKRXQaFgf6/giphy.gif" alt="" /></p>
 
 <p>Além disto, se você quiser fazer testes no desenvolvimento, você precisa desabilitar o <code>Ghost Mode</code>.</p>
@@ -534,10 +513,7 @@ module.exports = function () {
 <p>O problema disso é que se você tentar abrir a home numa aba, e abrir o cadastro da vaga em outra aba, vai dar merda, afinal, as telas estarão sincronizadas.</p>
 
 <p>Caso você por este problema, veja se na config. do seu BrowserSync não tem uma linha assim:</p>
-
-<pre><code class="language-js">browserSync.use(spa());
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">browserSync</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">spa</span>());</code></pre></div>
 <p>Se tiver, comente-a. Isto irá desabilitar o ghost mode. Quando você quiser reativar o esquema, basta descomentá-la.</p>
 
 <p>Feito a adaptação para o BrowserSync, vamos seguir para&hellip;</p>
@@ -553,38 +529,32 @@ module.exports = function () {
 <p>Vamos criar uma task para o nosso Gulp, para que ele possa iniciar o server:</p>
 
 <p>Crie o arquivo gulp_tasks/server.js (ou coloque dentro do gulpfile):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
 
-<pre><code class="language-js">const path = require('path');
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gulp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp&#39;</span>);
 
-const gulp = require('gulp');
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">conf</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../conf/gulp.conf&#39;</span>);
 
-const conf = require('../conf/gulp.conf');
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">exec</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>).<span style="color:#a6e22e">exec</span>;
 
-const exec = require('child_process').exec;
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;server&#39;</span>, <span style="color:#a6e22e">server</span>);
 
-gulp.task('server', server);
-
-function server() {
-  exec('node server.js', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">server</span>() {
+  <span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#39;node server.js&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">stdout</span>, <span style="color:#a6e22e">stderr</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">stdout</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">stderr</span>);
+    <span style="color:#a6e22e">cb</span>(<span style="color:#a6e22e">err</span>);
   });
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Se você fizer um teste rodando <code>gulp server</code> e abrir no seu navegador <a href="http://localhost:3010">http://localhost:3010</a> irá funcionar.</p>
 
 <p>Agora precisamos incluir esta task server, na fila de tasks quando rodamos <code>gulp serve</code> (lembra, é só pro amb. de desenvolvimento).</p>
 
 <p>Abra o gulpfile.js. Procure a linha que defina a task do serve. A minha estava assim:</p>
-
-<pre><code class="language-js">// Antigo
-gulp.task('serve', gulp.series('clean', 'ng-config:serve', 'partials', 'inject', 'watch', 'browsersync'));
-// Novo
-gulp.task('serve', gulp.series('clean', 'ng-config:serve', 'partials', 'inject', 'watch', 'browsersync', 'server'));
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Antigo
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;serve&#39;</span>, <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">series</span>(<span style="color:#e6db74">&#39;clean&#39;</span>, <span style="color:#e6db74">&#39;ng-config:serve&#39;</span>, <span style="color:#e6db74">&#39;partials&#39;</span>, <span style="color:#e6db74">&#39;inject&#39;</span>, <span style="color:#e6db74">&#39;watch&#39;</span>, <span style="color:#e6db74">&#39;browsersync&#39;</span>));
+<span style="color:#75715e">// Novo
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;serve&#39;</span>, <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">series</span>(<span style="color:#e6db74">&#39;clean&#39;</span>, <span style="color:#e6db74">&#39;ng-config:serve&#39;</span>, <span style="color:#e6db74">&#39;partials&#39;</span>, <span style="color:#e6db74">&#39;inject&#39;</span>, <span style="color:#e6db74">&#39;watch&#39;</span>, <span style="color:#e6db74">&#39;browsersync&#39;</span>, <span style="color:#e6db74">&#39;server&#39;</span>));</code></pre></div>
 <p>Ou seja, depois dele fazer todo o processo de servir o app, ele irár rodar o server.js (no caso o Express).</p>
 
 <p>Pronto. Gulp configurado!</p>
@@ -599,12 +569,9 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
 <h1 id="dizendo-o-app-o-que-fazer-quando-novas-vagas-forem-cadastradas">Dizendo o app o que fazer quando novas vagas forem cadastradas</h1>
 
 <p>Se você reparar, no server.js tem um trecho assim:</p>
-
-<pre><code class="language-js">socket.on('client:created:job', function(data) {
-  io.sockets.emit('server:created:job', data);
-});
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;client:created:job&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">data</span>) {
+  <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">sockets</span>.<span style="color:#a6e22e">emit</span>(<span style="color:#e6db74">&#39;server:created:job&#39;</span>, <span style="color:#a6e22e">data</span>);
+});</code></pre></div>
 <p>Isso significa que:</p>
 
 <p>Toda vez que nosso socket observar um evento novo em <code>client:created:job</code>, ele irá emitir um outro evento denominado <code>server:created:job</code>.</p>
@@ -626,67 +593,61 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
 <p>Digamos que este seja o controller da nossa página de cadastro de vagas:</p>
 
 <p>PS: Observe que eu já injetei o realtimeFactory que criamos lá em cima. :-)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* create.controller.js */</span>
+(<span style="color:#66d9ef">function</span>() {
 
-<pre><code class="language-js">/* create.controller.js */
-(function() {
-
-  angular
-    .module('app.job.create', [])
-    .component('tesJobCreate', {
-      templateUrl: 'app/components/job/create/create.html',
-      controller: CreateController
+  <span style="color:#a6e22e">angular</span>
+    .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app.job.create&#39;</span>, [])
+    .<span style="color:#a6e22e">component</span>(<span style="color:#e6db74">&#39;tesJobCreate&#39;</span>, {
+      <span style="color:#a6e22e">templateUrl</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;app/components/job/create/create.html&#39;</span>,
+      <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">CreateController</span>
     });
 
-  CreateController.$inject = ['JobService', 'realtimeFactory', 'Notification', '$cookies', '$state'];
+  <span style="color:#a6e22e">CreateController</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;JobService&#39;</span>, <span style="color:#e6db74">&#39;realtimeFactory&#39;</span>, <span style="color:#e6db74">&#39;Notification&#39;</span>, <span style="color:#e6db74">&#39;$cookies&#39;</span>, <span style="color:#e6db74">&#39;$state&#39;</span>];
   
-  function CreateController(JobService, realtimeFactory, Notification, $cookies, $state) {
-    var vm = this;
-    var job = $cookies.getObject('job');
+  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">CreateController</span>(<span style="color:#a6e22e">JobService</span>, <span style="color:#a6e22e">realtimeFactory</span>, <span style="color:#a6e22e">Notification</span>, <span style="color:#a6e22e">$cookies</span>, <span style="color:#a6e22e">$state</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">vm</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">job</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$cookies</span>.<span style="color:#a6e22e">getObject</span>(<span style="color:#e6db74">&#39;job&#39;</span>);
 
-    vm.job = job;
-    vm.create = create;
+    <span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">job</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">job</span>;
+    <span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">create</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">create</span>;
 
-    /* Função chamada quando o formulário é enviado (ng-submit=&quot;$ctrl.create($ctrl.job)&quot;, por exemplo) */
-    function create(job) {
+    <span style="color:#75715e">/* Função chamada quando o formulário é enviado (ng-submit=&#34;$ctrl.create($ctrl.job)&#34;, por exemplo) */</span>
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">job</span>) {
 
-      // Salva a vaga através de um Service, e define os callbacks
-      JobService.create(job).then(success, error);
+      <span style="color:#75715e">// Salva a vaga através de um Service, e define os callbacks
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">JobService</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">job</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">success</span>, <span style="color:#a6e22e">error</span>);
 
-      /* Callback de sucesso - será acionado caso a vaga tenha sido salva */
-      function success(result) {
-        // Notifica o usuário
-        Notification.primary('O seu anúncio foi criado com sucesso!');
+      <span style="color:#75715e">/* Callback de sucesso - será acionado caso a vaga tenha sido salva */</span>
+      <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">success</span>(<span style="color:#a6e22e">result</span>) {
+        <span style="color:#75715e">// Notifica o usuário
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">Notification</span>.<span style="color:#a6e22e">primary</span>(<span style="color:#e6db74">&#39;O seu anúncio foi criado com sucesso!&#39;</span>);
 
-        // Redireciona para a home
-        $state.go('home');
+        <span style="color:#75715e">// Redireciona para a home
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$state</span>.<span style="color:#a6e22e">go</span>(<span style="color:#e6db74">&#39;home&#39;</span>);
       }
 
-      /* Callback de erro - será acionado caso a API retorne algum erro ou a conexão tenha sido perdida */
-      function error(error) {
-        // Notifica o usuário
-        Notification.error('Ocorreu um problema ao cadastrar a vaga. Tente novamente.');
+      <span style="color:#75715e">/* Callback de erro - será acionado caso a API retorne algum erro ou a conexão tenha sido perdida */</span>
+      <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>) {
+        <span style="color:#75715e">// Notifica o usuário
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">Notification</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Ocorreu um problema ao cadastrar a vaga. Tente novamente.&#39;</span>);
       }
     }
   }
 
-})();
-</code></pre>
-
+})();</code></pre></div>
 <p>Vamos colocar na função create(), dentro do callback de sucesso, a seguinte linha:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* Callback de sucesso - será acionado caso a vaga tenha sido salva */</span>
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">success</span>(<span style="color:#a6e22e">result</span>) {
+  <span style="color:#75715e">// Transmite um evento para o servidor indicando que uma vaga foi criada com sucesso por um cliente
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">realtimeFactory</span>.<span style="color:#a6e22e">emit</span>(<span style="color:#e6db74">&#39;client:created:job&#39;</span>);
 
-<pre><code class="language-js">/* Callback de sucesso - será acionado caso a vaga tenha sido salva */
-function success(result) {
-  // Transmite um evento para o servidor indicando que uma vaga foi criada com sucesso por um cliente
-  realtimeFactory.emit('client:created:job');
+  <span style="color:#75715e">// Notifica o usuário
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">Notification</span>.<span style="color:#a6e22e">primary</span>(<span style="color:#e6db74">&#39;O seu anúncio foi criado com sucesso!&#39;</span>);
 
-  // Notifica o usuário
-  Notification.primary('O seu anúncio foi criado com sucesso!');
-
-  // Redireciona para a home
-  $state.go('home');
-}
-</code></pre>
-
+  <span style="color:#75715e">// Redireciona para a home
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">$state</span>.<span style="color:#a6e22e">go</span>(<span style="color:#e6db74">&#39;home&#39;</span>);
+}</code></pre></div>
 <p>Pronto, o nosso servidor já irá identificar que vagas foram criadas e vai emitir o tal do <code>server:created:job</code> (indicando que ele fez a parte dele também).</p>
 
 <p>É hora de tratarmos este evento do servidor!</p>
@@ -698,44 +659,41 @@ function success(result) {
 <p>O nosso componente está assim até então:</p>
 
 <p>PS: Observe que eu já injetei o realtimeFactory que criamos lá em cima. :-)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* recent-jobs.controller.js */</span>
+(<span style="color:#66d9ef">function</span>(){
+    <span style="color:#e6db74">&#39;use strict&#39;</span>;
 
-<pre><code class="language-js">/* recent-jobs.controller.js */
-(function(){
-    'use strict';
-
-    angular
-        .module('app.job.RecentJobs', [])
-        .component('tesRecentJobs', {
-            templateUrl: 'app/components/job/recent-jobs/recent-jobs.html',
-            controller: RecentJobsController
+    <span style="color:#a6e22e">angular</span>
+        .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app.job.RecentJobs&#39;</span>, [])
+        .<span style="color:#a6e22e">component</span>(<span style="color:#e6db74">&#39;tesRecentJobs&#39;</span>, {
+            <span style="color:#a6e22e">templateUrl</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;app/components/job/recent-jobs/recent-jobs.html&#39;</span>,
+            <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">RecentJobsController</span>
         });
     
-    RecentJobsController.$inject = ['JobService', 'realtimeFactory'];
+    <span style="color:#a6e22e">RecentJobsController</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;JobService&#39;</span>, <span style="color:#e6db74">&#39;realtimeFactory&#39;</span>];
 
-    function RecentJobsController(JobService, realtimeFactory) {
-        var vm = this;
-        var jobs = undefined;
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">RecentJobsController</span>(<span style="color:#a6e22e">JobService</span>, <span style="color:#a6e22e">realtimeFactory</span>) {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">vm</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jobs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">undefined</span>;
 
-        vm.jobs = jobs;
+        <span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">jobs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jobs</span>;
 
-        activate();
+        <span style="color:#a6e22e">activate</span>();
 
-        function activate() {
-          JobService.getAll().then(success, error);
+        <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">activate</span>() {
+          <span style="color:#a6e22e">JobService</span>.<span style="color:#a6e22e">getAll</span>().<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">success</span>, <span style="color:#a6e22e">error</span>);
 
-          function success(result) {
-              vm.jobs = result.data.jobs;
+          <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">success</span>(<span style="color:#a6e22e">result</span>) {
+              <span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">jobs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">jobs</span>;
           }
 
-          function error(error) {
-              console.log(error);
+          <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>) {
+              <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">error</span>);
           }
         }
 
     }
-})();
-</code></pre>
-
+})();</code></pre></div>
 <p>Observe a função activate(). Ela é acionada toda vez que nosso componente é carregado.</p>
 
 <p>Se você deixar seu código sempre bem estruturado, esta vai ser a parte mais fácil para você.</p>
@@ -747,12 +705,9 @@ function success(result) {
 <p>O problema de dar um <code>.push()</code>, é que você tem que observar caso o número limite de itens dentro do array não ultrapasse o limitado pelo layout, se não vai ficar algo enorme.</p>
 
 <p>Depois da função activate, vamos adicionar o observador para nosso evento disparado pelo servidor:</p>
-
-<pre><code class="language-js">realtimeFactory.on('server:created:job', function(ev, data) {
-  activate();
-});
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">realtimeFactory</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;server:created:job&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">ev</span>, <span style="color:#a6e22e">data</span>) {
+  <span style="color:#a6e22e">activate</span>();
+});</code></pre></div>
 <p>Ele faz exatamente o que eu expliquei ali em cima. Toda vez que houver um evento de <code>server:created:job</code>, nós iremos chamar a função activate(), que irá atualizar a lista de jobs.</p>
 
 <p><img src="https://media.giphy.com/media/VR19WcrVHM44E/giphy.gif" alt="" /></p>
@@ -794,7 +749,7 @@ function success(result) {
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>387</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>480</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -816,8 +771,8 @@ function success(result) {
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

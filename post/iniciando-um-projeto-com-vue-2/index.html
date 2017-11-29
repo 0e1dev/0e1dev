@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -26,18 +25,23 @@ O motivo do aumento de sua popularidade se dá graças aos benefícios que este 
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Iniciando um projeto com Vue 2" />
     <meta name="twitter:description" content="Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada VueJS.
 O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos React e Angular 2. Porém, apesar de ocupar este &amp;ldquo;terceiro&amp;rdquo; lugar, a sua popularidade aumenta cada dia.
 O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/iniciando-um-projeto-com-vue-2.jpg" />
+    <meta name="og:title" content="Iniciando um projeto com Vue 2" />
+    <meta name="og:description" content="Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada VueJS.
+O Vue é tem tido um hype bem grande da comunidade JS, atrás dos famosos React e Angular 2. Porém, apesar de ocupar este &amp;ldquo;terceiro&amp;rdquo; lugar, a sua popularidade aumenta cada dia.
+O motivo do aumento de sua popularidade se dá graças aos benefícios que este tipo de ferramenta proporciona em comparação as outras 2 ferramentas." />
+    <meta name="og:image" content="http://0e1dev.com/covers/iniciando-um-projeto-com-vue-2.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/iniciando-um-projeto-com-vue-2/" />
@@ -138,7 +142,9 @@ O motivo do aumento de sua popularidade se dá graças aos benefícios que este 
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -185,10 +191,16 @@ O motivo do aumento de sua popularidade se dá graças aos benefícios que este 
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Iniciando um projeto com Vue 2</h1>
       <p class="post-meta">@lhas · 11/12/2016 · 8 mins. de leitura</p>
     </header>
+
+    
+    <div title="Iniciando um projeto com Vue 2" style="width: 100%; height: 250px; background: url(/covers/iniciando-um-projeto-com-vue-2.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Este mini-post fará parte de uma série de postagens que farei a respeito desta mais nova ferramenta para desenvolvimento de front-end, chamada <a href="https://vuejs.org/">VueJS</a>.</p>
@@ -240,17 +252,11 @@ O motivo do aumento de sua popularidade se dá graças aos benefícios que este 
 <p>Caso você queira ver o código-fonte do Vue-CLI, <a href="https://github.com/vuejs/vue-cli">clique aqui</a>.</p>
 
 <p>Para instalá-lo, é muito simples. Você só precisa do NodeJS na sua máquina:</p>
-
-<pre><code class="language-bash">$ npm install -g vue-cli
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install -g vue-cli</code></pre></div>
 <h1 id="criando-novo-projeto">Criando novo projeto</h1>
 
 <p>Agora que temos nosso CLI disponível na máquina, vamos criar um novo projeto usando o template do Webpack que ele nos disponibiliza.  Caso você queira conhecer os templates disponíveis, <a href="https://github.com/vuejs-templates">clique aqui</a>.</p>
-
-<pre><code class="language-bash">$ vue init webpack vue-app
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vue init webpack vue-app</code></pre></div>
 <p>Ele vai fazer algumas perguntas como:
 - se você quer ter uma camada de testes;
 - se você deseja usar ESLint (super recomendo);
@@ -261,12 +267,9 @@ O motivo do aumento de sua popularidade se dá graças aos benefícios que este 
 <p>PS: <code>vue-app</code> é opcional, você pode chamá-lo como quiser. Porém é uma convenção interessante usar o nome da principal tecnologia no nome do seu repositório como prefixo.</p>
 
 <p>Agora vamos instalar as dependências e rodar o projeto. Para isto:</p>
-
-<pre><code class="language-bash">$ cd vue-app/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd vue-app/
 $ npm install
-$ npm run dev
-</code></pre>
-
+$ npm run dev</code></pre></div>
 <p>Seu browser deve abrir automaticamente esta página:</p>
 
 <p><img src="4.png" alt="" /></p>
@@ -335,122 +338,107 @@ $ npm run dev
 <p>Vamos primeiro instalar o <a href="https://github.com/marcosmoura/vue-material">Vue Material</a>.</p>
 
 <p>1) Edite o index.html e inclua as dependências:</p>
-
-<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&quot;&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;//fonts.googleapis.com/icon?family=Material+Icons&quot;&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width&#34;</span>&gt;
+&lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&#34;</span>&gt;
+&lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;//fonts.googleapis.com/icon?family=Material+Icons&#34;</span>&gt;</code></pre></div>
 <p>2) Instale o Vue Material:</p>
-
-<pre><code class="language-bash">$ npm install --save vue-material
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install --save vue-material</code></pre></div>
 <p>3) Inclua o Vue Material como dependência do projeto:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// src/main.js
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#75715e">// incluimos ele (e seu CSS para o Webpack poder processar)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">VueMaterial</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue-material&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;vue-material/dist/vue-material.css&#39;</span>
 
-<pre><code class="language-js">// src/main.js
-import Vue from 'vue'
-// incluimos ele (e seu CSS para o Webpack poder processar)
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.css'
+<span style="color:#75715e">// dizemos ao Vue para importá-lo
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">VueMaterial</span>)
 
-// dizemos ao Vue para importá-lo
-Vue.use(VueMaterial)
-
-// definimos um tema padrão para nosso MD
-// você pode escolher qualquer uma na palheta do próprio Google
-// link: https://material.google.com/style/color.html#color-color-palette
-Vue.material.theme.register('default', {
-  primary: 'light-blue',
-  accent: 'pink'
-})
-</code></pre>
-
+<span style="color:#75715e">// definimos um tema padrão para nosso MD
+</span><span style="color:#75715e">// você pode escolher qualquer uma na palheta do próprio Google
+</span><span style="color:#75715e">// link: https://material.google.com/style/color.html#color-color-palette
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">material</span>.<span style="color:#a6e22e">theme</span>.<span style="color:#a6e22e">register</span>(<span style="color:#e6db74">&#39;default&#39;</span>, {
+  <span style="color:#a6e22e">primary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;light-blue&#39;</span>,
+  <span style="color:#a6e22e">accent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;pink&#39;</span>
+})</code></pre></div>
 <p>Agora vamos declarar que nosso <code>App</code> use o tema padrão:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- src/App.vue --&gt;</span>
 
-<pre><code class="language-html">&lt;!-- src/App.vue --&gt;
+<span style="color:#75715e">&lt;!-- Ao invés de: --&gt;</span>
+&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app&#34;</span>&gt;
 
-&lt;!-- Ao invés de: --&gt;
-&lt;div id=&quot;app&quot;&gt;
-
-&lt;!-- Vamos aplicar o tema padrão do Material Design (você pode registrar quantos temas quiser) --&gt;
-&lt;div id=&quot;app&quot; v-md-theme=&quot;'default'&quot;&gt;
-</code></pre>
-
+<span style="color:#75715e">&lt;!-- Vamos aplicar o tema padrão do Material Design (você pode registrar quantos temas quiser) --&gt;</span>
+&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app&#34;</span> <span style="color:#a6e22e">v-md-theme</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#39;default&#39;&#34;</span>&gt;</code></pre></div>
 <p>Isto é suficiente para termos o <code>Vue Material</code> rodando no nosso app;</p>
 
 <p>Vamos testá-lo abrindo o componente <code>Hello.vue</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello&#34;</span>&gt;
+    &lt;<span style="color:#f92672">md-toolbar</span>&gt;
+      &lt;<span style="color:#f92672">md-button</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-icon-button&#34;</span>&gt;
+        &lt;<span style="color:#f92672">md-icon</span>&gt;menu&lt;/<span style="color:#f92672">md-icon</span>&gt;
+      &lt;/<span style="color:#f92672">md-button</span>&gt;
 
-<pre><code class="language-html">  &lt;div class=&quot;hello&quot;&gt;
-    &lt;md-toolbar&gt;
-      &lt;md-button class=&quot;md-icon-button&quot;&gt;
-        &lt;md-icon&gt;menu&lt;/md-icon&gt;
-      &lt;/md-button&gt;
+      &lt;<span style="color:#f92672">h2</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-title&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;flex: 1&#34;</span>&gt;Default&lt;/<span style="color:#f92672">h2</span>&gt;
 
-      &lt;h2 class=&quot;md-title&quot; style=&quot;flex: 1&quot;&gt;Default&lt;/h2&gt;
+      &lt;<span style="color:#f92672">md-button</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-icon-button&#34;</span>&gt;
+        &lt;<span style="color:#f92672">md-icon</span>&gt;favorite&lt;/<span style="color:#f92672">md-icon</span>&gt;
+      &lt;/<span style="color:#f92672">md-button</span>&gt;
+    &lt;/<span style="color:#f92672">md-toolbar</span>&gt;
 
-      &lt;md-button class=&quot;md-icon-button&quot;&gt;
-        &lt;md-icon&gt;favorite&lt;/md-icon&gt;
-      &lt;/md-button&gt;
-    &lt;/md-toolbar&gt;
+    &lt;<span style="color:#f92672">md-tabs</span> <span style="color:#a6e22e">md-centered</span>&gt;
+      &lt;<span style="color:#f92672">md-tab</span> <span style="color:#a6e22e">md-label</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Movies&#34;</span> <span style="color:#a6e22e">md-icon</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ondemand_video&#34;</span>&gt;
 
-    &lt;md-tabs md-centered&gt;
-      &lt;md-tab md-label=&quot;Movies&quot; md-icon=&quot;ondemand_video&quot;&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;field-group&#34;</span>&gt;
+          &lt;<span style="color:#f92672">md-input-container</span>&gt;
+            &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;movie&#34;</span>&gt;Movie&lt;/<span style="color:#f92672">label</span>&gt;
+            &lt;<span style="color:#f92672">md-select</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;movie&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;movie&#34;</span> <span style="color:#a6e22e">v-model</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;movie&#34;</span>&gt;
+              &lt;<span style="color:#f92672">md-option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fight_club&#34;</span>&gt;Fight Club&lt;/<span style="color:#f92672">md-option</span>&gt;
+              &lt;<span style="color:#f92672">md-option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;godfather&#34;</span>&gt;Godfather&lt;/<span style="color:#f92672">md-option</span>&gt;
+              &lt;<span style="color:#f92672">md-option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;godfather_ii&#34;</span>&gt;Godfather II&lt;/<span style="color:#f92672">md-option</span>&gt;
+              &lt;<span style="color:#f92672">md-option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;godfather_iii&#34;</span>&gt;Godfather III&lt;/<span style="color:#f92672">md-option</span>&gt;
+              &lt;<span style="color:#f92672">md-option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;godfellas&#34;</span>&gt;Godfellas&lt;/<span style="color:#f92672">md-option</span>&gt;
+              &lt;<span style="color:#f92672">md-option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pulp_fiction&#34;</span>&gt;Pulp Fiction&lt;/<span style="color:#f92672">md-option</span>&gt;
+              &lt;<span style="color:#f92672">md-option</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scarface&#34;</span>&gt;Scarface&lt;/<span style="color:#f92672">md-option</span>&gt;
+            &lt;/<span style="color:#f92672">md-select</span>&gt;
+          &lt;/<span style="color:#f92672">md-input-container</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
 
-        &lt;div class=&quot;field-group&quot;&gt;
-          &lt;md-input-container&gt;
-            &lt;label for=&quot;movie&quot;&gt;Movie&lt;/label&gt;
-            &lt;md-select name=&quot;movie&quot; id=&quot;movie&quot; v-model=&quot;movie&quot;&gt;
-              &lt;md-option value=&quot;fight_club&quot;&gt;Fight Club&lt;/md-option&gt;
-              &lt;md-option value=&quot;godfather&quot;&gt;Godfather&lt;/md-option&gt;
-              &lt;md-option value=&quot;godfather_ii&quot;&gt;Godfather II&lt;/md-option&gt;
-              &lt;md-option value=&quot;godfather_iii&quot;&gt;Godfather III&lt;/md-option&gt;
-              &lt;md-option value=&quot;godfellas&quot;&gt;Godfellas&lt;/md-option&gt;
-              &lt;md-option value=&quot;pulp_fiction&quot;&gt;Pulp Fiction&lt;/md-option&gt;
-              &lt;md-option value=&quot;scarface&quot;&gt;Scarface&lt;/md-option&gt;
-            &lt;/md-select&gt;
-          &lt;/md-input-container&gt;
-        &lt;/div&gt;
+          &lt;<span style="color:#f92672">md-card</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width: 320px;&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-ripple&#34;</span> <span style="color:#a6e22e">md-with-hover</span>&gt;
+            &lt;<span style="color:#f92672">md-card-media</span>&gt;
+              &lt;<span style="color:#f92672">md-ink-ripple</span>&gt;&lt;/<span style="color:#f92672">md-ink-ripple</span>&gt;
+              &lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://vuematerial.github.io/assets/card-image-1.jpg&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;People&#34;</span>&gt;
+            &lt;/<span style="color:#f92672">md-card-media</span>&gt;
 
-          &lt;md-card style=&quot;width: 320px;&quot; class=&quot;card-ripple&quot; md-with-hover&gt;
-            &lt;md-card-media&gt;
-              &lt;md-ink-ripple&gt;&lt;/md-ink-ripple&gt;
-              &lt;img src=&quot;https://vuematerial.github.io/assets/card-image-1.jpg&quot; alt=&quot;People&quot;&gt;
-            &lt;/md-card-media&gt;
+            &lt;<span style="color:#f92672">md-card-actions</span>&gt;
+              &lt;<span style="color:#f92672">md-button</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-icon-button&#34;</span>&gt;
+                &lt;<span style="color:#f92672">md-icon</span>&gt;favorite&lt;/<span style="color:#f92672">md-icon</span>&gt;
+              &lt;/<span style="color:#f92672">md-button</span>&gt;
 
-            &lt;md-card-actions&gt;
-              &lt;md-button class=&quot;md-icon-button&quot;&gt;
-                &lt;md-icon&gt;favorite&lt;/md-icon&gt;
-              &lt;/md-button&gt;
+              &lt;<span style="color:#f92672">md-button</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-icon-button&#34;</span>&gt;
+                &lt;<span style="color:#f92672">md-icon</span>&gt;bookmark&lt;/<span style="color:#f92672">md-icon</span>&gt;
+              &lt;/<span style="color:#f92672">md-button</span>&gt;
 
-              &lt;md-button class=&quot;md-icon-button&quot;&gt;
-                &lt;md-icon&gt;bookmark&lt;/md-icon&gt;
-              &lt;/md-button&gt;
-
-              &lt;md-button class=&quot;md-icon-button&quot;&gt;
-                &lt;md-icon&gt;share&lt;/md-icon&gt;
-              &lt;/md-button&gt;
-            &lt;/md-card-actions&gt;
-          &lt;/md-card&gt;
+              &lt;<span style="color:#f92672">md-button</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-icon-button&#34;</span>&gt;
+                &lt;<span style="color:#f92672">md-icon</span>&gt;share&lt;/<span style="color:#f92672">md-icon</span>&gt;
+              &lt;/<span style="color:#f92672">md-button</span>&gt;
+            &lt;/<span style="color:#f92672">md-card-actions</span>&gt;
+          &lt;/<span style="color:#f92672">md-card</span>&gt;
       
-      &lt;/md-tab&gt;
+      &lt;/<span style="color:#f92672">md-tab</span>&gt;
 
-      &lt;md-tab md-label=&quot;Music&quot; md-icon=&quot;music_note&quot;&gt;
-        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.&lt;/p&gt;
-        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.&lt;/p&gt;
-      &lt;/md-tab&gt;
+      &lt;<span style="color:#f92672">md-tab</span> <span style="color:#a6e22e">md-label</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Music&#34;</span> <span style="color:#a6e22e">md-icon</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;music_note&#34;</span>&gt;
+        &lt;<span style="color:#f92672">p</span>&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.&lt;/<span style="color:#f92672">p</span>&gt;
+        &lt;<span style="color:#f92672">p</span>&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.&lt;/<span style="color:#f92672">p</span>&gt;
+      &lt;/<span style="color:#f92672">md-tab</span>&gt;
 
-      &lt;md-tab md-label=&quot;Books&quot; md-icon=&quot;books&quot;&gt;
-        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.&lt;/p&gt;
-      &lt;/md-tab&gt;
+      &lt;<span style="color:#f92672">md-tab</span> <span style="color:#a6e22e">md-label</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Books&#34;</span> <span style="color:#a6e22e">md-icon</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;books&#34;</span>&gt;
+        &lt;<span style="color:#f92672">p</span>&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.&lt;/<span style="color:#f92672">p</span>&gt;
+      &lt;/<span style="color:#f92672">md-tab</span>&gt;
 
-      &lt;md-tab md-label=&quot;Pictures&quot; md-icon=&quot;photo&quot;&gt;
-        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.&lt;/p&gt;
-      &lt;/md-tab&gt;
-    &lt;/md-tabs&gt;
-  &lt;/div&gt;
-</code></pre>
-
+      &lt;<span style="color:#f92672">md-tab</span> <span style="color:#a6e22e">md-label</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Pictures&#34;</span> <span style="color:#a6e22e">md-icon</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;photo&#34;</span>&gt;
+        &lt;<span style="color:#f92672">p</span>&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.&lt;/<span style="color:#f92672">p</span>&gt;
+      &lt;/<span style="color:#f92672">md-tab</span>&gt;
+    &lt;/<span style="color:#f92672">md-tabs</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;</code></pre></div>
 <p>Você deverá ver algo igual a isto:</p>
 
 <p><img src="6.png" alt="" /></p>
@@ -460,54 +448,45 @@ Vue.material.theme.register('default', {
 <p>Agora vamos instalar o <code>vue-router</code> para termos algumas páginas customizadas.</p>
 
 <h2 id="instalando-o-vue-router">Instalando o vue-router</h2>
-
-<pre><code class="language-bash">$ npm install vue-router --save
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install vue-router --save</code></pre></div>
 <p>Vamos dizer para nossa página principal (<code>index.html</code>) que iremos usar rotas neste app. Para isto:</p>
-
-<pre><code class="language-html">&lt;div id=&quot;app&quot; v-md-theme=&quot;'default'&quot;&gt;
-  &lt;router-view&gt;&lt;/router-view&gt;
-&lt;/div&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app&#34;</span> <span style="color:#a6e22e">v-md-theme</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#39;default&#39;&#34;</span>&gt;
+  &lt;<span style="color:#f92672">router-view</span>&gt;&lt;/<span style="color:#f92672">router-view</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;</code></pre></div>
 <p>Vamos editar o <code>src/main.js</code>. Vamos incluir 2 rotas padrões - Hello e About Us.</p>
 
 <p>Esta segunda rota (About Us), vamos criar em seguida.</p>
 
 <p>Vou inserir o código completo do <code>main.js</code> para não ficar dúvidas.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">VueMaterial</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue-material&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">VueRouter</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue-router&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;vue-material/dist/vue-material.css&#39;</span>
 
-<pre><code class="language-js">import Vue from 'vue'
-import VueMaterial from 'vue-material'
-import VueRouter from 'vue-router'
-import 'vue-material/dist/vue-material.css'
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Hello</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/Hello&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">AboutUs</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/AboutUs.vue&#39;</span>
 
-import Hello from './components/Hello'
-import AboutUs from './components/AboutUs.vue'
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">VueMaterial</span>)
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">VueRouter</span>)
 
-Vue.use(VueMaterial)
-Vue.use(VueRouter)
-
-Vue.material.theme.register('default', {
-  primary: 'light-blue',
-  accent: 'pink'
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">material</span>.<span style="color:#a6e22e">theme</span>.<span style="color:#a6e22e">register</span>(<span style="color:#e6db74">&#39;default&#39;</span>, {
+  <span style="color:#a6e22e">primary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;light-blue&#39;</span>,
+  <span style="color:#a6e22e">accent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;pink&#39;</span>
 })
 
-const routes = [
-  { path: '/', redirect: '/hello' },
-  { path: '/hello', component: Hello },
-  { path: '/about-us', component: AboutUs }
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">routes</span> <span style="color:#f92672">=</span> [
+  { <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>, <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/hello&#39;</span> },
+  { <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/hello&#39;</span>, <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Hello</span> },
+  { <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/about-us&#39;</span>, <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">AboutUs</span> }
 ]
 
-const router = new VueRouter({
-  routes
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">router</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">VueRouter</span>({
+  <span style="color:#a6e22e">routes</span>
 })
 
-new Vue({
-  router
-}).$mount('#app')
-</code></pre>
-
+<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vue</span>({
+  <span style="color:#a6e22e">router</span>
+}).<span style="color:#a6e22e">$mount</span>(<span style="color:#e6db74">&#39;#app&#39;</span>)</code></pre></div>
 <h2 id="plus-outra-feature-bacana-do-vue">PLUS: Outra feature bacana do Vue</h2>
 
 <p>Se você tentar navegar na nossa aplicação agora, verá a seguinte tela:</p>
@@ -519,42 +498,36 @@ new Vue({
 <p>Para corrigir este erro, precisamos criar o arquivo <code>src/components/AboutUs.vue</code>.</p>
 
 <p>Só de criar, o problema já se resolve. Mas vamos preenchê-lo com nossa informação estática.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// src/components/AboutUs.vue
+</span><span style="color:#75715e"></span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">template</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;about-us&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">About</span> <span style="color:#a6e22e">Us</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/h1&gt;</span>
 
-<pre><code class="language-js">// src/components/AboutUs.vue
-&lt;template&gt;
-  &lt;div class=&quot;about-us&quot;&gt;
-    &lt;h1&gt;About Us&lt;/h1&gt;
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">p</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Powered</span> <span style="color:#a6e22e">by</span> <span style="color:#ae81ff">0</span><span style="color:#a6e22e">e1dev</span>.<span style="color:#a6e22e">com</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/p&gt;</span>
 
-    &lt;p&gt;Powered by 0e1dev.com&lt;/p&gt;
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">router</span><span style="color:#f92672">-</span><span style="color:#a6e22e">link</span> <span style="color:#a6e22e">tag</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-button&#34;</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-raised md-primary&#34;</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/hello&#34;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">md</span><span style="color:#f92672">-</span><span style="color:#a6e22e">icon</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">arrow_back</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/md-icon&gt; Back to Hello</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/router-link&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/template&gt;</span>
 
-    &lt;router-link tag=&quot;md-button&quot; class=&quot;md-raised md-primary&quot; to=&quot;/hello&quot;&gt;
-      &lt;md-icon&gt;arrow_back&lt;/md-icon&gt; Back to Hello
-    &lt;/router-link&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-export default {
-  name: 'about-us',
-  data () {
-    return {
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;about-us&#39;</span>,
+  <span style="color:#a6e22e">data</span> () {
+    <span style="color:#66d9ef">return</span> {
     }
   }
 }
-&lt;/script&gt;
-</code></pre>
-
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span></code></pre></div>
 <p>Agora que nossa <code>About Us</code> está redonda, vamos fazer com que através da Home nós possamos redirecionar o usuário para a segunda página.</p>
 
 <p>Abra o <code>src/components/Hello.vue</code> e insira depois do nosso <code>&lt;/md-tabs&gt;</code>:</p>
-
-<pre><code class="language-js">// src/components/Hello.vue
-
-&lt;router-link tag=&quot;md-button&quot; class=&quot;md-raised md-primary&quot; to=&quot;/about-us&quot;&gt;
-  &lt;md-icon&gt;navigate_next&lt;/md-icon&gt; Go to About Us
-&lt;/router-link&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// src/components/Hello.vue
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">router</span><span style="color:#f92672">-</span><span style="color:#a6e22e">link</span> <span style="color:#a6e22e">tag</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-button&#34;</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-raised md-primary&#34;</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/about-us&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">md</span><span style="color:#f92672">-</span><span style="color:#a6e22e">icon</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">navigate_next</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/md-icon&gt; Go to About Us</span>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/router-link&gt;</span></code></pre></div>
 <h2 id="pronto">Pronto!</h2>
 
 <p>Agora podemos navegar entre nossas rotas:</p>
@@ -594,7 +567,7 @@ export default {
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>260</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>353</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -616,8 +589,8 @@ export default {
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

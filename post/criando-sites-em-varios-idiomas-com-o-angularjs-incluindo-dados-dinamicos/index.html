@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -27,19 +26,25 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)" />
     <meta name="twitter:description" content="Graças a internet, empresas que no passado dependiam do mercado local para ofertar e adquirir serviços, agora podem escalar seu empreendimento a nível global.
 Por esta exposição, se faz necessário adaptar-se ao idioma local do público alvo desejado.
 Além disto, o inglês tornou-se idioma padrão em muitos ambientes de trabalho e até mesmo no nosso lazer (jogos, quadrinhos, livros, filmes, etc).
 Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lançando uma startup*, ou até mesmo *apoiando causas sociais*, é interessante que você possa conectar-se ao máximo possível de pessoas nesta era cyber." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos.jpg" />
+    <meta name="og:title" content="Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)" />
+    <meta name="og:description" content="Graças a internet, empresas que no passado dependiam do mercado local para ofertar e adquirir serviços, agora podem escalar seu empreendimento a nível global.
+Por esta exposição, se faz necessário adaptar-se ao idioma local do público alvo desejado.
+Além disto, o inglês tornou-se idioma padrão em muitos ambientes de trabalho e até mesmo no nosso lazer (jogos, quadrinhos, livros, filmes, etc).
+Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lançando uma startup*, ou até mesmo *apoiando causas sociais*, é interessante que você possa conectar-se ao máximo possível de pessoas nesta era cyber." />
+    <meta name="og:image" content="http://0e1dev.com/covers/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/" />
@@ -140,7 +145,9 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -187,10 +194,16 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)</h1>
       <p class="post-meta">@lhas · 05/08/2016 · 10 mins. de leitura</p>
     </header>
+
+    
+    <div title="Criando sites em vários idiomas com o AngularJS (incluindo dados dinâmicos)" style="width: 100%; height: 250px; background: url(/covers/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p><img src="cover.jpg" alt="" /></p>
@@ -228,26 +241,23 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
 <h1 id="iniciando-o-projeto">Iniciando o projeto</h1>
 
 <p><img src="apresentacao.jpg" alt="" /></p>
-
-<pre><code class="language-bash"># Crie a pasta para o nosso projeto
-mkdir pulp-fiction/
-# Entre na pasta
-cd pulp-fiction/
-# Instale o Yeoman e o gerador que iremos usar
-# (este passo é totalmente opcional para fazermos a tradução, é só para termos um site de base mas aqui poderia ser o código fonte do seu site)
-# O Gulp também é opcional, só instale caso você não tenha ainda na sua máquina
-npm install -g yo generator-fountain-webapp gulp-cli
-# Inicializando o gerador do FountainJS
-yo fountain-webapp
-# Selecione (na ordem):
-# - Angular 1
-# - None with Bower and Script injection
-# - Pure old Javascript
-# - SASS
-# - A working landing page
-# - Angular UI Router
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Crie a pasta para o nosso projeto
+</span><span style="color:#75715e"></span>mkdir pulp-fiction/
+<span style="color:#75715e"># Entre na pasta
+</span><span style="color:#75715e"></span>cd pulp-fiction/
+<span style="color:#75715e"># Instale o Yeoman e o gerador que iremos usar
+</span><span style="color:#75715e"># (este passo é totalmente opcional para fazermos a tradução, é só para termos um site de base mas aqui poderia ser o código fonte do seu site)
+</span><span style="color:#75715e"># O Gulp também é opcional, só instale caso você não tenha ainda na sua máquina
+</span><span style="color:#75715e"></span>npm install -g yo generator-fountain-webapp gulp-cli
+<span style="color:#75715e"># Inicializando o gerador do FountainJS
+</span><span style="color:#75715e"></span>yo fountain-webapp
+<span style="color:#75715e"># Selecione (na ordem):
+</span><span style="color:#75715e"># - Angular 1
+</span><span style="color:#75715e"># - None with Bower and Script injection
+</span><span style="color:#75715e"># - Pure old Javascript
+</span><span style="color:#75715e"># - SASS
+</span><span style="color:#75715e"># - A working landing page
+</span><span style="color:#75715e"></span># - Angular UI Router</code></pre></div>
 <p>Após rodar os comandos acima, ele irá <strong>instalar</strong> as <strong>dependências</strong> listadas no <strong>package.json</strong> e depois instalar nossas <strong>dependências</strong> de <em>front-end</em> no <strong>bower.json</strong>.</p>
 
 <p>Para <strong>rodar o projeto</strong> o comando é:</p>
@@ -268,24 +278,18 @@ yo fountain-webapp
 <p><img src="preparando.jpg" alt="" /></p>
 
 <p>Vamos colocar um <strong>Bootstrap</strong> <em>maroto</em>? <strong>Vamos</strong>. Abra um novo terminal, vá até a pasta do projeto e rode:</p>
-
-<pre><code class="language-bash"># Não se esqueça do --save, ele é importante neste processo
-bower install bootstrap-scss --save
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Não se esqueça do --save, ele é importante neste processo
+</span><span style="color:#75715e"></span>bower install bootstrap-scss --save</code></pre></div>
 <p>A <strong>magia</strong> começa a acontecer aqui: após você instalar o <em>Bootstrap</em> na última versão com o <em>Bower</em>, o <em>FountainJS</em> deixou o <em>Gulp</em> preparado de uma forma tão mágica, que ele irá <strong>observar (watch)</strong> novas instalações no <em>bower.json</em> e irá injetar os <em>scripts principais</em> do mesmo no nosso <em>HTML</em>.</p>
 
 <p><strong>Não acredita?</strong> Olha o código fonte do nosso site agora. Você vai ver algo parecido com isso:</p>
-
-<pre><code class="language-html">&lt;!-- build:js({.tmp,src}) scripts/vendor.js --&gt;
-  &lt;!-- bower:js --&gt;
-  &lt;script src=&quot;../bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;../bower_components/angular-ui-router/release/angular-ui-router.js&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;../bower_components/bootstrap-css/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
-  &lt;!-- endbower --&gt;
-  &lt;!-- endbuild --&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- build:js({.tmp,src}) scripts/vendor.js --&gt;</span>
+  <span style="color:#75715e">&lt;!-- bower:js --&gt;</span>
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../bower_components/angular/angular.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../bower_components/angular-ui-router/release/angular-ui-router.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../bower_components/bootstrap-css/js/bootstrap.min.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  <span style="color:#75715e">&lt;!-- endbower --&gt;</span>
+  <span style="color:#75715e">&lt;!-- endbuild --&gt;</span></code></pre></div>
 <p>Só tem um <em>probleminha</em> aqui. O nosso <em>Bootstrap</em> inclui por padrão o <em>bootstrap.min.js</em>.</p>
 
 <p>Nós não vamos usá-lo, já que ele depende do <strong>jQuery</strong> e o ideal é que nós deixemos de usá-lo.</p>
@@ -297,39 +301,33 @@ bower install bootstrap-scss --save
 <p>Para removermos esse maldito bootstrap.min.js dali, vamos usar a propriedade &ldquo;overrides&rdquo; do bower.</p>
 
 <p>Para isto, edite o nosso bower.json para isto aqui:</p>
-
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;fountain-inject&quot;,
-  &quot;version&quot;: &quot;0.0.1&quot;,
-  &quot;dependencies&quot;: {
-    &quot;angular&quot;: &quot;^1.5.0&quot;,
-    &quot;angular-ui-router&quot;: &quot;^0.3.1&quot;,
-    &quot;bootstrap-css&quot;: &quot;^3.3.6&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;fountain-inject&#34;</span>,
+  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.1&#34;</span>,
+  <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;angular&#34;</span>: <span style="color:#e6db74">&#34;^1.5.0&#34;</span>,
+    <span style="color:#f92672">&#34;angular-ui-router&#34;</span>: <span style="color:#e6db74">&#34;^0.3.1&#34;</span>,
+    <span style="color:#f92672">&#34;bootstrap-css&#34;</span>: <span style="color:#e6db74">&#34;^3.3.6&#34;</span>
   },
-  // Você deverá incluir este overrides aqui, exatamente embaixo do dependencies
-  &quot;overrides&quot;: {
-    &quot;bootstrap-css&quot;: {
-      &quot;main&quot;: [
-        &quot;css/bootstrap.min.css&quot;
+  <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">Você</span> <span style="color:#960050;background-color:#1e0010">deverá</span> <span style="color:#960050;background-color:#1e0010">incluir</span> <span style="color:#960050;background-color:#1e0010">este</span> <span style="color:#960050;background-color:#1e0010">overrides</span> <span style="color:#960050;background-color:#1e0010">aqui,</span> <span style="color:#960050;background-color:#1e0010">exatamente</span> <span style="color:#960050;background-color:#1e0010">embaixo</span> <span style="color:#960050;background-color:#1e0010">do</span> <span style="color:#960050;background-color:#1e0010">dependencies</span>
+  <span style="color:#f92672">&#34;overrides&#34;</span>: {
+    <span style="color:#f92672">&#34;bootstrap-css&#34;</span>: {
+      <span style="color:#f92672">&#34;main&#34;</span>: [
+        <span style="color:#e6db74">&#34;css/bootstrap.min.css&#34;</span>
       ]
     }
   },
-  &quot;devDependencies&quot;: {
-    &quot;angular-mocks&quot;: &quot;^1.5.0&quot;
+  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;angular-mocks&#34;</span>: <span style="color:#e6db74">&#34;^1.5.0&#34;</span>
   }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Se você salvar esta modificação no bower.json e atualizar o código-fonte do nosso site verá que o bootstrap.min.js sumiu!</p>
-
-<pre><code class="language-html">&lt;!-- build:js({.tmp,src}) scripts/vendor.js --&gt;
-  &lt;!-- bower:js --&gt;
-  &lt;script src=&quot;../bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
-  &lt;script src=&quot;../bower_components/angular-ui-router/release/angular-ui-router.js&quot;&gt;&lt;/script&gt;
-  &lt;!-- endbower --&gt;
-  &lt;!-- endbuild --&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- build:js({.tmp,src}) scripts/vendor.js --&gt;</span>
+  <span style="color:#75715e">&lt;!-- bower:js --&gt;</span>
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../bower_components/angular/angular.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../bower_components/angular-ui-router/release/angular-ui-router.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  <span style="color:#75715e">&lt;!-- endbower --&gt;</span>
+  <span style="color:#75715e">&lt;!-- endbuild --&gt;</span></code></pre></div>
 <p><img src="https://media.giphy.com/media/iUYwiYC4K2gF2/giphy.gif" alt="" /></p>
 
 <h1 id="adicionando-botões-para-trocar-o-idioma">Adicionando botões para trocar o idioma</h1>
@@ -341,18 +339,15 @@ bower install bootstrap-scss --save
 <p>Edite o arquivo src/app/header.html:</p>
 
 <p>Dentro do .header-date, vamos adicionar os botões de idioma:</p>
-
-<pre><code class="language-html">&lt;p class=&quot;header-date&quot;&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;header-date&#34;</span>&gt;
   
-  &lt;div class=&quot;btn-group&quot;&gt;
-    &lt;button type=&quot;button&quot; ng-click=&quot;$ctrl.changeLanguage('pt_BR')&quot; class=&quot;btn btn-success&quot;&gt;Português (BR)&lt;/button&gt;
-    &lt;button type=&quot;button&quot; ng-click=&quot;$ctrl.changeLanguage('en_US')&quot; class=&quot;btn btn-primary&quot;&gt;English (US)&lt;/button&gt;
-    &lt;button type=&quot;button&quot; ng-click=&quot;$ctrl.changeLanguage('es_ES')&quot; class=&quot;btn btn-danger&quot;&gt;Español (ES)&lt;/button&gt;
-  &lt;/div&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn-group&#34;</span>&gt;
+    &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">ng-click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$ctrl.changeLanguage(&#39;pt_BR&#39;)&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn btn-success&#34;</span>&gt;Português (BR)&lt;/<span style="color:#f92672">button</span>&gt;
+    &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">ng-click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$ctrl.changeLanguage(&#39;en_US&#39;)&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn btn-primary&#34;</span>&gt;English (US)&lt;/<span style="color:#f92672">button</span>&gt;
+    &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> <span style="color:#a6e22e">ng-click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$ctrl.changeLanguage(&#39;es_ES&#39;)&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn btn-danger&#34;</span>&gt;Español (ES)&lt;/<span style="color:#f92672">button</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
   
-&lt;/p&gt;
-</code></pre>
-
+&lt;/<span style="color:#f92672">p</span>&gt;</code></pre></div>
 <p>Já vi menus mais bonitos, mas para um exemplo tá valendo:</p>
 
 <p><img src="Selection_001.png" alt="" /></p>
@@ -364,32 +359,29 @@ bower install bootstrap-scss --save
 <p>Esta função ainda não existe, precisamos criá-la. Para isto, abra o arquivo src/app/header.js:</p>
 
 <p>Substitua o conteúdo do header.js por este:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* header.js */</span>
+(<span style="color:#66d9ef">function</span>(){
+  <span style="color:#e6db74">&#39;use strict&#39;</span>;
 
-<pre><code class="language-js">/* header.js */
-(function(){
-  'use strict';
-
-  angular
-    .module('app')
-    .component('fountainHeader', {
-      templateUrl: 'app/header.html',
-      controller: HeaderController
+  <span style="color:#a6e22e">angular</span>
+    .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>)
+    .<span style="color:#a6e22e">component</span>(<span style="color:#e6db74">&#39;fountainHeader&#39;</span>, {
+      <span style="color:#a6e22e">templateUrl</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;app/header.html&#39;</span>,
+      <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">HeaderController</span>
     });
 
-    HeaderController.$inject = [];
-    function HeaderController() {
-      var vm = this;
+    <span style="color:#a6e22e">HeaderController</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [];
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HeaderController</span>() {
+      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">vm</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
 
-      vm.changeLanguage = changeLanguage;
+      <span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">changeLanguage</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">changeLanguage</span>;
       
-      /* Esta função modifica o idioma do nosso app. */
-      function changeLanguage(locale) {
-        alert('Você selecionou o idioma: ' + locale);
+      <span style="color:#75715e">/* Esta função modifica o idioma do nosso app. */</span>
+      <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">changeLanguage</span>(<span style="color:#a6e22e">locale</span>) {
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;Você selecionou o idioma: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">locale</span>);
       }
     }
-})();
-</code></pre>
-
+})();</code></pre></div>
 <p><img src="Selection_002.png" alt="" /></p>
 
 <p>O <em>principal</em> está entre a <strong>linha 16 e 21</strong>. Ainda não mudamos o idioma, mas já conseguimos <strong>identificar</strong> qual o <strong>idioma</strong> que o <strong>usuário deseja carregar</strong>.</p>
@@ -399,18 +391,12 @@ bower install bootstrap-scss --save
 <p>Esta é a biblioteca que iremos utilizar para facilitar a nossa vida.</p>
 
 <p>Para instalá-la rode:</p>
-
-<pre><code class="language-bash">bower install angular-translate --save
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bower install angular-translate --save</code></pre></div>
 <p>Agora adicione o módulo dele como dependência do nosso app.</p>
 
 <p>Para isto, edite o src/index.js e deixe assim:</p>
-
-<pre><code class="language-js">angular
-  .module('app', ['ui.router', 'pascalprecht.translate']);
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">angular</span>
+  .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>, [<span style="color:#e6db74">&#39;ui.router&#39;</span>, <span style="color:#e6db74">&#39;pascalprecht.translate&#39;</span>]);</code></pre></div>
 <h2 id="configurando-o-angular-translate">Configurando o angular-translate</h2>
 
 <p>Precisamos efetuar algumas configurações como:
@@ -425,47 +411,44 @@ bower install bootstrap-scss --save
 <p>Para isto, vamos usar novamente o arquivo src/index.js.</p>
 
 <p>Coloque no final do conteúdo deste arquivo o seguinte:</p>
-
-<pre><code class="language-js">/* Configuração do angular-translate */
-angular
-  .module('app')
-  .config(translateConfig);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* Configuração do angular-translate */</span>
+<span style="color:#a6e22e">angular</span>
+  .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>)
+  .<span style="color:#a6e22e">config</span>(<span style="color:#a6e22e">translateConfig</span>);
   
-  translateConfig.$inject = ['$translateProvider'];
+  <span style="color:#a6e22e">translateConfig</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$translateProvider&#39;</span>];
 
-  function translateConfig($translateProvider) {
-    // Carregamos as traduções de cada idioma
-
-    // English (US)
-    $translateProvider.translations('en_US', {
-      'allo_allo': 'Hello, hello!',
-      'always_a_pleasure': 'Its always a pleasure to watch Pulp Fiction.'
+  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">translateConfig</span>(<span style="color:#a6e22e">$translateProvider</span>) {
+    <span style="color:#75715e">// Carregamos as traduções de cada idioma
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// English (US)
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$translateProvider</span>.<span style="color:#a6e22e">translations</span>(<span style="color:#e6db74">&#39;en_US&#39;</span>, {
+      <span style="color:#e6db74">&#39;allo_allo&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Hello, hello!&#39;</span>,
+      <span style="color:#e6db74">&#39;always_a_pleasure&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Its always a pleasure to watch Pulp Fiction.&#39;</span>
     });
 
-    // Português (BR)
-    $translateProvider.translations('pt_BR', {
-      'allo_allo': 'Olá, olá!',
-      'always_a_pleasure': 'É sempre um prazer assistir a Pulp Fiction.'
+    <span style="color:#75715e">// Português (BR)
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$translateProvider</span>.<span style="color:#a6e22e">translations</span>(<span style="color:#e6db74">&#39;pt_BR&#39;</span>, {
+      <span style="color:#e6db74">&#39;allo_allo&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Olá, olá!&#39;</span>,
+      <span style="color:#e6db74">&#39;always_a_pleasure&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;É sempre um prazer assistir a Pulp Fiction.&#39;</span>
     });
 
-    // Español (ES)
-    $translateProvider.translations('en_ES', {
-      'allo_allo': 'Hola, hola!',
-      'always_a_pleasure': 'Mi gusta churritos. :-)'
+    <span style="color:#75715e">// Español (ES)
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$translateProvider</span>.<span style="color:#a6e22e">translations</span>(<span style="color:#e6db74">&#39;en_ES&#39;</span>, {
+      <span style="color:#e6db74">&#39;allo_allo&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Hola, hola!&#39;</span>,
+      <span style="color:#e6db74">&#39;always_a_pleasure&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Mi gusta churritos. :-)&#39;</span>
     });
     
-    // Definimos o idioma padrão
-    $translateProvider.preferredLanguage('pt_BR');
+    <span style="color:#75715e">// Definimos o idioma padrão
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$translateProvider</span>.<span style="color:#a6e22e">preferredLanguage</span>(<span style="color:#e6db74">&#39;pt_BR&#39;</span>);
 
-    // Se você preferir que o idioma padrão seja detectado pelo idioma do browser
-    // use as linhas abaixo:
-    //
-    // $translateProvider
-    //  .uniformLanguageTag()
-    //  .determinePreferredLanguage();
-  }
-</code></pre>
-
+    <span style="color:#75715e">// Se você preferir que o idioma padrão seja detectado pelo idioma do browser
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// use as linhas abaixo:
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// $translateProvider
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//  .uniformLanguageTag()
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//  .determinePreferredLanguage();
+</span><span style="color:#75715e"></span>  }</code></pre></div>
 <p><img src="https://media.giphy.com/media/e5BASCeekXYoo/giphy.gif" alt="" /></p>
 
 <h1 id="configurando-o-conteúdo-do-nosso-site">Configurando o conteúdo do nosso site</h1>
@@ -473,23 +456,16 @@ angular
 <p>Precisamos adaptá-lo para que ele possa interpretar as traduções definidas pela gente.</p>
 
 <p>Para isto, abra o arquivo <strong>src/app/title.html</strong> e deixe da seguinte forma:</p>
-
-<pre><code class="language-html">&lt;div class=&quot;title&quot;&gt;
-  &lt;h1 class=&quot;title-h1&quot;&gt;{{'allo_allo' | translate}}&lt;/h1&gt;
-  &lt;div&gt;
-    &lt;img class=&quot;title-logo&quot; src=&quot;http://fountainjs.io/assets/imgs/yeoman.png&quot;/&gt;
-    &lt;img class=&quot;title-logo&quot; src=&quot;http://fountainjs.io/assets/imgs/fountain.png&quot;/&gt;
-  &lt;/div&gt;
-  &lt;h2 class=&quot;title-h2&quot;&gt;{{'always_a_pleasure' | translate}}&lt;/h2&gt;
-&lt;/div&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;title&#34;</span>&gt;
+  &lt;<span style="color:#f92672">h1</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;title-h1&#34;</span>&gt;{{&#39;allo_allo&#39; | translate}}&lt;/<span style="color:#f92672">h1</span>&gt;
+  &lt;<span style="color:#f92672">div</span>&gt;
+    &lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;title-logo&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://fountainjs.io/assets/imgs/yeoman.png&#34;</span>/&gt;
+    &lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;title-logo&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://fountainjs.io/assets/imgs/fountain.png&#34;</span>/&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
+  &lt;<span style="color:#f92672">h2</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;title-h2&#34;</span>&gt;{{&#39;always_a_pleasure&#39; | translate}}&lt;/<span style="color:#f92672">h2</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;</code></pre></div>
 <p>No caso, a sintaxe necessária para traduzirmos é esta:</p>
-
-<pre><code class="language-html">  {{'identificador_aqui' | translate}}
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">  {{&#39;identificador_aqui&#39; | translate}}</code></pre></div>
 <p><strong>&lsquo;identificador_aqui&rsquo;</strong>: é o nome que nós demos no src/index.js para cada tradução. É uma espécie de chave primária.</p>
 
 <p><strong>translate</strong>: é uma diretiva que nos é disponibilizada através do angular-translate. Por ser uma diretiva carregada por ele, você pode usá-la onde quiser, mesmo fora do escopo de um controller.</p>
@@ -511,15 +487,12 @@ angular
 <h1 id="fazendo-os-botões-de-tradução-traduzirem">Fazendo os botões de tradução traduzirem</h1>
 
 <p>Edite novamente o arquivo src/app/header.js:</p>
-
-<pre><code class="language-js">// Antigo
-    HeaderController.$inject = [];
-    function HeaderController() { }
-// Novo
-    HeaderController.$inject = ['$translate', '$state'];
-    function HeaderController($translate, $state) { }
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Antigo
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">HeaderController</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [];
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HeaderController</span>() { }
+<span style="color:#75715e">// Novo
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">HeaderController</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$translate&#39;</span>, <span style="color:#e6db74">&#39;$state&#39;</span>];
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HeaderController</span>(<span style="color:#a6e22e">$translate</span>, <span style="color:#a6e22e">$state</span>) { }</code></pre></div>
 <p>No caso injetamos 2 Services:</p>
 
 <p><strong>$translate</strong>: Service oriundo do angular-translate. Ele que irá nos ajudar a efetuar a troca de idioma.</p>
@@ -529,18 +502,14 @@ angular
 <p>Agora vamos editar a função changeLanguage() para fazer a mágica explicada acima.</p>
 
 <p>Ela ficará assim:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* Esta função modifica o idioma do nosso app. */</span>
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">changeLanguage</span>(<span style="color:#a6e22e">locale</span>) {
+  <span style="color:#75715e">/* Define o novo idioma atual */</span>
+  <span style="color:#a6e22e">$translate</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">locale</span>);
 
-<pre><code class="language-js">
-/* Esta função modifica o idioma do nosso app. */
-function changeLanguage(locale) {
-  /* Define o novo idioma atual */
-  $translate.use(locale);
-
-  /* Recarrega o template (sem recarregar o browser) */
-  $state.reload();
-}
-</code></pre>
-
+  <span style="color:#75715e">/* Recarrega o template (sem recarregar o browser) */</span>
+  <span style="color:#a6e22e">$state</span>.<span style="color:#a6e22e">reload</span>();
+}</code></pre></div>
 <h1 id="pronto-de-verdade">Pronto (de verdade)!</h1>
 
 <p><img src="https://media.giphy.com/media/fKBh0mt02CypW/giphy.gif" alt="" /></p>
@@ -581,71 +550,59 @@ Outro tutorial gringo com abordagem diferente: <a href="https://scotch.io/tutori
 <p>Vamos supor que no nosso blog, ao cadastrar um post o usuário possa definir o idioma do mesmo.</p>
 
 <p>Se tratando de base de dados seria algo como:</p>
-
-<pre><code class="language-json">{
-  &quot;id&quot;: &quot;integer&quot;,
-  &quot;title&quot;: &quot;string&quot;,
-  &quot;content&quot;: &quot;text&quot;,
-  &quot;language&quot;: {
-    &quot;type&quot;: &quot;enum&quot;,
-    &quot;values&quot;: [&quot;en_US&quot;, &quot;es_ES&quot;, &quot;pt_BR&quot;]
-}
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;integer&#34;</span>,
+  <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>,
+  <span style="color:#f92672">&#34;content&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+  <span style="color:#f92672">&#34;language&#34;</span>: {
+    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;enum&#34;</span>,
+    <span style="color:#f92672">&#34;values&#34;</span>: [<span style="color:#e6db74">&#34;en_US&#34;</span>, <span style="color:#e6db74">&#34;es_ES&#34;</span>, <span style="color:#e6db74">&#34;pt_BR&#34;</span>]
+}</code></pre></div>
 <p>Supomos que já tenhamos um PostService que busque estes dados na nossa API:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#66d9ef">function</span>() {
+  <span style="color:#e6db74">&#39;use strict&#39;</span>;
 
-<pre><code class="language-js">(function() {
-  'use strict';
+  <span style="color:#a6e22e">angular</span>
+    .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>)
+    .<span style="color:#a6e22e">service</span>(<span style="color:#e6db74">&#39;PostService&#39;</span>, <span style="color:#a6e22e">PostService</span>);
 
-  angular
-    .module('app')
-    .service('PostService', PostService);
-
-    PostService.$inject = ['$http'];
-    function PostService($http) {
-      var service = {
-        getAll: getAll,
-        getOne: getOne
+    <span style="color:#a6e22e">PostService</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$http&#39;</span>];
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">PostService</span>(<span style="color:#a6e22e">$http</span>) {
+      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">service</span> <span style="color:#f92672">=</span> {
+        <span style="color:#a6e22e">getAll</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">getAll</span>,
+        <span style="color:#a6e22e">getOne</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">getOne</span>
       };
 
-      return service;
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">service</span>;
 
-      function getAll() {
-        return $http.get('http://localhost:4000/api/post/');
+      <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getAll</span>() {
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;http://localhost:4000/api/post/&#39;</span>);
       }
 
-      function getOne(id) {
-        return $http.get('http://localhost:4000/api/post/' + id);
+      <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getOne</span>(<span style="color:#a6e22e">id</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;http://localhost:4000/api/post/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>);
       }
     }
-})();
-</code></pre>
-
+})();</code></pre></div>
 <p>A gente só precisaria adaptar uma coisa nas nossas requições $http:</p>
-
-<pre><code class="language-js">      function getAll() {
-        return $http.get('http://localhost:4000/api/post/', {
-          params: {
-            language: $translate.proposedLanguage()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">      <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getAll</span>() {
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;http://localhost:4000/api/post/&#39;</span>, {
+          <span style="color:#a6e22e">params</span><span style="color:#f92672">:</span> {
+            <span style="color:#a6e22e">language</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">$translate</span>.<span style="color:#a6e22e">proposedLanguage</span>()
           }
         });
       }
 
-      function getOne(id) {
-        return $http.get('http://localhost:4000/api/post/' + id, {
-          params: {
-            language: $translate.proposedLanguage()
+      <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getOne</span>(<span style="color:#a6e22e">id</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;http://localhost:4000/api/post/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>, {
+          <span style="color:#a6e22e">params</span><span style="color:#f92672">:</span> {
+            <span style="color:#a6e22e">language</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">$translate</span>.<span style="color:#a6e22e">proposedLanguage</span>()
           }
         });
-      }
-</code></pre>
-
+      }</code></pre></div>
 <p>Não se esquecendo de injetar o service $translate no nosso PostService:</p>
-
-<pre><code class="language-js">  PostService.$inject = ['$http', '$translate'];
-  function PostService($http, $translate) { }
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#a6e22e">PostService</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$http&#39;</span>, <span style="color:#e6db74">&#39;$translate&#39;</span>];
+  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">PostService</span>(<span style="color:#a6e22e">$http</span>, <span style="color:#a6e22e">$translate</span>) { }</code></pre></div>
 <p>Esta função <strong>$translate.proposedLanguage()</strong> retorna o idioma atual.</p>
 
 <p>Daí é só você através da sua API adaptar como você achar mais prático para a informação retornada ser correta.</p>
@@ -685,7 +642,7 @@ Outro tutorial gringo com abordagem diferente: <a href="https://scotch.io/tutori
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>388</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>481</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -707,8 +664,8 @@ Outro tutorial gringo com abordagem diferente: <a href="https://scotch.io/tutori
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -29,7 +28,7 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Aplicando a Arquitetura Flux com Vue 2" />
     <meta name="twitter:description" content="Olá a todos!
 Depois de termos implementado um CRUD através do Vue 2, agora iremos profissionalizar a arquitetura do mesmo.
@@ -38,12 +37,20 @@ E uma destas patterns escaláveis que temos hoje em dia é o Flux.
 Caso você queira conhecer os outros posts desta série de Vue 2:
  Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2 Montando CRUD com Vue 2  O que é Flux?" />
     <meta name="twitter:image" content="http://0e1dev.com/covers/aplicando-a-arquitetura-flux-com-vue-2.png" />
+    <meta name="og:title" content="Aplicando a Arquitetura Flux com Vue 2" />
+    <meta name="og:description" content="Olá a todos!
+Depois de termos implementado um CRUD através do Vue 2, agora iremos profissionalizar a arquitetura do mesmo.
+Caso você esteja desenvolvendo um SPA de médio a grande porte, é interessante que você tenha uma arquitetura que seja escalável.
+E uma destas patterns escaláveis que temos hoje em dia é o Flux.
+Caso você queira conhecer os outros posts desta série de Vue 2:
+ Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2 Montando CRUD com Vue 2  O que é Flux?" />
+    <meta name="og:image" content="http://0e1dev.com/covers/aplicando-a-arquitetura-flux-com-vue-2.png" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/" />
@@ -144,7 +151,9 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -191,10 +200,16 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Aplicando a Arquitetura Flux com Vue 2</h1>
       <p class="post-meta">@lhas · 10/01/2017 · 14 mins. de leitura</p>
     </header>
+
+    
+    <div title="Aplicando a Arquitetura Flux com Vue 2" style="width: 100%; height: 250px; background: url(/covers/aplicando-a-arquitetura-flux-com-vue-2.png); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Olá a todos!</p>
@@ -277,16 +292,14 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
 
 <p>Supondo que você está na pasta da nossa app:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic"># Cria a pasta</span>
-mkdir src/services
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cria a pasta
+</span><span style="color:#75715e"></span>mkdir src/services
 
-<span style="color: #0080ff; font-style: italic"># Inicializa a base dos services</span>
-touch src/services/index.js
+<span style="color:#75715e"># Inicializa a base dos services
+</span><span style="color:#75715e"></span>touch src/services/index.js
 
-<span style="color: #0080ff; font-style: italic"># Inicializa o service de Lessons</span>
-touch src/services/lessons.js
-</pre></div>
-
+<span style="color:#75715e"># Inicializa o service de Lessons
+</span><span style="color:#75715e"></span>touch src/services/lessons.js</code></pre></div>
 
 <h1 id="base-dos-services">Base dos Services</h1>
 
@@ -294,14 +307,12 @@ touch src/services/lessons.js
 
 <p>É bem simples e ficará assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> Vue from <span style="color: #00cc66">&#39;vue&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> VueResource from <span style="color: #00cc66">&#39;vue-resource&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">VueResource</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue-resource&#39;</span>
 
-Vue.use(VueResource)
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">VueResource</span>)
 
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> Vue
-</pre></div>
-
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Vue</span></code></pre></div>
 
 <p>Basicamente, ele cria uma instância do Vue e incorpora o vue-resource nesta instância.</p>
 
@@ -313,35 +324,33 @@ Vue.use(VueResource)
 
 <p>Ficará assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> service from <span style="color: #00cc66">&#39;./index&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">service</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./index&#39;</span>
 
-<span style="color: #2c5dcd; font-weight: bold">const</span> resource <span style="color: #2c5dcd">=</span> service.resource(<span style="color: #00cc66">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>)
-<span style="color: #2c5dcd; font-weight: bold">const</span> currentProfile <span style="color: #2c5dcd">=</span> JSON.parse(<span style="color: #5918bb; font-weight: bold">window</span>.localStorage.getItem(<span style="color: #00cc66">&#39;current-profile&#39;</span>))
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resource</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">service</span>.<span style="color:#a6e22e">resource</span>(<span style="color:#e6db74">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>)
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">currentProfile</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(window.<span style="color:#a6e22e">localStorage</span>.<span style="color:#a6e22e">getItem</span>(<span style="color:#e6db74">&#39;current-profile&#39;</span>))
 
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
-  <span style="color: #0080ff; font-style: italic">// Read</span>
-  getAll () {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.get({})
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#75715e">// Read
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">getAll</span> () {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">get</span>({})
   },
-  getOne (id) {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.get({id<span style="color: #2c5dcd">:</span> id})
+  <span style="color:#a6e22e">getOne</span> (<span style="color:#a6e22e">id</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">get</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">id</span>})
   },
-  <span style="color: #0080ff; font-style: italic">// Delete</span>
-  deleteOne (lesson) {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.<span style="color: #2c5dcd; font-weight: bold">delete</span>({id<span style="color: #2c5dcd">:</span> lesson.id})
+  <span style="color:#75715e">// Delete
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">deleteOne</span> (<span style="color:#a6e22e">lesson</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resource</span>.<span style="color:#66d9ef">delete</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">id</span>})
   },
-  <span style="color: #0080ff; font-style: italic">// Create</span>
-  createOne (lesson) {
-    lesson[<span style="color: #00cc66">&#39;student_id&#39;</span>] <span style="color: #2c5dcd">=</span> currentProfile.student.id
-    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.save({}, lesson)
+  <span style="color:#75715e">// Create
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">createOne</span> (<span style="color:#a6e22e">lesson</span>) {
+    <span style="color:#a6e22e">lesson</span>[<span style="color:#e6db74">&#39;student_id&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">currentProfile</span>.<span style="color:#a6e22e">student</span>.<span style="color:#a6e22e">id</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">save</span>({}, <span style="color:#a6e22e">lesson</span>)
   },
-  <span style="color: #0080ff; font-style: italic">// Update</span>
-  updateOne (lesson) {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> resource.update({id<span style="color: #2c5dcd">:</span> lesson.id}, lesson)
+  <span style="color:#75715e">// Update
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">updateOne</span> (<span style="color:#a6e22e">lesson</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">update</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">id</span>}, <span style="color:#a6e22e">lesson</span>)
   }
-}
-</pre></div>
-
+}</code></pre></div>
 
 <p>Caso você precise adicionar valores de campos padrão, este é um ótimo lugar. Eu mesmo fiz isso na linha 20. Pego o ID do estudante atual e acoplo ele ao novo registro de aula.</p>
 
@@ -349,9 +358,7 @@ Vue.use(VueResource)
 
 <p>Primeiro, instale ele como dependência do seu projeto:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>npm install vuex --save
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install vuex --save</code></pre></div>
 
 <p>Agora, vamos criar a nossa <em>Store</em>.</p>
 
@@ -385,18 +392,16 @@ Vue.use(VueResource)
 
 <p>Dado a seguinte store:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> store <span style="color: #2c5dcd">=</span> <span style="color: #2c5dcd; font-weight: bold">new</span> Vuex.Store({
-  state<span style="color: #2c5dcd">:</span> {
-    count<span style="color: #2c5dcd">:</span> <span style="color: #5918bb; font-weight: bold">0</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">store</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vuex</span>.<span style="color:#a6e22e">Store</span>({
+  <span style="color:#a6e22e">state</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">count</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>
   },
-  mutations<span style="color: #2c5dcd">:</span> {
-    increment (state) {
-      state.count<span style="color: #2c5dcd">++</span>
+  <span style="color:#a6e22e">mutations</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">increment</span> (<span style="color:#a6e22e">state</span>) {
+      <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">count</span><span style="color:#f92672">++</span>
     }
   }
-})
-</pre></div>
-
+})</code></pre></div>
 
 <p>Imagine que o state seja na verdade o <code>data()</code>.</p>
 
@@ -404,15 +409,11 @@ Vue.use(VueResource)
 
 <p>Para você recuperar o count atual:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>store.state.count
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">count</span></code></pre></div>
 
 <p>Para você rodar o método <code>increment</code> e consequentemente modificar o count:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>store.commit(<span style="color: #00cc66">&#39;increment&#39;</span>)
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#39;increment&#39;</span>)</code></pre></div>
 
 <p>Após rodar a linha acima, o <code>store.state.count</code> será igual a <code>1</code>.</p>
 
@@ -426,11 +427,9 @@ Vue.use(VueResource)
 
 <p>Após você injetar o Vuex e o Store na sua aplicação, você poderá acessá-lo assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">this</span>.$store; <span style="color: #0080ff; font-style: italic">// -&gt; retornará todo o Store</span>
-<span style="color: #2c5dcd; font-weight: bold">this</span>.$store.state; <span style="color: #0080ff; font-style: italic">// -&gt; retornará todos os States disponíveis</span>
-<span style="color: #2c5dcd; font-weight: bold">this</span>.$store.commit(<span style="color: #00cc66">&#39;exemplo&#39;</span>); <span style="color: #0080ff; font-style: italic">// -&gt; rodará o commit &#39;exemplo&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>; <span style="color:#75715e">// -&gt; retornará todo o Store
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">state</span>; <span style="color:#75715e">// -&gt; retornará todos os States disponíveis
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#39;exemplo&#39;</span>); <span style="color:#960050;background-color:#1e0010">// -&gt; rodará o commit &#39;exemplo&#39;</span></code></pre></div>
 
 <p>Chega de teoria e vamos para a prática.</p>
 
@@ -447,11 +446,9 @@ Vue.use(VueResource)
 
 <p>Para isto:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir src/store
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir src/store
 touch src/store/index.js
-touch src/store/mutation-types.js
-</pre></div>
-
+touch src/store/mutation-types.js</code></pre></div>
 
 <p>Com nossa pasta e arquivos criados, vamos começar pelo nosso módulo para Store.</p>
 
@@ -459,18 +456,16 @@ touch src/store/mutation-types.js
 
 <p>Ele ficará assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> Vue from <span style="color: #00cc66">&#39;vue&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> Vuex from <span style="color: #00cc66">&#39;vuex&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vuex</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vuex&#39;</span>
 
-Vue.use(Vuex)
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">Vuex</span>)
 
-<span style="color: #2c5dcd; font-weight: bold">const</span> debug <span style="color: #2c5dcd">=</span> process.env.NODE_ENV <span style="color: #2c5dcd">!==</span> <span style="color: #00cc66">&#39;production&#39;</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">debug</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">NODE_ENV</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;production&#39;</span>
 
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> <span style="color: #2c5dcd; font-weight: bold">new</span> Vuex.Store({
-  strict<span style="color: #2c5dcd">:</span> debug
-})
-</pre></div>
-
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vuex</span>.<span style="color:#a6e22e">Store</span>({
+  <span style="color:#a6e22e">strict</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">debug</span>
+})</code></pre></div>
 
 <h1 id="importando-store-na-app">Importando Store na App</h1>
 
@@ -478,19 +473,15 @@ Vue.use(Vuex)
 
 <p>Primeiro vamos precisar importar o Store que acabamos de criar.</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> store from <span style="color: #00cc66">&#39;./store&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span></code></pre></div>
 
 <p>Depois vamos injetá-lo dentro da nossa instância do Vue.</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">new</span> Vue({
-  el<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;#app&#39;</span>,
-  router,
-  store
-})
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vue</span>({
+  <span style="color:#a6e22e">el</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#app&#39;</span>,
+  <span style="color:#a6e22e">router</span>,
+  <span style="color:#a6e22e">store</span>
+})</code></pre></div>
 
 <p>Pronto! Agora teremos acesso ao nosso Store através do <code>this.$store</code>.</p>
 
@@ -500,9 +491,7 @@ Vue.use(Vuex)
 
 <p>Para isto, vamos precisar de uma pasta &ldquo;modules&rdquo;:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir src/store/modules
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir src/store/modules</code></pre></div>
 
 <p>Vamos começar com um módulo simples, que será o de <strong>Alertas</strong>.</p>
 
@@ -514,15 +503,11 @@ Vue.use(Vuex)
 
 <p>Para isto, vamos precisar de uma pasta para este módulo:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir src/store/modules/alerts
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir src/store/modules/alerts</code></pre></div>
 
 <p>Como ele será um módulo bem simples, podemos fazer toda implementação dentro de um único JS:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>touch src/store/modules/alerts/index.js
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">touch src/store/modules/alerts/index.js</code></pre></div>
 
 <p>Vamos editá-lo agora.</p>
 
@@ -530,12 +515,10 @@ Vue.use(Vuex)
 
 <p>Nosso state será assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> state <span style="color: #2c5dcd">=</span> {
-  message<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">null</span>,
-  delay<span style="color: #2c5dcd">:</span> <span style="color: #5918bb; font-weight: bold">4000</span>
-}
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+  <span style="color:#a6e22e">delay</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">4000</span>
+}</code></pre></div>
 
 <h3 id="actions-de-alertas">Actions de Alertas</h3>
 
@@ -543,14 +526,12 @@ Vue.use(Vuex)
 
 <p>Nossa action será assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> actions <span style="color: #2c5dcd">=</span> {
-  createOne ({ commit, state }, alert) {
-    commit(types.ALERTS_CHANGE_MESSAGE, alert.message)
-    commit(types.ALERTS_DISPLAY)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">actions</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">createOne</span> ({ <span style="color:#a6e22e">commit</span>, <span style="color:#a6e22e">state</span> }, <span style="color:#a6e22e">alert</span>) {
+    <span style="color:#a6e22e">commit</span>(<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">ALERTS_CHANGE_MESSAGE</span>, <span style="color:#a6e22e">alert</span>.<span style="color:#a6e22e">message</span>)
+    <span style="color:#a6e22e">commit</span>(<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">ALERTS_DISPLAY</span>)
   }
-}
-</pre></div>
-
+}</code></pre></div>
 
 <p>Como você pode ver, nossa ação efetua <strong>2 commits</strong>.</p>
 
@@ -569,15 +550,11 @@ Vue.use(Vuex)
 
 <p>Para incluir ele, insira na primeira linha do módulo:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> <span style="color: #2c5dcd">*</span> as types from <span style="color: #00cc66">&#39;../../mutation-types&#39;</span>
-</pre></div>
-
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">types</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../../mutation-types&#39;</span></code></pre></div>
 Agora vamos preencher o <strong>mutation types</strong> com as constantes necessárias para nossas ações:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">const</span> ALERTS_CHANGE_MESSAGE <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;ALERTS_CHANGE_MESSAGE&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">const</span> ALERTS_DISPLAY <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;ALERTS_DISPLAY&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ALERTS_CHANGE_MESSAGE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ALERTS_CHANGE_MESSAGE&#39;</span>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ALERTS_DISPLAY</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ALERTS_DISPLAY&#39;</span></code></pre></div>
 
 <p><strong>Pronto!</strong> Até aqui, já temos um módulo de alertas com <strong>2 states</strong>, <strong>2 commits</strong>, <strong>2 mutation types</strong> e <strong>1 action</strong>.</p>
 
@@ -599,18 +576,16 @@ Agora vamos preencher o <strong>mutation types</strong> com as constantes necess
 
 <p>Para nosso módulo, estas serão as mutações necessárias:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> mutations <span style="color: #2c5dcd">=</span> {
-  [types.ALERTS_CHANGE_MESSAGE] (state, message) {
-    state.message <span style="color: #2c5dcd">=</span> message
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mutations</span> <span style="color:#f92672">=</span> {
+  [<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">ALERTS_CHANGE_MESSAGE</span>] (<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">message</span>) {
+    <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">message</span>
   },
-  [types.ALERTS_DISPLAY] (state) {
-    setTimeout(() =&gt; {
-      alert(state.message)
-    }, state.delay)
+  [<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">ALERTS_DISPLAY</span>] (<span style="color:#a6e22e">state</span>) {
+    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+      <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">message</span>)
+    }, <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">delay</span>)
   }
-}
-</pre></div>
-
+}</code></pre></div>
 
 <p><strong>Observação:</strong> Caso esta sintaxe pareça estranha para você, pesquise mais sobre ES6. Mas de forma resumida, o ES6 permite que criemos uma função com nome igual a uma constante. Para isto, basta encapsular a constante entre colchetes [].</p>
 
@@ -624,14 +599,12 @@ Agora vamos preencher o <strong>mutation types</strong> com as constantes necess
 
 <p>Para finalizar, precisamos exportar ele como módulo de fato. Para isto, no fim do nosso arquivo, você deverá incluir:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
-  namespaced<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">true</span>,
-  state,
-  actions,
-  mutations
-}
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">namespaced</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+  <span style="color:#a6e22e">state</span>,
+  <span style="color:#a6e22e">actions</span>,
+  <span style="color:#a6e22e">mutations</span>
+}</code></pre></div>
 
 <h1 id="resultado-do-alertas">Resultado do Alertas</h1>
 
@@ -651,15 +624,13 @@ Agora vamos preencher o <strong>mutation types</strong> com as constantes necess
 
 <p>Para criá-lo:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>mkdir src/store/modules/lessons
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir src/store/modules/lessons
 touch src/store/modules/lessons/index.js
 touch src/store/modules/lessons/actions.js
 touch src/store/modules/lessons/getters.js
 touch src/store/modules/lessons/index.js
 touch src/store/modules/lessons/mutations.js
-touch src/store/modules/lessons/state.js
-</pre></div>
-
+touch src/store/modules/lessons/state.js</code></pre></div>
 
 <p>Como este módulo pode vir a ser mais complexo no futuro, faremos o isolamento de cada camada em módulos separados.</p>
 
@@ -669,33 +640,29 @@ touch src/store/modules/lessons/state.js
 
 <p>Ele irá basicamente centralizar os sub-módulos. Nenhum mistério aqui:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> actions from <span style="color: #00cc66">&#39;./actions&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> getters from <span style="color: #00cc66">&#39;./getters&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> mutations from <span style="color: #00cc66">&#39;./mutations&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> state from <span style="color: #00cc66">&#39;./state&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">actions</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./actions&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">getters</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./getters&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">mutations</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./mutations&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">state</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./state&#39;</span>
 
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
-  namespaced<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">true</span>,
-  state,
-  getters,
-  actions,
-  mutations
-}
-</pre></div>
-
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">namespaced</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+  <span style="color:#a6e22e">state</span>,
+  <span style="color:#a6e22e">getters</span>,
+  <span style="color:#a6e22e">actions</span>,
+  <span style="color:#a6e22e">mutations</span>
+}</code></pre></div>
 
 <h2 id="state-de-lessons">State de Lessons</h2>
 
 <p>Vamos para o State que são os nossos dados, é a segunda parte mais simples aqui:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> state <span style="color: #2c5dcd">=</span> {
-  lessons<span style="color: #2c5dcd">:</span> [],
-  lesson<span style="color: #2c5dcd">:</span> {}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">lessons</span><span style="color:#f92672">:</span> [],
+  <span style="color:#a6e22e">lesson</span><span style="color:#f92672">:</span> {}
 }
 
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> state
-</pre></div>
-
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">state</span></code></pre></div>
 
 <h2 id="getters-de-lessons">Getters de Lessons</h2>
 
@@ -707,11 +674,9 @@ touch src/store/modules/lessons/state.js
 
 <p>A maneira mais simples:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">this</span>.$store.states.NOME_DO_MODULO.NOME_DO_STATE;
-<span style="color: #0080ff; font-style: italic">// exemplo:</span>
-<span style="color: #2c5dcd; font-weight: bold">this</span>.$store.states.lessons.lesson; <span style="color: #0080ff; font-style: italic">// -&gt; estamos acessando nosso módulo &quot;lessons&quot; e recuperando o state &quot;lesson&quot;; neste exemplo, fica meio redundante mesmo</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">states</span>.<span style="color:#a6e22e">NOME_DO_MODULO</span>.<span style="color:#a6e22e">NOME_DO_STATE</span>;
+<span style="color:#75715e">// exemplo:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">states</span>.<span style="color:#a6e22e">lessons</span>.<span style="color:#a6e22e">lesson</span>; <span style="color:#960050;background-color:#1e0010">// -&gt; estamos acessando nosso módulo &#34;lessons&#34; e recuperando o state &#34;lesson&#34;; neste exemplo, fica meio redundante mesmo</span></code></pre></div>
 
 <p><strong>2) Usar um getter</strong></p>
 
@@ -719,19 +684,15 @@ touch src/store/modules/lessons/state.js
 
 <p>Um exemplo clássico seria:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">const</span> getters <span style="color: #2c5dcd">=</span> {
-  lessonsDone<span style="color: #2c5dcd">:</span> (state) =&gt; {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> state.lessons.filter(lesson =&gt; lesson.done)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getters</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">lessonsDone</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">state</span>) =&gt; {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">lessons</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">lesson</span> =&gt; <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">done</span>)
   }
-}
-</pre></div>
-
+}</code></pre></div>
 
 <p>Ou seja, ao invés de repetirmos este filtro em todo componente que quisermos mostrar esta informação, fazemos o filtro dentro de um Getter, e quando quisermos mostrar o mesmo, acessamos apenas o getter assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">this</span>.$store.getters[<span style="color: #00cc66">&#39;lessons/lessonsDone&#39;</span>]; <span style="color: #0080ff; font-style: italic">// -&gt; nome_do_modulo/nome_do_getter</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">getters</span>[<span style="color:#e6db74">&#39;lessons/lessonsDone&#39;</span>]; <span style="color:#960050;background-color:#1e0010">// -&gt; nome_do_modulo/nome_do_getter</span></code></pre></div>
 
 <h2 id="mutation-types-de-lessons">Mutation Types de Lessons</h2>
 
@@ -739,10 +700,8 @@ touch src/store/modules/lessons/state.js
 
 <p>No caso, basta adicionar estas 2 linhas no nosso <code>mutation-types.js</code> atual:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">const</span> GET_ALL_LESSONS <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;GET_ALL_LESSONS&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">const</span> GET_ONE_LESSON <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;GET_ONE_LESSON&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">GET_ALL_LESSONS</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GET_ALL_LESSONS&#39;</span>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">GET_ONE_LESSON</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GET_ONE_LESSON&#39;</span></code></pre></div>
 
 <h2 id="mutations-de-lessons">Mutations de Lessons</h2>
 
@@ -750,19 +709,17 @@ touch src/store/modules/lessons/state.js
 
 <p>Como no nosso módulo temos 2 states (<strong>lesson</strong> e <strong>lessons</strong>), teremos 2 mutations:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> <span style="color: #2c5dcd">*</span> as types from <span style="color: #00cc66">&#39;../../mutation-types&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">types</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../../mutation-types&#39;</span>
 
-<span style="color: #2c5dcd; font-weight: bold">const</span> mutations <span style="color: #2c5dcd">=</span> {
-  [types.GET_ALL_LESSONS] (state, { lessons }) {
-    state.lessons <span style="color: #2c5dcd">=</span> lessons
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mutations</span> <span style="color:#f92672">=</span> {
+  [<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">GET_ALL_LESSONS</span>] (<span style="color:#a6e22e">state</span>, { <span style="color:#a6e22e">lessons</span> }) {
+    <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">lessons</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lessons</span>
   },
-  [types.GET_ONE_LESSON] (state, { lesson }) {
-    state.lesson <span style="color: #2c5dcd">=</span> lesson
+  [<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">GET_ONE_LESSON</span>] (<span style="color:#a6e22e">state</span>, { <span style="color:#a6e22e">lesson</span> }) {
+    <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">lesson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lesson</span>
   }
 }
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> mutations
-</pre></div>
-
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">mutations</span></code></pre></div>
 
 <p><strong>Pronto!</strong> Já temos Getters, Mutations e State.</p>
 
@@ -774,34 +731,32 @@ touch src/store/modules/lessons/state.js
 
 <p>No nosso exemplo, nossas ações serão bem semelhantes aos mesmos métodos do nosso <strong>Service</strong>. Inclusive, é aqui que iremos importá-lo.</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> <span style="color: #2c5dcd">*</span> as types from <span style="color: #00cc66">&#39;../../mutation-types&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> LessonsService from <span style="color: #00cc66">&#39;../../../services/lessons&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">types</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../../mutation-types&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">LessonsService</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../../../services/lessons&#39;</span>
 
-<span style="color: #2c5dcd; font-weight: bold">const</span> actions <span style="color: #2c5dcd">=</span> {
-  getAll ({ commit, state }) {
-    LessonsService.getAll().then((response) =&gt; {
-      commit(types.GET_ALL_LESSONS, {
-        lessons<span style="color: #2c5dcd">:</span> response.data
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">actions</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">getAll</span> ({ <span style="color:#a6e22e">commit</span>, <span style="color:#a6e22e">state</span> }) {
+    <span style="color:#a6e22e">LessonsService</span>.<span style="color:#a6e22e">getAll</span>().<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+      <span style="color:#a6e22e">commit</span>(<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">GET_ALL_LESSONS</span>, {
+        <span style="color:#a6e22e">lessons</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">data</span>
       })
     })
   },
-  getOne ({ commit, state }, lesson) {
-    commit(types.GET_ONE_LESSON, lesson)
+  <span style="color:#a6e22e">getOne</span> ({ <span style="color:#a6e22e">commit</span>, <span style="color:#a6e22e">state</span> }, <span style="color:#a6e22e">lesson</span>) {
+    <span style="color:#a6e22e">commit</span>(<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">GET_ONE_LESSON</span>, <span style="color:#a6e22e">lesson</span>)
   },
-  deleteOne ({ commit, state }, lesson) {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> LessonsService.deleteOne(lesson)
+  <span style="color:#a6e22e">deleteOne</span> ({ <span style="color:#a6e22e">commit</span>, <span style="color:#a6e22e">state</span> }, <span style="color:#a6e22e">lesson</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">LessonsService</span>.<span style="color:#a6e22e">deleteOne</span>(<span style="color:#a6e22e">lesson</span>)
   },
-  createOne ({ commit, state }, lesson) {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> LessonsService.createOne(lesson)
+  <span style="color:#a6e22e">createOne</span> ({ <span style="color:#a6e22e">commit</span>, <span style="color:#a6e22e">state</span> }, <span style="color:#a6e22e">lesson</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">LessonsService</span>.<span style="color:#a6e22e">createOne</span>(<span style="color:#a6e22e">lesson</span>)
   },
-  updateOne ({ commit, state }, lesson) {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> LessonsService.updateOne(lesson)
+  <span style="color:#a6e22e">updateOne</span> ({ <span style="color:#a6e22e">commit</span>, <span style="color:#a6e22e">state</span> }, <span style="color:#a6e22e">lesson</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">LessonsService</span>.<span style="color:#a6e22e">updateOne</span>(<span style="color:#a6e22e">lesson</span>)
   }
 }
 
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> actions
-</pre></div>
-
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">actions</span></code></pre></div>
 
 <p>No caso do <code>getAll()</code>, por exemplo, primeiro fazemos a requisição XHR com o nosso Service.</p>
 
@@ -827,96 +782,92 @@ touch src/store/modules/lessons/state.js
 
 <p>Não entendeu? Eu explico. Nosso componente Index atualmente encontra-se assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> InputsCreate from <span style="color: #00cc66">&#39;./Create&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> InputsUpdate from <span style="color: #00cc66">&#39;./Update&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">InputsCreate</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Create&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">InputsUpdate</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Update&#39;</span>
 
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
-  name<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;DashboardInputsIndex&#39;</span>,
-  data () {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> {
-      resource<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">this</span>.$resource(<span style="color: #00cc66">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>),
-      lessons<span style="color: #2c5dcd">:</span> [],
-      lesson<span style="color: #2c5dcd">:</span> {}
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DashboardInputsIndex&#39;</span>,
+  <span style="color:#a6e22e">data</span> () {
+    <span style="color:#66d9ef">return</span> {
+      <span style="color:#a6e22e">resource</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$resource</span>(<span style="color:#e6db74">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>),
+      <span style="color:#a6e22e">lessons</span><span style="color:#f92672">:</span> [],
+      <span style="color:#a6e22e">lesson</span><span style="color:#f92672">:</span> {}
     }
   },
-  methods<span style="color: #2c5dcd">:</span> {
-    initialize () {
-      <span style="color: #2c5dcd; font-weight: bold">this</span>.resource.get({}).then((response) =&gt; {
-        <span style="color: #2c5dcd; font-weight: bold">this</span>.lessons <span style="color: #2c5dcd">=</span> response.data
+  <span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">initialize</span> () {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">get</span>({}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lessons</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">data</span>
       })
     },
-    handleDelete (lesson) {
-      <span style="color: #2c5dcd; font-weight: bold">this</span>.resource.<span style="color: #2c5dcd; font-weight: bold">delete</span>({id<span style="color: #2c5dcd">:</span> lesson.id}).then((response) =&gt; {
-        <span style="color: #2c5dcd; font-weight: bold">this</span>.$emit(<span style="color: #00cc66">&#39;deleted&#39;</span>)
+    <span style="color:#a6e22e">handleDelete</span> (<span style="color:#a6e22e">lesson</span>) {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">resource</span>.<span style="color:#66d9ef">delete</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">id</span>}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$emit</span>(<span style="color:#e6db74">&#39;deleted&#39;</span>)
       })
     },
-    handleUpdate (lesson) {
-      <span style="color: #2c5dcd; font-weight: bold">this</span>.lesson <span style="color: #2c5dcd">=</span> lesson
-      <span style="color: #5918bb; font-weight: bold">window</span>.jQuery(<span style="color: #00cc66">&#39;#modal2&#39;</span>).modal(<span style="color: #00cc66">&#39;open&#39;</span>)
+    <span style="color:#a6e22e">handleUpdate</span> (<span style="color:#a6e22e">lesson</span>) {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lesson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lesson</span>
+      window.<span style="color:#a6e22e">jQuery</span>(<span style="color:#e6db74">&#39;#modal2&#39;</span>).<span style="color:#a6e22e">modal</span>(<span style="color:#e6db74">&#39;open&#39;</span>)
     },
-    eventDeleted () {
-      <span style="color: #2c5dcd; font-weight: bold">this</span>.initialize()
-      <span style="color: #0080ff; font-style: italic">// notifica o usuário</span>
-      <span style="color: #2c5dcd; font-weight: bold">let</span> message <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;Aula removida!&#39;</span>
-      alert(message)
+    <span style="color:#a6e22e">eventDeleted</span> () {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
+      <span style="color:#75715e">// notifica o usuário
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Aula removida!&#39;</span>
+      <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">message</span>)
     }
   },
-  created () {
-    <span style="color: #2c5dcd; font-weight: bold">this</span>.initialize()
-    <span style="color: #2c5dcd; font-weight: bold">this</span>.$on(<span style="color: #00cc66">&#39;deleted&#39;</span>, () =&gt; {
-      <span style="color: #2c5dcd; font-weight: bold">this</span>.eventDeleted()
+  <span style="color:#a6e22e">created</span> () {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$on</span>(<span style="color:#e6db74">&#39;deleted&#39;</span>, () =&gt; {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">eventDeleted</span>()
     })
   },
-  components<span style="color: #2c5dcd">:</span> {
-    <span style="color: #00cc66">&#39;Inputs-Create&#39;</span><span style="color: #2c5dcd">:</span> InputsCreate,
-    <span style="color: #00cc66">&#39;Inputs-Update&#39;</span><span style="color: #2c5dcd">:</span> InputsUpdate
+  <span style="color:#a6e22e">components</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#39;Inputs-Create&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsCreate</span>,
+    <span style="color:#e6db74">&#39;Inputs-Update&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsUpdate</span>
   }
-}
-</pre></div>
-
+}</code></pre></div>
 
 <p>Agora, com a arquitetura Flux implementada, ele funcionará assim:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">import</span> InputsCreate from <span style="color: #00cc66">&#39;./Create&#39;</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> InputsUpdate from <span style="color: #00cc66">&#39;./Update&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">InputsCreate</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Create&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">InputsUpdate</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Update&#39;</span>
 
-<span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
-  name<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;DashboardInputsIndex&#39;</span>,
-  computed<span style="color: #2c5dcd">:</span> {
-    lessons () {
-      <span style="color: #2c5dcd; font-weight: bold">return</span> <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.getters[<span style="color: #00cc66">&#39;lessons/lessons&#39;</span>]
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DashboardInputsIndex&#39;</span>,
+  <span style="color:#a6e22e">computed</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">lessons</span> () {
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">getters</span>[<span style="color:#e6db74">&#39;lessons/lessons&#39;</span>]
     },
-    lesson () {
-      <span style="color: #2c5dcd; font-weight: bold">return</span> <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.getters[<span style="color: #00cc66">&#39;lessons/lesson&#39;</span>]
+    <span style="color:#a6e22e">lesson</span> () {
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">getters</span>[<span style="color:#e6db74">&#39;lessons/lesson&#39;</span>]
     }
   },
-  methods<span style="color: #2c5dcd">:</span> {
-    initialize () {
-      <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/getAll&#39;</span>)
+  <span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">initialize</span> () {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#e6db74">&#39;lessons/getAll&#39;</span>)
     },
-    handleDelete (lesson) {
-      <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/deleteOne&#39;</span>, lesson).then(() =&gt; {
-        <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/getAll&#39;</span>)
-        <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;alerts/createOne&#39;</span>, {
-          message<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;Aula removida!&#39;</span>
+    <span style="color:#a6e22e">handleDelete</span> (<span style="color:#a6e22e">lesson</span>) {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#e6db74">&#39;lessons/deleteOne&#39;</span>, <span style="color:#a6e22e">lesson</span>).<span style="color:#a6e22e">then</span>(() =&gt; {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#e6db74">&#39;lessons/getAll&#39;</span>)
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#e6db74">&#39;alerts/createOne&#39;</span>, {
+          <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Aula removida!&#39;</span>
         })
       })
     },
-    handleUpdate (lesson) {
-      <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/getOne&#39;</span>, {lesson})
-      <span style="color: #5918bb; font-weight: bold">window</span>.jQuery(<span style="color: #00cc66">&#39;#modal2&#39;</span>).modal(<span style="color: #00cc66">&#39;open&#39;</span>)
+    <span style="color:#a6e22e">handleUpdate</span> (<span style="color:#a6e22e">lesson</span>) {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#e6db74">&#39;lessons/getOne&#39;</span>, {<span style="color:#a6e22e">lesson</span>})
+      window.<span style="color:#a6e22e">jQuery</span>(<span style="color:#e6db74">&#39;#modal2&#39;</span>).<span style="color:#a6e22e">modal</span>(<span style="color:#e6db74">&#39;open&#39;</span>)
     }
   },
-  created () {
-    <span style="color: #2c5dcd; font-weight: bold">this</span>.initialize()
+  <span style="color:#a6e22e">created</span> () {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
   },
-  components<span style="color: #2c5dcd">:</span> {
-    <span style="color: #00cc66">&#39;Inputs-Create&#39;</span><span style="color: #2c5dcd">:</span> InputsCreate,
-    <span style="color: #00cc66">&#39;Inputs-Update&#39;</span><span style="color: #2c5dcd">:</span> InputsUpdate
+  <span style="color:#a6e22e">components</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#39;Inputs-Create&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsCreate</span>,
+    <span style="color:#e6db74">&#39;Inputs-Update&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsUpdate</span>
   }
-}
-</pre></div>
-
+}</code></pre></div>
 
 <p>Além de termos economizado 7 linhas, o código ficou MUITO mais legível.</p>
 
@@ -924,37 +875,33 @@ touch src/store/modules/lessons/state.js
 
 <h3 id="antes">Antes</h3>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>handleDelete (lesson) {
-  <span style="color: #2c5dcd; font-weight: bold">this</span>.resource.<span style="color: #2c5dcd; font-weight: bold">delete</span>({id<span style="color: #2c5dcd">:</span> lesson.id}).then((response) =&gt; {
-    <span style="color: #2c5dcd; font-weight: bold">this</span>.$emit(<span style="color: #00cc66">&#39;deleted&#39;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">handleDelete</span> (<span style="color:#a6e22e">lesson</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">resource</span>.<span style="color:#66d9ef">delete</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">id</span>}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$emit</span>(<span style="color:#e6db74">&#39;deleted&#39;</span>)
   })
 }
 
-<span style="color: #2c5dcd; font-weight: bold">this</span>.$on(<span style="color: #00cc66">&#39;deleted&#39;</span>, () =&gt; {
-  <span style="color: #2c5dcd; font-weight: bold">this</span>.eventDeleted()
+<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$on</span>(<span style="color:#e6db74">&#39;deleted&#39;</span>, () =&gt; {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">eventDeleted</span>()
 })
 
-eventDeleted () {
-  <span style="color: #2c5dcd; font-weight: bold">this</span>.initialize()
-  <span style="color: #0080ff; font-style: italic">// notifica o usuário</span>
-  <span style="color: #2c5dcd; font-weight: bold">let</span> message <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;Aula removida!&#39;</span>
-  alert(message)
-}
-</pre></div>
-
+<span style="color:#a6e22e">eventDeleted</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
+  <span style="color:#75715e">// notifica o usuário
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Aula removida!&#39;</span>
+  <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">message</span>)
+}</code></pre></div>
 
 <h3 id="depois">Depois</h3>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>handleDelete (lesson) {
-  <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/deleteOne&#39;</span>, lesson).then(() =&gt; {
-    <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;lessons/getAll&#39;</span>)
-    <span style="color: #2c5dcd; font-weight: bold">this</span>.$store.dispatch(<span style="color: #00cc66">&#39;alerts/createOne&#39;</span>, {
-      message<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;Aula removida!&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">handleDelete</span> (<span style="color:#a6e22e">lesson</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#e6db74">&#39;lessons/deleteOne&#39;</span>, <span style="color:#a6e22e">lesson</span>).<span style="color:#a6e22e">then</span>(() =&gt; {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#e6db74">&#39;lessons/getAll&#39;</span>)
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#e6db74">&#39;alerts/createOne&#39;</span>, {
+      <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Aula removida!&#39;</span>
     })
   })
-}
-</pre></div>
-
+}</code></pre></div>
 
 <p><img src="https://media.giphy.com/media/Unhhb0W1IaDHG/giphy.gif" alt="" /></p>
 
@@ -1005,7 +952,7 @@ eventDeleted () {
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>229</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>322</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -1027,8 +974,8 @@ eventDeleted () {
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

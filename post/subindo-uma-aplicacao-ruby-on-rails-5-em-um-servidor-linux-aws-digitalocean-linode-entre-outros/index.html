@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -25,17 +24,21 @@ Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Subindo uma aplicação Ruby on Rails 5 em um servidor Linux (AWS/DigitalOcean/Linode/entre outros)" />
     <meta name="twitter:description" content="Este é um processo que se faz necessário de vez em quando na vida de um desenvolvedor Ruby. Muitos dirão &amp;ldquo;ah usa Heroku&amp;rdquo;, mas acredite jovem padawan, caminho melhor a seguir.
 Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo lhe permite que deixe falhas críticas na segurança. Mas é só você estudar um pouco e tomar bastante cuidado que a sua segurança não estará tão comprometida." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros.jpg" />
+    <meta name="og:title" content="Subindo uma aplicação Ruby on Rails 5 em um servidor Linux (AWS/DigitalOcean/Linode/entre outros)" />
+    <meta name="og:description" content="Este é um processo que se faz necessário de vez em quando na vida de um desenvolvedor Ruby. Muitos dirão &amp;ldquo;ah usa Heroku&amp;rdquo;, mas acredite jovem padawan, caminho melhor a seguir.
+Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo lhe permite que deixe falhas críticas na segurança. Mas é só você estudar um pouco e tomar bastante cuidado que a sua segurança não estará tão comprometida." />
+    <meta name="og:image" content="http://0e1dev.com/covers/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros/" />
@@ -136,7 +139,9 @@ Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -183,10 +188,16 @@ Este é o caminho mais sujeito a falhas, afinal, você ter o controle sobre tudo
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Subindo uma aplicação Ruby on Rails 5 em um servidor Linux (AWS/DigitalOcean/Linode/entre outros)</h1>
       <p class="post-meta">@lhas · 23/11/2016 · 14 mins. de leitura</p>
     </header>
+
+    
+    <div title="Subindo uma aplicação Ruby on Rails 5 em um servidor Linux (AWS/DigitalOcean/Linode/entre outros)" style="width: 100%; height: 250px; background: url(/covers/subindo-uma-aplicacao-ruby-on-rails-5-em-um-servidor-linux-aws-digitalocean-linode-entre-outros.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Este é um processo que se faz necessário de vez em quando na vida de um desenvolvedor Ruby. Muitos dirão &ldquo;ah usa Heroku&rdquo;, mas acredite jovem padawan, caminho melhor a seguir.</p>
@@ -390,17 +401,14 @@ rbenv global 2.3.1
 </code></pre>
 
 <p>Agora, devemos remover o Ruby velho que tem na sua máquina provavelmente, e forçar o binário do Ruby instalado pelo Rbenv. Para isto, rode:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Remove o binário antigo
+</span><span style="color:#75715e"></span>sudo rm -rf /usr/bin/ruby
 
-<pre><code class="language-bash"># Remove o binário antigo
-sudo rm -rf /usr/bin/ruby
+<span style="color:#75715e"># Descobre o caminho do binário atual - copie o retorno deste comando (para mim foi /home/lhas/.rbenv/versions/2.3.1/bin/ruby)
+</span><span style="color:#75715e"></span>rbenv which ruby
 
-# Descobre o caminho do binário atual - copie o retorno deste comando (para mim foi /home/lhas/.rbenv/versions/2.3.1/bin/ruby)
-rbenv which ruby
-
-# Isto criará um symlink (atalho de binário) entre o Ruby do rbenv e a pasta de binários da máquina
-sudo ln -s /home/lhas/.rbenv/versions/2.3.1/bin/ruby /usr/bin/ruby
-</code></pre>
-
+<span style="color:#75715e"># Isto criará um symlink (atalho de binário) entre o Ruby do rbenv e a pasta de binários da máquina
+</span><span style="color:#75715e"></span>sudo ln -s /home/lhas/.rbenv/versions/2.3.1/bin/ruby /usr/bin/ruby</code></pre></div>
 <h1 id="instalando-o-rails">Instalando o Rails</h1>
 
 <p>Esta é a etapa mais fácil. Como vamos instalar a versão mais recente, isto basta;</p>
@@ -446,15 +454,9 @@ nvm install node --default
 <p>Aqui poderia ser o MySQL por exemplo. Mas é uma convenção na comunidade rubista utilizar o PostgreSQL para tudo ao invés do MySQL.</p>
 
 <p>Para instalar o Postgres, basta rodar:</p>
-
-<pre><code class="language-bash">sudo yum install -y postgresql-server postgresql-contrib
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install -y postgresql-server postgresql-contrib</code></pre></div>
 <p>É importante instalar 2 pacotes que permitirão que nós instalemos nossa gem <code>pg</code>:</p>
-
-<pre><code class="language-bash">sudo yum install -y postgresql-libs postgresql-devel
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install -y postgresql-libs postgresql-devel</code></pre></div>
 <p>Agora vamos inicializar a configuração padrão dele:</p>
 
 <pre><code>sudo postgresql-setup initdb
@@ -649,19 +651,13 @@ passenger_instance_registry_dir /var/run/passenger-instreg;
 <p>Após finalizar estas alterações, salve e feche o arquivo.</p>
 
 <p>Agora vamos reiniciar o Nginx e conferir se está tudo:</p>
-
-<pre><code class="language-bash">sudo systemctl stop nginx
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl stop nginx
 sudo systemctl start nginx
 
-# Validando instalação do Passenger
-/usr/bin/passenger-config validate-install
-</code></pre>
-
+<span style="color:#75715e"># Validando instalação do Passenger
+</span><span style="color:#75715e"></span>/usr/bin/passenger-config validate-install</code></pre></div>
 <p>Se rodarmos o comando a seguir, deveremos visualizar alguns processos tanto na aba de Nginx quanto do Passenger. Caso você não veja nenhum processo, algo na sua instalação deu errado:</p>
-
-<pre><code class="language-bash">/usr/sbin/passenger-memory-stats
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/usr/sbin/passenger-memory-stats</code></pre></div>
 <p><img src="14.png" alt="" /></p>
 
 <p>Agora que já estamos com nossa <em>dobradinha</em> <strong>Nginx</strong> + <strong>Passenger</strong> instalado e configurado, vamos seguir para nossa aplicação de exemplo.</p>
@@ -679,50 +675,38 @@ sudo systemctl start nginx
 <p>Eu vou usar a pasta <code>/home/lhas/apps</code> pois sou familiarizado com ela já. Outras pessoas usam <code>/var/www/apps</code> ou algo parecido.</p>
 
 <h2 id="clonando-o-projeto">Clonando o projeto</h2>
-
-<pre><code class="language-bash"># Cria nossa pasta que armazenará nossas aplicações em Rails
-mkdir ~/apps
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cria nossa pasta que armazenará nossas aplicações em Rails
+</span><span style="color:#75715e"></span>mkdir ~/apps
 cd ~/apps
 
-# Clona o projeto
-git clone https://github.com/lhas/piratenstrasse-api.git
-</code></pre>
-
+<span style="color:#75715e"># Clona o projeto
+</span><span style="color:#75715e"></span>git clone https://github.com/lhas/piratenstrasse-api.git</code></pre></div>
 <h2 id="configurando-o-projeto">Configurando o projeto</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Abra a pasta do projeto
+</span><span style="color:#75715e"></span>cd piratenstrasse-api/
 
-<pre><code class="language-bash"># Abra a pasta do projeto
-cd piratenstrasse-api/
-
-# Instale as dependências do projeto
-bundle install
-</code></pre>
-
+<span style="color:#75715e"># Instale as dependências do projeto
+</span><span style="color:#75715e"></span>bundle install</code></pre></div>
 <h2 id="configurando-database-yml-e-secrets-yml">Configurando database.yml e secrets.yml</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Edita a base de dados de exemplo
+</span><span style="color:#75715e"># Você deve levar o atributo &#34;production&#34; em consideração
+</span><span style="color:#75715e"></span>nano config/database.yml
 
-<pre><code class="language-bash"># Edita a base de dados de exemplo
-# Você deve levar o atributo &quot;production&quot; em consideração
-nano config/database.yml
+<span style="color:#75715e"># Gera uma nova secret key - copie ela
+</span><span style="color:#75715e"></span>bundle exec rake secret
 
-# Gera uma nova secret key - copie ela
-bundle exec rake secret
-
-# Edita o arquivo de secrets keys - cole aqui
-# Você deve levar o atributo &quot;production&quot; em consideração
-nano config/secrets.yml
-</code></pre>
-
+<span style="color:#75715e"># Edita o arquivo de secrets keys - cole aqui
+</span><span style="color:#75715e"># Você deve levar o atributo &#34;production&#34; em consideração
+</span><span style="color:#75715e"></span>nano config/secrets.yml</code></pre></div>
 <h2 id="rodando-as-migrações">Rodando as migrações</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Cria a base de dados
+</span><span style="color:#75715e"></span>RAILS_ENV<span style="color:#f92672">=</span>production bundle exec rake db:create
 
-<pre><code class="language-bash"># Cria a base de dados
-RAILS_ENV=production bundle exec rake db:create
+<span style="color:#75715e"># Roda as migrações
+</span><span style="color:#75715e"></span>RAILS_ENV<span style="color:#f92672">=</span>production bundle exec rake db:migrate
 
-# Roda as migrações
-RAILS_ENV=production bundle exec rake db:migrate
-
-# Alimenta a base com os seeds
-RAILS_ENV=production bundle exec rake db:seed
-</code></pre>
-
+<span style="color:#75715e"># Alimenta a base com os seeds
+</span><span style="color:#75715e"></span>RAILS_ENV<span style="color:#f92672">=</span>production bundle exec rake db:seed</code></pre></div>
 <h2 id="segurança-em-dados-sensíveis">Segurança em dados sensíveis</h2>
 
 <pre><code>chmod 700 config db
@@ -758,26 +742,20 @@ sudo chmod g+x,o+x /home/
 <h2 id="rodando-app-através-do-nginx">Rodando app através do Nginx</h2>
 
 <p>Vamos criar um arquivo de configuração para ele:</p>
-
-<pre><code class="language-bash">sudo nano /etc/nginx/conf.d/nome_do_app.conf
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo nano /etc/nginx/conf.d/nome_do_app.conf</code></pre></div>
 <p>Agora coloque as seguintes informações neste arquivo:</p>
-
-<pre><code class="language-bash">server {
-    listen 80;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">server <span style="color:#f92672">{</span>
+    listen <span style="color:#ae81ff">80</span>;
     server_name ip.da.maquina.aqui;
 
-    # Tell Nginx and Passenger where your app's 'public' directory is
-    root /home/lhas/apps/piratenstrasse-api/public;
+    <span style="color:#75715e"># Tell Nginx and Passenger where your app&#39;s &#39;public&#39; directory is
+</span><span style="color:#75715e"></span>    root /home/lhas/apps/piratenstrasse-api/public;
 
-    # Turn on Passenger
-    passenger_enabled on;
-    # Você deve substituir o CAMINHO DO RUBY AQUI pelo caminho correto do binário do seu ruby através de &quot;rbenv which ruby&quot;
-    passenger_ruby /home/lhas/.rbenv/versions/2.3.1/bin/ruby;
-}
-</code></pre>
-
+    <span style="color:#75715e"># Turn on Passenger
+</span><span style="color:#75715e"></span>    passenger_enabled on;
+    <span style="color:#75715e"># Você deve substituir o CAMINHO DO RUBY AQUI pelo caminho correto do binário do seu ruby através de &#34;rbenv which ruby&#34;
+</span><span style="color:#75715e"></span>    passenger_ruby /home/lhas/.rbenv/versions/2.3.1/bin/ruby;
+<span style="color:#f92672">}</span></code></pre></div>
 <p>Salve o arquivo, saia dele.</p>
 
 <p>Agora, vamos reiniciar o Nginx:</p>
@@ -821,10 +799,7 @@ sudo systemctl start nginx
 <h2 id="como-posso-reiniciar-minha-aplicação">Como posso reiniciar minha aplicação?</h2>
 
 <p>Rode o comando abaixo:</p>
-
-<pre><code class="language-bash">passenger-config restart-app
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">passenger-config restart-app</code></pre></div>
 <p>Ele irá pedir para selecionar qual app deseja reiniciar:</p>
 
 <p><img src="17.png" alt="" /></p>
@@ -840,35 +815,17 @@ sudo systemctl start nginx
 <p>1) Envie as modificações para o seu repositório Git;</p>
 
 <p>2) Acesse via SSH seu servidor;</p>
-
-<pre><code class="language-bash">ssh root@192.168.0.1
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh root@192.168.0.1</code></pre></div>
 <p>3) Abra a pasta do nosso projeto;</p>
-
-<pre><code class="language-bash">cd ~/apps/piratenstrasse-api/
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/apps/piratenstrasse-api/</code></pre></div>
 <p>4) Receba as modificações do repositório remoto;</p>
-
-<pre><code class="language-bash">git pull --force
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git pull --force</code></pre></div>
 <p>5) Instale novas gems;</p>
-
-<pre><code class="language-bash">bundle install
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bundle install</code></pre></div>
 <p>6) Rode migrações;</p>
-
-<pre><code class="language-bash">RAILS_ENV=production bundle exec rake db:migrate
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">RAILS_ENV<span style="color:#f92672">=</span>production bundle exec rake db:migrate</code></pre></div>
 <p>7) Reinicie o Passenger.</p>
-
-<pre><code class="language-bash">passenger-config restart-app
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">passenger-config restart-app</code></pre></div>
 <h1 id="conclusão">Conclusão</h1>
 
 <p>Espero que este tutorial torne-se referência quanto a discussão repetitiva de novatos de qual é a melhor solução para subir nossas aplicações no dia-a-dia.</p>
@@ -888,7 +845,7 @@ sudo systemctl start nginx
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>278</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>371</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -910,8 +867,8 @@ sudo systemctl start nginx
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

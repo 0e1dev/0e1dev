@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -27,19 +26,25 @@ Vamos começar pelo Index (Listagem de Registros)." />
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Montando CRUD com Vue 2" />
     <meta name="twitter:description" content="Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o Vue 2.
 Caso você queira acompanhar os posts anteriores:
  Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2  Pré-Requisitos  Vue Vue-resource Vue-router (opcional, mas útil caso você queira páginas separadas para cada ação)  Nosso projeto Atualmente, o projeto encontra-se assim:
 Vamos começar pelo Index (Listagem de Registros)." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/montando-crud-com-vue-2.png" />
+    <meta name="og:title" content="Montando CRUD com Vue 2" />
+    <meta name="og:description" content="Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o Vue 2.
+Caso você queira acompanhar os posts anteriores:
+ Iniciando um projeto com Vue 2 Autenticação com JWT e Vue 2  Pré-Requisitos  Vue Vue-resource Vue-router (opcional, mas útil caso você queira páginas separadas para cada ação)  Nosso projeto Atualmente, o projeto encontra-se assim:
+Vamos começar pelo Index (Listagem de Registros)." />
+    <meta name="og:image" content="http://0e1dev.com/covers/montando-crud-com-vue-2.png" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/montando-crud-com-vue-2/" />
@@ -140,7 +145,9 @@ Vamos começar pelo Index (Listagem de Registros)." />
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -187,10 +194,16 @@ Vamos começar pelo Index (Listagem de Registros)." />
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Montando CRUD com Vue 2</h1>
       <p class="post-meta">@lhas · 07/01/2017 · 10 mins. de leitura</p>
     </header>
+
+    
+    <div title="Montando CRUD com Vue 2" style="width: 100%; height: 250px; background: url(/covers/montando-crud-com-vue-2.png); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Após um hiato de 18 dias, estou dando continuidade a nossa série de posts sobre o <a href="https://vuejs.org/">Vue 2</a>.</p>
@@ -217,19 +230,16 @@ Vamos começar pelo Index (Listagem de Registros)." />
 <p><img src="1.png" alt="" /></p>
 
 <p>Vamos começar pelo <em>Index</em> (Listagem de Registros).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">template</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dashboard-inputs&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt; &lt;!-- .dashboard-inputs --&gt;</span>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/template&gt;</span>
 
-<pre><code class="language-js">&lt;template&gt;
-  &lt;div class=&quot;dashboard-inputs&quot;&gt;
-  &lt;/div&gt; &lt;!-- .dashboard-inputs --&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-export default {
-  name: 'DashboardInputsIndex'
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DashboardInputsIndex&#39;</span>
 }
-&lt;/script&gt;
-</code></pre>
-
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span></code></pre></div>
 <h1 id="index">Index</h1>
 
 <p>Primeiro, precisamos recuperar os nossos registros através de uma requisição XHR.</p>
@@ -237,13 +247,10 @@ export default {
 <p>Conseguimos fazer requisições facilmente com o <strong>vue-resource</strong>.</p>
 
 <p>Um exemplo para esta nossa requisição:</p>
-
-<pre><code class="language-js">this.$http.get('http://localhost:3000/lessons.json').then((response) =&gt; {
-  console.log('Dados aqui:')
-  console.log(response.data)
-})
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;http://localhost:3000/lessons.json&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Dados aqui:&#39;</span>)
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">data</span>)
+})</code></pre></div>
 <p>Para quem está acostumado com o Angular 1, a sintaxe é bem semelhante.</p>
 
 <p>Este é um exemplo simples de requisição GET com o <em>vue-resource</em>.</p>
@@ -255,39 +262,33 @@ export default {
 <h1 id="usando-resource">Usando $resource</h1>
 
 <p>Um exemplo:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">lessons</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$resource</span>(<span style="color:#e6db74">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>)
 
-<pre><code class="language-js">let lessons = this.$resource('http://localhost:3000/lessons{/id}.json')
-
-lessons.get({}).then((response) =&gt; {
-  console.log(response)
-})
-</code></pre>
-
+<span style="color:#a6e22e">lessons</span>.<span style="color:#a6e22e">get</span>({}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>)
+})</code></pre></div>
 <p><strong>Observação:</strong> <code>{/id}</code> significa que podemos passar um parâmetro ID, mas este parâmetro é opcional, por isto está entre chaves {}.</p>
 
 <h1 id="aplicando-resource-na-index">Aplicando $resource na Index</h1>
-
-<pre><code class="language-js">export default {
-  name: 'DashboardInputsIndex',
-  data () {
-    return {
-      resource: this.$resource('http://localhost:3000/lessons{/id}.json'),
-      lessons: []
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DashboardInputsIndex&#39;</span>,
+  <span style="color:#a6e22e">data</span> () {
+    <span style="color:#66d9ef">return</span> {
+      <span style="color:#a6e22e">resource</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$resource</span>(<span style="color:#e6db74">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>),
+      <span style="color:#a6e22e">lessons</span><span style="color:#f92672">:</span> []
     }
   },
-  methods: {
-    initialize () {
-      this.resource.get({}).then((response) =&gt; {
-        this.lessons = response.data
+  <span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">initialize</span> () {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">get</span>({}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lessons</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">data</span>
       })
     }
   },
-  created () {
-    this.initialize()
+  <span style="color:#a6e22e">created</span> () {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
   }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Vamos pontuar cada atributo do componente.</p>
 
 <h2 id="name">name</h2>
@@ -306,11 +307,8 @@ lessons.get({}).then((response) =&gt; {
 <p>Todas as variáveis atribuídas ao data estarão disponíveis no resto do componente dentro do <code>this</code>.</p>
 
 <p>No nosso caso, podemos usar:</p>
-
-<pre><code class="language-js">this.resource; // para nosso $resource
-this.lessons; // para nossas aulas
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">resource</span>; <span style="color:#75715e">// para nosso $resource
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lessons</span>; <span style="color:#960050;background-color:#1e0010">// para nossas aulas</span></code></pre></div>
 <h2 id="methods">methods</h2>
 
 <p>Esta é fácil. São os métodos que estarão disponíveis no nosso componente.</p>
@@ -338,30 +336,27 @@ this.lessons; // para nossas aulas
 <p>Explicado os atributos do componente, vamos exibir as informações retornadas pela requisição na nossa view.</p>
 
 <p>A view ficará assim:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">template</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dashboard-inputs&#34;</span>&gt;
 
-<pre><code class="language-html">&lt;template&gt;
-  &lt;div class=&quot;dashboard-inputs&quot;&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
 
-    &lt;div class=&quot;container&quot;&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span>&gt;
 
-      &lt;div class=&quot;row&quot;&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;col s12&#34;</span> <span style="color:#a6e22e">v-for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lesson in lessons&#34;</span>&gt;
+          &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card center&#34;</span>&gt;
+            &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-content&#34;</span>&gt;
+              &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-title&#34;</span>&gt;{{lesson.class_date}}&lt;/<span style="color:#f92672">span</span>&gt;
+              &lt;<span style="color:#f92672">p</span>&gt;{{lesson.observation}}&lt;/<span style="color:#f92672">p</span>&gt;
+            &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .card-content --&gt;</span>
+          &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .card --&gt;</span>
+        &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .col --&gt;</span>
 
-        &lt;div class=&quot;col s12&quot; v-for=&quot;lesson in lessons&quot;&gt;
-          &lt;div class=&quot;card center&quot;&gt;
-            &lt;div class=&quot;card-content&quot;&gt;
-              &lt;span class=&quot;card-title&quot;&gt;{{lesson.class_date}}&lt;/span&gt;
-              &lt;p&gt;{{lesson.observation}}&lt;/p&gt;
-            &lt;/div&gt; &lt;!-- .card-content --&gt;
-          &lt;/div&gt; &lt;!-- .card --&gt;
-        &lt;/div&gt; &lt;!-- .col --&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .row --&gt;</span>
+    &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .container --&gt;</span>
 
-      &lt;/div&gt; &lt;!-- .row --&gt;
-    &lt;/div&gt; &lt;!-- .container --&gt;
-
-  &lt;/div&gt; &lt;!-- .dashboard-inputs --&gt;
-&lt;/template&gt;
-</code></pre>
-
+  &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .dashboard-inputs --&gt;</span>
+&lt;/<span style="color:#f92672">template</span>&gt;</code></pre></div>
 <p><img src="2.png" alt="" /></p>
 
 <p>Nossa <em>Index</em> está finalizada por agora.</p>
@@ -375,22 +370,19 @@ this.lessons; // para nossas aulas
 <p>Para isto, vamos usar outro componente. Vamos chamá-lo de <code>Create.vue</code>.</p>
 
 <p>Por enquanto, ele só vai ter um botão de adicionar que em breve acionará uma modal.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">template</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;inputs-create&#34;</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fixed-action-btn&#34;</span>&gt;
+      &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn-floating btn-large z-depth-4 green&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons&#34;</span>&gt;add&lt;/<span style="color:#f92672">i</span>&gt;&lt;/<span style="color:#f92672">a</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .fixed-action-btn --&gt;</span>
+  &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .inputs-create --&gt;</span>
+&lt;/<span style="color:#f92672">template</span>&gt;
 
-<pre><code class="language-html">&lt;template&gt;
-  &lt;div class=&quot;inputs-create&quot;&gt;
-    &lt;div class=&quot;fixed-action-btn&quot;&gt;
-      &lt;a class=&quot;btn-floating btn-large z-depth-4 green&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;add&lt;/i&gt;&lt;/a&gt;
-    &lt;/div&gt; &lt;!-- .fixed-action-btn --&gt;
-  &lt;/div&gt; &lt;!-- .inputs-create --&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-export default {
-  name: 'Inputs-Create'
+&lt;<span style="color:#f92672">script</span>&gt;
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Inputs-Create&#39;</span>
 }
-&lt;/script&gt;
-</code></pre>
-
+&lt;/<span style="color:#f92672">script</span>&gt;</code></pre></div>
 <p><strong>Observação:</strong> Está é a minha árvore atual, caso você esteja curioso sobre.</p>
 
 <p><img src="3.png" alt="" /></p>
@@ -416,54 +408,42 @@ export default {
 <p>O vue contém sua própria implementação desta pattern chamada <a href="https://vuex.vuejs.org/en/intro.html">vuex</a>. No próximo post falo mais sobre este assunto.</p>
 
 <p>Voltando ao nosso título, vamos importar o create no index. No nosso <code>Index.vue</code>, precisaremos fazer esta importação:</p>
-
-<pre><code class="language-js">import InputsCreate from './Create'
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">InputsCreate</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Create&#39;</span></code></pre></div>
 <p>Agora precisamos indicar ao nosso Index para consumir este componente:</p>
-
-<pre><code class="language-js">export default {
-  // ocultei o código para uma melhor leitura
-  ...,
-  components: {
-    'Inputs-Create': InputsCreate
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#75715e">// ocultei o código para uma melhor leitura
+</span><span style="color:#75715e"></span>  ...,
+  <span style="color:#a6e22e">components</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#39;Inputs-Create&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsCreate</span>
   }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Agora podemos usar dentro do nosso Componente pai o nosso filho quantas vezes quisermos, da seguinte maneira:</p>
-
-<pre><code class="language-html">&lt;Inputs-Create&gt;&lt;/Input-Create&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Inputs-Create</span>&gt;&lt;/<span style="color:#f92672">Input-Create</span>&gt;</code></pre></div>
 <p>No meu caso eu usei assim:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">template</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dashboard-inputs&#34;</span>&gt;
 
-<pre><code class="language-html">&lt;template&gt;
-  &lt;div class=&quot;dashboard-inputs&quot;&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
 
-    &lt;div class=&quot;container&quot;&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span>&gt;
 
-      &lt;div class=&quot;row&quot;&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;col s12&#34;</span> <span style="color:#a6e22e">v-for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lesson in lessons&#34;</span>&gt;
+          &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card center z-depth-1&#34;</span>&gt;
+            &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-content&#34;</span>&gt;
+              &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-title&#34;</span>&gt;{{lesson.class_date}}&lt;/<span style="color:#f92672">span</span>&gt;
+              &lt;<span style="color:#f92672">p</span>&gt;{{lesson.observation}}&lt;/<span style="color:#f92672">p</span>&gt;
+            &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .card-content --&gt;</span>
+          &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .card --&gt;</span>
+        &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .col --&gt;</span>
 
-        &lt;div class=&quot;col s12&quot; v-for=&quot;lesson in lessons&quot;&gt;
-          &lt;div class=&quot;card center z-depth-1&quot;&gt;
-            &lt;div class=&quot;card-content&quot;&gt;
-              &lt;span class=&quot;card-title&quot;&gt;{{lesson.class_date}}&lt;/span&gt;
-              &lt;p&gt;{{lesson.observation}}&lt;/p&gt;
-            &lt;/div&gt; &lt;!-- .card-content --&gt;
-          &lt;/div&gt; &lt;!-- .card --&gt;
-        &lt;/div&gt; &lt;!-- .col --&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .row --&gt;</span>
+    &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .container --&gt;</span>
 
-      &lt;/div&gt; &lt;!-- .row --&gt;
-    &lt;/div&gt; &lt;!-- .container --&gt;
+    <span style="color:#75715e">&lt;!-- Aqui a mágica acontece --&gt;</span>
+    &lt;<span style="color:#f92672">Inputs-Create</span>&gt;&lt;/<span style="color:#f92672">Inputs-Create</span>&gt;
 
-    &lt;!-- Aqui a mágica acontece --&gt;
-    &lt;Inputs-Create&gt;&lt;/Inputs-Create&gt;
-
-  &lt;/div&gt; &lt;!-- .dashboard-inputs --&gt;
-&lt;/template&gt;
-</code></pre>
-
+  &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .dashboard-inputs --&gt;</span>
+&lt;/<span style="color:#f92672">template</span>&gt;</code></pre></div>
 <p>O que me proporcionou a seguinte renderização:</p>
 
 <p><img src="4.png" alt="" /></p>
@@ -477,56 +457,53 @@ export default {
 <p>Eu só estou fazendo as coisas desta forma pois neste projeto quero usar o Materialize e nenhuma implementação do mesmo com o Vue me agradou, então tentei deixar as coisas mais <em>roots</em> possíveis.</p>
 
 <p>Meu template com o modal funcionando abaixo:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">template</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;inputs-create&#34;</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fixed-action-btn&#34;</span>&gt;
+      &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#modal1&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn-floating btn-large z-depth-4 green&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons&#34;</span>&gt;add&lt;/<span style="color:#f92672">i</span>&gt;&lt;/<span style="color:#f92672">a</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .fixed-action-btn --&gt;</span>
 
-<pre><code class="language-html">&lt;template&gt;
-  &lt;div class=&quot;inputs-create&quot;&gt;
-    &lt;div class=&quot;fixed-action-btn&quot;&gt;
-      &lt;a href=&quot;#modal1&quot; class=&quot;btn-floating btn-large z-depth-4 green&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;add&lt;/i&gt;&lt;/a&gt;
-    &lt;/div&gt; &lt;!-- .fixed-action-btn --&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal1&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal&#34;</span>&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal-content&#34;</span>&gt;
+        &lt;<span style="color:#f92672">h4</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons&#34;</span>&gt;edit&lt;/<span style="color:#f92672">i</span>&gt; Adicionar Aula&lt;/<span style="color:#f92672">h4</span>&gt;
 
-    &lt;div id=&quot;modal1&quot; class=&quot;modal&quot;&gt;
-      &lt;div class=&quot;modal-content&quot;&gt;
-        &lt;h4 class=&quot;center&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;edit&lt;/i&gt; Adicionar Aula&lt;/h4&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-field&#34;</span>&gt;
+          &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span> <span style="color:#a6e22e">v-model</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lesson.class_date&#34;</span>&gt;
+          &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>&gt;Data&lt;/<span style="color:#f92672">label</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .input-field --&gt;</span>
 
-        &lt;div class=&quot;input-field&quot;&gt;
-          &lt;input type=&quot;text&quot; id=&quot;date&quot; v-model=&quot;lesson.class_date&quot;&gt;
-          &lt;label for=&quot;date&quot;&gt;Data&lt;/label&gt;
-        &lt;/div&gt; &lt;!-- .input-field --&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-field&#34;</span>&gt;
+          &lt;<span style="color:#f92672">textarea</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;observation&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;materialize-textarea&#34;</span> <span style="color:#a6e22e">v-model</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lesson.observation&#34;</span>&gt;&lt;/<span style="color:#f92672">textarea</span>&gt;
+          &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span>&gt;Observações&lt;/<span style="color:#f92672">label</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .input-field --&gt;</span>
+      &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .modal-content --&gt;</span>
 
-        &lt;div class=&quot;input-field&quot;&gt;
-          &lt;textarea id=&quot;observation&quot; class=&quot;materialize-textarea&quot; v-model=&quot;lesson.observation&quot;&gt;&lt;/textarea&gt;
-          &lt;label for=&quot;email&quot;&gt;Observações&lt;/label&gt;
-        &lt;/div&gt; &lt;!-- .input-field --&gt;
-      &lt;/div&gt; &lt;!-- .modal-content --&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal-footer&#34;</span>&gt;
+        &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#!&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal-action modal-close btn blue&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons right&#34;</span>&gt;send&lt;/<span style="color:#f92672">i</span>&gt; Salvar Aula&lt;/<span style="color:#f92672">a</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .modal-footer --&gt;</span>
+    &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .modal --&gt;</span>
 
-      &lt;div class=&quot;modal-footer&quot;&gt;
-        &lt;a href=&quot;#!&quot; class=&quot;modal-action modal-close btn blue&quot;&gt;&lt;i class=&quot;material-icons right&quot;&gt;send&lt;/i&gt; Salvar Aula&lt;/a&gt;
-      &lt;/div&gt; &lt;!-- .modal-footer --&gt;
-    &lt;/div&gt; &lt;!-- .modal --&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .inputs-create --&gt;</span>
+&lt;/<span style="color:#f92672">template</span>&gt;
 
-  &lt;/div&gt; &lt;!-- .inputs-create --&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-export default {
-  name: 'Inputs-Create',
-  data () {
-    return {
-      lesson: {
-        class_date: null,
-        observation: null
+&lt;<span style="color:#f92672">script</span>&gt;
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Inputs-Create&#39;</span>,
+  <span style="color:#a6e22e">data</span> () {
+    <span style="color:#66d9ef">return</span> {
+      <span style="color:#a6e22e">lesson</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">class_date</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+        <span style="color:#a6e22e">observation</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>
       }
     }
   },
-  created () {
-    window.jQuery(document).ready(() =&gt; {
-      window.jQuery('.modal').modal()
+  <span style="color:#a6e22e">created</span> () {
+    window.<span style="color:#a6e22e">jQuery</span>(document).<span style="color:#a6e22e">ready</span>(() =&gt; {
+      window.<span style="color:#a6e22e">jQuery</span>(<span style="color:#e6db74">&#39;.modal&#39;</span>).<span style="color:#a6e22e">modal</span>()
     })
   }
 }
-&lt;/script&gt;
-</code></pre>
-
+&lt;/<span style="color:#f92672">script</span>&gt;</code></pre></div>
 <p><img src="5.png" alt="" /></p>
 
 <p>Agora precisamos fazer este formulário funcionar.</p>
@@ -538,54 +515,48 @@ export default {
 <p>Primeiro, precisamos indicar ao nosso botão de <strong>Salvar</strong> que ele deve chamar um método através do evento de <strong>clique</strong>.</p>
 
 <p>Para isto, vamos mudar a sintaxe do botão:</p>
-
-<pre><code class="language-html">&lt;!-- Antes --&gt;
-&lt;a href=&quot;#!&quot; class=&quot;modal-action modal-close btn blue&quot;&gt;&lt;i class=&quot;material-icons right&quot;&gt;send&lt;/i&gt; Salvar Aula&lt;/a&gt;
-&lt;!-- Depois --&gt;
-&lt;a href=&quot;javascript:void(0);&quot; @click=&quot;handleSubmit(lesson)&quot; class=&quot;modal-action btn blue&quot;&gt;&lt;i class=&quot;material-icons right&quot;&gt;send&lt;/i&gt; Salvar Aula&lt;/a&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- Antes --&gt;</span>
+&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#!&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal-action modal-close btn blue&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons right&#34;</span>&gt;send&lt;/<span style="color:#f92672">i</span>&gt; Salvar Aula&lt;/<span style="color:#f92672">a</span>&gt;
+<span style="color:#75715e">&lt;!-- Depois --&gt;</span>
+&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:void(0);&#34;</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleSubmit(lesson)&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal-action btn blue&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons right&#34;</span>&gt;send&lt;/<span style="color:#f92672">i</span>&gt; Salvar Aula&lt;/<span style="color:#f92672">a</span>&gt;</code></pre></div>
 <p>Usamos a propriedade <code>@click</code> para isto, passando o método <code>handleSubmit(lesson)</code>.</p>
 
 <p>Vamos criar este método agora:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Inputs-Create&#39;</span>,
+  <span style="color:#75715e">// resto do código ocultado
+</span><span style="color:#75715e"></span>  ...,
+  <span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">handleSubmit</span> (<span style="color:#a6e22e">lesson</span>) {
+      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
 
-<pre><code class="language-js">export default {
-  name: 'Inputs-Create',
-  // resto do código ocultado
-  ...,
-  methods: {
-    handleSubmit (lesson) {
-      let message = ''
+      <span style="color:#75715e">// usamos o resource do Index para salvar uma nova aula
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// ela retornará uma Promise, que iremos tratar com o .then()
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$parent</span>.<span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">save</span>({}, <span style="color:#a6e22e">lesson</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
+        <span style="color:#75715e">// em caso de sucesso, o primeiro parâmetro do .then() é usado
+</span><span style="color:#75715e"></span>
+        <span style="color:#75715e">// como expliquei anteriormente,
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// estou usando um plugin de jQuery para o modal.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// preciso fechá-lo então:
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// fecha a modal
+</span><span style="color:#75715e"></span>        window.<span style="color:#a6e22e">jQuery</span>(<span style="color:#e6db74">&#39;.modal&#39;</span>).<span style="color:#a6e22e">modal</span>(<span style="color:#e6db74">&#39;close&#39;</span>)
 
-      // usamos o resource do Index para salvar uma nova aula
-      // ela retornará uma Promise, que iremos tratar com o .then()
-      this.$parent.resource.save({}, lesson).then((result) =&gt; {
-        // em caso de sucesso, o primeiro parâmetro do .then() é usado
-
-        // como expliquei anteriormente,
-        // estou usando um plugin de jQuery para o modal.
-        // preciso fechá-lo então:
-        //
-        // fecha a modal
-        window.jQuery('.modal').modal('close')
-
-        // precisamos avisar o usuário que mudanças ocorreram
-        // notifica o usuário
-        message = 'Aula adicionada com sucesso!'
-        window.Materialize.toast(message)
+        <span style="color:#75715e">// precisamos avisar o usuário que mudanças ocorreram
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// notifica o usuário
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Aula adicionada com sucesso!&#39;</span>
+        window.<span style="color:#a6e22e">Materialize</span>.<span style="color:#a6e22e">toast</span>(<span style="color:#a6e22e">message</span>)
       }, () =&gt; {
-        // aqui é o fallback caso a requisição tenha algum problema
-
-        // notifica o usuário (em caso de erro)
-        message = 'Erro ao adicionar aula'
-        window.Materialize.toast(message)
+        <span style="color:#75715e">// aqui é o fallback caso a requisição tenha algum problema
+</span><span style="color:#75715e"></span>
+        <span style="color:#75715e">// notifica o usuário (em caso de erro)
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Erro ao adicionar aula&#39;</span>
+        window.<span style="color:#a6e22e">Materialize</span>.<span style="color:#a6e22e">toast</span>(<span style="color:#a6e22e">message</span>)
       })
 
     }
   }
-}
-</code></pre>
-
+}</code></pre></div>
 <p><strong>Pronto!</strong> O nosso <em>Create</em> está concluído.</p>
 
 <p>Só que tem 1 problema: O <em>Index</em> não sabe que o seu filho, <em>Create</em>, fez algo.</p>
@@ -600,28 +571,19 @@ export default {
 <p>Caso uma nova aula seja adicionada com sucesso, precisamos emitir um evento indicando mudanças, que chamarei de <strong>created</strong>.</p>
 
 <p>Para emitir este evento, o código necessário é:</p>
-
-<pre><code class="language-js">this.$emit('created')
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$emit</span>(<span style="color:#e6db74">&#39;created&#39;</span>)</code></pre></div>
 <p>Para nosso componente pai escutar este evento, podemos fazer de 2 maneiras:</p>
 
 <h3 id="a-maneira-ideal">A maneira ideal</h3>
 
 <p>No seu componente pai, onde chamamos o filho, adicionamos um novo atributo:</p>
-
-<pre><code class="language-html">&lt;Inputs-Create v-on:created=&quot;initialize&quot;&gt;&lt;/Inputs-Create&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Inputs-Create</span> <span style="color:#a6e22e">v-on:created</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;initialize&#34;</span>&gt;&lt;/<span style="color:#f92672">Inputs-Create</span>&gt;</code></pre></div>
 <h3 id="a-maneira-feia">A maneira feia</h3>
 
 <p>Caso você queira detectar dentro da execução do componente:</p>
-
-<pre><code class="language-js">this.$on('created', () =&gt; {
-  this.initialize()
-})
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$on</span>(<span style="color:#e6db74">&#39;created&#39;</span>, () =&gt; {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
+})</code></pre></div>
 <p><strong>Pronto!</strong> <em>Created</em> de fato finalizado.</p>
 
 <p>Agora falta <strong>Delete</strong> e <strong>Update</strong>.</p>
@@ -631,46 +593,34 @@ export default {
 <p>Vamos começar pelo <em>Delete</em> pela simplicidade.</p>
 
 <p>Precisamos de um botão para remover os itens:</p>
-
-<pre><code class="language-html">&lt;div class=&quot;card-action&quot;&gt;
-  &lt;button @click=&quot;handleDelete(lesson)&quot; class=&quot;btn-flat red-text&quot;&gt;
-    &lt;i class=&quot;material-icons&quot;&gt;delete&lt;/i&gt;
-  &lt;/button&gt;
-&lt;/div&gt; &lt;!-- .card-action --&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-action&#34;</span>&gt;
+  &lt;<span style="color:#f92672">button</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleDelete(lesson)&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;btn-flat red-text&#34;</span>&gt;
+    &lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons&#34;</span>&gt;delete&lt;/<span style="color:#f92672">i</span>&gt;
+  &lt;/<span style="color:#f92672">button</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .card-action --&gt;</span></code></pre></div>
 <p>Este botão está chamando o método <code>handleDelete(lesson)</code>.</p>
-
-<pre><code class="language-js">handleDelete (lesson) {
-  this.resource.delete({id: lesson.id}).then((response) =&gt; {
-    this.$emit('deleted')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">handleDelete</span> (<span style="color:#a6e22e">lesson</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">resource</span>.<span style="color:#66d9ef">delete</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">id</span>}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$emit</span>(<span style="color:#e6db74">&#39;deleted&#39;</span>)
   })
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Este método está emitindo um evento <code>deleted</code>. Vamos escutá-lo quando o componente é criado?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
 
-<pre><code class="language-js">created () {
-  this.initialize()
-
-  this.$on('deleted', () =&gt; {
-    this.eventDeleted()
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$on</span>(<span style="color:#e6db74">&#39;deleted&#39;</span>, () =&gt; {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">eventDeleted</span>()
   })
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Dentro da nossa escuta, estamos acionando outro método <code>eventDeleted()</code>. Vamos criá-lo?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">eventDeleted</span> () {
+  <span style="color:#75715e">// reiniciamos o componente
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
 
-<pre><code class="language-js">eventDeleted () {
-  // reiniciamos o componente
-  this.initialize()
-
-  // notifica o usuário
-  let message = 'Aula removida!'
-  window.Materialize.toast(message)
-}
-</code></pre>
-
+  <span style="color:#75715e">// notifica o usuário
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Aula removida!&#39;</span>
+  window.<span style="color:#a6e22e">Materialize</span>.<span style="color:#a6e22e">toast</span>(<span style="color:#a6e22e">message</span>)
+}</code></pre></div>
 <p><strong>Pronto!</strong> <em>Delete</em> concluído, faltando apenas o <em>Update</em>.</p>
 
 <p><img src="https://media.giphy.com/media/xT0GqtcVR0jOXzmmPK/giphy.gif" alt="" /></p>
@@ -680,32 +630,29 @@ export default {
 <p>O <em>Update</em> pode ser implementado em N maneiras. Faremos da maneira mais repetitiva possível, criando outro componente com um template próprio, mas talvez em uma situação da vida real seja interessante você isolar o formulário em um componente só e reaproveitá-lo dentro do <em>Create</em> e <em>Update</em>.</p>
 
 <p>Em termos de template, é idêntico, apenas removendo o botão fixo de adicionar novos:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;inputs-update&#34;</span>&gt;
 
-<pre><code class="language-html">&lt;div class=&quot;inputs-update&quot;&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal2&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal&#34;</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal-content&#34;</span>&gt;
+      &lt;<span style="color:#f92672">h4</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons&#34;</span>&gt;edit&lt;/<span style="color:#f92672">i</span>&gt; Editar Aula&lt;/<span style="color:#f92672">h4</span>&gt;
 
-  &lt;div id=&quot;modal2&quot; class=&quot;modal&quot;&gt;
-    &lt;div class=&quot;modal-content&quot;&gt;
-      &lt;h4 class=&quot;center&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;edit&lt;/i&gt; Editar Aula&lt;/h4&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-field&#34;</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span> <span style="color:#a6e22e">v-model</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lesson.class_date&#34;</span>&gt;
+        &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>&gt;Data&lt;/<span style="color:#f92672">label</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .input-field --&gt;</span>
 
-      &lt;div class=&quot;input-field&quot;&gt;
-        &lt;input type=&quot;text&quot; id=&quot;date&quot; v-model=&quot;lesson.class_date&quot;&gt;
-        &lt;label for=&quot;date&quot;&gt;Data&lt;/label&gt;
-      &lt;/div&gt; &lt;!-- .input-field --&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;input-field&#34;</span>&gt;
+        &lt;<span style="color:#f92672">textarea</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;observation&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;materialize-textarea&#34;</span> <span style="color:#a6e22e">v-model</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lesson.observation&#34;</span>&gt;&lt;/<span style="color:#f92672">textarea</span>&gt;
+        &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span>&gt;Observações&lt;/<span style="color:#f92672">label</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .input-field --&gt;</span>
 
-      &lt;div class=&quot;input-field&quot;&gt;
-        &lt;textarea id=&quot;observation&quot; class=&quot;materialize-textarea&quot; v-model=&quot;lesson.observation&quot;&gt;&lt;/textarea&gt;
-        &lt;label for=&quot;email&quot;&gt;Observações&lt;/label&gt;
-      &lt;/div&gt; &lt;!-- .input-field --&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .modal-content --&gt;</span>
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal-footer&#34;</span>&gt;
+      &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:void(0);&#34;</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleSubmit(lesson)&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modal-action btn blue&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;material-icons right&#34;</span>&gt;send&lt;/<span style="color:#f92672">i</span>&gt; Salvar Aula&lt;/<span style="color:#f92672">a</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .modal-footer --&gt;</span>
+  &lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .modal --&gt;</span>
 
-    &lt;/div&gt; &lt;!-- .modal-content --&gt;
-    &lt;div class=&quot;modal-footer&quot;&gt;
-      &lt;a href=&quot;javascript:void(0);&quot; @click=&quot;handleSubmit(lesson)&quot; class=&quot;modal-action btn blue&quot;&gt;&lt;i class=&quot;material-icons right&quot;&gt;send&lt;/i&gt; Salvar Aula&lt;/a&gt;
-    &lt;/div&gt; &lt;!-- .modal-footer --&gt;
-  &lt;/div&gt; &lt;!-- .modal --&gt;
-
-&lt;/div&gt; &lt;!-- .inputs-update --&gt;
-</code></pre>
-
+&lt;/<span style="color:#f92672">div</span>&gt; <span style="color:#75715e">&lt;!-- .inputs-update --&gt;</span></code></pre></div>
 <p>No JS, duas mudanças:</p>
 
 <ul>
@@ -731,66 +678,57 @@ export default {
 <p>Esta notificação ocorrerá através do evento <em>updated</em>.</p>
 
 <p>Para isto, no nosso pai, abaixo do <code>&lt;Inputs-Create&gt;</code>, teremos o <code>&lt;Inputs-Update&gt;</code>:</p>
-
-<pre><code class="language-html">&lt;Inputs-Create v-on:created=&quot;initialize&quot;&gt;&lt;/Inputs-Create&gt;
-&lt;!-- Observe o evento &quot;updated&quot; sendo usado e o nosso prop &quot;lesson&quot; --&gt;
-&lt;Inputs-Update v-on:updated=&quot;initialize&quot; :lesson=&quot;lesson&quot;&gt;&lt;/Inputs-Update&gt;
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Inputs-Create</span> <span style="color:#a6e22e">v-on:created</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;initialize&#34;</span>&gt;&lt;/<span style="color:#f92672">Inputs-Create</span>&gt;
+<span style="color:#75715e">&lt;!-- Observe o evento &#34;updated&#34; sendo usado e o nosso prop &#34;lesson&#34; --&gt;</span>
+&lt;<span style="color:#f92672">Inputs-Update</span> <span style="color:#a6e22e">v-on:updated</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;initialize&#34;</span> <span style="color:#a6e22e">:lesson</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lesson&#34;</span>&gt;&lt;/<span style="color:#f92672">Inputs-Update</span>&gt;</code></pre></div>
 <p>Abaixo o código JS do componente <em>Update</em>:</p>
-
-<pre><code class="language-js">export default {
-  name: 'Inputs-Update',
-  props: ['lesson'],
-  created () {
-    window.jQuery(document).ready(() =&gt; {
-      window.jQuery('.modal').modal({
-        // isto é uma gambiarra para os labels do Materialize funcionarem
-        // com dados dinâmicos
-        ready: function () {
-          window.Materialize.updateTextFields()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Inputs-Update&#39;</span>,
+  <span style="color:#a6e22e">props</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;lesson&#39;</span>],
+  <span style="color:#a6e22e">created</span> () {
+    window.<span style="color:#a6e22e">jQuery</span>(document).<span style="color:#a6e22e">ready</span>(() =&gt; {
+      window.<span style="color:#a6e22e">jQuery</span>(<span style="color:#e6db74">&#39;.modal&#39;</span>).<span style="color:#a6e22e">modal</span>({
+        <span style="color:#75715e">// isto é uma gambiarra para os labels do Materialize funcionarem
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// com dados dinâmicos
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">ready</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+          window.<span style="color:#a6e22e">Materialize</span>.<span style="color:#a6e22e">updateTextFields</span>()
         }
       })
     })
   },
-  methods: {
-    handleSubmit (lesson) {
-      let message = ''
+  <span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">handleSubmit</span> (<span style="color:#a6e22e">lesson</span>) {
+      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
 
-      this.$parent.resource.update({id: lesson.id}, lesson).then((result) =&gt; {
-        // fecha a modal
-        window.jQuery('.modal').modal('close')
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$parent</span>.<span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">update</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">id</span>}, <span style="color:#a6e22e">lesson</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
+        <span style="color:#75715e">// fecha a modal
+</span><span style="color:#75715e"></span>        window.<span style="color:#a6e22e">jQuery</span>(<span style="color:#e6db74">&#39;.modal&#39;</span>).<span style="color:#a6e22e">modal</span>(<span style="color:#e6db74">&#39;close&#39;</span>)
 
-        // notifica o usuário
-        message = 'Aula editada com sucesso!'
-        window.Materialize.toast(message)
+        <span style="color:#75715e">// notifica o usuário
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Aula editada com sucesso!&#39;</span>
+        window.<span style="color:#a6e22e">Materialize</span>.<span style="color:#a6e22e">toast</span>(<span style="color:#a6e22e">message</span>)
 
-        // emissão de evento
-        this.$emit('updated')
+        <span style="color:#75715e">// emissão de evento
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$emit</span>(<span style="color:#e6db74">&#39;updated&#39;</span>)
       }, () =&gt; {
-        // notifica o usuário (em caso de erro)
-        message = 'Erro ao editar aula'
-        window.Materialize.toast(message)
+        <span style="color:#75715e">// notifica o usuário (em caso de erro)
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Erro ao editar aula&#39;</span>
+        window.<span style="color:#a6e22e">Materialize</span>.<span style="color:#a6e22e">toast</span>(<span style="color:#a6e22e">message</span>)
       })
     }
   }
-}
-</code></pre>
-
+}</code></pre></div>
 <p>Para este componente funcionar, precisamos fazer 2 adaptações no <em>Index</em>:</p>
 
 <ul>
 <li>Importar o componente <em>Update</em>;</li>
 </ul>
-
-<pre><code class="language-js">import InputsUpdate from './Update'
-// ...
-components: {
-  'Inputs-Create': InputsCreate,
-  'Inputs-Update': InputsUpdate
-}
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">InputsUpdate</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Update&#39;</span>
+<span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">components</span><span style="color:#f92672">:</span> {
+  <span style="color:#e6db74">&#39;Inputs-Create&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsCreate</span>,
+  <span style="color:#e6db74">&#39;Inputs-Update&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsUpdate</span>
+}</code></pre></div>
 <ul>
 <li>Adicionar o <em>prop</em> ao <strong>data</strong>;</li>
 </ul>
@@ -800,17 +738,14 @@ components: {
 <p>Isso se faz necessário pois o <em>Vue</em> precisa que todos nossos &ldquo;models&rdquo; sejam inicializados antes de serem usados.</p>
 
 <p>No caso, nosso data ficará assim:</p>
-
-<pre><code class="language-js">data () {
-  return {
-    resource: this.$resource('http://localhost:3000/lessons{/id}.json'),
-    lessons: [],
-    // nova linha aqui
-    lesson: {}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">resource</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$resource</span>(<span style="color:#e6db74">&#39;http://localhost:3000/lessons{/id}.json&#39;</span>),
+    <span style="color:#a6e22e">lessons</span><span style="color:#f92672">:</span> [],
+    <span style="color:#75715e">// nova linha aqui
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">lesson</span><span style="color:#f92672">:</span> {}
   }
-},
-</code></pre>
-
+},</code></pre></div>
 <p><strong>Pronto</strong>! Nosso CRUD funcionando 100%.</p>
 
 <h1 id="conclusão">Conclusão</h1>
@@ -842,7 +777,7 @@ components: {
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>233</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>326</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -864,8 +799,8 @@ components: {
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

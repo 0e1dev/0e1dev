@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -27,19 +26,25 @@ Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter 
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Usando Socket.IO em uma hospedagem compartilhada (como Locaweb, HostGator, etc)" />
     <meta name="twitter:description" content="Hoje vou ensinar como trabalhar com o Socket.IO para transformar sua aplicação web em tempo real.
 O que é Socket.IO? Segundo a descrição no site deles, &amp;ldquo;THE FASTEST AND MOST RELIABLE REAL-TIME ENGINE&amp;rdquo;.
 Ele permite que você crie aplicações em tempo real de forma bi-direcional (tanto o cliente quanto o servidor podem se comunicar), orientado a eventos.
 Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter problemas." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc.jpg" />
+    <meta name="og:title" content="Usando Socket.IO em uma hospedagem compartilhada (como Locaweb, HostGator, etc)" />
+    <meta name="og:description" content="Hoje vou ensinar como trabalhar com o Socket.IO para transformar sua aplicação web em tempo real.
+O que é Socket.IO? Segundo a descrição no site deles, &amp;ldquo;THE FASTEST AND MOST RELIABLE REAL-TIME ENGINE&amp;rdquo;.
+Ele permite que você crie aplicações em tempo real de forma bi-direcional (tanto o cliente quanto o servidor podem se comunicar), orientado a eventos.
+Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter problemas." />
+    <meta name="og:image" content="http://0e1dev.com/covers/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc/" />
@@ -140,7 +145,9 @@ Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter 
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -187,10 +194,16 @@ Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter 
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Usando Socket.IO em uma hospedagem compartilhada (como Locaweb, HostGator, etc)</h1>
       <p class="post-meta">@lhas · 14/07/2016 · 5 mins. de leitura</p>
     </header>
+
+    
+    <div title="Usando Socket.IO em uma hospedagem compartilhada (como Locaweb, HostGator, etc)" style="width: 100%; height: 250px; background: url(/covers/usando-socket-io-em-uma-hospedagem-compartilhada-como-locaweb-hostgator-etc.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Hoje vou ensinar como trabalhar com o Socket.IO para transformar sua aplicação web em tempo real.</p>
@@ -219,16 +232,10 @@ Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter 
 <h1 id="começando">Começando&hellip;</h1>
 
 <p>1) Acesse o servidor que vai hospedar a aplicação via SSH.</p>
-
-<pre><code class="language-bash">ssh root@0e1dev.com
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh root@0e1dev.com</code></pre></div>
 <p>2) Instale o Node.JS (não abordarei isto aqui, você pode aprender sobre <a href="https://www.digitalocean.com/community/tutorials/como-instalar-o-node-js-em-um-servidor-ubuntu-14-04-pt">aqui</a>).
 3) Instale o PM2:</p>
-
-<pre><code class="language-bash">npm install pm2 -g
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install pm2 -g</code></pre></div>
 <p>4) Vamos montar nosso script? Bora:</p>
 
 <p>Crie uma pasta para nosso app, e dentro um arquivo chamado server.js.</p>
@@ -238,61 +245,46 @@ Ela funciona em qualquer dispositivo, browser, plataforma e você não deve ter 
 </code></pre>
 
 <p>Primeiro precisamos instalar nossas dependências (Express e o Socket.IO). O Express é necessário pois para o Socket.IO rodar ele precisa de um processo HTTP já rodando em algum lugar. Para instalar rode este comando na pasta do app:</p>
-
-<pre><code class="language-bash">npm install --save-dev express socket.io
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install --save-dev express socket.io</code></pre></div>
 <p>Agora, vamos editar o server.js.</p>
 
 <p>No começo do nosso script, vamos importar as dependencias que instalamos:</p>
-
-<pre><code class="language-javascript">var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>)();
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;http&#39;</span>).<span style="color:#a6e22e">Server</span>(<span style="color:#a6e22e">app</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">io</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;socket.io&#39;</span>)(<span style="color:#a6e22e">http</span>);</code></pre></div>
 <p>Caso você queira criar uma rota para testar o funcionamento do Express na nossa app, adicione logo depois:</p>
-
-<pre><code class="language-javascript">app.get('/', function(req, res){
-  res.send('&lt;h1&gt;Hello world&lt;/h1&gt;');
-});
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>){
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;&lt;h1&gt;Hello world&lt;/h1&gt;&#39;</span>);
+});</code></pre></div>
 <p>Como caso de uso, vamos fazer um counter de usuários acessando nosso site. Para isto, vamos declarar uma variável que vai armazenar este total. Depois, vamos manipular o evento &ldquo;connection&rdquo; e &ldquo;disconnect&rdquo; disponíveis dentro do socket. Quando ocorrer uma nova &ldquo;connection&rdquo;, vamos acrescentar esta variável total. Quando ocorrer um &ldquo;disconnect&rdquo;, vamos reduzir essa variável.</p>
 
 <p>Sim, o Socket.IO permite que nós detectamos quando um usuário &ldquo;sai&rdquo; do nosso site. Isso é muito bom, levando em conta que a um tempo atrás não era possível fazer esse tipo de detecção client-side apenas.</p>
 
 <p>Chega de papo e vamos pro código:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Armazena o total de usuários
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">totalUsers</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-<pre><code class="language-javascript">// Armazena o total de usuários
-var totalUsers = 0;
+<span style="color:#75715e">// Evento - Ao ocorrer uma conexão (um novo socket disponível)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;connection&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">socket</span>){
 
-// Evento - Ao ocorrer uma conexão (um novo socket disponível)
-io.on('connection', function(socket){
+  <span style="color:#75715e">// Acrescentar total
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">totalUsers</span><span style="color:#f92672">++</span>;
 
-  // Acrescentar total
-  totalUsers++;
+  <span style="color:#75715e">// Vamos emitir um evento chamado &#34;refresh users&#34;. Ele será usado depois
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">emit</span>(<span style="color:#e6db74">&#39;refresh users&#39;</span>, <span style="color:#a6e22e">totalUsers</span>);
 
-  // Vamos emitir um evento chamado &quot;refresh users&quot;. Ele será usado depois
-  io.emit('refresh users', totalUsers);
+  <span style="color:#75715e">// Caso ocorra um disconnect, reduzimos o total de usuários e emitimos o evento &#34;refresh users&#34; novamente, com o novo total.
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;disconnect&#39;</span>, <span style="color:#66d9ef">function</span>() {
+    <span style="color:#a6e22e">totalUsers</span><span style="color:#f92672">--</span>;
 
-  // Caso ocorra um disconnect, reduzimos o total de usuários e emitimos o evento &quot;refresh users&quot; novamente, com o novo total.
-  socket.on('disconnect', function() {
-    totalUsers--;
-
-    io.emit('refresh users', totalUsers);
+    <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">emit</span>(<span style="color:#e6db74">&#39;refresh users&#39;</span>, <span style="color:#a6e22e">totalUsers</span>);
   });
 
-});
-</code></pre>
-
+});</code></pre></div>
 <p>Feito isso, precisamos inicializar nosso servidor web. Continue escrevendo:</p>
-
-<pre><code class="language-javascript">http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3000</span>, <span style="color:#66d9ef">function</span>(){
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;listening on *:3000&#39;</span>);
+});</code></pre></div>
 <p>Pronto! Já temos um script que configura o ambiente do Socket.IO através da porta 3000. Basta rodá-lo seja na sua máquina quanto no seu servidor/VPS que estará funcionando.</p>
 
 <h1 id="como-colocar-ele-pra-funcionar-no-servidor">Como colocar ele pra funcionar no servidor?</h1>
@@ -304,38 +296,29 @@ io.on('connection', function(socket){
 <p>Você pode monitorar em TEMPO REAL (UAU!) suas aplicações escritas em Node. Isso significa que se por exemplo, sua aplicação lançar uma exceção, eles te notificarão por e-mail que uma exceção ocorreu na aplicação X na hora Y pelo usuário Z. É muito foda, apenas use.</p>
 
 <p>Enfim, após instalar o PM2 você terá alguns comandos disponíveis:</p>
-
-<pre><code class="language-bash">// Mostra todas as aplicações startadas usando o PM2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">// Mostra todas as aplicações startadas usando o PM2
 pm2 list
-// Inicia uma nova aplicação com o PM2, basta rodá-lo na pasta do script
+// Inicia uma nova aplicação com o PM2, basta rodá-lo na pasta <span style="color:#66d9ef">do</span> script
 pm2 start server.js
 //  Mostra informações sobre memória e CPU sendo consumidas pelas aplicações
 pm2 monit
 // Reinicia o NOME_APP
-pm2 restart [NOME_APP]
-</code></pre>
-
+pm2 restart <span style="color:#f92672">[</span>NOME_APP<span style="color:#f92672">]</span></code></pre></div>
 <p>Basta subir o script para o servidor, acessar a pasta onde o script está localizado por SSH e rodar:</p>
-
-<pre><code class="language-bash">pm2 start server.js
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pm2 start server.js</code></pre></div>
 <p>Agora caso você abra <a href="http://seu.servidor:3000/">http://seu.servidor:3000/</a></p>
 
 <p>Você vai ver o Hello World.</p>
 
 <p>Para manipular o Socket.IO no seu site agora, basta importá-lo usando a URL do seu servidor:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://0e1dev.com:3000/socket.io/socket.io.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;<span style="color:#f92672">script</span>&gt;
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">io</span>();
 
-<pre><code class="language-html">  &lt;script src=&quot;http://0e1dev.com:3000/socket.io/socket.io.js&quot;&gt;&lt;/script&gt;
-  &lt;script&gt;
-    var socket = io();
-
-    socket.on('refresh users', function(data) {
-      console.log(&quot;Total de usuários logados: &quot; + data);
+    <span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;refresh users&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">data</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Total de usuários logados: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">data</span>);
     });
-  &lt;/script&gt;
-</code></pre>
-
+  &lt;/<span style="color:#f92672">script</span>&gt;</code></pre></div>
 <h1 id="e-se-eu-não-tiver-acesso-a-um-vps">E se eu não tiver acesso a um VPS?</h1>
 
 <p>Você pode recorrer a alternativas como o <a href="https://www.heroku.com/">Heroku</a> ou <a href="https://www.openshift.com/">OpenShift</a> (mantido pela Red Hat). Ambos contém planos gratuitos onde você hospedar esta aplicação em Node.JS tranquilamente.</p>
@@ -387,7 +370,7 @@ pm2 restart [NOME_APP]
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>410</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>503</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -409,8 +392,8 @@ pm2 restart [NOME_APP]
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

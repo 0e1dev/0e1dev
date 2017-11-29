@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -28,20 +27,20 @@ Sugestões de API para consumir Algumas sugestões para você incrementar seu co
   
   
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Consumindo uma API RESTful com Ruby" />
     <meta name="twitter:description" content="Este é um assunto bem simples de se trabalhar quando falamos de Ruby. Ainda mais com gems poderosas que temos acesso como rest-client ou ActiveResource.
 Hoje nós vamos trabalhar com a rest-client.
 Quanto a API a ser utilizada, podemos usar qualquer uma famosa para reproduzir este tutorial.
 Eu vou usar a do MyFinance pois é a minha demanda atual de trabalho integrá-la.
 Sugestões de API para consumir Algumas sugestões para você incrementar seu conhecimento:" />
-    <meta name="twitter:image" content="http://0e1dev.com/img/avatar.jpg" />
+    <meta name="twitter:image" content="http://0e1dev.com/img/marca-branca.png" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/consumindo-uma-api-restful-com-ruby/" />
@@ -142,7 +141,9 @@ Sugestões de API para consumir Algumas sugestões para você incrementar seu co
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -189,10 +190,13 @@ Sugestões de API para consumir Algumas sugestões para você incrementar seu co
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Consumindo uma API RESTful com Ruby</h1>
       <p class="post-meta">@lhas · 22/11/2016 · 4 mins. de leitura</p>
     </header>
+
+    
     <article class="post-content">
 
 <p>Este é um assunto bem simples de se trabalhar quando falamos de Ruby. Ainda mais com gems poderosas que temos acesso como <a href="https://github.com/rest-client/rest-client">rest-client</a> ou <a href="https://github.com/rails/activeresource">ActiveResource</a>.</p>
@@ -233,26 +237,20 @@ Sugestões de API para consumir Algumas sugestões para você incrementar seu co
 <h1 id="iniciando-nossa-classe">Iniciando nossa classe</h1>
 
 <p>No meu caso, como é um projeto em Rails, ele conta com toda uma arquitetura já pré-definida. Isso me leva a criar uma <code>Service</code>. Mas se tratando de Ruby puro, uma simples classe resolveria o problema da mesma forma.</p>
-
-<pre><code class="language-ruby">class MyFinanceService
-  attr_reader :authentication_token, :account_id, :base_url
-end
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyFinanceService</span>
+  <span style="color:#66d9ef">attr_reader</span> <span style="color:#e6db74">:authentication_token</span>, <span style="color:#e6db74">:account_id</span>, <span style="color:#e6db74">:base_url</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
 <p>Vamos adicionar ao construtor da nossa classe 2 parâmetros:</p>
 
 <ul>
 <li><strong>authentication_token</strong>: O token requisitado pela nossa API</li>
 <li><strong>account_id</strong>: (opcional) Este é um parâmetro extra que a API que nós iremos consumir pede. Ela será adicionada no nosso header.</li>
 </ul>
-
-<pre><code class="language-ruby">def initialize(authentication_token, account_id)
-    @authentication_token = authentication_token
-    @account_id           = account_id
-    @base_url             = 'https://app.myfinance.com.br'
-end
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">initialize</span>(authentication_token, account_id)
+    @authentication_token <span style="color:#f92672">=</span> authentication_token
+    @account_id           <span style="color:#f92672">=</span> account_id
+    @base_url             <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://app.myfinance.com.br&#39;</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
 <p>Agora nós já temos estes 3 atributos como constantes em nossa classe podemos seguir.</p>
 
 <h1 id="autenticação">Autenticação</h1>
@@ -262,11 +260,8 @@ end
 <p>Só que ao invés do típico <code>username:password</code>, o <code>username</code> é o <code>@authentication_token</code> em <code>Base64</code>, e a senha é sempre <code>X</code>.</p>
 
 <p>Vamos supor que:</p>
-
-<pre><code class="language-ruby">@authentication_token = '7c6eea82bb824805e1e03498eb70f40e4e5d09816c1bb2e'
-@account_id = 25641
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">@authentication_token <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;7c6eea82bb824805e1e03498eb70f40e4e5d09816c1bb2e&#39;</span>
+@account_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">25641</span><span style="color:#f92672"></span></code></pre></div>
 <p>O nosso <code>authorization_hash</code> (vamos chamá-lo assim) será:</p>
 
 <p><code>N2M2ZWVhODJiYjgyNDgwNWUxZTAzNDk4ZWI3MGY0MGU0ZTVkMDk4MTZjMWJiMmU=</code></p>
@@ -274,36 +269,27 @@ end
 <p><img src="3.jpg" alt="" /></p>
 
 <p>Para calcular nosso <em>authorization_hash</em>, vamos criar um novo método:</p>
-
-<pre><code class="language-ruby">def authorization_hash
-  Base64.strict_encode64(@authentication_token)
-end
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">authorization_hash</span>
+  <span style="color:#66d9ef">Base64</span><span style="color:#f92672">.</span>strict_encode64(@authentication_token)
+<span style="color:#66d9ef">end</span></code></pre></div>
 <p>Vamos preparar um método que já defina nossos headers por padrão. Como eu disse acima, o <em>account_id</em> é enviado através do Header, então vamos colocá-lo aqui.</p>
-
-<pre><code class="language-ruby">def headers
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">headers</span>
   {
-    'Accept': 'application/json',
-    'Content-type': 'application/json',
-    'ACCOUNT_ID': @account_id,
-    'Authorization': &quot;Basic #{authorization_hash}:X&quot;
+    <span style="color:#e6db74">&#39;Accept&#39;</span>: <span style="color:#e6db74">&#39;application/json&#39;</span>,
+    <span style="color:#e6db74">&#39;Content-type&#39;</span>: <span style="color:#e6db74">&#39;application/json&#39;</span>,
+    <span style="color:#e6db74">&#39;ACCOUNT_ID&#39;</span>: @account_id,
+    <span style="color:#e6db74">&#39;Authorization&#39;</span>: <span style="color:#e6db74">&#34;Basic </span><span style="color:#e6db74">#{</span>authorization_hash<span style="color:#e6db74">}</span><span style="color:#e6db74">:X&#34;</span>
   }
-end
-</code></pre>
-
+<span style="color:#66d9ef">end</span></code></pre></div>
 <p>Já temos tudo necessário para podermos fazer requisições autenticadas.</p>
 
 <p>Vamos fazer um teste para ver se está tudo ok, acessando um endpoint protegido chamado <code>entities</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">entities</span>
+  url     <span style="color:#f92672">=</span> @base_url <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/entities.json&#39;</span>
+  request <span style="color:#f92672">=</span> <span style="color:#66d9ef">RestClient</span><span style="color:#f92672">.</span>get(url, headers)
 
-<pre><code class="language-ruby">def entities
-  url     = @base_url + '/entities.json'
-  request = RestClient.get(url, headers)
-
-  JSON.parse(request.body)
-end
-</code></pre>
-
+  <span style="color:#66d9ef">JSON</span><span style="color:#f92672">.</span>parse(request<span style="color:#f92672">.</span>body)
+<span style="color:#66d9ef">end</span></code></pre></div>
 <p>A variável <code>url</code> é apenas um helper para definirmos a URL absoluta final.
 A variável <code>request</code> faz a solicitação, usando o nosso método <code>headers</code> como helper também para enviar cabeçalhos pré-definidos, incluindo nossa autenticação.</p>
 
@@ -316,78 +302,57 @@ A variável <code>request</code> faz a solicitação, usando o nosso método <co
 <h1 id="usando-apis-como-resources">Usando APIs como Resources</h1>
 
 <p>No caso, precisaríamos refatorar nosso método para algo assim:</p>
-
-<pre><code class="language-ruby">def entities
-  url     = @base_url + '/entities'
-  RestClient::Resource.new(url, { headers: headers } )
-end
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">entities</span>
+  url     <span style="color:#f92672">=</span> @base_url <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/entities&#39;</span>
+  <span style="color:#66d9ef">RestClient</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Resource</span><span style="color:#f92672">.</span>new(url, { <span style="color:#e6db74">headers</span>: headers } )
+<span style="color:#66d9ef">end</span></code></pre></div>
 <p>Precisamos matar o <code>JSON.parse</code>, pois agora teremos um acesso completo ao endpoint.</p>
 
 <p>Para facilitar as coisas, podemos escrever um helper que faça esse trabalho sujo de parsear as strings:</p>
-
-<pre><code class="language-ruby">def parse(request)
-  JSON.parse(request.body)
-end
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">parse</span>(request)
+  <span style="color:#66d9ef">JSON</span><span style="color:#f92672">.</span>parse(request<span style="color:#f92672">.</span>body)
+<span style="color:#66d9ef">end</span></code></pre></div>
 <p>Agora podemos manipular nosso endpoint da seguinte forma:</p>
 
 <h2 id="get-entities">GET /entities</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e"># Recupera as entidades</span>
+entities <span style="color:#f92672">=</span> @service<span style="color:#f92672">.</span>entities<span style="color:#f92672">.</span>get
 
-<pre><code class="language-ruby"># Recupera as entidades
-entities = @service.entities.get
-
-# Transforma em JSON
-@service.parse(entitites)
-</code></pre>
-
+<span style="color:#75715e"># Transforma em JSON</span>
+@service<span style="color:#f92672">.</span>parse(entitites)</code></pre></div>
 <p>Isto irá retornar um Array com todas as entidades do endpoint.</p>
 
 <h2 id="get-entities-id">GET /entities/:id</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e"># Recupera a entidade</span>
+entity <span style="color:#f92672">=</span> @service<span style="color:#f92672">.</span>entities<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;/1&#39;</span><span style="color:#f92672">].</span>get
 
-<pre><code class="language-ruby"># Recupera a entidade
-entity = @service.entities['/1'].get
-
-# Transforma em JSON
-@service.parse(entity)
-</code></pre>
-
+<span style="color:#75715e"># Transforma em JSON</span>
+@service<span style="color:#f92672">.</span>parse(entity)</code></pre></div>
 <p>Isto irá retornar especificamente a entidade solicitada através do parâmetro passado.</p>
 
 <h2 id="put-entities-id">PUT /entities/:id</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e"># Recupera a entidade (sem carregá-la diretamente)</span>
+entity <span style="color:#f92672">=</span> @service<span style="color:#f92672">.</span>entities<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;/28698&#39;</span><span style="color:#f92672">]</span>
 
-<pre><code class="language-ruby"># Recupera a entidade (sem carregá-la diretamente)
-entity = @service.entities['/28698']
+<span style="color:#75715e"># Edita ela</span>
+payload <span style="color:#f92672">=</span> { <span style="color:#e6db74">entity</span>: { name: <span style="color:#e6db74">&#39;Abacate Editado&#39;</span> } }
+entity<span style="color:#f92672">.</span>put payload
 
-# Edita ela
-payload = { entity: { name: 'Abacate Editado' } }
-entity.put payload
-
-# Recupera a entidade editada
-@service.parse(entity.get)
-</code></pre>
-
+<span style="color:#75715e"># Recupera a entidade editada</span>
+@service<span style="color:#f92672">.</span>parse(entity<span style="color:#f92672">.</span>get)</code></pre></div>
 <p>Isto irá editar a entidade solicitada, usando o <strong>payload</strong> enviado como parâmetro.</p>
 
 <h2 id="post-entities">POST /entities</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e"># Cria a nova entidade</span>
+payload <span style="color:#f92672">=</span> { <span style="color:#e6db74">entity</span>: { name: <span style="color:#e6db74">&#39;Abacate Editado&#39;</span> } }
+entity <span style="color:#f92672">=</span> @service<span style="color:#f92672">.</span>entities<span style="color:#f92672">.</span>post payload
 
-<pre><code class="language-ruby"># Cria a nova entidade
-payload = { entity: { name: 'Abacate Editado' } }
-entity = @service.entities.post payload
-
-# Recupera a entidade criada
-@service.parse(entity)
-</code></pre>
-
+<span style="color:#75715e"># Recupera a entidade criada</span>
+@service<span style="color:#f92672">.</span>parse(entity)</code></pre></div>
 <p>Isto irá criar uma nova entidade, usando o <strong>payload</strong> como parâmetro.</p>
 
 <h2 id="delete-entities-id">DELETE /entities/:id</h2>
-
-<pre><code class="language-ruby">@service.entities['/28698'].delete
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">@service<span style="color:#f92672">.</span>entities<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;/28698&#39;</span><span style="color:#f92672">].</span>delete</code></pre></div>
 <p>Isto irá deletar nossa entidade.</p>
 
 <h1 id="conclusão">Conclusão</h1>
@@ -409,7 +374,7 @@ entity = @service.entities.post payload
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>279</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>372</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -431,8 +396,8 @@ entity = @service.entities.post payload
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

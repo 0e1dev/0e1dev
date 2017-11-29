@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -27,19 +26,25 @@ Se tratando de rotas, seria:" />
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Autenticação no Laravel 5 com models diferentes (Admin/User/etc)" />
     <meta name="twitter:description" content="Passei recentemente por um problema que eu tinha certeza que era simples de se resolver mas nenhuma informação que eu encontrei na internet disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documentação oficial do Laravel.
 Então resolvi escrever sobre.
 O cenário Temos uma aplicação em Laravel 5 onde ela serve como Gerenciador de Conteúdo (CMS) e API (WebService) para a parte do front-end.
 Se tratando de rotas, seria:" />
     <meta name="twitter:image" content="http://0e1dev.com/covers/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc.jpg" />
+    <meta name="og:title" content="Autenticação no Laravel 5 com models diferentes (Admin/User/etc)" />
+    <meta name="og:description" content="Passei recentemente por um problema que eu tinha certeza que era simples de se resolver mas nenhuma informação que eu encontrei na internet disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documentação oficial do Laravel.
+Então resolvi escrever sobre.
+O cenário Temos uma aplicação em Laravel 5 onde ela serve como Gerenciador de Conteúdo (CMS) e API (WebService) para a parte do front-end.
+Se tratando de rotas, seria:" />
+    <meta name="og:image" content="http://0e1dev.com/covers/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/" />
@@ -140,7 +145,9 @@ Se tratando de rotas, seria:" />
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -187,10 +194,16 @@ Se tratando de rotas, seria:" />
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Autenticação no Laravel 5 com models diferentes (Admin/User/etc)</h1>
       <p class="post-meta">@lhas · 04/08/2016 · 4 mins. de leitura</p>
     </header>
+
+    
+    <div title="Autenticação no Laravel 5 com models diferentes (Admin/User/etc)" style="width: 100%; height: 250px; background: url(/covers/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p>Passei recentemente por um problema que eu tinha certeza que era simples de se resolver mas nenhuma informação que eu encontrei na internet
@@ -227,57 +240,51 @@ disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documen
 <p>Abra o <strong>config/auth.app</strong>. Vamos trabalhar aqui em 2 índices: <strong>&lsquo;guards&rsquo;</strong> e <strong>&lsquo;providers&rsquo;</strong>.</p>
 
 <p>Em <strong>&lsquo;guards&rsquo;</strong> vamos deixar assim:</p>
-
-<pre><code class="language-php">// Antigo
-'guards' =&gt; [
-    'web' =&gt; [
-        'driver' =&gt; 'session',
-        'provider' =&gt; 'users',
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Antigo
+&#39;guards&#39; =&gt; [
+    &#39;web&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;session&#39;,
+        &#39;provider&#39; =&gt; &#39;users&#39;,
     ],
-    'api' =&gt; [
-        'driver' =&gt; 'token',
-        'provider' =&gt; 'users',
+    &#39;api&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;token&#39;,
+        &#39;provider&#39; =&gt; &#39;users&#39;,
     ],
 ],
 // Novo
-'guards' =&gt; [
-    'web' =&gt; [
-        'driver' =&gt; 'session',
-        'provider' =&gt; 'users',
+&#39;guards&#39; =&gt; [
+    &#39;web&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;session&#39;,
+        &#39;provider&#39; =&gt; &#39;users&#39;,
     ],
-    'admin' =&gt; [
-        'driver' =&gt; 'session',
-        'provider' =&gt; 'admins',
+    &#39;admin&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;session&#39;,
+        &#39;provider&#39; =&gt; &#39;admins&#39;,
     ],
-    'api' =&gt; [
-        'driver' =&gt; 'token',
-        'provider' =&gt; 'users',
+    &#39;api&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;token&#39;,
+        &#39;provider&#39; =&gt; &#39;users&#39;,
     ],
-],
-</code></pre>
-
+],</code></pre></div>
 <p>Em <strong>&lsquo;providers&rsquo;</strong> vamos deixar assim:</p>
-
-<pre><code class="language-php">// Antigo
-'providers' =&gt; [
-    'users' =&gt; [
-        'driver' =&gt; 'eloquent',
-        'model' =&gt; App\User::class,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Antigo
+&#39;providers&#39; =&gt; [
+    &#39;users&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;eloquent&#39;,
+        &#39;model&#39; =&gt; App\User::class,
     ],
 ],
 // Novo
-'providers' =&gt; [
-    'admins' =&gt; [
-        'driver' =&gt; 'eloquent',
-        'model' =&gt; App\Admin::class,
+&#39;providers&#39; =&gt; [
+    &#39;admins&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;eloquent&#39;,
+        &#39;model&#39; =&gt; App\Admin::class,
     ],
-    'users' =&gt; [
-        'driver' =&gt; 'eloquent',
-        'model' =&gt; App\User::class,
+    &#39;users&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;eloquent&#39;,
+        &#39;model&#39; =&gt; App\User::class,
     ],
-],
-</code></pre>
-
+],</code></pre></div>
 <p>No caso, apesar de termos um guard para API feita já pelo Laravel, não vamos usá-la.</p>
 
 <p>Ela já vem com uma pré-configuração onde se faz necessário uma coluna &ldquo;api_token&rdquo; na tabela do model a ser autenticado.</p>
@@ -297,25 +304,19 @@ disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documen
 <p>Aqui iremos indicar qual deve ser o guard usado por esta autenticação.</p>
 
 <p>Aproximadamente na linha 31, embaixo do $redirectTo, vamos definir o guard.</p>
-
-<pre><code class="language-php">    protected $redirectTo = '/';
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    protected $redirectTo = &#39;/&#39;;
 
     // Aqui nossa nova linha
-    protected $guard = 'admin';
-</code></pre>
-
+    protected $guard = &#39;admin&#39;;</code></pre></div>
 <p><strong>(Opcional)</strong> Se você for usar a página de registro, deve alterar o model de User para Admin no método create() também:</p>
-
-<pre><code class="language-php">    protected function create(array $data)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    protected function create(array $data)
     {
         return Admin::create([
-            'name' =&gt; $data['name'],
-            'email' =&gt; $data['email'],
-            'password' =&gt; bcrypt($data['password']),
+            &#39;name&#39; =&gt; $data[&#39;name&#39;],
+            &#39;email&#39; =&gt; $data[&#39;email&#39;],
+            &#39;password&#39; =&gt; bcrypt($data[&#39;password&#39;]),
         ]);
-    }
-</code></pre>
-
+    }</code></pre></div>
 <p>Agora, temos que indicar ao middleware do Auth, que queremos usar o nosso guard admin.</p>
 
 <p>Para isto, vamos editar 2 controllers:</p>
@@ -324,47 +325,35 @@ disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documen
 <strong>AdminController.php</strong> - Este por padrão não existe, mas recomendo que você crie e use-o como classe pai para as suas páginas do Admin. Assim ele vai herdar os middlewares que nós configurarmos.</p>
 
 <p><strong>app/Http/Controllers/HomeController.php:</strong></p>
-
-<pre><code class="language-php">// Antigo
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Antigo
 public function __construct()
 {
-    $this-&gt;middleware('auth');
+    $this-&gt;middleware(&#39;auth&#39;);
 }
 // Novo
 public function __construct()
 {
-    $this-&gt;middleware('auth:admin');
-}
-</code></pre>
-
+    $this-&gt;middleware(&#39;auth:admin&#39;);
+}</code></pre></div>
 <p><strong>app/Http/Controllers/Admin/AdminController.php:</strong></p>
-
-<pre><code class="language-php">// Antigo
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Antigo
 public function __construct()
 {
-    $this-&gt;middleware('auth');
+    $this-&gt;middleware(&#39;auth&#39;);
 }
 // Novo
 public function __construct()
 {
-    $this-&gt;middleware('auth:admin');
-}
-</code></pre>
-
+    $this-&gt;middleware(&#39;auth:admin&#39;);
+}</code></pre></div>
 <h1 id="corrigindo-as-views-do-admin">Corrigindo as views do admin</h1>
 
 <p>Se você abrir o layout que é gerado pelo Artisan, verá algumas linhas fazendo referência ao Auth desta forma:</p>
-
-<pre><code class="language-php">@if (Auth::guest())
-@endif
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">@if (Auth::guest())
+@endif</code></pre></div>
 <p>Neste caso, você deverá trocar para o seguinte:</p>
-
-<pre><code class="language-php">@if (Auth::guard('admin')-&gt;guest())
-@endif
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">@if (Auth::guard(&#39;admin&#39;)-&gt;guest())
+@endif</code></pre></div>
 <p>Isso significa que ele vai analisar se há alguma sessão especificamente no guard de admin.</p>
 
 <p>PRONTO!</p>
@@ -399,7 +388,7 @@ public function __construct()
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>389</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>482</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -421,8 +410,8 @@ public function __construct()
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

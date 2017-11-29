@@ -12,7 +12,6 @@
 
 
 <meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
-<meta property="og:image" content="http://0e1dev.com/img/marca-branca.png" />
 
 
 
@@ -26,18 +25,23 @@ Para isto, será necessário:
   
   
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:site" content="@01lhas" />
     <meta name="twitter:title" content="Autenticação com JWT e Vue 2" />
     <meta name="twitter:description" content="Agora que iniciamos nosso projeto, podemos fazer a próxima etapa que é inserir uma camada de Autenticação na nossa aplicação.
 Para isto, será necessário:
  Ter uma rota de login Um formulário com e-mail e senha Uma API que tenha autenticação via JWT  Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem." />
     <meta name="twitter:image" content="http://0e1dev.com/covers/autenticacao-com-jwt-e-vue-2.jpg" />
+    <meta name="og:title" content="Autenticação com JWT e Vue 2" />
+    <meta name="og:description" content="Agora que iniciamos nosso projeto, podemos fazer a próxima etapa que é inserir uma camada de Autenticação na nossa aplicação.
+Para isto, será necessário:
+ Ter uma rota de login Um formulário com e-mail e senha Uma API que tenha autenticação via JWT  Para a API, no próximo post explicarei como montar uma com Rails 5, mas por enquanto vou supor que você tenha uma já rodando, independente de linguagem." />
+    <meta name="og:image" content="http://0e1dev.com/covers/autenticacao-com-jwt-e-vue-2.jpg" />
   
 
 
 
 
-<meta name="generator" content="Hugo 0.26" />
+<meta name="generator" content="Hugo 0.30.2" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/" />
@@ -138,7 +142,9 @@ Para isto, será necessário:
 
       
 
-      
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
 
       
 
@@ -185,10 +191,16 @@ Para isto, será necessário:
 </header>
 
   <section class="main post-detail">
+
     <header class="post-header">
       <h1 class="post-title">Autenticação com JWT e Vue 2</h1>
       <p class="post-meta">@lhas · 11/12/2016 · 6 mins. de leitura</p>
     </header>
+
+    
+    <div title="Autenticação com JWT e Vue 2" style="width: 100%; height: 250px; background: url(/covers/autenticacao-com-jwt-e-vue-2.jpg); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
     <article class="post-content">
 
 <p><a href="http://blog.0e1dev.com/2016/12/11/Iniciando-um-projeto-com-Vue-2/">Agora que iniciamos nosso projeto</a>, podemos fazer a próxima etapa que é inserir uma camada de <strong>Autenticação</strong> na nossa aplicação.</p>
@@ -213,59 +225,55 @@ Para isto, será necessário:
 
 <p>Ela foi implementada com o <code>Vue-Material</code>, caso você queira reaproveitá-la, segue o código-fonte:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>  &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;login&quot;</span>&gt;
-    &lt;<span style="color: #2c5dcd; font-weight: bold">md-toolbar</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;center-xs&quot;</span>&gt;
-      &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;md-title&quot;</span>&gt;Plataforma de Ensino Personalizado&lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
-    &lt;/<span style="color: #2c5dcd; font-weight: bold">md-toolbar</span>&gt;
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;login&#34;</span>&gt;
+    &lt;<span style="color:#f92672">md-toolbar</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center-xs&#34;</span>&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-title&#34;</span>&gt;Plataforma de Ensino Personalizado&lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;/<span style="color:#f92672">md-toolbar</span>&gt;
 
-    &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;container&quot;</span>&gt;
-      &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;row&quot;</span>&gt;
-        &lt;<span style="color: #2c5dcd; font-weight: bold">div</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 center-xs&quot;</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span>&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1 center-xs&#34;</span>&gt;
 
-          &lt;<span style="color: #2c5dcd; font-weight: bold">md-subheader</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;center-xs&quot;</span>&gt;Faça seu login agora&lt;/<span style="color: #2c5dcd; font-weight: bold">md-subheader</span>&gt;
+          &lt;<span style="color:#f92672">md-subheader</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center-xs&#34;</span>&gt;Faça seu login agora&lt;/<span style="color:#f92672">md-subheader</span>&gt;
 
-          &lt;<span style="color: #2c5dcd; font-weight: bold">form</span> <span style="color: #2c5dcd; font-style: italic">v-on:submit</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;handleSubmit($event)&quot;</span>&gt;
+          &lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">v-on:submit</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;handleSubmit($event)&#34;</span>&gt;
 
-            &lt;<span style="color: #2c5dcd; font-weight: bold">md-input-container</span>&gt;
-              &lt;<span style="color: #2c5dcd; font-weight: bold">label</span>&gt;E-mail&lt;/<span style="color: #2c5dcd; font-weight: bold">label</span>&gt;
-              &lt;<span style="color: #2c5dcd; font-weight: bold">md-input</span> <span style="color: #2c5dcd; font-style: italic">v-model</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;user.email&quot;</span>&gt;&lt;/<span style="color: #2c5dcd; font-weight: bold">md-input</span>&gt;
-            &lt;/<span style="color: #2c5dcd; font-weight: bold">md-input-container</span>&gt;
+            &lt;<span style="color:#f92672">md-input-container</span>&gt;
+              &lt;<span style="color:#f92672">label</span>&gt;E-mail&lt;/<span style="color:#f92672">label</span>&gt;
+              &lt;<span style="color:#f92672">md-input</span> <span style="color:#a6e22e">v-model</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;user.email&#34;</span>&gt;&lt;/<span style="color:#f92672">md-input</span>&gt;
+            &lt;/<span style="color:#f92672">md-input-container</span>&gt;
 
-            &lt;<span style="color: #2c5dcd; font-weight: bold">md-input-container</span> <span style="color: #2c5dcd; font-style: italic">md-has-password</span>&gt;
-              &lt;<span style="color: #2c5dcd; font-weight: bold">label</span>&gt;Senha&lt;/<span style="color: #2c5dcd; font-weight: bold">label</span>&gt;
-              &lt;<span style="color: #2c5dcd; font-weight: bold">md-input</span> <span style="color: #2c5dcd; font-style: italic">type</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;password&quot;</span> <span style="color: #2c5dcd; font-style: italic">v-model</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;user.password&quot;</span>&gt;&lt;/<span style="color: #2c5dcd; font-weight: bold">md-input</span>&gt;
-            &lt;/<span style="color: #2c5dcd; font-weight: bold">md-input-container</span>&gt;
+            &lt;<span style="color:#f92672">md-input-container</span> <span style="color:#a6e22e">md-has-password</span>&gt;
+              &lt;<span style="color:#f92672">label</span>&gt;Senha&lt;/<span style="color:#f92672">label</span>&gt;
+              &lt;<span style="color:#f92672">md-input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">v-model</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;user.password&#34;</span>&gt;&lt;/<span style="color:#f92672">md-input</span>&gt;
+            &lt;/<span style="color:#f92672">md-input-container</span>&gt;
 
-            &lt;<span style="color: #2c5dcd; font-weight: bold">md-button</span> <span style="color: #2c5dcd; font-style: italic">type</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;submit&quot;</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;md-raised md-primary&quot;</span>&gt;&lt;<span style="color: #2c5dcd; font-weight: bold">md-icon</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;&quot;</span>&gt;send&lt;/<span style="color: #2c5dcd; font-weight: bold">md-icon</span>&gt; Entrar&lt;/<span style="color: #2c5dcd; font-weight: bold">md-button</span>&gt;
-            &lt;<span style="color: #2c5dcd; font-weight: bold">router-link</span> <span style="color: #2c5dcd; font-style: italic">to</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;signup&quot;</span> <span style="color: #2c5dcd; font-style: italic">tag</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;md-button&quot;</span> <span style="color: #2c5dcd; font-style: italic">class</span><span style="color: #2c5dcd">=</span><span style="color: #00cc66">&quot;md-primary&quot;</span>&gt;Quero me cadastrar&lt;/<span style="color: #2c5dcd; font-weight: bold">router-link</span>&gt;
+            &lt;<span style="color:#f92672">md-button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-raised md-primary&#34;</span>&gt;&lt;<span style="color:#f92672">md-icon</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>&gt;send&lt;/<span style="color:#f92672">md-icon</span>&gt; Entrar&lt;/<span style="color:#f92672">md-button</span>&gt;
+            &lt;<span style="color:#f92672">router-link</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;signup&#34;</span> <span style="color:#a6e22e">tag</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-button&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-primary&#34;</span>&gt;Quero me cadastrar&lt;/<span style="color:#f92672">router-link</span>&gt;
 
-          &lt;/<span style="color: #2c5dcd; font-weight: bold">form</span>&gt;
+          &lt;/<span style="color:#f92672">form</span>&gt;
 
 
-        &lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
-      &lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
-    &lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
-  &lt;/<span style="color: #2c5dcd; font-weight: bold">div</span>&gt;
-</pre></div>
-
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">export</span> <span style="color: #2c5dcd; font-weight: bold">default</span> {
-  name<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;login&#39;</span>,
-  data () {
-    <span style="color: #2c5dcd; font-weight: bold">return</span> {
-      user<span style="color: #2c5dcd">:</span> {
-        email<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">null</span>,
-        password<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">null</span>
+        &lt;/<span style="color:#f92672">div</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;login&#39;</span>,
+  <span style="color:#a6e22e">data</span> () {
+    <span style="color:#66d9ef">return</span> {
+      <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+        <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>
       }
     }
   },
-  methods<span style="color: #2c5dcd">:</span> {
-    handleSubmit<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">function</span> () {
-      console.log(<span style="color: #2c5dcd; font-weight: bold">this</span>.user)
+  <span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">handleSubmit</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">user</span>)
     }
   }
-}
-</pre></div>
-</p>
+}</code></pre></div></p>
 
 <h2 id="variáveis-de-ambiente">Variáveis de Ambiente</h2>
 
@@ -285,68 +293,54 @@ Para isto, será necessário:
 
 <p>Ou seja, se você definir uma constante somente no <code>prod.env.js</code>, o ambiente de desenvolvimento e testes irá herdar esta configuração.</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// config/prod.env.js</span>
-module.exports <span style="color: #2c5dcd">=</span> {
-  NODE_ENV<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;&quot;production&quot;&#39;</span>,
-  API<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;&quot;http://api.0e1dev.com/&quot;&#39;</span>
-}
-</pre></div>
-
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// config/dev.env.js</span>
-module.exports <span style="color: #2c5dcd">=</span> {
-  NODE_ENV<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;&quot;production&quot;&#39;</span>,
-  API<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;&quot;http://localhost:9001/&quot;&#39;</span>
-}
-</pre></div>
-
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// config/prod.env.js
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">NODE_ENV</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#34;production&#34;&#39;</span>,
+  <span style="color:#a6e22e">API</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#34;http://api.0e1dev.com/&#34;&#39;</span>
+}</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// config/dev.env.js
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">NODE_ENV</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#34;production&#34;&#39;</span>,
+  <span style="color:#a6e22e">API</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#34;http://localhost:9001/&#34;&#39;</span>
+}</code></pre></div>
 Pronto. Nós teremos acesso a esta informação na nossa aplicação através de <code>process.env.API</code>.</p>
 
 <h2 id="instalando-vue-resource">Instalando vue-resource</h2>
 
 <p>Este é o componente que nós iremos utilizar para fazer as requisições AJAX.</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ npm install vue-resource --save
-</pre></div>
-
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install vue-resource --save</code></pre></div>
 Agora abra o <code>main.js</code> e indique ao Vue que nós vamos usá-lo:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// src/main.js</span>
-<span style="color: #2c5dcd; font-weight: bold">import</span> VueResource from <span style="color: #00cc66">&#39;vue-resource&#39;</span>
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// src/main.js
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">VueResource</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue-resource&#39;</span>
 
-Vue.use(VueResource)
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">VueResource</span>)
 
-<span style="color: #0080ff; font-style: italic">// Define a base da URL das requisições AJAX será</span>
-<span style="color: #0080ff; font-style: italic">// a constante API que configuramos</span>
-Vue.http.options.root <span style="color: #2c5dcd">=</span> process.env.API
-</pre></div>
-
+<span style="color:#75715e">// Define a base da URL das requisições AJAX será
+</span><span style="color:#75715e">// a constante API que configuramos
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">options</span>.<span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">API</span></code></pre></div>
 Agora que nossa requisição está pronta, vamos importar uma biblioteca para nos auxiliar na camada de autenticação.</p>
 
 <p>Ela é a <a href="https://github.com/websanova/vue-auth">vue-auth</a>. Para instalá-la:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ npm install @websanova/vue-auth
-</pre></div>
-
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install @websanova/vue-auth</code></pre></div>
 Vamos configurá-la. Abra o <code>src/main.js</code>.</p>
 
 <p>Após nossa declaração de rotas, vamos fazer um monkeypatch para o <em>vue-auth</em> identificar nossas rotas:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>Vue.router <span style="color: #2c5dcd">=</span> router
-</pre></div>
-
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">router</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">router</span></code></pre></div>
 Agora vamos configurar a autenticação em si.</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>Vue.use(require(<span style="color: #00cc66">&#39;@websanova/vue-auth&#39;</span>), {
-  auth<span style="color: #2c5dcd">:</span> require(<span style="color: #00cc66">&#39;@websanova/vue-auth/drivers/auth/bearer.js&#39;</span>),
-  http<span style="color: #2c5dcd">:</span> require(<span style="color: #00cc66">&#39;@websanova/vue-auth/drivers/http/vue-resource.1.x.js&#39;</span>),
-  router<span style="color: #2c5dcd">:</span> require(<span style="color: #00cc66">&#39;@websanova/vue-auth/drivers/router/vue-router.2.x.js&#39;</span>),
-  rolesVar<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;type&#39;</span>,
-  loginData<span style="color: #2c5dcd">:</span> {url<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;user_token&#39;</span>, method<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;POST&#39;</span>, redirect<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/&#39;</span>, fetchUser<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">false</span>},
-  fetchData<span style="color: #2c5dcd">:</span> {url<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;auth/user&#39;</span>, method<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;GET&#39;</span>},
-  refreshData<span style="color: #2c5dcd">:</span> {url<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;auth/refresh&#39;</span>, method<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;GET&#39;</span>, atInit<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">false</span>}
-})
-</pre></div>
-
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;@websanova/vue-auth&#39;</span>), {
+  <span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;@websanova/vue-auth/drivers/auth/bearer.js&#39;</span>),
+  <span style="color:#a6e22e">http</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;@websanova/vue-auth/drivers/http/vue-resource.1.x.js&#39;</span>),
+  <span style="color:#a6e22e">router</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;@websanova/vue-auth/drivers/router/vue-router.2.x.js&#39;</span>),
+  <span style="color:#a6e22e">rolesVar</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;type&#39;</span>,
+  <span style="color:#a6e22e">loginData</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;user_token&#39;</span>, <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>, <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>, <span style="color:#a6e22e">fetchUser</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>},
+  <span style="color:#a6e22e">fetchData</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;auth/user&#39;</span>, <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>},
+  <span style="color:#a6e22e">refreshData</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;auth/refresh&#39;</span>, <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#a6e22e">atInit</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}
+})</code></pre></div>
 Algumas considerações nesta configuração:</p>
 
 <h3 id="por-que-esse-bando-de-require">Por que esse bando de require?</h3>
@@ -384,14 +378,12 @@ No caso do <code>fetchUser</code> estar habilitado, após logar ele fará requis
 
 <p>Um exemplo de action para este endpoint de refresh com o Knock:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd">include</span> <span style="color: #318495">Knock</span><span style="color: #2c5dcd">::</span><span style="color: #318495">Authenticable</span>
-before_action <span style="color: #c5060b; font-weight: bold">:authenticate_user</span>, <span style="color: #c5060b; font-weight: bold">only</span>: <span style="color: #2c5dcd">[</span><span style="color: #c5060b; font-weight: bold">:refresh</span><span style="color: #2c5dcd">]</span>
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">include</span> <span style="color:#66d9ef">Knock</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Authenticable</span>
+before_action <span style="color:#e6db74">:authenticate_user</span>, <span style="color:#e6db74">only</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">:refresh</span><span style="color:#f92672">]</span>
 
-<span style="color: #2c5dcd; font-weight: bold">def</span> <span style="color: #ff8000; font-weight: bold">refresh</span>
-  render <span style="color: #c5060b; font-weight: bold">json</span>: <span style="color: #2c5dcd">[]</span>, <span style="color: #c5060b; font-weight: bold">status</span>: <span style="color: #c5060b; font-weight: bold">:ok</span>
-<span style="color: #2c5dcd; font-weight: bold">end</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">refresh</span>
+  render <span style="color:#e6db74">json</span>: <span style="color:#f92672">[]</span>, <span style="color:#e6db74">status</span>: <span style="color:#e6db74">:ok</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
 Assim o <strong>refresh</strong> fica protegido. Caso a requisição tenha um token válido, ele vai retornar nada.</p>
 
 <p>Caso a requisição tenha um token inválido ou vazio, ele vai retornar 401 Unauthorized.</p>
@@ -412,18 +404,16 @@ Assim o <strong>refresh</strong> fica protegido. Caso a requisição tenha um to
 
 <p>Exemplo da minha configuração de CORS:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic"># config/initializers/cors.rb</span>
-<span style="color: #318495">Rails</span><span style="color: #2c5dcd">.</span>application<span style="color: #2c5dcd">.</span>config<span style="color: #2c5dcd">.</span>middleware<span style="color: #2c5dcd">.</span>insert_before <span style="color: #5918bb; font-weight: bold">0</span>, <span style="color: #318495">Rack</span><span style="color: #2c5dcd">::</span><span style="color: #318495">Cors</span> <span style="color: #2c5dcd; font-weight: bold">do</span>
-  allow <span style="color: #2c5dcd; font-weight: bold">do</span>
-    origins <span style="color: #00cc66">&#39;*&#39;</span>
-    resource <span style="color: #00cc66">&#39;*&#39;</span>,
-      <span style="color: #c5060b; font-weight: bold">headers</span>: <span style="color: #c5060b; font-weight: bold">:any</span>,
-      <span style="color: #5918bb; font-weight: bold">methods</span>: <span style="color: #2c5dcd">[</span><span style="color: #c5060b; font-weight: bold">:get</span>, <span style="color: #c5060b; font-weight: bold">:post</span>, <span style="color: #c5060b; font-weight: bold">:put</span>, <span style="color: #c5060b; font-weight: bold">:patch</span>, <span style="color: #c5060b; font-weight: bold">:delete</span>, <span style="color: #c5060b; font-weight: bold">:options</span>, <span style="color: #c5060b; font-weight: bold">:head</span><span style="color: #2c5dcd">]</span>,
-      <span style="color: #c5060b; font-weight: bold">expose</span>: <span style="color: #2c5dcd">[</span><span style="color: #00cc66">&#39;Authorization&#39;</span><span style="color: #2c5dcd">]</span>
-  <span style="color: #2c5dcd; font-weight: bold">end</span>
-<span style="color: #2c5dcd; font-weight: bold">end</span>
-</pre></div>
-
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#75715e"># config/initializers/cors.rb</span>
+<span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>application<span style="color:#f92672">.</span>config<span style="color:#f92672">.</span>middleware<span style="color:#f92672">.</span>insert_before <span style="color:#ae81ff">0</span><span style="color:#f92672"></span>, <span style="color:#66d9ef">Rack</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Cors</span> <span style="color:#66d9ef">do</span>
+  allow <span style="color:#66d9ef">do</span>
+    origins <span style="color:#e6db74">&#39;*&#39;</span>
+    resource <span style="color:#e6db74">&#39;*&#39;</span>,
+      <span style="color:#e6db74">headers</span>: <span style="color:#e6db74">:any</span>,
+      methods: <span style="color:#f92672">[</span><span style="color:#e6db74">:get</span>, <span style="color:#e6db74">:post</span>, <span style="color:#e6db74">:put</span>, <span style="color:#e6db74">:patch</span>, <span style="color:#e6db74">:delete</span>, <span style="color:#e6db74">:options</span>, <span style="color:#e6db74">:head</span><span style="color:#f92672">]</span>,
+      <span style="color:#e6db74">expose</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;Authorization&#39;</span><span style="color:#f92672">]</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
 Observe o <code>expose</code>. Ele é a peça-chave para a segunda coisa importante&hellip;</p>
 
 <h3 id="token-no-header">Token no Header</h3>
@@ -434,12 +424,10 @@ Observe o <code>expose</code>. Ele é a peça-chave para a segunda coisa importa
 
 <p>Exemplo da minha action de Login:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #2c5dcd; font-weight: bold">def</span> <span style="color: #ff8000; font-weight: bold">create</span>
-  response<span style="color: #2c5dcd">.</span>headers<span style="color: #2c5dcd">[</span><span style="color: #00cc66">&#39;Authorization&#39;</span><span style="color: #2c5dcd">]</span> <span style="color: #2c5dcd">=</span> <span style="color: #00cc66">&#39;Bearer &#39;</span> <span style="color: #2c5dcd">+</span> auth_token<span style="color: #2c5dcd">.</span>token
-  render <span style="color: #c5060b; font-weight: bold">json</span>: auth_token, <span style="color: #c5060b; font-weight: bold">status</span>: <span style="color: #c5060b; font-weight: bold">:created</span>
-<span style="color: #2c5dcd; font-weight: bold">end</span>
-</pre></div>
-
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">create</span>
+  response<span style="color:#f92672">.</span>headers<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;Authorization&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Bearer &#39;</span> <span style="color:#f92672">+</span> auth_token<span style="color:#f92672">.</span>token
+  render <span style="color:#e6db74">json</span>: auth_token, <span style="color:#e6db74">status</span>: <span style="color:#e6db74">:created</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
 Pontos esclarecidos, vamos voltar para nosso front-end.</p>
 
 <h2 id="requisição-no-formulário">Requisição no formulário</h2>
@@ -448,26 +436,24 @@ Pontos esclarecidos, vamos voltar para nosso front-end.</p>
 
 <p>Vamos voltar para o componente do Login, e refatorar o nosso <code>handleSubmit()</code>:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>methods<span style="color: #2c5dcd">:</span> {
-  handleSubmit<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">function</span> (e) {
-    e.preventDefault()
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">handleSubmit</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">e</span>) {
+    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>()
 
-    <span style="color: #0080ff; font-style: italic">// Auth</span>
-    <span style="color: #2c5dcd; font-weight: bold">this</span>.$auth.login({
-      params<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">this</span>.user},
-      success<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">function</span> () {
-        console.log(<span style="color: #00cc66">&#39;Usuário logado com sucesso.&#39;</span>)
+    <span style="color:#75715e">// Auth
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$auth</span>.<span style="color:#a6e22e">login</span>({
+      <span style="color:#a6e22e">params</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">user</span>},
+      <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Usuário logado com sucesso.&#39;</span>)
       },
-      error<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">function</span> () {
-        console.log(<span style="color: #00cc66">&#39;Usuário e/ou senha inválidos.&#39;</span>)
+      <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Usuário e/ou senha inválidos.&#39;</span>)
       },
-      rememberMe<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">true</span>,
-      redirect<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/signup&#39;</span>
+      <span style="color:#a6e22e">rememberMe</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+      <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/signup&#39;</span>
     })
   }
-}
-</pre></div>
-
+}</code></pre></div>
 Os parâmetros <em>rememberMe</em> e <em>redirect</em> são opcionais.</p>
 
 <p>No caso da nossa aplicação de teste, a página de cadastro só deverá carregar para usuários logados.</p>
@@ -476,46 +462,42 @@ Os parâmetros <em>rememberMe</em> e <em>redirect</em> são opcionais.</p>
 
 <p>Nossas rotas ficam assim então:</p>
 
-<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// src/main.js</span>
-<span style="color: #0080ff; font-style: italic">// Routes</span>
-<span style="color: #2c5dcd; font-weight: bold">const</span> routes <span style="color: #2c5dcd">=</span> [
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// src/main.js
+</span><span style="color:#75715e">// Routes
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">routes</span> <span style="color:#f92672">=</span> [
   {
-    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/&#39;</span>,
-    redirect<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/login&#39;</span>
+    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>,
+    <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/login&#39;</span>
   },
   {
-    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/signup&#39;</span>,
-    component<span style="color: #2c5dcd">:</span> SignUp,
-    meta<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">true</span>}
+    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/signup&#39;</span>,
+    <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SignUp</span>,
+    <span style="color:#a6e22e">meta</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>}
   },
   {
-    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/login&#39;</span>,
-    component<span style="color: #2c5dcd">:</span> Login,
-    meta<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #2c5dcd; font-weight: bold">false</span>}
+    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/login&#39;</span>,
+    <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Login</span>,
+    <span style="color:#a6e22e">meta</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}
   }
-]
-</pre></div>
-
+]</code></pre></div>
 Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto para não-logados), basta não declarar o atributo <code>meta</code>.</p>
 
 <p>Se a gente quisesse montar uma rota somente para 1 role em específico, seria:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #0080ff; font-style: italic">// src/main.js</span>
-<span style="color: #0080ff; font-style: italic">// Routes</span>
-<span style="color: #2c5dcd; font-weight: bold">const</span> routes <span style="color: #2c5dcd">=</span> [
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// src/main.js
+</span><span style="color:#75715e">// Routes
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">routes</span> <span style="color:#f92672">=</span> [
   {
-    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/admin&#39;</span>,
-    component<span style="color: #2c5dcd">:</span> Admin,
-    meta<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;admin&#39;</span>}
+    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/admin&#39;</span>,
+    <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Admin</span>,
+    <span style="color:#a6e22e">meta</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;admin&#39;</span>}
   },
   {
-    path<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;/manager&#39;</span>,
-    component<span style="color: #2c5dcd">:</span> Manager,
-    meta<span style="color: #2c5dcd">:</span> {auth<span style="color: #2c5dcd">:</span> <span style="color: #00cc66">&#39;manager&#39;</span>}
+    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/manager&#39;</span>,
+    <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Manager</span>,
+    <span style="color:#a6e22e">meta</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;manager&#39;</span>}
   }
-]
-</pre></div>
-
+]</code></pre></div>
 
 <h2 id="testando-nossa-aplicação">Testando nossa aplicação</h2>
 
@@ -565,7 +547,7 @@ Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto 
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>260</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>353</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -587,8 +569,8 @@ Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto 
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>
