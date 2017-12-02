@@ -2,7 +2,7 @@
 title: "Usando Fragments No React"
 date: 2017-12-02T15:53:10-02:00
 tags: ["fragments", "react"]
-cover: /covers/usando-fragments-no-react.jpg
+cover: /covers/usando-fragments-no-react.png
 author: lhas
 ---
 
