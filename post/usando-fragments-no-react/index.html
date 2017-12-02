@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Usando Fragments No React</title>
+
+  
+  
+
+
+<meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-68682771-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-68682771-1');
+</script>
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Fragments é um recurso novo, adicionado na última versão do React (v16.2). Este recurso permite que nós criemos uma listagem de sub-componentes, sem necessariamente adicionar um componente pai.
+Quem já trabalhou com React, sabe como é chato ter que sempre criar uma &amp;lt;div /&amp;gt; ou algum elemento equivalente, para usá-lo de componente pai, e então retornar uma listagem com os componentes filhos.
+Os Fragments vieram justamente para resolver este tipo de situação." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@01lhas" />
+    <meta name="twitter:title" content="Usando Fragments No React" />
+    <meta name="twitter:description" content="Fragments é um recurso novo, adicionado na última versão do React (v16.2). Este recurso permite que nós criemos uma listagem de sub-componentes, sem necessariamente adicionar um componente pai.
+Quem já trabalhou com React, sabe como é chato ter que sempre criar uma &amp;lt;div /&amp;gt; ou algum elemento equivalente, para usá-lo de componente pai, e então retornar uma listagem com os componentes filhos.
+Os Fragments vieram justamente para resolver este tipo de situação." />
+    <meta name="twitter:image" content="http://0e1dev.com/covers/usando-fragments-no-react.png" />
+    <meta name="og:title" content="Usando Fragments No React" />
+    <meta name="og:description" content="Fragments é um recurso novo, adicionado na última versão do React (v16.2). Este recurso permite que nós criemos uma listagem de sub-componentes, sem necessariamente adicionar um componente pai.
+Quem já trabalhou com React, sabe como é chato ter que sempre criar uma &amp;lt;div /&amp;gt; ou algum elemento equivalente, para usá-lo de componente pai, e então retornar uma listagem com os componentes filhos.
+Os Fragments vieram justamente para resolver este tipo de situação." />
+    <meta name="og:image" content="http://0e1dev.com/covers/usando-fragments-no-react.png" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.30.2" />
+
+
+<link rel="canonical" href="http://0e1dev.com/post/usando-fragments-no-react/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+
+    <header class="post-header">
+      <h1 class="post-title">Usando Fragments No React</h1>
+      <p class="post-meta">@lhas · 02/12/2017 · 3 mins. de leitura</p>
+    </header>
+
+    
+    <div title="Usando Fragments No React" style="width: 100%; height: 250px; background: url(/covers/usando-fragments-no-react.png); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
+    <article class="post-content">
+
+<p>Fragments é um recurso novo, adicionado na última versão do React (v16.2). Este recurso permite que nós criemos uma listagem de sub-componentes, sem necessariamente adicionar um componente pai.</p>
+
+<p>Quem já trabalhou com React, sabe como é chato ter que sempre criar uma <code>&lt;div /&gt;</code> ou algum elemento equivalente, para usá-lo de <em>componente pai</em>, e então retornar uma listagem com os <em>componentes filhos</em>.</p>
+
+<p>Os Fragments vieram justamente para resolver este tipo de situação.</p>
+
+<p><img src="https://media.giphy.com/media/xUA7b7XgQQkWfUIIHC/giphy.gif" alt="" /></p>
+
+<p>Você pode utilizá-lo através de 2 sintaxes:</p>
+
+<h1 id="sintaxe-curta">Sintaxe curta</h1>
+
+<p>Esta é a maneira mais prática de você utilizar os Fragments. Porém você vai precisar fazer uma pequena configuração no seu Babel, para ele não acusar nenhum tipo de erro. É bem simples, abaixo tem a explicação do procedimento.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoA</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoB</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoC</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/&gt;</span></code></pre></div>
+<p>Uma outro situação que esta sintaxe se aplicaria, seria um componente onde você quer retornar vários textos, sem necessariamente encapsulá-los em outro elemento:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CommentHeader</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">comment</span> }) =&gt; (
+  <span style="color:#f92672">&lt;&gt;</span>
+    <span style="color:#a6e22e">Deixe</span> <span style="color:#a6e22e">um</span> <span style="color:#a6e22e">comentário</span> <span style="color:#a6e22e">você</span> <span style="color:#a6e22e">também</span><span style="color:#f92672">!</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">strong</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Nós</span> <span style="color:#a6e22e">iremos</span> <span style="color:#a6e22e">adorar</span><span style="color:#f92672">!&lt;</span><span style="color:#960050;background-color:#1e0010">/strong&gt;</span>
+    <span style="color:#a6e22e">Se</span> <span style="color:#a6e22e">não</span> <span style="color:#a6e22e">quiser</span>, <span style="color:#a6e22e">não</span> <span style="color:#a6e22e">precisa</span> <span style="color:#a6e22e">deixar</span> <span style="color:#a6e22e">também</span>.
+    <span style="color:#a6e22e">Entendeu</span><span style="color:#f92672">?</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/&gt;</span>
+)</code></pre></div>
+<p>Ou seja, ao invés de ter que separar os textos em <code>&lt;p /&gt;</code>, e criar um parágrafo para cada frase, nós podemos simplesmente acoplar tudo dentro de um fragment e o React se vira para renderizar.</p>
+
+<p><img src="https://media.giphy.com/media/ZZdRSJ6ESGA5G/giphy.gif" alt="" /></p>
+
+<h1 id="sintaxe-longa">Sintaxe longa</h1>
+
+<p>Este tipo de sintaxe, tem como vantagem, ficar mais explícito que você está utilizando deste recurso;</p>
+
+<p>Além disto, outra vantagem é que você não precisa fazer nenhuma modificação na sua configuração do Babel.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">Fragment</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">React</span>;
+
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Fragment</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoA</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoB</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoC</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Fragment&gt;</span></code></pre></div>
+<p>Caso você precise fazer este processo dentro de um <code>map()</code>, você irá precisar declarar a prop <code>key</code>. Para declarar a <code>key</code> do Fragment, você terá de usá-lo com a sintaxe longa:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">comments</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">comment</span>) =&gt; (
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Fragment</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>.<span style="color:#a6e22e">uuid</span>}<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentHeader</span> <span style="color:#a6e22e">comment</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentDescription</span> <span style="color:#a6e22e">comment</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentForm</span> <span style="color:#a6e22e">comment</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Fragment&gt;</span>
+))</code></pre></div>
+<p>Apesar de parecer que você trocou 6 por meia dúzia, na hora da renderização dos componentes no browser, não haverá nenhum elemento no lugar do fragment.</p>
+
+<p>Isto irá economizar algumas dores de cabeça com Flexbox, e outras situações de estilização que envolvam múltiplos elementos, sem um elemento pai.</p>
+
+<h1 id="como-instalar-os-fragments">Como instalar os Fragments</h1>
+
+<p>Antes de tudo, você irá precisar da <a href="https://github.com/facebook/react/blob/master/CHANGELOG.md#1620-november-28-2017">versão 16.2 do React</a>, que foi lançada dia 28 de novembro de 2017.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn upgrade react@^16.2.0 react-dom@^16.2.0</code></pre></div>
+<p>Após atualizar a versão do React para a v16.2, você deverá atualizar seu Babel para versão 7. A sintaxe curta dos Fragments só irá funcionar no Babel a partir da versão 7, ou seja, se você estiver usando a versão 6, deixa de ser ultrapassado e atualiza essa bagaça pra v7. 😄</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># caso você use preset-react
+</span><span style="color:#75715e"></span>yarn upgrade @babel/core @babel/preset-react
+<span style="color:#75715e"># ou caso você use transform
+</span><span style="color:#75715e"></span>yarn upgrade @babel/core @babel/plugin-transform-react-jsx</code></pre></div>
+<p>Agora, você irá precisar atualizar o seu ESLint:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn upgrade eslint@3.x babel-eslint@7</code></pre></div>
+<p>Agora, no seu <code>.eslintrc</code> você deverá adicionar a seguinte linha:</p>
+
+<pre><code>&quot;parser&quot;: &quot;babel-eslint&quot;
+</code></pre>
+
+<p>O CRA (Create React App) ainda não permite a utilização dos Fragments, em breve eles vão atualizar isso. Mas se for o seu caso, basta você ejetar a aplicação usando <code>yarn eject</code>, e fazer o procedimento acima.</p>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>Os Fragments vieram para ficar. Eles já eram bastante utilizados pela equipe do Facebook, através de um addon. Após o amplo uso do time deles, eles resolveram expandir para o público.</p>
+
+<p>Espero que este recurso seja útil nos seus projetos e que você tenha aprendido algo novo hoje! 👍</p>
+
+<p><img src="https://media3.giphy.com/media/3ogsjQvoi63d8PxuUg/giphy.gif" alt="" /></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/fragments"><span class="tag">Fragments</span></a></li>
+        
+          <li><a href="/tags/react"><span class="tag">React</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

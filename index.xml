@@ -25,6 +25,17 @@ Além disso, sou colunista do portal iMasters e atuo como Revisor de Projetos no
     </item>
     
     <item>
+      <title>Usando Fragments No React</title>
+      <link>http://0e1dev.com/post/usando-fragments-no-react/</link>
+      <pubDate>Sat, 02 Dec 2017 15:53:10 -0200</pubDate>
+      
+      <guid>http://0e1dev.com/post/usando-fragments-no-react/</guid>
+      <description>Fragments é um recurso novo, adicionado na última versão do React (v16.2). Este recurso permite que nós criemos uma listagem de sub-componentes, sem necessariamente adicionar um componente pai.
+Quem já trabalhou com React, sabe como é chato ter que sempre criar uma &amp;lt;div /&amp;gt; ou algum elemento equivalente, para usá-lo de componente pai, e então retornar uma listagem com os componentes filhos.
+Os Fragments vieram justamente para resolver este tipo de situação.</description>
+    </item>
+    
+    <item>
       <title>Ciclo de vida de um componente em React</title>
       <link>http://0e1dev.com/post/ciclo-de-vida-de-um-componente-em-react/</link>
       <pubDate>Tue, 28 Nov 2017 14:20:47 -0200</pubDate>
