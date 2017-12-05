@@ -52,9 +52,7 @@ Este tipo de sintaxe, tem como vantagem, ficar mais explícito que você está u
 Além disto, outra vantagem é que você não precisa fazer nenhuma modificação na sua configuração do Babel.
 
 ```js
-import React from 'react';
-
-const { Fragment } = React;
+import React, { Fragment } from 'react';
 
 <Fragment>
   <FilhoA />
