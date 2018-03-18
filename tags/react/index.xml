@@ -6,10 +6,22 @@
     <description>Recent content in React on 0e1dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 02 Dec 2017 15:53:10 -0200</lastBuildDate>
+    <lastBuildDate>Sun, 18 Mar 2018 15:26:12 -0300</lastBuildDate>
     
 	<atom:link href="http://0e1dev.com/tags/react/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Adicionando, Lendo e Observando dados no Firebase com React</title>
+      <link>http://0e1dev.com/post/adicionando-lendo-e-observando-dados-no-firebase-react/</link>
+      <pubDate>Sun, 18 Mar 2018 15:26:12 -0300</pubDate>
+      
+      <guid>http://0e1dev.com/post/adicionando-lendo-e-observando-dados-no-firebase-react/</guid>
+      <description>Olá a todos!
+Hoje iremos aprender como trabalhar com o Firebase junto do React.
+O que é o Firebase? O Firebase é uma plataforma de desenvolvimento que atualmente é mantida pelo Google. As principais funcionalidades dele são o Realtime Database e o Authentication.
+Além destas 2 funcionalidades, o Firebase disponibiliza de outros serviços como Cloud Messaging (para disparar notificações em iOS, Android e Web), Storage (para armazenar arquivos estáticos, uploads, etc), Hosting (semelhante ao AWS S3), entre outros.</description>
+    </item>
     
     <item>
       <title>Usando Fragments No React</title>

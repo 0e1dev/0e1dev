@@ -51,7 +51,7 @@ Os Fragments vieram justamente para resolver este tipo de situação." />
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/usando-fragments-no-react/" />
@@ -230,7 +230,8 @@ Os Fragments vieram justamente para resolver este tipo de situação." />
   <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoA</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
   <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoB</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
   <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoC</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
-<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/&gt;</span></code></pre></div>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/&gt;</span>
+</code></pre></div>
 <p>Uma outro situação que esta sintaxe se aplicaria, seria um componente onde você quer retornar vários textos, sem necessariamente encapsulá-los em outro elemento:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CommentHeader</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">comment</span> }) =&gt; (
   <span style="color:#f92672">&lt;&gt;</span>
@@ -239,7 +240,8 @@ Os Fragments vieram justamente para resolver este tipo de situação." />
     <span style="color:#a6e22e">Se</span> <span style="color:#a6e22e">não</span> <span style="color:#a6e22e">quiser</span>, <span style="color:#a6e22e">não</span> <span style="color:#a6e22e">precisa</span> <span style="color:#a6e22e">deixar</span> <span style="color:#a6e22e">também</span>.
     <span style="color:#a6e22e">Entendeu</span><span style="color:#f92672">?</span>
   <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/&gt;</span>
-)</code></pre></div>
+)
+</code></pre></div>
 <p>Ou seja, ao invés de ter que separar os textos em <code>&lt;p /&gt;</code>, e criar um parágrafo para cada frase, nós podemos simplesmente acoplar tudo dentro de um fragment e o React se vira para renderizar.</p>
 
 <p><img src="https://media.giphy.com/media/ZZdRSJ6ESGA5G/giphy.gif" alt="" /></p>
@@ -255,7 +257,8 @@ Os Fragments vieram justamente para resolver este tipo de situação." />
   <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoA</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
   <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoB</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
   <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">FilhoC</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
-<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Fragment&gt;</span></code></pre></div>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Fragment&gt;</span>
+</code></pre></div>
 <p>Caso você precise fazer este processo dentro de um <code>map()</code>, você irá precisar declarar a prop <code>key</code>. Para declarar a <code>key</code> do Fragment, você terá de usá-lo com a sintaxe longa:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">comments</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">comment</span>) =&gt; (
   <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Fragment</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>.<span style="color:#a6e22e">uuid</span>}<span style="color:#f92672">&gt;</span>
@@ -263,7 +266,8 @@ Os Fragments vieram justamente para resolver este tipo de situação." />
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentDescription</span> <span style="color:#a6e22e">comment</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentForm</span> <span style="color:#a6e22e">comment</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
   <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Fragment&gt;</span>
-))</code></pre></div>
+))
+</code></pre></div>
 <p>Apesar de parecer que você trocou 6 por meia dúzia, na hora da renderização dos componentes no browser, não haverá nenhum elemento no lugar do fragment.</p>
 
 <p>Isto irá economizar algumas dores de cabeça com Flexbox, e outras situações de estilização que envolvam múltiplos elementos, sem um elemento pai.</p>
@@ -305,7 +309,7 @@ Os Fragments vieram justamente para resolver este tipo de situação." />
       </ul>
       
       <p class="post-copyright">
-        
+        Este post foi publicado <strong>106</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -333,7 +337,7 @@ Os Fragments vieram justamente para resolver este tipo de situação." />
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

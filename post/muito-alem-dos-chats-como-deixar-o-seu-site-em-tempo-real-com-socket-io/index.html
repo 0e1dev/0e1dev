@@ -51,7 +51,7 @@ Continue lendo o tutorial e você aprenderá:
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/muito-alem-dos-chats-como-deixar-o-seu-site-em-tempo-real-com-socket-io/" />
@@ -298,7 +298,8 @@ Continue lendo o tutorial e você aprenderá:
 <span style="color:#a6e22e">angular</span>
   .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>, [<span style="color:#e6db74">&#39;ui.router&#39;</span>, <span style="color:#e6db74">&#39;btford.socket-io&#39;</span>])
 
-})();</code></pre></div>
+})();
+</code></pre></div>
 <h2 id="criar-uma-factory-para-lidarmos-com-o-socket-io">Criar uma factory para lidarmos com o Socket.IO</h2>
 
 <p>src/app/shared/realtime/realtime.factory.js:</p>
@@ -319,7 +320,8 @@ Continue lendo o tutorial e você aprenderá:
 
       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">realtimeSocket</span>;
     }
-})();</code></pre></div>
+})();
+</code></pre></div>
 <p>Se você fizer os passos acima direitinho, no seu console irá aparecer isso aqui:</p>
 
 <p><img src="Selection_001.png" alt="" /></p>
@@ -450,7 +452,8 @@ Continue lendo o tutorial e você aprenderá:
 <span style="color:#75715e">// Iniciando servidor
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3010</span>, <span style="color:#66d9ef">function</span>(){
   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Escutando em *:3010&#39;</span>);
-});</code></pre></div>
+});
+</code></pre></div>
 <p>Se rodarmos no terminal agora:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">node server.js</code></pre></div>
 <p><img src="Selection_005.png" alt="" /></p>
@@ -513,7 +516,8 @@ Se <em>houver</em>, vamos <em>atualizar</em> a listagem dos jobs.</li>
 		},
     <span style="color:#a6e22e">open</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
   };
-};</code></pre></div>
+};
+</code></pre></div>
 <p><img src="https://media.giphy.com/media/bl2FKRXQaFgf6/giphy.gif" alt="" /></p>
 
 <p>Além disto, se você quiser fazer testes no desenvolvimento, você precisa desabilitar o <code>Ghost Mode</code>.</p>
@@ -523,7 +527,8 @@ Se <em>houver</em>, vamos <em>atualizar</em> a listagem dos jobs.</li>
 <p>O problema disso é que se você tentar abrir a home numa aba, e abrir o cadastro da vaga em outra aba, vai dar merda, afinal, as telas estarão sincronizadas.</p>
 
 <p>Caso você por este problema, veja se na config. do seu BrowserSync não tem uma linha assim:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">browserSync</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">spa</span>());</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">browserSync</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">spa</span>());
+</code></pre></div>
 <p>Se tiver, comente-a. Isto irá desabilitar o ghost mode. Quando você quiser reativar o esquema, basta descomentá-la.</p>
 
 <p>Feito a adaptação para o BrowserSync, vamos seguir para&hellip;</p>
@@ -555,7 +560,8 @@ Se <em>houver</em>, vamos <em>atualizar</em> a listagem dos jobs.</li>
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">stderr</span>);
     <span style="color:#a6e22e">cb</span>(<span style="color:#a6e22e">err</span>);
   });
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Se você fizer um teste rodando <code>gulp server</code> e abrir no seu navegador <a href="http://localhost:3010">http://localhost:3010</a> irá funcionar.</p>
 
 <p>Agora precisamos incluir esta task server, na fila de tasks quando rodamos <code>gulp serve</code> (lembra, é só pro amb. de desenvolvimento).</p>
@@ -564,7 +570,8 @@ Se <em>houver</em>, vamos <em>atualizar</em> a listagem dos jobs.</li>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Antigo
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;serve&#39;</span>, <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">series</span>(<span style="color:#e6db74">&#39;clean&#39;</span>, <span style="color:#e6db74">&#39;ng-config:serve&#39;</span>, <span style="color:#e6db74">&#39;partials&#39;</span>, <span style="color:#e6db74">&#39;inject&#39;</span>, <span style="color:#e6db74">&#39;watch&#39;</span>, <span style="color:#e6db74">&#39;browsersync&#39;</span>));
 <span style="color:#75715e">// Novo
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;serve&#39;</span>, <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">series</span>(<span style="color:#e6db74">&#39;clean&#39;</span>, <span style="color:#e6db74">&#39;ng-config:serve&#39;</span>, <span style="color:#e6db74">&#39;partials&#39;</span>, <span style="color:#e6db74">&#39;inject&#39;</span>, <span style="color:#e6db74">&#39;watch&#39;</span>, <span style="color:#e6db74">&#39;browsersync&#39;</span>, <span style="color:#e6db74">&#39;server&#39;</span>));</code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;serve&#39;</span>, <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">series</span>(<span style="color:#e6db74">&#39;clean&#39;</span>, <span style="color:#e6db74">&#39;ng-config:serve&#39;</span>, <span style="color:#e6db74">&#39;partials&#39;</span>, <span style="color:#e6db74">&#39;inject&#39;</span>, <span style="color:#e6db74">&#39;watch&#39;</span>, <span style="color:#e6db74">&#39;browsersync&#39;</span>, <span style="color:#e6db74">&#39;server&#39;</span>));
+</code></pre></div>
 <p>Ou seja, depois dele fazer todo o processo de servir o app, ele irár rodar o server.js (no caso o Express).</p>
 
 <p>Pronto. Gulp configurado!</p>
@@ -581,7 +588,8 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
 <p>Se você reparar, no server.js tem um trecho assim:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;client:created:job&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">data</span>) {
   <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">sockets</span>.<span style="color:#a6e22e">emit</span>(<span style="color:#e6db74">&#39;server:created:job&#39;</span>, <span style="color:#a6e22e">data</span>);
-});</code></pre></div>
+});
+</code></pre></div>
 <p>Isso significa que:</p>
 
 <p>Toda vez que nosso socket observar um evento novo em <code>client:created:job</code>, ele irá emitir um outro evento denominado <code>server:created:job</code>.</p>
@@ -645,7 +653,8 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
     }
   }
 
-})();</code></pre></div>
+})();
+</code></pre></div>
 <p>Vamos colocar na função create(), dentro do callback de sucesso, a seguinte linha:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* Callback de sucesso - será acionado caso a vaga tenha sido salva */</span>
 <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">success</span>(<span style="color:#a6e22e">result</span>) {
@@ -657,7 +666,8 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
 
   <span style="color:#75715e">// Redireciona para a home
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">$state</span>.<span style="color:#a6e22e">go</span>(<span style="color:#e6db74">&#39;home&#39;</span>);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Pronto, o nosso servidor já irá identificar que vagas foram criadas e vai emitir o tal do <code>server:created:job</code> (indicando que ele fez a parte dele também).</p>
 
 <p>É hora de tratarmos este evento do servidor!</p>
@@ -703,7 +713,8 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
         }
 
     }
-})();</code></pre></div>
+})();
+</code></pre></div>
 <p>Observe a função activate(). Ela é acionada toda vez que nosso componente é carregado.</p>
 
 <p>Se você deixar seu código sempre bem estruturado, esta vai ser a parte mais fácil para você.</p>
@@ -717,7 +728,8 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
 <p>Depois da função activate, vamos adicionar o observador para nosso evento disparado pelo servidor:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">realtimeFactory</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;server:created:job&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">ev</span>, <span style="color:#a6e22e">data</span>) {
   <span style="color:#a6e22e">activate</span>();
-});</code></pre></div>
+});
+</code></pre></div>
 <p>Ele faz exatamente o que eu expliquei ali em cima. Toda vez que houver um evento de <code>server:created:job</code>, nós iremos chamar a função activate(), que irá atualizar a lista de jobs.</p>
 
 <p><img src="https://media.giphy.com/media/VR19WcrVHM44E/giphy.gif" alt="" /></p>
@@ -759,7 +771,7 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>485</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>589</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -787,7 +799,7 @@ Se você abrir <a href="http://localhost:3010">http://localhost:3010</a> verá o
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

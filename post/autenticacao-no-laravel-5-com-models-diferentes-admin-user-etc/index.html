@@ -54,7 +54,7 @@ Se tratando de rotas, seria:" />
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/autenticacao-no-laravel-5-com-models-diferentes-admin-user-etc/" />
@@ -275,7 +275,8 @@ disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documen
         &#39;driver&#39; =&gt; &#39;token&#39;,
         &#39;provider&#39; =&gt; &#39;users&#39;,
     ],
-],</code></pre></div>
+],
+</code></pre></div>
 <p>Em <strong>&lsquo;providers&rsquo;</strong> vamos deixar assim:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Antigo
 &#39;providers&#39; =&gt; [
@@ -294,7 +295,8 @@ disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documen
         &#39;driver&#39; =&gt; &#39;eloquent&#39;,
         &#39;model&#39; =&gt; App\User::class,
     ],
-],</code></pre></div>
+],
+</code></pre></div>
 <p>No caso, apesar de termos um guard para API feita já pelo Laravel, não vamos usá-la.</p>
 
 <p>Ela já vem com uma pré-configuração onde se faz necessário uma coluna &ldquo;api_token&rdquo; na tabela do model a ser autenticado.</p>
@@ -317,7 +319,8 @@ disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documen
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    protected $redirectTo = &#39;/&#39;;
 
     // Aqui nossa nova linha
-    protected $guard = &#39;admin&#39;;</code></pre></div>
+    protected $guard = &#39;admin&#39;;
+</code></pre></div>
 <p><strong>(Opcional)</strong> Se você for usar a página de registro, deve alterar o model de User para Admin no método create() também:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    protected function create(array $data)
     {
@@ -326,7 +329,8 @@ disponível conseguia explicar claramente como resolvê-la. Nem mesmo na documen
             &#39;email&#39; =&gt; $data[&#39;email&#39;],
             &#39;password&#39; =&gt; bcrypt($data[&#39;password&#39;]),
         ]);
-    }</code></pre></div>
+    }
+</code></pre></div>
 <p>Agora, temos que indicar ao middleware do Auth, que queremos usar o nosso guard admin.</p>
 
 <p>Para isto, vamos editar 2 controllers:</p>
@@ -344,7 +348,8 @@ public function __construct()
 public function __construct()
 {
     $this-&gt;middleware(&#39;auth:admin&#39;);
-}</code></pre></div>
+}
+</code></pre></div>
 <p><strong>app/Http/Controllers/Admin/AdminController.php:</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Antigo
 public function __construct()
@@ -355,15 +360,18 @@ public function __construct()
 public function __construct()
 {
     $this-&gt;middleware(&#39;auth:admin&#39;);
-}</code></pre></div>
+}
+</code></pre></div>
 <h1 id="corrigindo-as-views-do-admin">Corrigindo as views do admin</h1>
 
 <p>Se você abrir o layout que é gerado pelo Artisan, verá algumas linhas fazendo referência ao Auth desta forma:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">@if (Auth::guest())
-@endif</code></pre></div>
+@endif
+</code></pre></div>
 <p>Neste caso, você deverá trocar para o seguinte:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">@if (Auth::guard(&#39;admin&#39;)-&gt;guest())
-@endif</code></pre></div>
+@endif
+</code></pre></div>
 <p>Isso significa que ele vai analisar se há alguma sessão especificamente no guard de admin.</p>
 
 <p>PRONTO!</p>
@@ -398,7 +406,7 @@ public function __construct()
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>487</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>591</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -426,7 +434,7 @@ public function __construct()
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

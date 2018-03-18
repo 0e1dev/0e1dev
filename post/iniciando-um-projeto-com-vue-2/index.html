@@ -51,7 +51,7 @@ O motivo do aumento de sua popularidade se dá graças aos benefícios que este 
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/iniciando-um-projeto-com-vue-2/" />
@@ -369,7 +369,8 @@ $ npm run dev</code></pre></div>
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">material</span>.<span style="color:#a6e22e">theme</span>.<span style="color:#a6e22e">register</span>(<span style="color:#e6db74">&#39;default&#39;</span>, {
   <span style="color:#a6e22e">primary</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;light-blue&#39;</span>,
   <span style="color:#a6e22e">accent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;pink&#39;</span>
-})</code></pre></div>
+})
+</code></pre></div>
 <p>Agora vamos declarar que nosso <code>App</code> use o tema padrão:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- src/App.vue --&gt;</span>
 
@@ -496,7 +497,8 @@ $ npm run dev</code></pre></div>
 
 <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vue</span>({
   <span style="color:#a6e22e">router</span>
-}).<span style="color:#a6e22e">$mount</span>(<span style="color:#e6db74">&#39;#app&#39;</span>)</code></pre></div>
+}).<span style="color:#a6e22e">$mount</span>(<span style="color:#e6db74">&#39;#app&#39;</span>)
+</code></pre></div>
 <h2 id="plus-outra-feature-bacana-do-vue">PLUS: Outra feature bacana do Vue</h2>
 
 <p>Se você tentar navegar na nossa aplicação agora, verá a seguinte tela:</p>
@@ -529,7 +531,8 @@ $ npm run dev</code></pre></div>
     }
   }
 }
-<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span></code></pre></div>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div>
 <p>Agora que nossa <code>About Us</code> está redonda, vamos fazer com que através da Home nós possamos redirecionar o usuário para a segunda página.</p>
 
 <p>Abra o <code>src/components/Hello.vue</code> e insira depois do nosso <code>&lt;/md-tabs&gt;</code>:</p>
@@ -537,7 +540,8 @@ $ npm run dev</code></pre></div>
 </span><span style="color:#75715e"></span>
 <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">router</span><span style="color:#f92672">-</span><span style="color:#a6e22e">link</span> <span style="color:#a6e22e">tag</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-button&#34;</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;md-raised md-primary&#34;</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/about-us&#34;</span><span style="color:#f92672">&gt;</span>
   <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">md</span><span style="color:#f92672">-</span><span style="color:#a6e22e">icon</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">navigate_next</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/md-icon&gt; Go to About Us</span>
-<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/router-link&gt;</span></code></pre></div>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/router-link&gt;</span>
+</code></pre></div>
 <h2 id="pronto">Pronto!</h2>
 
 <p>Agora podemos navegar entre nossas rotas:</p>
@@ -577,7 +581,7 @@ $ npm run dev</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>359</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>462</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -605,7 +609,7 @@ $ npm run dev</code></pre></div>
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

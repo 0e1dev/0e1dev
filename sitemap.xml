@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>http://0e1dev.com/post/adicionando-lendo-e-observando-dados-no-firebase-react/</loc>
+    <lastmod>2018-03-18T15:26:12-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://0e1dev.com/post/usando-fragments-no-react/</loc>
     <lastmod>2017-12-02T15:53:10-02:00</lastmod>
   </url>
@@ -154,7 +159,7 @@
   
   <url>
     <loc>http://0e1dev.com/tags/crud/</loc>
-    <lastmod>2017-01-07T12:02:12+00:00</lastmod>
+    <lastmod>2018-03-18T15:26:12-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -173,6 +178,12 @@
   <url>
     <loc>http://0e1dev.com/tags/digitalocean/</loc>
     <lastmod>2016-07-14T02:10:28+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://0e1dev.com/tags/firebase/</loc>
+    <lastmod>2018-03-18T15:26:12-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -268,7 +279,7 @@
   
   <url>
     <loc>http://0e1dev.com/post/</loc>
-    <lastmod>2017-12-02T15:53:10-02:00</lastmod>
+    <lastmod>2018-03-18T15:26:12-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -280,7 +291,7 @@
   
   <url>
     <loc>http://0e1dev.com/tags/react/</loc>
-    <lastmod>2017-12-02T15:53:10-02:00</lastmod>
+    <lastmod>2018-03-18T15:26:12-03:00</lastmod>
     <priority>0</priority>
   </url>
   

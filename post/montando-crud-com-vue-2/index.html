@@ -54,7 +54,7 @@ Vamos começar pelo Index (Listagem de Registros)." />
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/montando-crud-com-vue-2/" />
@@ -249,7 +249,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
   <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DashboardInputsIndex&#39;</span>
 }
-<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span></code></pre></div>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div>
 <h1 id="index">Index</h1>
 
 <p>Primeiro, precisamos recuperar os nossos registros através de uma requisição XHR.</p>
@@ -260,7 +261,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;http://localhost:3000/lessons.json&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Dados aqui:&#39;</span>)
   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">data</span>)
-})</code></pre></div>
+})
+</code></pre></div>
 <p>Para quem está acostumado com o Angular 1, a sintaxe é bem semelhante.</p>
 
 <p>Este é um exemplo simples de requisição GET com o <em>vue-resource</em>.</p>
@@ -276,7 +278,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 
 <span style="color:#a6e22e">lessons</span>.<span style="color:#a6e22e">get</span>({}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>)
-})</code></pre></div>
+})
+</code></pre></div>
 <p><strong>Observação:</strong> <code>{/id}</code> significa que podemos passar um parâmetro ID, mas este parâmetro é opcional, por isto está entre chaves {}.</p>
 
 <h1 id="aplicando-resource-na-index">Aplicando $resource na Index</h1>
@@ -298,7 +301,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
   <span style="color:#a6e22e">created</span> () {
     <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Vamos pontuar cada atributo do componente.</p>
 
 <h2 id="name">name</h2>
@@ -318,7 +322,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 
 <p>No nosso caso, podemos usar:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">resource</span>; <span style="color:#75715e">// para nosso $resource
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lessons</span>; <span style="color:#960050;background-color:#1e0010">// para nossas aulas</span></code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lessons</span>; <span style="color:#75715e">// para nossas aulas
+</span><span style="color:#75715e"></span></code></pre></div>
 <h2 id="methods">methods</h2>
 
 <p>Esta é fácil. São os métodos que estarão disponíveis no nosso componente.</p>
@@ -418,7 +423,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 <p>O vue contém sua própria implementação desta pattern chamada <a href="https://vuex.vuejs.org/en/intro.html">vuex</a>. No próximo post falo mais sobre este assunto.</p>
 
 <p>Voltando ao nosso título, vamos importar o create no index. No nosso <code>Index.vue</code>, precisaremos fazer esta importação:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">InputsCreate</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Create&#39;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">InputsCreate</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Create&#39;</span>
+</code></pre></div>
 <p>Agora precisamos indicar ao nosso Index para consumir este componente:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
   <span style="color:#75715e">// ocultei o código para uma melhor leitura
@@ -426,7 +432,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
   <span style="color:#a6e22e">components</span><span style="color:#f92672">:</span> {
     <span style="color:#e6db74">&#39;Inputs-Create&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsCreate</span>
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Agora podemos usar dentro do nosso Componente pai o nosso filho quantas vezes quisermos, da seguinte maneira:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Inputs-Create</span>&gt;&lt;/<span style="color:#f92672">Input-Create</span>&gt;</code></pre></div>
 <p>No meu caso eu usei assim:</p>
@@ -566,7 +573,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 
     }
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p><strong>Pronto!</strong> O nosso <em>Create</em> está concluído.</p>
 
 <p>Só que tem 1 problema: O <em>Index</em> não sabe que o seu filho, <em>Create</em>, fez algo.</p>
@@ -581,7 +589,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 <p>Caso uma nova aula seja adicionada com sucesso, precisamos emitir um evento indicando mudanças, que chamarei de <strong>created</strong>.</p>
 
 <p>Para emitir este evento, o código necessário é:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$emit</span>(<span style="color:#e6db74">&#39;created&#39;</span>)</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$emit</span>(<span style="color:#e6db74">&#39;created&#39;</span>)
+</code></pre></div>
 <p>Para nosso componente pai escutar este evento, podemos fazer de 2 maneiras:</p>
 
 <h3 id="a-maneira-ideal">A maneira ideal</h3>
@@ -593,7 +602,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 <p>Caso você queira detectar dentro da execução do componente:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$on</span>(<span style="color:#e6db74">&#39;created&#39;</span>, () =&gt; {
   <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
-})</code></pre></div>
+})
+</code></pre></div>
 <p><strong>Pronto!</strong> <em>Created</em> de fato finalizado.</p>
 
 <p>Agora falta <strong>Delete</strong> e <strong>Update</strong>.</p>
@@ -613,7 +623,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
   <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">resource</span>.<span style="color:#66d9ef">delete</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">id</span>}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
     <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$emit</span>(<span style="color:#e6db74">&#39;deleted&#39;</span>)
   })
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Este método está emitindo um evento <code>deleted</code>. Vamos escutá-lo quando o componente é criado?</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">created</span> () {
   <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">initialize</span>()
@@ -621,7 +632,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
   <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$on</span>(<span style="color:#e6db74">&#39;deleted&#39;</span>, () =&gt; {
     <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">eventDeleted</span>()
   })
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Dentro da nossa escuta, estamos acionando outro método <code>eventDeleted()</code>. Vamos criá-lo?</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">eventDeleted</span> () {
   <span style="color:#75715e">// reiniciamos o componente
@@ -630,7 +642,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
   <span style="color:#75715e">// notifica o usuário
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Aula removida!&#39;</span>
   window.<span style="color:#a6e22e">Materialize</span>.<span style="color:#a6e22e">toast</span>(<span style="color:#a6e22e">message</span>)
-}</code></pre></div>
+}
+</code></pre></div>
 <p><strong>Pronto!</strong> <em>Delete</em> concluído, faltando apenas o <em>Update</em>.</p>
 
 <p><img src="https://media.giphy.com/media/xT0GqtcVR0jOXzmmPK/giphy.gif" alt="" /></p>
@@ -727,7 +740,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
       })
     }
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Para este componente funcionar, precisamos fazer 2 adaptações no <em>Index</em>:</p>
 
 <ul>
@@ -738,7 +752,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">components</span><span style="color:#f92672">:</span> {
   <span style="color:#e6db74">&#39;Inputs-Create&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsCreate</span>,
   <span style="color:#e6db74">&#39;Inputs-Update&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsUpdate</span>
-}</code></pre></div>
+}
+</code></pre></div>
 <ul>
 <li>Adicionar o <em>prop</em> ao <strong>data</strong>;</li>
 </ul>
@@ -755,7 +770,8 @@ Vamos começar pelo Index (Listagem de Registros)." />
     <span style="color:#75715e">// nova linha aqui
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">lesson</span><span style="color:#f92672">:</span> {}
   }
-},</code></pre></div>
+},
+</code></pre></div>
 <p><strong>Pronto</strong>! Nosso CRUD funcionando 100%.</p>
 
 <h1 id="conclusão">Conclusão</h1>
@@ -787,7 +803,7 @@ Vamos começar pelo Index (Listagem de Registros)." />
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>331</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>435</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -815,7 +831,7 @@ Vamos começar pelo Index (Listagem de Registros)." />
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

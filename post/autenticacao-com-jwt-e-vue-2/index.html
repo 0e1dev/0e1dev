@@ -51,7 +51,7 @@ Para isto, será necessário:
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/autenticacao-com-jwt-e-vue-2/" />
@@ -283,7 +283,8 @@ Para isto, será necessário:
       <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">user</span>)
     }
   }
-}</code></pre></div></p>
+}
+</code></pre></div></p>
 
 <h2 id="variáveis-de-ambiente">Variáveis de Ambiente</h2>
 
@@ -307,12 +308,14 @@ Para isto, será necessário:
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
   <span style="color:#a6e22e">NODE_ENV</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#34;production&#34;&#39;</span>,
   <span style="color:#a6e22e">API</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#34;http://api.0e1dev.com/&#34;&#39;</span>
-}</code></pre></div>
+}
+</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// config/dev.env.js
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
   <span style="color:#a6e22e">NODE_ENV</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#34;production&#34;&#39;</span>,
   <span style="color:#a6e22e">API</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#34;http://localhost:9001/&#34;&#39;</span>
-}</code></pre></div>
+}
+</code></pre></div>
 Pronto. Nós teremos acesso a esta informação na nossa aplicação através de <code>process.env.API</code>.</p>
 
 <h2 id="instalando-vue-resource">Instalando vue-resource</h2>
@@ -329,7 +332,8 @@ Agora abra o <code>main.js</code> e indique ao Vue que nós vamos usá-lo:</p>
 
 <span style="color:#75715e">// Define a base da URL das requisições AJAX será
 </span><span style="color:#75715e">// a constante API que configuramos
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">options</span>.<span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">API</span></code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">options</span>.<span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">API</span>
+</code></pre></div>
 Agora que nossa requisição está pronta, vamos importar uma biblioteca para nos auxiliar na camada de autenticação.</p>
 
 <p>Ela é a <a href="https://github.com/websanova/vue-auth">vue-auth</a>. Para instalá-la:</p>
@@ -339,7 +343,8 @@ Vamos configurá-la. Abra o <code>src/main.js</code>.</p>
 
 <p>Após nossa declaração de rotas, vamos fazer um monkeypatch para o <em>vue-auth</em> identificar nossas rotas:</p>
 
-<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">router</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">router</span></code></pre></div>
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">router</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">router</span>
+</code></pre></div>
 Agora vamos configurar a autenticação em si.</p>
 
 <p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;@websanova/vue-auth&#39;</span>), {
@@ -350,7 +355,8 @@ Agora vamos configurar a autenticação em si.</p>
   <span style="color:#a6e22e">loginData</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;user_token&#39;</span>, <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>, <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>, <span style="color:#a6e22e">fetchUser</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>},
   <span style="color:#a6e22e">fetchData</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;auth/user&#39;</span>, <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>},
   <span style="color:#a6e22e">refreshData</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;auth/refresh&#39;</span>, <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#a6e22e">atInit</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}
-})</code></pre></div>
+})
+</code></pre></div>
 Algumas considerações nesta configuração:</p>
 
 <h3 id="por-que-esse-bando-de-require">Por que esse bando de require?</h3>
@@ -463,7 +469,8 @@ Pontos esclarecidos, vamos voltar para nosso front-end.</p>
       <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/signup&#39;</span>
     })
   }
-}</code></pre></div>
+}
+</code></pre></div>
 Os parâmetros <em>rememberMe</em> e <em>redirect</em> são opcionais.</p>
 
 <p>No caso da nossa aplicação de teste, a página de cadastro só deverá carregar para usuários logados.</p>
@@ -489,7 +496,8 @@ Os parâmetros <em>rememberMe</em> e <em>redirect</em> são opcionais.</p>
     <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Login</span>,
     <span style="color:#a6e22e">meta</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}
   }
-]</code></pre></div>
+]
+</code></pre></div>
 Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto para não-logados), basta não declarar o atributo <code>meta</code>.</p>
 
 <p>Se a gente quisesse montar uma rota somente para 1 role em específico, seria:</p>
@@ -507,7 +515,8 @@ Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto 
     <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Manager</span>,
     <span style="color:#a6e22e">meta</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;manager&#39;</span>}
   }
-]</code></pre></div>
+]
+</code></pre></div>
 
 <h2 id="testando-nossa-aplicação">Testando nossa aplicação</h2>
 
@@ -557,7 +566,7 @@ Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto 
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>358</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>462</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -585,7 +594,7 @@ Se a gente quisesse ter uma rota pública (acessível tanto para logados quanto 
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

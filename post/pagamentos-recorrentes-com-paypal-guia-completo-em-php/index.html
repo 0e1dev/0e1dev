@@ -48,7 +48,7 @@ Atualmente, o PayPal tem 2 métodos de integração: (a) Clássico ou (b) REST A
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/pagamentos-recorrentes-com-paypal-guia-completo-em-php/" />
@@ -297,7 +297,8 @@ R: A Clássica é uma bosta para configurarmos o retorno automático, para fazer
 
 <p>Agora, vamos chamar as dependências administradas pelo Composer:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
-<span style="color:#66d9ef">require_once</span> <span style="color:#66d9ef">__DIR__</span>  <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;/vendor/autoload.php&#39;</span>;</code></pre></div>
+<span style="color:#66d9ef">require_once</span> <span style="color:#66d9ef">__DIR__</span>  <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;/vendor/autoload.php&#39;</span>;
+</code></pre></div>
 <p>Vamos inserir nosso token de acesso:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Lembrando de substituir o Client ID e o Client Secret abaixo
 $apiContext = new \PayPal\Rest\ApiContext(
@@ -305,7 +306,8 @@ $apiContext = new \PayPal\Rest\ApiContext(
         &#39;AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS&#39;,     // ClientID
         &#39;EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL&#39;      // ClientSecret
     )
-);</code></pre></div>
+);
+</code></pre></div>
 <p>Lembre-se de substituir as duas chaves acima com o <strong>Client ID</strong> e <strong>Secret Key</strong> que nós pegamos no segundo tópico, <strong>Tokens de Acesso</strong>.</p>
 
 <p>Pronto! Nós já estamos nos conectando com a API do PayPal. O token só será validado ao executar alguma requisição mas a príncipio já estamos com parte do caminho andado.</p>
@@ -336,11 +338,13 @@ use PayPal\Api\PaymentDefinition;
 use PayPal\Api\Patch;
 use PayPal\Api\PatchRequest;
 use PayPal\Api\Plan;
-use PayPal\Common\PayPalModel;</code></pre></div>
+use PayPal\Common\PayPalModel;
+</code></pre></div>
 <p>Vamos criar uma função que gere o plano:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function createPlan($apiContext, $name, $description, $frequency, $frequencyInterval, $cycles, $amountValue, $amountCurrency) {
     
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Nossos parâmetros nesta função são:</p>
 
 <ul>
@@ -382,7 +386,8 @@ use PayPal\Common\PayPalModel;</code></pre></div>
 
   // Retorna o objeto do plano
   return $plan;
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Na linha 23, rodamos uma outra função chamada <code>setMerchantPreferences()</code>. Nós ainda não criamos ela. Vamos criá-la agora:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function setMerchantPreferences($plan, $baseUrl, $returnUrl = &#39;/ExecuteAgreement.php?success=true&#39;, $cancelUrl = &#39;/ExecuteAgreement.php?success=false&#39;) {
   $merchantPreferences = new MerchantPreferences();
@@ -396,7 +401,8 @@ use PayPal\Common\PayPalModel;</code></pre></div>
   $plan-&gt;setMerchantPreferences($merchantPreferences);
 
   return $plan;
-}</code></pre></div>
+}
+</code></pre></div>
 <p><img src="5.png" alt="" /></p>
 
 <p>Pronto! Para nós criarmos nosso plano, precisamos das seguintes etapas:</p>
@@ -412,7 +418,8 @@ use PayPal\Common\PayPalModel;</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// Criamos um plano chamado &#34;User Premium Plan&#34;.
 // Este plano será cobrado a cada 1 ($frequencyInterval) mês ($frequency) durante 12 meses ($cycles)
 // com um preço de R$ 50 ($amountCurrency e $amountValue).
-$userPremiumPlan = createPlan($apiContext, &#39;User Premium Plan&#39;, &#39;A premium plan for our users on 0e1dev.com&#39;, &#39;Month&#39;, &#39;1&#39;, &#39;12&#39;, 50, &#39;BRL&#39;);</code></pre></div>
+$userPremiumPlan = createPlan($apiContext, &#39;User Premium Plan&#39;, &#39;A premium plan for our users on 0e1dev.com&#39;, &#39;Month&#39;, &#39;1&#39;, &#39;12&#39;, 50, &#39;BRL&#39;);
+</code></pre></div>
 <p>Após nós criarmos nosso plano, vamos precisar ativá-lo. É uma burocracia idiota do PayPal, afinal, o plano já poderia vir ativado, não? Whatever, sou apenas um programador cheio de incertezas, provavelmente tem um motivo para ser assim (?).</p>
 
 <p><img src="https://media.giphy.com/media/FFb9yZK6t0oDu/giphy.gif" alt="" /></p>
@@ -437,7 +444,8 @@ $userPremiumPlan = createPlan($apiContext, &#39;User Premium Plan&#39;, &#39;A p
   $plan-&gt;update($patchRequest, $apiContext);
 
   return Plan::get($plan-&gt;getId(), $apiContext);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>O lance de Patch/PatchRequest é uma abstração necessária para efetuar a comunicação com a API através do cURL. Eles poderiam deixar isto dentro do $plan-&gt;update(), mas novamente foda-se.</p>
 
 <p>Após atualizar o plano, retornamos o nosso objeto Plan, limpo, atualizado, e o mais importante, ativado.</p>
@@ -469,7 +477,8 @@ $userPremiumPlan = createPlan($apiContext, &#39;User Premium Plan&#39;, &#39;A p
   $agreement-&gt;setPayer($payer);
 
   return $agreement-&gt;create($apiContext);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Sem muito mistério aqui. Criamos um objeto Agreement, configuramos ele com algumas infos básicas, definimos qual plano esta assinatura irá usar, e o método de pagamento, que é dentro do próprio Paypal.</p>
 
 <p>Se sua conta tiver autorização para efetuar checkout transparente, isto é, pagamento na mesma página da sua app, nesta etapa ao invés do paymentmethod ser paypal ele seria credit_card.</p>
@@ -489,7 +498,8 @@ $userPremiumPlan = createPlan($apiContext, &#39;User Premium Plan&#39;, &#39;A p
 <p>Vamos usar um simples helper para isto:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function redirectUser($url) {
   header(&#39;Location: &#39; . $url);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>No fim nosso código de checkout ficará assim:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$apiContext = new \PayPal\Rest\ApiContext(
     new \PayPal\Auth\OAuthTokenCredential(
@@ -510,7 +520,8 @@ $userPremiumPlan = activatePlan($apiContext, $userPremiumPlan);
 $userPremiumAgreement = createAgreement($apiContext, $userPremiumPlan);
 
 // Redirecionamos usuário para a página de pagamento
-redirectUser($userPremiumAgreement-&gt;getApprovalLink());</code></pre></div>
+redirectUser($userPremiumAgreement-&gt;getApprovalLink());
+</code></pre></div>
 <h2 id="outra-observação">Outra observação</h2>
 
 <p>Antes de redirecionar o usuário, é interessante que o seu sistema armazene o ID da Assinatura. Este ID é a única maneira do seu sistema identificar a quem se refere o pagamento quando nós configurarmos o Webhook.</p>
@@ -525,7 +536,8 @@ $userPremiumAgreement = createAgreement($apiContext, $userPremiumPlan);
 $userPremiumAgreementID = $userPremiumAgreement-&gt;getId();
 
 // Redirecionamos usuário para a página de pagamento
-// redirectUser($userPremiumAgreement-&gt;getApprovalLink());</code></pre></div>
+// redirectUser($userPremiumAgreement-&gt;getApprovalLink());
+</code></pre></div>
 <h1 id="checkout-concluído">Checkout concluído!</h1>
 
 <p>Agora que nossa etapa de checkout está pronta, vamos fazer a etapa seguinte, que é a tela de pós-pagamento, em que nós vamos mostar uma mensagem de sucesso ou de erro, de acordo com  o status do pagamento feito pelo usuário, ou caso ele tenha cancelado.</p>
@@ -567,7 +579,8 @@ if (isset($_GET[&#39;success&#39;]) &amp;&amp; $_GET[&#39;success&#39;] == &#39;
   var_dump($agreement);
 } else {
   var_dump(&#39;Usuário cancelou pagamento/não conseguiu pagar.&#39;);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>O código é auto-explicativo. Se o usuário tiver pago, executamos a assinatura, para ela começar a contar, do contrário, não fazemos nada. Podemos exibir uma mensagem de alerta indicando que ocorreu um problema ao efetuar o pagamento do usuário.</p>
 
 <h1 id="testando-nossa-aplicação">Testando nossa aplicação</h1>
@@ -667,7 +680,8 @@ if (isset($_GET[&#39;success&#39;]) &amp;&amp; $_GET[&#39;success&#39;] == &#39;
 $file_handle <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#39;post.log&#39;</span>, <span style="color:#e6db74">&#39;a+&#39;</span>);
 <span style="color:#a6e22e">fwrite</span>($file_handle, <span style="color:#a6e22e">print_r</span>($_POST,<span style="color:#66d9ef">true</span>));
 <span style="color:#a6e22e">fwrite</span>($file_handle, <span style="color:#a6e22e">file_get_contents</span>(<span style="color:#e6db74">&#39;php://input&#39;</span>));
-<span style="color:#a6e22e">fclose</span>($file_handle);</code></pre></div>
+<span style="color:#a6e22e">fclose</span>($file_handle);
+</code></pre></div>
 <p>Isso fará com que todo conteúdo recebido pelo Webhook (vem diretamente do canal POST), seja armazenado em um arquivo chamado post.log.</p>
 
 <h1 id="testando-o-webhook">Testando o webhook</h1>
@@ -714,7 +728,7 @@ b) Usar o <strong>Webhook Simulator</strong>. <a href="https://developer.paypal.
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>379</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>482</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -742,7 +756,7 @@ b) Usar o <strong>Webhook Simulator</strong>. <a href="https://developer.paypal.
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

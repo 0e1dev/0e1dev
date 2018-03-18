@@ -51,7 +51,7 @@ Independente do fato de se discutir se o Angular 2 vai vingar ou não, é intere
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/escrevendo-componentes-com-angularjs-no-padrao-do-google/" />
@@ -355,7 +355,8 @@ app/forum/topic/topic.controller.spec.js
                 }
             }
         }
-})();</code></pre></div>
+})();
+</code></pre></div>
 <p>Nosso controller está pronto!</p>
 
 <p>Recuperando o tópico com o TopicService e atualizando nosso ViewModel (daí o vm)
@@ -418,7 +419,8 @@ app/forum/topic/topic.service.spec.js
 
   }
 
-})();</code></pre></div>
+})();
+</code></pre></div>
 <h2 id="view">View</h2>
 
 <p>O arquivo será:</p>
@@ -453,14 +455,14 @@ app/forum/topic/topic.service.spec.js
 </code></pre>
 
 <p>A segunda parte mais simples aqui.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss">    .topic {
-        background: #F00;
-        color: #FFF;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss">    <span style="color:#a6e22e">.topic</span> {
+        <span style="color:#f92672">background</span><span style="color:#a6e22e">:</span> #F00<span style="color:#f92672">;</span>
+        <span style="color:#f92672">color</span><span style="color:#a6e22e">:</span> #FFF<span style="color:#f92672">;</span>
     }</code></pre></div>
 <p>É importante na view e no CSS você usar classes ao invés de IDs, pois o conceito por trás dos componentes é que eles sejam reutilizáveis o máximo possível.</p>
 
 <p>Não esqueça de incorporar o topic.scss no seu main.scss com um @import da vida:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss">    @import &#34;app/forum/topic/topic.scss&#34;;</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss">    <span style="color:#66d9ef">@import</span> <span style="color:#e6db74">&#34;app/forum/topic/topic.scss&#34;</span>;</code></pre></div>
 <p>Agora só chamar no seu index.html:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app/forum/topic/topic.controller.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
     &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app/forum/topic/topic.service.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;</code></pre></div>
@@ -469,7 +471,8 @@ app/forum/topic/topic.service.spec.js
 
     <span style="color:#a6e22e">angular</span>
         .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>, [<span style="color:#e6db74">&#39;app.forum.topic&#39;</span>]);
-})();</code></pre></div>
+})();
+</code></pre></div>
 <p>Agora para usar o componente, digamos no seu routes.js usando o UI Router:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">angular</span>
   .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>)
@@ -490,7 +493,8 @@ app/forum/topic/topic.service.spec.js
       <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/topic/{id}&#39;</span>,
       <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&lt;matrix-topic&gt;&lt;/matrix-topic&gt;&#39;</span>
     });
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Pronto! :D</p>
 
 <p>Agora toda vez que você quiser mostrar um tópico na aplicação, só colocar em qualquer HTML:</p>
@@ -512,7 +516,7 @@ app/forum/topic/topic.service.spec.js
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>489</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>593</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -540,7 +544,7 @@ app/forum/topic/topic.service.spec.js
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

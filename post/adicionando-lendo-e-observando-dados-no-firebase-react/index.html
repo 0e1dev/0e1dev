@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Adicionando, Lendo e Observando dados no Firebase com React</title>
+
+  
+  
+
+
+<meta name="google-site-verification" content="VDefNJwj4-IOy5G6HPnTYDi4VzjF9O-d6f-4j93CvIs" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-68682771-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-68682771-1');
+</script>
+
+
+
+
+  
+  <meta name="author" content="lhas" />
+  <meta name="description" content="Olá a todos!
+Hoje iremos aprender como trabalhar com o Firebase junto do React.
+O que é o Firebase? O Firebase é uma plataforma de desenvolvimento que atualmente é mantida pelo Google. As principais funcionalidades dele são o Realtime Database e o Authentication.
+Além destas 2 funcionalidades, o Firebase disponibiliza de outros serviços como Cloud Messaging (para disparar notificações em iOS, Android e Web), Storage (para armazenar arquivos estáticos, uploads, etc), Hosting (semelhante ao AWS S3), entre outros." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@01lhas" />
+    <meta name="twitter:title" content="Adicionando, Lendo e Observando dados no Firebase com React" />
+    <meta name="twitter:description" content="Olá a todos!
+Hoje iremos aprender como trabalhar com o Firebase junto do React.
+O que é o Firebase? O Firebase é uma plataforma de desenvolvimento que atualmente é mantida pelo Google. As principais funcionalidades dele são o Realtime Database e o Authentication.
+Além destas 2 funcionalidades, o Firebase disponibiliza de outros serviços como Cloud Messaging (para disparar notificações em iOS, Android e Web), Storage (para armazenar arquivos estáticos, uploads, etc), Hosting (semelhante ao AWS S3), entre outros." />
+    <meta name="twitter:image" content="http://0e1dev.com/covers/adicionando-lendo-e-observando-dados-no-firebase-react.png" />
+    <meta name="og:title" content="Adicionando, Lendo e Observando dados no Firebase com React" />
+    <meta name="og:description" content="Olá a todos!
+Hoje iremos aprender como trabalhar com o Firebase junto do React.
+O que é o Firebase? O Firebase é uma plataforma de desenvolvimento que atualmente é mantida pelo Google. As principais funcionalidades dele são o Realtime Database e o Authentication.
+Além destas 2 funcionalidades, o Firebase disponibiliza de outros serviços como Cloud Messaging (para disparar notificações em iOS, Android e Web), Storage (para armazenar arquivos estáticos, uploads, etc), Hosting (semelhante ao AWS S3), entre outros." />
+    <meta name="og:image" content="http://0e1dev.com/covers/adicionando-lendo-e-observando-dados-no-firebase-react.png" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<link rel="canonical" href="http://0e1dev.com/post/adicionando-lendo-e-observando-dados-no-firebase-react/" />
+<link rel="alternative" href="/index.xml" title="0e1dev" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="0e1dev" />
+<meta name="msapplication-tooltip" content="0e1dev" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.1/video-js.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.1/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/2014.01.31/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.0/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="/">
+    <img src="/img/marca-branca.png" alt="0e1dev">
+  </a>
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item "><a href="/sobre/">Sobre</a></li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//twitter.com/01lhas" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+
+    <header class="post-header">
+      <h1 class="post-title">Adicionando, Lendo e Observando dados no Firebase com React</h1>
+      <p class="post-meta">@lhas · 18/03/2018 · 8 mins. de leitura</p>
+    </header>
+
+    
+    <div title="Adicionando, Lendo e Observando dados no Firebase com React" style="width: 100%; height: 250px; background: url(/covers/adicionando-lendo-e-observando-dados-no-firebase-react.png); background-size: contain;
+    background-position: center; background-repeat: no-repeat;"></div>
+  
+    <article class="post-content">
+
+<p>Olá a todos!</p>
+
+<p>Hoje iremos aprender como trabalhar com o Firebase junto do React.</p>
+
+<h1 id="o-que-é-o-firebase">O que é o Firebase?</h1>
+
+<p>O Firebase é uma plataforma de desenvolvimento que atualmente é mantida pelo Google. As principais funcionalidades dele são o <em>Realtime Database</em> e o <em>Authentication</em>.</p>
+
+<p>Além destas 2 funcionalidades, o Firebase disponibiliza de outros serviços como Cloud Messaging (para disparar notificações em iOS, Android e Web), Storage (para armazenar arquivos estáticos, uploads, etc), Hosting (semelhante ao AWS S3), entre outros.</p>
+
+<h1 id="qual-a-vantagem-em-utilizá-lo">Qual a vantagem em utilizá-lo?</h1>
+
+<p>Essa é uma pergunta que muitos desenvolvedores fazem. Qual é o benefício de utilizar o Firebase no seu projeto, ao invés de configurar cada serviço manualmente (um banco de dados, um serviço de hospedagem, etc).</p>
+
+<p>O maior benefício é você poder criar aplicativos/sites com recursos avançados como banco de dados em tempo real, e autenticação com redes sociais, em tempo recorde. Ao invés de você gastar tempo configurando serviços, servidores, entre outros, você foca no desenvolvimento do seu app, e deixa toda a escalabilidade dos serviços na mão do Google.</p>
+
+<h1 id="qual-a-desvantagem-em-utilizá-lo">Qual a desvantagem em utilizá-lo?</h1>
+
+<p>A desvantagem é justamente a mesma coisa que a vantagem. O fato de você &ldquo;terceirizar&rdquo; a responsabilidade de infraestrutura para uma empresa terceira, faz com que você se torne &ldquo;refém&rdquo; dela. Então, se os serviços do Firebase estiverem fora do ar, consequentemente, o seu aplicativo que depende dele ficará offline.</p>
+
+<p>Existem diversos mecanismos para prevenir que o seu aplicativo mantenha-se funcional mesmo com os serviços offline, mas de longe essa é a maior desvantagem de trabalhar com este tipo de serviço. Você ganha em conforto, agilidade e facilidade, mas perde em termos de cuidados &ldquo;behind the scenes&rdquo;.</p>
+
+<h1 id="iniciando-o-projeto">Iniciando o projeto</h1>
+
+<p>Vamos iniciar o projeto utilizando o <em>create-react-app</em>. Para isto, basta rodar no seu terminal:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">create-react-app firebase-crud
+cd firebase-crud/
+yarn start</code></pre></div>
+<h1 id="pegando-credenciais-do-firebase">Pegando credenciais do Firebase</h1>
+
+<p>Agora, precisamos cadastrar um novo aplicativo no Firebase, e recuperar as credenciais Web para podermos utilizar no nosso <em>firebase-crud</em>.</p>
+
+<p>Para isto, basta acessar o <a href="https://console.firebase.google.com/u/0/">Console do Firebase</a> e clicar em <em>Adicionar projeto</em>.</p>
+
+<p><img src="Screenshot from 2018-03-18 16-59-43.png" alt="" /></p>
+
+<p>Após criar o projeto, você deverá clicar em <em>Adicionar o Firebase ao seu aplicativo da Web</em> e anotar as credenciais que ele irá te mostrar.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Minhas credenciais de exemplo
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">apiKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;AIzaSyAhY8YyIb5Xfr2Kh2tgTHTEzDW5NOkp6j0&#34;</span>,
+  <span style="color:#a6e22e">authDomain</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;fir-crud-2474f.firebaseapp.com&#34;</span>,
+  <span style="color:#a6e22e">databaseURL</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://fir-crud-2474f.firebaseio.com&#34;</span>,
+  <span style="color:#a6e22e">projectId</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;fir-crud-2474f&#34;</span>,
+  <span style="color:#a6e22e">storageBucket</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#a6e22e">messagingSenderId</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;326727019283&#34;</span>
+};
+</code></pre></div>
+<h1 id="instanciando-o-firebase">Instanciando o Firebase</h1>
+
+<p>Primeiro, vamos precisar adicioná-lo como dependência do nosso projeto.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn add firebase</code></pre></div>
+<p>Agora, iremos criar um arquivo chamado <code>firebase.js</code>, e iremos instanciá-lo neste arquivo.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">firebase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;firebase&#34;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">apiKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;AIzaSyAhY8YyIb5Xfr2Kh2tgTHTEzDW5NOkp6j0&#34;</span>,
+  <span style="color:#a6e22e">authDomain</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;fir-crud-2474f.firebaseapp.com&#34;</span>,
+  <span style="color:#a6e22e">databaseURL</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://fir-crud-2474f.firebaseio.com&#34;</span>,
+  <span style="color:#a6e22e">projectId</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;fir-crud-2474f&#34;</span>,
+  <span style="color:#a6e22e">storageBucket</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#a6e22e">messagingSenderId</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;326727019283&#34;</span>
+};
+
+<span style="color:#a6e22e">firebase</span>.<span style="color:#a6e22e">initializeApp</span>(<span style="color:#a6e22e">config</span>);
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">firebase</span>;
+</code></pre></div>
+<h1 id="alterando-regras-do-database">Alterando Regras do Database</h1>
+
+<p>O banco de dados do Firebase tem 1 estrutura em JSON para definir as regras de segurança do banco.</p>
+
+<p>Através deste JSON, você pode indicar quais são as regras de leitura/escrita para todos os documentos, ou para alguns em específico.</p>
+
+<p>Para alterarmos estas regras, você deverá acessar o console do Database:</p>
+
+<p><img src="Screenshot from 2018-03-18 17-12-36.png" alt="" /></p>
+
+<p>Agora, você irá acessar a aba de <em>Regras</em>:</p>
+
+<p><img src="Screenshot from 2018-03-18 17-14-50.png" alt="" /></p>
+
+<p>Vamos alterar esta regra padrão, para permitir que todos usuários (autenticados ou não) possam ler/escrever dados.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// De
+</span><span style="color:#75715e"></span>{
+  <span style="color:#e6db74">&#34;rules&#34;</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#34;.read&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;auth != null&#34;</span>,
+    <span style="color:#e6db74">&#34;.write&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;auth != null&#34;</span>
+  }
+}
+
+<span style="color:#75715e">// Para
+</span><span style="color:#75715e"></span>{
+  <span style="color:#e6db74">&#34;rules&#34;</span><span style="color:#f92672">:</span> {
+    <span style="color:#e6db74">&#34;.read&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;true&#34;</span>,
+    <span style="color:#e6db74">&#34;.write&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;true&#34;</span>
+  }
+}
+</code></pre></div>
+<p>Após esta mudança, você deverá publicá-la.</p>
+
+<h1 id="conceito-de-demonstração">Conceito de demonstração</h1>
+
+<p>Para este artigo, vamos utilizar o conceito de <em>Guestbook</em>.</p>
+
+<p>Vamos fazer uma página em que os visitantes possam deixar um recado na página. Ou editar/excluir os existentes.</p>
+
+<p>Este recado contará com os atributos de <em>Nome</em>, <em>Comentário</em> e <em>Data de Publicação</em>.</p>
+
+<h1 id="formulário-para-novos-recados">Formulário para novos recados</h1>
+
+<p>Vamos adicionar um formulário para que os visitantes possam adicionar os recados:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// CommentForm.js
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;react&#34;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;prop-types&#34;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CommentForm</span> <span style="color:#f92672">=</span> ({
+  <span style="color:#a6e22e">name</span>,
+  <span style="color:#a6e22e">comment</span>,
+  <span style="color:#a6e22e">onChangeName</span>,
+  <span style="color:#a6e22e">onChangeComment</span>,
+  <span style="color:#a6e22e">onSubmit</span>
+}) =&gt; (
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">form</span> <span style="color:#a6e22e">onSubmit</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">onSubmit</span>}<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">label</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Nome</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/label&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">br</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">required</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">name</span>} <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">onChangeName</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">label</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Comentário</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/label&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">br</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">textarea</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>} <span style="color:#a6e22e">required</span> <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">onChangeComment</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Salvar</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/form&gt;</span>
+);
+
+<span style="color:#a6e22e">CommentForm</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>,
+  <span style="color:#a6e22e">comment</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>,
+  <span style="color:#a6e22e">onChangeName</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">func</span>,
+  <span style="color:#a6e22e">onChangeComment</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">func</span>,
+  <span style="color:#a6e22e">onSubmit</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">func</span>
+};
+
+<span style="color:#a6e22e">CommentForm</span>.<span style="color:#a6e22e">defaultProps</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#a6e22e">comment</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#a6e22e">onChangeName</span><span style="color:#f92672">:</span> () =&gt; {},
+  <span style="color:#a6e22e">onChangeComment</span><span style="color:#f92672">:</span> () =&gt; {},
+  <span style="color:#a6e22e">onSubmit</span><span style="color:#f92672">:</span> () =&gt; {}
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">CommentForm</span>;
+</code></pre></div>
+<p>Agora que temos nosso componente de formulário, vamos aplicá-lo no nosso app. Para isto, basta editar o <code>App.js</code>.</p>
+
+<p>Primeiro, vamos importar o formulário:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">CommentForm</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./CommentForm&#34;</span>;
+</code></pre></div>
+<p>Precisamos declarar um <em>state</em> para armazenar os dados do formulário:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">form</span><span style="color:#f92672">:</span> {
+      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#a6e22e">comment</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>
+    }
+  };
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>}
+</code></pre></div>
+<p>Agora nós iremos renderizar o formulário:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">comment</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">form</span>;
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;App&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentForm</span>
+          <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">name</span>}
+          <span style="color:#a6e22e">comment</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>}
+          <span style="color:#a6e22e">onChangeName</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onChangeName</span>}
+          <span style="color:#a6e22e">onChangeComment</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onChangeComment</span>}
+          <span style="color:#a6e22e">onSubmit</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onSubmit</span>}
+        <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    );
+  }
+</code></pre></div>
+<p>Após renderizar o formulário, precisamos adicionar os 3 callbacks necessários para nosso componente funcionar: <code>onChangeName</code>, <code>onChangeComment</code> e <code>onSubmit</code>. Primeiramente, iremos inserir os 2 primeiros callbacks:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">onChangeName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span> =&gt; {
+  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">value</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">target</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({
+    <span style="color:#a6e22e">form</span><span style="color:#f92672">:</span> {
+      ...<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">form</span>,
+      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">value</span>
+    }
+  });
+};
+
+<span style="color:#a6e22e">onChangeComment</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span> =&gt; {
+  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">value</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">target</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({
+    <span style="color:#a6e22e">form</span><span style="color:#f92672">:</span> {
+      ...<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">form</span>,
+      <span style="color:#a6e22e">comment</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">value</span>
+    }
+  });
+};
+</code></pre></div>
+<p>A esta altura, nosso formulário já está quase pronto!</p>
+
+<p><img src="Peek 2018-03-18 17-39.gif" alt="" /></p>
+
+<h1 id="salvando-dados-no-firebase">Salvando dados no Firebase</h1>
+
+<p>Agora que nosso formulário já está funcionando, vamos salvar os dados que os usuários preencherem neste formulário!</p>
+
+<p>Para isto, vamos importar o nosso Firebase instanciado:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">firebase</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./firebase&#34;</span>;
+</code></pre></div>
+<p>Com o Firebase importado, podemos finalmente desenvolver nosso último callback <em>onSubmit</em>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">onSubmit</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">event</span> =&gt; {
+  <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">preventDefault</span>(); <span style="color:#75715e">// previne que o browser atualize a página
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// armazenamos um objeto com os dados do state + a data atual
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">comment</span> <span style="color:#f92672">=</span> {
+    ...<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">form</span>,
+    <span style="color:#a6e22e">createdAt</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">getTime</span>()
+  };
+  <span style="color:#75715e">// mandamos o firebase armazenar no ref &#34;comments&#34;, nosso comentário atual
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">firebase</span>
+    .<span style="color:#a6e22e">database</span>()
+    .<span style="color:#a6e22e">ref</span>(<span style="color:#e6db74">&#34;comments&#34;</span>)
+    .<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">comment</span>);
+  <span style="color:#75715e">// após o comentário ser adicionado, vamos limpar o formulário
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({
+    <span style="color:#a6e22e">form</span><span style="color:#f92672">:</span> {
+      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+      <span style="color:#a6e22e">comment</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>
+    }
+  });
+};
+</code></pre></div>
+<p>Com este callback incluído, caso você tente enviar o formulário agora, você terá o seguinte resultado:</p>
+
+<p><img src="Peek 2018-03-18 17-53.gif" alt="" /></p>
+
+<p>Muito legal, né?</p>
+
+<p>Temos um banco de dados em tempo real sem precisarmos configurar Socket.IO, subir banco de dados, subir backend, etc, etc.</p>
+
+<p>Através do front-end, conseguimos manipular o banco de dados, sem precisar de 1 intermediário. Trazendo produtividade para seu desenvolvimento! :)</p>
+
+<h1 id="listando-dados-do-firebase">Listando dados do Firebase</h1>
+
+<p>Agora que já sabemos como adicionar novos dados, vamos aprender como listá-los.</p>
+
+<p>Para isto, vamos gerar um componente para listagem de comentários:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;react&#34;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;prop-types&#34;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CommentList</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">comments</span> }) =&gt; (
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">marginTop</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">20</span> }}<span style="color:#f92672">&gt;</span>
+    {<span style="color:#a6e22e">comments</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">comment</span> =&gt; (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>.<span style="color:#a6e22e">uid</span>}<span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">strong</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Nome</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">comment</span>.<span style="color:#a6e22e">name</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/strong&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">p</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Comentário</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">comment</span>.<span style="color:#a6e22e">comment</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/p&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">em</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Postado</span> <span style="color:#a6e22e">em</span> {<span style="color:#a6e22e">comment</span>.<span style="color:#a6e22e">createdAt</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/em&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">hr</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    ))}
+    {<span style="color:#a6e22e">comments</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">p</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Nenhum</span> <span style="color:#a6e22e">comentário</span> <span style="color:#a6e22e">encontrado</span><span style="color:#f92672">!&lt;</span><span style="color:#960050;background-color:#1e0010">/p&gt;}</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+);
+
+<span style="color:#a6e22e">CommentList</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">comments</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">array</span>
+};
+
+<span style="color:#a6e22e">CommentList</span>.<span style="color:#a6e22e">defaultProps</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">comments</span><span style="color:#f92672">:</span> []
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">CommentList</span>;
+</code></pre></div>
+<p>Precisamos importá-lo no nosso <code>App.js</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">CommentList</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./CommentList&#34;</span>;
+</code></pre></div>
+<p>E atualizar o state para armazenar a listagem de comentários:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">form</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+    <span style="color:#a6e22e">comment</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>
+  },
+  <span style="color:#a6e22e">comments</span><span style="color:#f92672">:</span> [] <span style="color:#75715e">// nova linha
+</span><span style="color:#75715e"></span>};
+</code></pre></div>
+<p>Vamos atualizar a camada de visualização, para renderizar o componente de listagem de comentários:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">comments</span>, <span style="color:#a6e22e">form</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">comment</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">form</span>;
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;App&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentForm</span>
+          <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">name</span>}
+          <span style="color:#a6e22e">comment</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comment</span>}
+          <span style="color:#a6e22e">onChangeName</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onChangeName</span>}
+          <span style="color:#a6e22e">onChangeComment</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onChangeComment</span>}
+          <span style="color:#a6e22e">onSubmit</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onSubmit</span>}
+        <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentList</span> <span style="color:#a6e22e">comments</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comments</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    );
+  }
+</code></pre></div>
+<p>E agora, iremos ler os dados em tempo real do nosso documento de <code>comments</code>.</p>
+
+<p>Para isto, iremos utilizar o callback <code>componentDidMount</code>. Caso queira aprender mais sobe o ciclo de vida de um componente React, <a href="http://0e1dev.com/post/ciclo-de-vida-de-um-componente-em-react/">veja nosso artigo sobre o assunto</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#a6e22e">componentDidMount</span>() {
+    <span style="color:#a6e22e">firebase</span>
+      .<span style="color:#a6e22e">database</span>()
+      .<span style="color:#a6e22e">ref</span>(<span style="color:#e6db74">&#34;comments&#34;</span>)
+      .<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;value&#34;</span>, <span style="color:#a6e22e">snapshot</span> =&gt; {
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">snapshot</span>.<span style="color:#a6e22e">val</span>();
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">comments</span> <span style="color:#f92672">=</span> <span style="color:#f92672">!!</span><span style="color:#a6e22e">response</span>
+          <span style="color:#f92672">?</span> Object.<span style="color:#a6e22e">keys</span>(<span style="color:#a6e22e">response</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">uid</span> =&gt; ({
+              ...<span style="color:#a6e22e">response</span>[<span style="color:#a6e22e">uid</span>],
+              <span style="color:#a6e22e">uid</span>
+            }))
+          <span style="color:#f92672">:</span> [];
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({
+          <span style="color:#a6e22e">comments</span>
+        });
+      });
+  }
+</code></pre></div>
+<p>No código acima, primeiramente nós &ldquo;plugamos&rdquo; a nossa conexão com o <em>ref</em> (de referência) de <em>comments</em>.</p>
+
+<p>O callback <code>.on('value')</code> irá ser acionado toda vez que a referência for atualizada. Seja esta atualização, uma exclusão, alteração, ou inserção de um novo registro. Toda vez, que algo ocorrer, o callback será acionado.</p>
+
+<p>Quando o callback é acionado, ele passa como parâmetro um snapshot (uma cópia idêntica ao estado atual da referência no banco).</p>
+
+<p>Com o snapshot, nós formatamos os dados para ele tornar-se um array, e aplicamos o mesmo no estado local do app.</p>
+
+<p>Esta aplicação ao estado local, fará com que a listagem de comentários fique sincronizada em tempo real com os comentários do banco de dados. Legal, né? Dá uma olhada no exemplo abaixo:</p>
+
+<p><img src="Peek 2018-03-18 18-24.gif" alt="" /></p>
+
+<h1 id="excluindo-dados">Excluindo dados</h1>
+
+<p>Para permitirmos que nosso usuário exclua um comentário, vamos precisar inserir um botão de exclusão.</p>
+
+<p>Você poderá adicioná-lo no <code>&lt;CommentList /&gt;</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">onRemove</span>(<span style="color:#a6e22e">comment</span>.<span style="color:#a6e22e">uid</span>)}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Excluir</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+</code></pre></div>
+<p>Agora, devemos inserir um callback para <code>onRemove</code>. Ele será assim:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">onRemove</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uid</span> =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">commentRef</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">firebase</span>.<span style="color:#a6e22e">database</span>().<span style="color:#a6e22e">ref</span>(<span style="color:#e6db74">`comments/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uid</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+  <span style="color:#a6e22e">commentRef</span>.<span style="color:#a6e22e">remove</span>();
+};
+</code></pre></div>
+<p>Uma alternativa, caso você não queira aplicar esta interpolação de string:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">onRemove</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uid</span> =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">commentRef</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">firebase</span>
+    .<span style="color:#a6e22e">database</span>()
+    .<span style="color:#a6e22e">ref</span>(<span style="color:#e6db74">&#34;comments&#34;</span>)
+    .<span style="color:#a6e22e">child</span>(<span style="color:#a6e22e">uid</span>);
+  <span style="color:#a6e22e">commentRef</span>.<span style="color:#a6e22e">remove</span>();
+};
+</code></pre></div>
+<p>Vamos declarar o callback como prop do nosso componente:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentList</span> <span style="color:#a6e22e">comments</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comments</span>} <span style="color:#a6e22e">onRemove</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onRemove</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+</code></pre></div>
+<p>Pronto! Nosso botão de exclusão deverá estar funcionando como o esperado:</p>
+
+<p><img src="Peek 2018-03-18 19-02.gif" alt="" /></p>
+
+<h1 id="editando-dados">Editando dados</h1>
+
+<p>Por último, mas não menos importante, vamos editar nossos dados!</p>
+
+<p>Para isto, primeiro vamos adicionar um botão de Editar:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">onEdit</span>(<span style="color:#a6e22e">comment</span>.<span style="color:#a6e22e">uid</span>)}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Editar</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+</code></pre></div>
+<p>Agora, devemos inserir um callback para <code>onEdit</code>. Ele será assim:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">onEdit</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uid</span> =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">commentRef</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">firebase</span>.<span style="color:#a6e22e">database</span>().<span style="color:#a6e22e">ref</span>(<span style="color:#e6db74">`comments/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">uid</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+  <span style="color:#a6e22e">commentRef</span>.<span style="color:#a6e22e">update</span>({
+    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Nome editado&#34;</span>,
+    <span style="color:#a6e22e">comment</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Comentário editado&#34;</span>
+  });
+};
+</code></pre></div>
+<p>Vamos declarar o callback como prop do nosso componente:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">CommentList</span>
+  <span style="color:#a6e22e">comments</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">comments</span>}
+  <span style="color:#a6e22e">onRemove</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onRemove</span>}
+  <span style="color:#a6e22e">onEdit</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onEdit</span>}
+<span style="color:#960050;background-color:#1e0010">/&gt;</span>
+</code></pre></div>
+<p>Pronto! Nosso botão de edição deverá estar funcionando como o esperado.</p>
+
+<p>Lembrando que estamos editando os atributos manualmente, pela simplicidade do artigo. Em um contexto real, você renderizaria um formulário para o usuário poder editar os dados dinamicamente.</p>
+
+<p>Veja ele funcionando:</p>
+
+<p><img src="Peek 2018-03-18 19-07.gif" alt="" /></p>
+
+<h1 id="conclusão">Conclusão</h1>
+
+<p>Este artigo foi simples, mas espero agregar um grande valor ao seu conhecimento.</p>
+
+<p>Facilitadores como Firebase vieram pra ficar, e auxiliar times ágeis a desenvolverem soluções cada vez mais sólidas e rápidas, com alto poder de escalabilidade.</p>
+
+<p>Espero que tenham gostado! Dúvidas, deixem nos comentários.</p>
+
+<p>Você pode encontrar o exemplo desta publicação aqui: <a href="https://lhas.github.io/firebase-crud-0e1dev/">https://lhas.github.io/firebase-crud-0e1dev/</a></p>
+
+<p>E poderá consultar o código-fonte final aqui: <a href="https://github.com/lhas/firebase-crud-0e1dev">https://github.com/lhas/firebase-crud-0e1dev</a></p>
+
+<p>Abraços!</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/crud"><span class="tag">CRUD</span></a></li>
+        
+          <li><a href="/tags/firebase"><span class="tag">Firebase</span></a></li>
+        
+          <li><a href="/tags/react"><span class="tag">React</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "0e1dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 0e1dev</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script src="//cdn.bootcss.com/video.js/6.2.1/video.min.js"></script>
+<script src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

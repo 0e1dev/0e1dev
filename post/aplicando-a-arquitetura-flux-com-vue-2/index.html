@@ -60,7 +60,7 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/aplicando-a-arquitetura-flux-com-vue-2/" />
@@ -322,7 +322,8 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
 
 <span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">VueResource</span>)
 
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Vue</span></code></pre></div>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Vue</span>
+</code></pre></div>
 
 <p>Basicamente, ele cria uma instância do Vue e incorpora o vue-resource nesta instância.</p>
 
@@ -360,7 +361,8 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">updateOne</span> (<span style="color:#a6e22e">lesson</span>) {
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">resource</span>.<span style="color:#a6e22e">update</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">id</span>}, <span style="color:#a6e22e">lesson</span>)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 
 <p>Caso você precise adicionar valores de campos padrão, este é um ótimo lugar. Eu mesmo fiz isso na linha 20. Pego o ID do estudante atual e acoplo ele ao novo registro de aula.</p>
 
@@ -411,7 +413,8 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
       <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">count</span><span style="color:#f92672">++</span>
     }
   }
-})</code></pre></div>
+})
+</code></pre></div>
 
 <p>Imagine que o state seja na verdade o <code>data()</code>.</p>
 
@@ -419,11 +422,13 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
 
 <p>Para você recuperar o count atual:</p>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">count</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">count</span>
+</code></pre></div>
 
 <p>Para você rodar o método <code>increment</code> e consequentemente modificar o count:</p>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#39;increment&#39;</span>)</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#39;increment&#39;</span>)
+</code></pre></div>
 
 <p>Após rodar a linha acima, o <code>store.state.count</code> será igual a <code>1</code>.</p>
 
@@ -439,7 +444,8 @@ Caso você queira conhecer os outros posts desta série de Vue 2:
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>; <span style="color:#75715e">// -&gt; retornará todo o Store
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">state</span>; <span style="color:#75715e">// -&gt; retornará todos os States disponíveis
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#39;exemplo&#39;</span>); <span style="color:#960050;background-color:#1e0010">// -&gt; rodará o commit &#39;exemplo&#39;</span></code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#39;exemplo&#39;</span>); <span style="color:#75715e">// -&gt; rodará o commit &#39;exemplo&#39;
+</span><span style="color:#75715e"></span></code></pre></div>
 
 <p>Chega de teoria e vamos para a prática.</p>
 
@@ -475,7 +481,8 @@ touch src/store/mutation-types.js</code></pre></div>
 
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vuex</span>.<span style="color:#a6e22e">Store</span>({
   <span style="color:#a6e22e">strict</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">debug</span>
-})</code></pre></div>
+})
+</code></pre></div>
 
 <h1 id="importando-store-na-app">Importando Store na App</h1>
 
@@ -483,7 +490,8 @@ touch src/store/mutation-types.js</code></pre></div>
 
 <p>Primeiro vamos precisar importar o Store que acabamos de criar.</p>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>
+</code></pre></div>
 
 <p>Depois vamos injetá-lo dentro da nossa instância do Vue.</p>
 
@@ -491,7 +499,8 @@ touch src/store/mutation-types.js</code></pre></div>
   <span style="color:#a6e22e">el</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#app&#39;</span>,
   <span style="color:#a6e22e">router</span>,
   <span style="color:#a6e22e">store</span>
-})</code></pre></div>
+})
+</code></pre></div>
 
 <p>Pronto! Agora teremos acesso ao nosso Store através do <code>this.$store</code>.</p>
 
@@ -528,7 +537,8 @@ touch src/store/mutation-types.js</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
   <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
   <span style="color:#a6e22e">delay</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">4000</span>
-}</code></pre></div>
+}
+</code></pre></div>
 
 <h3 id="actions-de-alertas">Actions de Alertas</h3>
 
@@ -541,7 +551,8 @@ touch src/store/mutation-types.js</code></pre></div>
     <span style="color:#a6e22e">commit</span>(<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">ALERTS_CHANGE_MESSAGE</span>, <span style="color:#a6e22e">alert</span>.<span style="color:#a6e22e">message</span>)
     <span style="color:#a6e22e">commit</span>(<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">ALERTS_DISPLAY</span>)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 
 <p>Como você pode ver, nossa ação efetua <strong>2 commits</strong>.</p>
 
@@ -560,11 +571,13 @@ touch src/store/mutation-types.js</code></pre></div>
 
 <p>Para incluir ele, insira na primeira linha do módulo:</p>
 
-<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">types</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../../mutation-types&#39;</span></code></pre></div>
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">types</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../../mutation-types&#39;</span>
+</code></pre></div>
 Agora vamos preencher o <strong>mutation types</strong> com as constantes necessárias para nossas ações:</p>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ALERTS_CHANGE_MESSAGE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ALERTS_CHANGE_MESSAGE&#39;</span>
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ALERTS_DISPLAY</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ALERTS_DISPLAY&#39;</span></code></pre></div>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ALERTS_DISPLAY</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ALERTS_DISPLAY&#39;</span>
+</code></pre></div>
 
 <p><strong>Pronto!</strong> Até aqui, já temos um módulo de alertas com <strong>2 states</strong>, <strong>2 commits</strong>, <strong>2 mutation types</strong> e <strong>1 action</strong>.</p>
 
@@ -595,7 +608,8 @@ Agora vamos preencher o <strong>mutation types</strong> com as constantes necess
       <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">message</span>)
     }, <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">delay</span>)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 
 <p><strong>Observação:</strong> Caso esta sintaxe pareça estranha para você, pesquise mais sobre ES6. Mas de forma resumida, o ES6 permite que criemos uma função com nome igual a uma constante. Para isto, basta encapsular a constante entre colchetes [].</p>
 
@@ -614,7 +628,8 @@ Agora vamos preencher o <strong>mutation types</strong> com as constantes necess
   <span style="color:#a6e22e">state</span>,
   <span style="color:#a6e22e">actions</span>,
   <span style="color:#a6e22e">mutations</span>
-}</code></pre></div>
+}
+</code></pre></div>
 
 <h1 id="resultado-do-alertas">Resultado do Alertas</h1>
 
@@ -661,7 +676,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
   <span style="color:#a6e22e">getters</span>,
   <span style="color:#a6e22e">actions</span>,
   <span style="color:#a6e22e">mutations</span>
-}</code></pre></div>
+}
+</code></pre></div>
 
 <h2 id="state-de-lessons">State de Lessons</h2>
 
@@ -672,7 +688,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
   <span style="color:#a6e22e">lesson</span><span style="color:#f92672">:</span> {}
 }
 
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">state</span></code></pre></div>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">state</span>
+</code></pre></div>
 
 <h2 id="getters-de-lessons">Getters de Lessons</h2>
 
@@ -686,7 +703,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">states</span>.<span style="color:#a6e22e">NOME_DO_MODULO</span>.<span style="color:#a6e22e">NOME_DO_STATE</span>;
 <span style="color:#75715e">// exemplo:
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">states</span>.<span style="color:#a6e22e">lessons</span>.<span style="color:#a6e22e">lesson</span>; <span style="color:#960050;background-color:#1e0010">// -&gt; estamos acessando nosso módulo &#34;lessons&#34; e recuperando o state &#34;lesson&#34;; neste exemplo, fica meio redundante mesmo</span></code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">states</span>.<span style="color:#a6e22e">lessons</span>.<span style="color:#a6e22e">lesson</span>; <span style="color:#75715e">// -&gt; estamos acessando nosso módulo &#34;lessons&#34; e recuperando o state &#34;lesson&#34;; neste exemplo, fica meio redundante mesmo
+</span><span style="color:#75715e"></span></code></pre></div>
 
 <p><strong>2) Usar um getter</strong></p>
 
@@ -698,11 +716,13 @@ touch src/store/modules/lessons/state.js</code></pre></div>
   <span style="color:#a6e22e">lessonsDone</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">state</span>) =&gt; {
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">lessons</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">lesson</span> =&gt; <span style="color:#a6e22e">lesson</span>.<span style="color:#a6e22e">done</span>)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 
 <p>Ou seja, ao invés de repetirmos este filtro em todo componente que quisermos mostrar esta informação, fazemos o filtro dentro de um Getter, e quando quisermos mostrar o mesmo, acessamos apenas o getter assim:</p>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">getters</span>[<span style="color:#e6db74">&#39;lessons/lessonsDone&#39;</span>]; <span style="color:#960050;background-color:#1e0010">// -&gt; nome_do_modulo/nome_do_getter</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">getters</span>[<span style="color:#e6db74">&#39;lessons/lessonsDone&#39;</span>]; <span style="color:#75715e">// -&gt; nome_do_modulo/nome_do_getter
+</span><span style="color:#75715e"></span></code></pre></div>
 
 <h2 id="mutation-types-de-lessons">Mutation Types de Lessons</h2>
 
@@ -711,7 +731,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
 <p>No caso, basta adicionar estas 2 linhas no nosso <code>mutation-types.js</code> atual:</p>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">GET_ALL_LESSONS</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GET_ALL_LESSONS&#39;</span>
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">GET_ONE_LESSON</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GET_ONE_LESSON&#39;</span></code></pre></div>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">GET_ONE_LESSON</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GET_ONE_LESSON&#39;</span>
+</code></pre></div>
 
 <h2 id="mutations-de-lessons">Mutations de Lessons</h2>
 
@@ -729,7 +750,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
     <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">lesson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lesson</span>
   }
 }
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">mutations</span></code></pre></div>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">mutations</span>
+</code></pre></div>
 
 <p><strong>Pronto!</strong> Já temos Getters, Mutations e State.</p>
 
@@ -766,7 +788,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
   }
 }
 
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">actions</span></code></pre></div>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">actions</span>
+</code></pre></div>
 
 <p>No caso do <code>getAll()</code>, por exemplo, primeiro fazemos a requisição XHR com o nosso Service.</p>
 
@@ -836,7 +859,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
     <span style="color:#e6db74">&#39;Inputs-Create&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsCreate</span>,
     <span style="color:#e6db74">&#39;Inputs-Update&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsUpdate</span>
   }
-}</code></pre></div>
+}
+</code></pre></div>
 
 <p>Agora, com a arquitetura Flux implementada, ele funcionará assim:</p>
 
@@ -877,7 +901,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
     <span style="color:#e6db74">&#39;Inputs-Create&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsCreate</span>,
     <span style="color:#e6db74">&#39;Inputs-Update&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">InputsUpdate</span>
   }
-}</code></pre></div>
+}
+</code></pre></div>
 
 <p>Além de termos economizado 7 linhas, o código ficou MUITO mais legível.</p>
 
@@ -900,7 +925,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
   <span style="color:#75715e">// notifica o usuário
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Aula removida!&#39;</span>
   <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">message</span>)
-}</code></pre></div>
+}
+</code></pre></div>
 
 <h3 id="depois">Depois</h3>
 
@@ -911,7 +937,8 @@ touch src/store/modules/lessons/state.js</code></pre></div>
       <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Aula removida!&#39;</span>
     })
   })
-}</code></pre></div>
+}
+</code></pre></div>
 
 <p><img src="https://media.giphy.com/media/Unhhb0W1IaDHG/giphy.gif" alt="" /></p>
 
@@ -962,7 +989,7 @@ touch src/store/modules/lessons/state.js</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>328</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>431</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -990,7 +1017,7 @@ touch src/store/modules/lessons/state.js</code></pre></div>
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

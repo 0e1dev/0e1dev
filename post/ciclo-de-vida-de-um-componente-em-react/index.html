@@ -57,7 +57,7 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/ciclo-de-vida-de-um-componente-em-react/" />
@@ -273,7 +273,8 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
 <p>Quando ocorrer algum tipo de mudança no <strong>estado</strong> (state) do componente, estas mudanças irão engatilhar outros callbacks.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentDidMount</span><span style="color:#f92672">:</span> () =&gt; {
   <span style="color:#75715e">// use e abuse! C&amp;A
-</span><span style="color:#75715e"></span>}</code></pre></div>
+</span><span style="color:#75715e"></span>}
+</code></pre></div>
 <h1 id="shouldcomponentupdate">shouldComponentUpdate</h1>
 
 <p>O primeiro callback a ser acionado quando ocorre alguma mudança no componente é o <code>shouldComponentUpdate</code>.</p>
@@ -287,7 +288,8 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
   <span style="color:#75715e">// você deve sempre retornar um booleano
 </span><span style="color:#75715e"></span>  <span style="color:#75715e">// ao usá-lo (por padrão ele sempre retornará true)
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-}</code></pre></div>
+}
+</code></pre></div>
 <h1 id="componentwillupdate">componentWillUpdate</h1>
 
 <p>Assim que o <code>shouldComponentUpdate</code> é finalizado, caso o valor de retorno dele seja <code>true</code>, o <code>componentWillUpdate</code> irá ser acionado em seguida.</p>
@@ -295,7 +297,8 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
 <p>Ele recebe 2 parâmetros: <code>nextProps</code> e <code>nextState</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentWillUpdate</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">nextProps</span>, <span style="color:#a6e22e">nextState</span>) =&gt; {
   <span style="color:#75715e">// prefira usar o `componentDidUpdate` pelos motivos abaixo
-</span><span style="color:#75715e"></span>}</code></pre></div>
+</span><span style="color:#75715e"></span>}
+</code></pre></div>
 <p>Ele é bem semelhante ao <code>componentWillMount</code>, no sentido de que não é interessante que você utilize-o para aplicar efeitos colaterais ou manipulações de DOM.</p>
 
 <p>O <code>componentWillUpdate</code> só deve ser usado para fazer algum tipo de &ldquo;preparação&rdquo; pré-atualização. Se tu aplicar uma nova atualização aqui (seja com <code>setState()</code> ou acionando uma prop que irá modificar algo), ele irá desencadear outro <code>componentWillUpdate</code>, o que irá gerar uma recursão indesejada, causando o famoso loop infinito.</p>
@@ -311,7 +314,8 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
 <p>Ele recebe 2 parâmetros: <code>prevProps</code> e <code>prevState</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentDidUpdate</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">prevProps</span>, <span style="color:#a6e22e">prevState</span>) =&gt; {
   <span style="color:#75715e">// use e abuse! C&amp;A pt 2
-</span><span style="color:#75715e"></span>}</code></pre></div>
+</span><span style="color:#75715e"></span>}
+</code></pre></div>
 <p><img src="https://media.giphy.com/media/o6Tkep8B99ydG/giphy.gif" alt="" /></p>
 
 <p>Depois que nosso componente foi renderizado com sucesso em nossa aplicação, nosso usuário resolver iterar com algum botão.</p>
@@ -338,7 +342,8 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
       <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/form&gt;</span>
     )
   }
-}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SubmitButton</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SubmitButton</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
   <span style="color:#a6e22e">componentWillReceiveProps</span>(<span style="color:#a6e22e">nextProps</span>, <span style="color:#a6e22e">oldProps</span>) {
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Usuário acabou de enviar o formulário!&#39;</span>);
   }
@@ -348,7 +353,8 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span><span style="color:#f92672">&gt;</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">submitted</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;Enviado! :D&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Enviar&#39;</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
     )
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>O usuário resolve enviar o formulário.</p>
 
 <p>Ao clicar no botão de enviar, <code>&lt;SubmitButton /&gt;</code> irá acionar a prop <code>onSubmit</code> do <code>&lt;form /&gt;</code>.</p>
@@ -376,7 +382,8 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
   <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">nextProps</span>.<span style="color:#a6e22e">submitted</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">oldProps</span>.<span style="color:#a6e22e">submitted</span>) {
     <span style="color:#75715e">// nosso exemplo entraria aqui
 </span><span style="color:#75715e"></span>  }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Continuando nosso exemplo, digamos que nosso usuário resolva sair da página de cadastro, e retornar a página inicial.</p>
 
 <p>A partir do momento que o nosso usuário clicou em &ldquo;Home&rdquo; e o <a href="https://reacttraining.com/react-router/">React Router</a> (ou <a href="https://ui-router.github.io/react/">UI Router</a>) detectou a mudança da rota, o componente do <code>&lt;SignUpForm /&gt;</code> vai ser <strong>DESMONTADO</strong>.</p>
@@ -398,7 +405,8 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
 <p>Exemplo prático:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">componentWillUnmount</span><span style="color:#f92672">:</span> () =&gt; {
   <span style="color:#a6e22e">clearInterval</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">interval</span>);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Isto irá fazer o nosso serviço de &ldquo;garbage collector&rdquo;. Este é só um exemplo, existem outras situações que você vai querer fazer esta limpeza de dados.</p>
 
 <h1 id="conclusão">Conclusão</h1>
@@ -426,7 +434,7 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
       </ul>
       
       <p class="post-copyright">
-        
+        Este post foi publicado <strong>110</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -454,7 +462,7 @@ Assim como nós, humanos, temos a fase da infância, adolescência, e velhice, o
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

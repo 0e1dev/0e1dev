@@ -54,7 +54,7 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://0e1dev.com/post/criando-sites-em-varios-idiomas-com-o-angularjs-incluindo-dados-dinamicos/" />
@@ -391,7 +391,8 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
         <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;Você selecionou o idioma: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">locale</span>);
       }
     }
-})();</code></pre></div>
+})();
+</code></pre></div>
 <p><img src="Selection_002.png" alt="" /></p>
 
 <p>O <em>principal</em> está entre a <strong>linha 16 e 21</strong>. Ainda não mudamos o idioma, mas já conseguimos <strong>identificar</strong> qual o <strong>idioma</strong> que o <strong>usuário deseja carregar</strong>.</p>
@@ -406,7 +407,8 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
 
 <p>Para isto, edite o src/index.js e deixe assim:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">angular</span>
-  .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>, [<span style="color:#e6db74">&#39;ui.router&#39;</span>, <span style="color:#e6db74">&#39;pascalprecht.translate&#39;</span>]);</code></pre></div>
+  .<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;app&#39;</span>, [<span style="color:#e6db74">&#39;ui.router&#39;</span>, <span style="color:#e6db74">&#39;pascalprecht.translate&#39;</span>]);
+</code></pre></div>
 <h2 id="configurando-o-angular-translate">Configurando o angular-translate</h2>
 
 <p>Precisamos efetuar algumas configurações como:
@@ -458,7 +460,8 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// $translateProvider
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">//  .uniformLanguageTag()
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">//  .determinePreferredLanguage();
-</span><span style="color:#75715e"></span>  }</code></pre></div>
+</span><span style="color:#75715e"></span>  }
+</code></pre></div>
 <p><img src="https://media.giphy.com/media/e5BASCeekXYoo/giphy.gif" alt="" /></p>
 
 <h1 id="configurando-o-conteúdo-do-nosso-site">Configurando o conteúdo do nosso site</h1>
@@ -502,7 +505,8 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
     <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HeaderController</span>() { }
 <span style="color:#75715e">// Novo
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">HeaderController</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$translate&#39;</span>, <span style="color:#e6db74">&#39;$state&#39;</span>];
-    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HeaderController</span>(<span style="color:#a6e22e">$translate</span>, <span style="color:#a6e22e">$state</span>) { }</code></pre></div>
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HeaderController</span>(<span style="color:#a6e22e">$translate</span>, <span style="color:#a6e22e">$state</span>) { }
+</code></pre></div>
 <p>No caso injetamos 2 Services:</p>
 
 <p><strong>$translate</strong>: Service oriundo do angular-translate. Ele que irá nos ajudar a efetuar a troca de idioma.</p>
@@ -519,7 +523,8 @@ Então se você está *abrindo uma loja*, *alugando uma sala comercial*, *lança
 
   <span style="color:#75715e">/* Recarrega o template (sem recarregar o browser) */</span>
   <span style="color:#a6e22e">$state</span>.<span style="color:#a6e22e">reload</span>();
-}</code></pre></div>
+}
+</code></pre></div>
 <h1 id="pronto-de-verdade">Pronto (de verdade)!</h1>
 
 <p><img src="https://media.giphy.com/media/fKBh0mt02CypW/giphy.gif" alt="" /></p>
@@ -593,7 +598,8 @@ Outro tutorial gringo com abordagem diferente: <a href="https://scotch.io/tutori
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;http://localhost:4000/api/post/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>);
       }
     }
-})();</code></pre></div>
+})();
+</code></pre></div>
 <p>A gente só precisaria adaptar uma coisa nas nossas requições $http:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">      <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getAll</span>() {
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$http</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;http://localhost:4000/api/post/&#39;</span>, {
@@ -609,10 +615,12 @@ Outro tutorial gringo com abordagem diferente: <a href="https://scotch.io/tutori
             <span style="color:#a6e22e">language</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">$translate</span>.<span style="color:#a6e22e">proposedLanguage</span>()
           }
         });
-      }</code></pre></div>
+      }
+</code></pre></div>
 <p>Não se esquecendo de injetar o service $translate no nosso PostService:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#a6e22e">PostService</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$http&#39;</span>, <span style="color:#e6db74">&#39;$translate&#39;</span>];
-  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">PostService</span>(<span style="color:#a6e22e">$http</span>, <span style="color:#a6e22e">$translate</span>) { }</code></pre></div>
+  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">PostService</span>(<span style="color:#a6e22e">$http</span>, <span style="color:#a6e22e">$translate</span>) { }
+</code></pre></div>
 <p>Esta função <strong>$translate.proposedLanguage()</strong> retorna o idioma atual.</p>
 
 <p>Daí é só você através da sua API adaptar como você achar mais prático para a informação retornada ser correta.</p>
@@ -652,7 +660,7 @@ Outro tutorial gringo com abordagem diferente: <a href="https://scotch.io/tutori
       </ul>
       
       <p class="post-copyright">
-        Este post foi publicado <strong>487</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
+        Este post foi publicado <strong>590</strong> dias atrás, o conteúdo pode estar desatualizado, portanto, cuidado.
       </p>
     </footer>
     
@@ -680,7 +688,7 @@ Outro tutorial gringo com abordagem diferente: <a href="https://scotch.io/tutori
     
   </section>
   <footer class="site-footer">
-  <p>© 2017 0e1dev</p>
+  <p>© 2017-2018 0e1dev</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>
